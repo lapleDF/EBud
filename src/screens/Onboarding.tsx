@@ -12,7 +12,6 @@ const OnboardingScreen = () => {
   useEffect(() => {
     AsyncStorage.getItem('alreadyLaunched').then(value => {
       if (value == null) {
-        AsyncStorage.setItem('alreadyLaunched', 'true');
         setIsFirstLaunch(true);
       } else {
         setIsFirstLaunch(false);
@@ -26,6 +25,10 @@ const OnboardingScreen = () => {
     return (
       <Onboarding
         onDone={() => {
+          AsyncStorage.setItem('alreadyLaunched', 'true');
+          navigation.navigate('bottomTab');
+        }}
+        onSkip={() => {
           AsyncStorage.setItem('alreadyLaunched', 'true');
           navigation.navigate('bottomTab');
         }}

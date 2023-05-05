@@ -1,20 +1,16 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
+import CSContainer from '../components/core/CSContainer';
+import CSText from '../components/core/CSText';
+import CSButton from '../components/core/CSButton';
+
 const Home = () => {
-  console.log('home');
   return (
-    <View style={styles.container}>
-      <Text>Home</Text>
-    </View>
+    <CSContainer>
+      <CSText>Welcome to the home page</CSText>
+      <CSButton onPress={() => {}} title="test" />
+    </CSContainer>
   );
 };
 
 export default Home;
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'red',
-    flex: 1,
-  },
-});

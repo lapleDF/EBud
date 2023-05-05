@@ -1,14 +1,26 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View, ViewStyle} from 'react-native';
 import React from 'react';
 
-const CSContainer = () => {
+import {COLORS} from '../../constants/color';
+
+export interface CSContainerProps {
+  children: any;
+  style?: ViewStyle;
+}
+
+const CSContainer = (props: CSContainerProps) => {
   return (
-    <View>
-      <Text>CSContainer</Text>
+    <View
+      style={[props.style, {backgroundColor: COLORS.bgDark}, styles.container]}>
+      {props.children}
     </View>
   );
 };
 
-export default CSContainer;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
-const styles = StyleSheet.create({});
+export default CSContainer;
