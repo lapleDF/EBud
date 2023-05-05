@@ -1,0 +1,16 @@
+diff --git a/node_modules/react-native-raw-bottom-sheet/index.d.ts b/node_modules/react-native-raw-bottom-sheet/index.d.ts
+index 31a5259..60a2763 100644
+--- a/node_modules/react-native-raw-bottom-sheet/index.d.ts
++++ b/node_modules/react-native-raw-bottom-sheet/index.d.ts
+@@ -1,9 +1,10 @@
+-import { Component } from "react";
++import React, { Component } from "react";
+ import { StyleProp, ViewStyle } from "react-native";
+ 
+ declare module "react-native-raw-bottom-sheet" {
+   export type RBSheetProps = {
+     animationType?: "none" | "fade" | "slide";
++    children?: React.ReactNode;
+     height?: number;
+     minClosingHeight?: number;
+     openDuration?: number;

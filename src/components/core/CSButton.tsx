@@ -13,7 +13,10 @@ export interface CSButtonProps {
 const CSButton = ({variant = 'primary', ...props}: CSButtonProps) => {
   const colorText = variant !== 'primary' ? 'primaryDark' : 'whiteText';
   return (
-    <TouchableOpacity activeOpacity={0.5} style={[styles.btn, styles[variant]]}>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      style={[styles.btn, styles[variant]]}
+      onPress={props.onPress}>
       <CSText color={colorText}>{props.title}</CSText>
     </TouchableOpacity>
   );
