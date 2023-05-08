@@ -71,6 +71,12 @@
 		<string>Poppins-SemiBoldItalic.ttf</string>
 		<string>Poppins-Thin.ttf</string>
 		<string>Poppins-ThinItalic.ttf</string>
+		<string>Neuton-Bold.ttf</string>
+		<string>Neuton-ExtraBold.ttf</string>
+		<string>Neuton-ExtraLight.ttf</string>
+		<string>Neuton-Italic.ttf</string>
+		<string>Neuton-Light.ttf</string>
+		<string>Neuton-Regular.ttf</string>
 	</array>
 </dict>
 </plist>

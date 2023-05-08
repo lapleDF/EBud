@@ -5,5 +5,5 @@ export interface Book {
   cover: string;
   desc: string;
   content: string;
-  type: 'truyện' | 'báo';
+  type: 'comic' | 'magazine';
 }
