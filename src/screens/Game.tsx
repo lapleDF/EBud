@@ -2,12 +2,12 @@ import React from 'react';
 import CSContainer from '../components/core/CSContainer';
 import CSText from '../components/core/CSText';
 
-const Account = () => {
+const Game = () => {
   return (
     <CSContainer>
-      <CSText>Account</CSText>
+      <CSText>Game</CSText>
     </CSContainer>
   );
 };
 
-export default Account;
+export default Game;

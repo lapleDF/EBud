@@ -2,12 +2,12 @@ import React from 'react';
 import CSContainer from '../components/core/CSContainer';
 import CSText from '../components/core/CSText';
 
-const Account = () => {
+const Library = () => {
   return (
     <CSContainer>
-      <CSText>Account</CSText>
+      <CSText>Library</CSText>
     </CSContainer>
   );
 };
 
-export default Account;
+export default Library;

@@ -1,6 +1,6 @@
 export interface Game {
   id: string;
   name: string;
-  desc: string;
+  rule: string;
   cover: string;
 }

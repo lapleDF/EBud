@@ -1,14 +1,21 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import BottomTabNavigator from './BottomTabNavigator';
-import OnboardingScreen from '../screens/Onboarding';
+import React from 'react';
+
+import {ROOT_ROUTE} from '../constants/route';
 
 const RootNavigator = () => {
   const RootStack = createStackNavigator();
 
   return (
     <RootStack.Navigator screenOptions={{headerShown: false}}>
-      <RootStack.Screen name="onboarding" component={OnboardingScreen} />
-      <RootStack.Screen name="bottomTab" component={BottomTabNavigator} />
+      {ROOT_ROUTE.map(route => (
+        <RootStack.Screen
+          name={route.name}
+          key={route.name}
+          component={route.component}
+          options={route.options}
+        />
+      ))}
     </RootStack.Navigator>
   );
 };
