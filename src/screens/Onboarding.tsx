@@ -3,17 +3,17 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
 import {Image, StyleSheet} from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
-import BottomTabNavigator from '../navigators/BottomTabNavigator';
 import CSText from '../components/core/CSText';
 import CSContainer from '../components/core/CSContainer';
 import {ONBOARDING} from '../constants/onBoarding.constant';
+import AuthNavigator from '../navigators/AuthNavigator';
 
 const SplashScreen = () => {
   return (
     <CSContainer style={styles.container}>
       <Image
         source={require('../assets/images/logo.png')}
-        style={styles.image}
+        style={styles.logo}
       />
     </CSContainer>
   );
@@ -40,11 +40,11 @@ const OnboardingScreen = () => {
       <Onboarding
         onDone={() => {
           AsyncStorage.setItem('alreadyLaunched', 'true');
-          navigation.navigate('bottomTab');
+          navigation.navigate('authentication');
         }}
         onSkip={() => {
           AsyncStorage.setItem('alreadyLaunched', 'true');
-          navigation.navigate('bottomTab');
+          navigation.navigate('authentication');
         }}
         nextLabel={<CSText color="primaryDark">Tiếp theo</CSText>}
         skipLabel={<CSText>Bỏ qua</CSText>}
@@ -52,7 +52,14 @@ const OnboardingScreen = () => {
         pages={ONBOARDING.map(page => {
           return {
             backgroundColor: page.backgroundColor,
-            image: <Image source={page.image} style={styles.image} />,
+            image: (
+              <Image
+                source={page.image}
+                style={
+                  page.title === 'Welcome to EBud' ? styles.logo : styles.image
+                }
+              />
+            ),
             title: (
               <CSText
                 size={'xxl'}
@@ -76,14 +83,19 @@ const OnboardingScreen = () => {
       />
     );
   } else {
-    return <BottomTabNavigator />;
+    return <AuthNavigator />;
   }
 };
 
 const styles = StyleSheet.create({
   image: {
     width: '100%',
-    resizeMode: 'cover',
+    resizeMode: 'contain',
+    height: 350,
+  },
+  logo: {
+    width: '100%',
+    resizeMode: 'contain',
     height: 250,
   },
   container: {
