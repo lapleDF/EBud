@@ -74,7 +74,7 @@ const OnboardingScreen = () => {
                 size={'xxl'}
                 style={styles.text}
                 variant="NeutonItalic"
-                color="terarity">
+                color="secondary">
                 {page.subtitle}
               </CSText>
             ),
