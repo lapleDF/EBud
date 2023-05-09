@@ -5,9 +5,9 @@ import {USER_ACTION} from '../actions';
 
 export const initialUser: User = {
   id: uuid.v4().toString(),
-  username: 'dennis',
-  email: 'lap@gmail.com',
-  password: '123123',
+  username: '',
+  email: '',
+  password: '',
   totalMedal: 0,
   createdAt: new Date(),
   totalStreak: 0,

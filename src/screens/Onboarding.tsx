@@ -6,7 +6,7 @@ import Onboarding from 'react-native-onboarding-swiper';
 import CSText from '../components/core/CSText';
 import CSContainer from '../components/core/CSContainer';
 import {ONBOARDING} from '../constants/onBoarding.constant';
-import AuthNavigator from '../navigators/AuthNavigator';
+import BottomTabNavigator from '../navigators/BottomTabNavigator';
 
 const SplashScreen = () => {
   return (
@@ -24,7 +24,8 @@ const OnboardingScreen = () => {
   const navigation = useNavigation<any>();
 
   useEffect(() => {
-    AsyncStorage.getItem('alreadyLaunched').then(value => {
+    AsyncStorage.getItem('EBudAccessToken').then(value => {
+      console.log('value', value);
       if (value == null) {
         setIsFirstLaunch(true);
       } else {
@@ -83,7 +84,7 @@ const OnboardingScreen = () => {
       />
     );
   } else {
-    return <AuthNavigator />;
+    return <BottomTabNavigator />;
   }
 };
 

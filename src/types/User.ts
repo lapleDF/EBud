@@ -3,7 +3,8 @@ export interface User {
   username: string;
   email: string;
   password: string;
-  totalStreak: number;
-  totalMedal: number;
-  createdAt: Date;
+  totalStreak?: number;
+  totalMedal?: number;
+  createdAt?: Date;
+  desc?: string;
 }
