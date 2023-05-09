@@ -8,5 +8,5 @@ export const COLORS = {
   borderDeactive: '#233F6F',
   secondary: '#F8B558',
   black: '#000',
-  red: '#DB0505',
+  red: '#FF0000',
 };

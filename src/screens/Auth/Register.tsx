@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 100,
     paddingHorizontal: SPACING.px,
-    backgroundColor: 'red',
   },
   groupBtn: {
     width: '100%',

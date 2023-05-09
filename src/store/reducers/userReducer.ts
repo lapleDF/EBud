@@ -20,6 +20,8 @@ export const userReducer = (
   switch (action.type) {
     case USER_ACTION.REGISTER:
       return action.payload;
+    case USER_ACTION.UPDATE:
+      return action.payload;
     default:
       return state;
   }

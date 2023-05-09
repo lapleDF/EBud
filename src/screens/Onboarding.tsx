@@ -7,6 +7,9 @@ import CSText from '../components/core/CSText';
 import CSContainer from '../components/core/CSContainer';
 import {ONBOARDING} from '../constants/onBoarding.constant';
 import BottomTabNavigator from '../navigators/BottomTabNavigator';
+import {getDataObjAsyncStorage} from '../utils';
+import {AppDispatch} from '../store/store';
+import {USER_ACTION} from '../store/actions';
 
 const SplashScreen = () => {
   return (
@@ -23,13 +26,17 @@ const OnboardingScreen = () => {
   const [isFirstLaunch, setIsFirstLaunch] = useState<any>(null);
   const navigation = useNavigation<any>();
 
+  const updateUser = async () => {
+    const user = await getDataObjAsyncStorage('EBudUser');
+    AppDispatch(USER_ACTION.UPDATE, user);
+  };
   useEffect(() => {
     AsyncStorage.getItem('EBudAccessToken').then(value => {
-      console.log('value', value);
       if (value == null) {
         setIsFirstLaunch(true);
       } else {
         setIsFirstLaunch(false);
+        updateUser();
       }
     });
   }, []);

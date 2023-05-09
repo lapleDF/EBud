@@ -10,23 +10,31 @@ import {SPACING} from '../../constants/spacing';
 import {User} from '../../types';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
-import {storeDataAsyncStorage} from '../../utils';
+import {storeDataAsyncStorage, storeDataObjAsyncStorage} from '../../utils';
 
 const Login = () => {
   const [params, setParams] = useState({
     username: '',
     password: '',
   });
+
+  const [errMess, setErrMess] = useState({
+    userName: '',
+    password: '',
+  });
+
   const user: User = useSelector((state: RootState) => state.user);
   const navigation = useNavigation<any>();
 
   const login = () => {
-    if (
-      user.username === params.username &&
-      user.password === params.password
-    ) {
-      storeDataAsyncStorage('EBudAccessToken', 'abcd'); // !hard code access token
-      navigation.navigate('bottomTab');
+    if (user.username === params.username) {
+      if (user.password === params.password) {
+        storeDataAsyncStorage('EBudAccessToken', 'abcd'); // !hard code access token
+        storeDataObjAsyncStorage('EBudUser', user);
+        navigation.navigate('bottomTab');
+      } else {
+        setErrMess({...errMess, password: 'Email hoặc mật khẩu không đúng'});
+      }
     }
   };
   return (
@@ -39,11 +47,13 @@ const Login = () => {
           onChangeText={text => setParams({...params, username: text})}
           defaultValue={params.username}
           placeholder="Tên đăng nhập"
+          errMess={errMess.userName}
         />
         <CSInput
           onChangeText={text => setParams({...params, password: text})}
           placeholder="Mật khẩu"
           defaultValue={params.password}
+          errMess={errMess.password}
           secure
         />
       </View>
