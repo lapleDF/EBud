@@ -6,7 +6,11 @@ import Onboarding from 'react-native-onboarding-swiper';
 import CSText from '../components/core/CSText';
 import CSContainer from '../components/core/CSContainer';
 import {ONBOARDING} from '../constants/onBoarding.constant';
-import AuthNavigator from '../navigators/AuthNavigator';
+import BottomTabNavigator from '../navigators/BottomTabNavigator';
+import {getDataObjAsyncStorage} from '../utils';
+import {AppDispatch} from '../store/store';
+import {USER_ACTION} from '../store/actions';
+import {ASYNC_STORAGE} from '../constants/asyncStorage';
 
 const SplashScreen = () => {
   return (
@@ -23,12 +27,17 @@ const OnboardingScreen = () => {
   const [isFirstLaunch, setIsFirstLaunch] = useState<any>(null);
   const navigation = useNavigation<any>();
 
+  const updateUser = async () => {
+    const user = await getDataObjAsyncStorage(ASYNC_STORAGE.user);
+    AppDispatch(USER_ACTION.UPDATE, user);
+  };
   useEffect(() => {
-    AsyncStorage.getItem('alreadyLaunched').then(value => {
+    AsyncStorage.getItem(ASYNC_STORAGE.accessToken).then(value => {
       if (value == null) {
         setIsFirstLaunch(true);
       } else {
         setIsFirstLaunch(false);
+        updateUser();
       }
     });
   }, []);
@@ -39,11 +48,9 @@ const OnboardingScreen = () => {
     return (
       <Onboarding
         onDone={() => {
-          AsyncStorage.setItem('alreadyLaunched', 'true');
           navigation.navigate('authentication');
         }}
         onSkip={() => {
-          AsyncStorage.setItem('alreadyLaunched', 'true');
           navigation.navigate('authentication');
         }}
         nextLabel={<CSText color="primaryDark">Tiếp theo</CSText>}
@@ -74,7 +81,7 @@ const OnboardingScreen = () => {
                 size={'xxl'}
                 style={styles.text}
                 variant="NeutonItalic"
-                color="terarity">
+                color="secondary">
                 {page.subtitle}
               </CSText>
             ),
@@ -83,7 +90,7 @@ const OnboardingScreen = () => {
       />
     );
   } else {
-    return <AuthNavigator />;
+    return <BottomTabNavigator />;
   }
 };
 

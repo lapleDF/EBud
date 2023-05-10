@@ -15,7 +15,7 @@ export interface CSTextProps {
 export const sizeText = {
   xs: 11,
   sm: 13,
-  md: 18,
+  md: 17,
   lg: 27,
   xxl: 37,
 };

@@ -5,9 +5,10 @@ import {USER_ACTION} from '../actions';
 
 export const initialUser: User = {
   id: uuid.v4().toString(),
-  username: 'dennis',
-  email: 'lap@gmail.com',
-  password: '123123',
+  username: '',
+  email: '',
+  password: '',
+  avatar: require('../../assets/images/avatar/winged.png'),
   totalMedal: 0,
   createdAt: new Date(),
   totalStreak: 0,
@@ -19,6 +20,8 @@ export const userReducer = (
 ) => {
   switch (action.type) {
     case USER_ACTION.REGISTER:
+      return action.payload;
+    case USER_ACTION.UPDATE:
       return action.payload;
     default:
       return state;
