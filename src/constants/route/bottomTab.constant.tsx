@@ -7,6 +7,7 @@ import Courses from '../../screens/Courses';
 import Game from '../../screens/Game';
 import Library from '../../screens/Library';
 import {COLORS} from '../color';
+import HeaderScreen from '../../components/HeaderScreen';
 
 interface IconRenderProps {
   focused: boolean;
@@ -83,7 +84,8 @@ export const BOTTOM_TAB_ROUTE = [
           iconNameUnfocus="person"
         />
       ),
-      headerShown: true,
+      header: () =>
+        HeaderScreen({textLeft: 'Tài khoản của tôi', backBtn: true}),
     },
   },
 ];

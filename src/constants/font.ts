@@ -3,6 +3,8 @@ export const FONTS = {
   PoppinsRegular: 'Poppins-Regular',
   PoppinsBold: 'Poppins-Bold',
   PoppinsItalic: 'Poppins-Italic',
+  PoppinsSemiBold: 'Poppins-SemiBold',
+  PoppinsSemiBoldItalic: 'Poppins-SemiBoldItalic',
   // Neuton
   NeutonRegular: 'Neuton-Regular',
   NeutonBold: 'Neuton-Bold',
