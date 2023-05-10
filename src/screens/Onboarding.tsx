@@ -1,8 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
-import {Image, StyleSheet} from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
+import {Image, StyleSheet} from 'react-native';
+
 import CSText from '../components/core/CSText';
 import CSContainer from '../components/core/CSContainer';
 import {ONBOARDING} from '../constants/onBoarding.constant';

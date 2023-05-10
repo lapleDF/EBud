@@ -1,9 +1,9 @@
 import React, {useRef} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {BOTTOM_TAB_ROUTE} from '../constants/route';
-import {COLORS} from '../constants/color';
 import {Animated, StyleSheet} from 'react-native';
+import {COLORS} from '../constants/color';
+import {BOTTOM_TAB_ROUTE} from '../constants/route/bottomTab.constant';
 import {SPACING} from '../constants/spacing';
 
 const BottomTabNavigator = () => {

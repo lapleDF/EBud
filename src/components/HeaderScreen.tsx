@@ -58,7 +58,7 @@ const HeaderScreen = ({backBtn = false, ...props}: HeaderScreenProps) => {
 const styles = StyleSheet.create({
   header: {
     height: 60,
-    backgroundColor: COLORS.bgDark,
+    backgroundColor: COLORS.bgHeader,
     paddingHorizontal: SPACING.px,
     width: '100%',
     shadowColor: COLORS.black,
