@@ -7,6 +7,6 @@ export const COLORS = {
   bgDark: '#182844',
   borderDeactive: '#233F6F',
   secondary: '#F8B558',
-  black: '#000',
+  black: '#000000',
   red: '#FF0000',
 };

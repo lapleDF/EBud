@@ -8,6 +8,7 @@ export const initialUser: User = {
   username: '',
   email: '',
   password: '',
+  avatar: require('../../assets/images/avatar/winged.png'),
   totalMedal: 0,
   createdAt: new Date(),
   totalStreak: 0,

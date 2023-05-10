@@ -11,6 +11,7 @@ import {User} from '../../types';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 import {storeDataAsyncStorage, storeDataObjAsyncStorage} from '../../utils';
+import {ASYNC_STORAGE} from '../../constants/asyncStorage';
 
 const Login = () => {
   const [params, setParams] = useState({
@@ -27,10 +28,11 @@ const Login = () => {
   const navigation = useNavigation<any>();
 
   const login = () => {
+    // todo: Validate input
     if (user.username === params.username) {
       if (user.password === params.password) {
-        storeDataAsyncStorage('EBudAccessToken', 'abcd'); // !hard code access token
-        storeDataObjAsyncStorage('EBudUser', user);
+        storeDataAsyncStorage(ASYNC_STORAGE.accessToken, 'abcd'); // !hard code access token
+        storeDataObjAsyncStorage(ASYNC_STORAGE.user, user);
         navigation.navigate('bottomTab');
       } else {
         setErrMess({...errMess, password: 'Email hoặc mật khẩu không đúng'});

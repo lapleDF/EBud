@@ -1,6 +1,7 @@
-import {View, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
+import {View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {Link, useNavigation} from '@react-navigation/native';
 
 import CSContainer from '../../components/core/CSContainer';
 import CSText from '../../components/core/CSText';
@@ -10,7 +11,6 @@ import {User} from '../../types';
 import {initialUser} from '../../store/reducers/userReducer';
 import CSInput from '../../components/core/CSInput';
 import {COLORS} from '../../constants/color';
-import {Link, useNavigation} from '@react-navigation/native';
 import {AppDispatch} from '../../store/store';
 import {USER_ACTION} from '../../store/actions';
 
@@ -24,6 +24,7 @@ const Register = () => {
     if (!isAgree) {
       return;
     }
+    // todo: Validate input form
     AppDispatch(USER_ACTION.REGISTER, params);
     navigation.navigate('login');
   };

@@ -1,4 +1,5 @@
 import React from 'react';
+import {StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Account from '../../screens/Account';
@@ -6,8 +7,6 @@ import Courses from '../../screens/Courses';
 import Game from '../../screens/Game';
 import Library from '../../screens/Library';
 import {COLORS} from '../color';
-import {StyleSheet, View} from 'react-native';
-import CSText from '../../components/core/CSText';
 
 interface IconRenderProps {
   focused: boolean;
@@ -43,11 +42,6 @@ export const BOTTOM_TAB_ROUTE = [
         />
       ),
       headerShown: true,
-      header: () => (
-        <View style={styles.header}>
-          <CSText>Courses header</CSText>
-        </View>
-      ),
     },
   },
   {
@@ -95,18 +89,6 @@ export const BOTTOM_TAB_ROUTE = [
 ];
 
 const styles = StyleSheet.create({
-  header: {
-    height: 50,
-    backgroundColor: COLORS.bgDark,
-    width: '100%',
-    shadowColor: COLORS.black,
-    shadowOpacity: 0.06,
-    shadowOffset: {
-      width: 10,
-      height: 10,
-    },
-    elevation: 15,
-  },
   icon: {
     position: 'absolute',
     bottom: 5,

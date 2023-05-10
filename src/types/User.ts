@@ -3,6 +3,7 @@ export interface User {
   username: string;
   email: string;
   password: string;
+  avatar?: any;
   totalStreak?: number;
   totalMedal?: number;
   createdAt?: Date;

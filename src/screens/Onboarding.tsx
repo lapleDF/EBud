@@ -10,6 +10,7 @@ import BottomTabNavigator from '../navigators/BottomTabNavigator';
 import {getDataObjAsyncStorage} from '../utils';
 import {AppDispatch} from '../store/store';
 import {USER_ACTION} from '../store/actions';
+import {ASYNC_STORAGE} from '../constants/asyncStorage';
 
 const SplashScreen = () => {
   return (
@@ -27,11 +28,11 @@ const OnboardingScreen = () => {
   const navigation = useNavigation<any>();
 
   const updateUser = async () => {
-    const user = await getDataObjAsyncStorage('EBudUser');
+    const user = await getDataObjAsyncStorage(ASYNC_STORAGE.user);
     AppDispatch(USER_ACTION.UPDATE, user);
   };
   useEffect(() => {
-    AsyncStorage.getItem('EBudAccessToken').then(value => {
+    AsyncStorage.getItem(ASYNC_STORAGE.accessToken).then(value => {
       if (value == null) {
         setIsFirstLaunch(true);
       } else {
@@ -47,11 +48,9 @@ const OnboardingScreen = () => {
     return (
       <Onboarding
         onDone={() => {
-          AsyncStorage.setItem('alreadyLaunched', 'true');
           navigation.navigate('authentication');
         }}
         onSkip={() => {
-          AsyncStorage.setItem('alreadyLaunched', 'true');
           navigation.navigate('authentication');
         }}
         nextLabel={<CSText color="primaryDark">Tiếp theo</CSText>}
