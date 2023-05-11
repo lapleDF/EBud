@@ -63,10 +63,13 @@ const styles = StyleSheet.create({
     width: '100%',
     shadowColor: COLORS.black,
     shadowOffset: {
-      width: 10,
+      width: 0,
       height: 10,
     },
-    elevation: 15,
+    shadowOpacity: 0.51,
+    shadowRadius: 13.16,
+
+    elevation: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

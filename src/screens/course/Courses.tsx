@@ -4,9 +4,11 @@ import {useSelector} from 'react-redux';
 
 import HeaderScreen from '../../components/HeaderScreen';
 import CSContainer from '../../components/core/CSContainer';
-import CSText from '../../components/core/CSText';
 import {RootState} from '../../store/store';
 import {User} from '../../types';
+import {StyleSheet} from 'react-native';
+import {SPACING} from '../../constants/spacing';
+import CoursList from '../../components/course/CoursList';
 
 const Courses = () => {
   const navigation = useNavigation();
@@ -24,10 +26,16 @@ const Courses = () => {
     });
   });
   return (
-    <CSContainer>
-      <CSText>Courses</CSText>
+    <CSContainer style={styles.container}>
+      <CoursList skillFilter="vocab" />
     </CSContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: SPACING.px,
+  },
+});
 
 export default Courses;

@@ -20,7 +20,7 @@ export const COURSE_ROUTE = [
     options: {headerShown: false},
   },
   {
-    name: 'pronoun',
+    name: 'pronounce',
     component: PronounciationLesson,
     options: {headerShown: false},
   },
