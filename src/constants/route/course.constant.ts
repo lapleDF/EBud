@@ -1,7 +1,5 @@
 import Courses from '../../screens/course/Courses';
-import GrammarLesson from '../../screens/course/GrammarLesson';
-import PronounciationLesson from '../../screens/course/PronounciationLesson';
-import VocabLesson from '../../screens/course/VocabLesson';
+import Lesson from '../../screens/course/Lesson';
 
 export const COURSE_ROUTE = [
   {
@@ -10,18 +8,8 @@ export const COURSE_ROUTE = [
     options: {headerShown: true},
   },
   {
-    name: 'grammar',
-    component: GrammarLesson,
-    options: {headerShown: false},
-  },
-  {
-    name: 'vocab',
-    component: VocabLesson,
-    options: {headerShown: false},
-  },
-  {
-    name: 'pronounce',
-    component: PronounciationLesson,
+    name: 'lesson',
+    component: Lesson,
     options: {headerShown: false},
   },
 ];
