@@ -3,9 +3,9 @@ import React from 'react';
 
 import {ROOT_ROUTE} from '../constants/route/rootRoute.constant';
 
-const RootNavigator = () => {
-  const RootStack = createStackNavigator();
+const RootStack = createStackNavigator();
 
+const RootNavigator = () => {
   return (
     <RootStack.Navigator screenOptions={{headerShown: false}}>
       {ROOT_ROUTE.map(route => (

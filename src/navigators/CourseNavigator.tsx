@@ -3,9 +3,9 @@ import React from 'react';
 
 import {COURSE_ROUTE} from '../constants/route/course.constant';
 
-const CourseNavigator = () => {
-  const CourseStack = createStackNavigator();
+const CourseStack = createStackNavigator();
 
+const CourseNavigator = () => {
   return (
     <CourseStack.Navigator screenOptions={{headerShown: false}}>
       {COURSE_ROUTE.map(route => (

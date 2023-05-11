@@ -2,9 +2,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {LIBRARY_ROUTE} from '../constants/route/library.constant';
 
-const LibraryNavigator = () => {
-  const LibraryStack = createStackNavigator();
+const LibraryStack = createStackNavigator();
 
+const LibraryNavigator = () => {
   return (
     <LibraryStack.Navigator screenOptions={{headerShown: false}}>
       {LIBRARY_ROUTE.map(route => (

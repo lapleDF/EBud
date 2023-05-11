@@ -57,6 +57,7 @@ export const BOTTOM_TAB_ROUTE = [
           iconNameUnfocus="book"
         />
       ),
+      tabBarVisible: false,
     },
   },
   {

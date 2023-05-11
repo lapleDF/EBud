@@ -4,9 +4,9 @@ import React from 'react';
 import Login from '../screens/auth/Login';
 import Register from '../screens/auth/Register';
 
-const AuthNavigator = () => {
-  const AuthStack = createStackNavigator();
+const AuthStack = createStackNavigator();
 
+const AuthNavigator = () => {
   return (
     <AuthStack.Navigator screenOptions={{headerShown: false}}>
       <AuthStack.Screen

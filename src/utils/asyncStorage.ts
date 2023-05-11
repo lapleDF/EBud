@@ -17,7 +17,7 @@ export const getDataAsyncStorage = async (key: string) => {
       return '';
     }
   } catch (e) {
-    console.log('error: ' + e);
+    console.log('error: ', e);
   }
 };
 

@@ -2,9 +2,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {ACCOUNT_ROUTE} from '../constants/route/account.constant';
 
-const AccountNavigator = () => {
-  const AccountStack = createStackNavigator();
+const AccountStack = createStackNavigator();
 
+const AccountNavigator = () => {
   return (
     <AccountStack.Navigator screenOptions={{headerShown: false}}>
       {ACCOUNT_ROUTE.map(route => (
