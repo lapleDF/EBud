@@ -16,7 +16,7 @@ export interface CSButtonProps {
   onPress: () => void;
   title: string;
   variant?: 'primary' | 'secondary';
-  style?: StyleProp<any>;
+  style?: StyleProp<ViewStyle>;
   variantText?: keyof typeof FONTS;
 }
 
@@ -34,7 +34,7 @@ const CSButton = ({
   return (
     <TouchableOpacity
       activeOpacity={0.5}
-      style={[styles.btn, styles[variant]]}
+      style={[styles.btn, styles[variant], props.style]}
       onPress={props.onPress}>
       <CSText color={colorText} variant={variantText}>
         {props.title}

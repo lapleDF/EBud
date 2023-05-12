@@ -39,7 +39,7 @@ const MainElement = (props: MainElementProps) => {
   return (
     <View style={styles.mainEle}>
       <CSText style={styles.courseTitle}>{props.name}</CSText>
-      <CSText style={styles.courseScore}>
+      <CSText size={'sm'} style={styles.courseScore}>
         {`${props.learnedLesson}/${props.totalLesson}`}
       </CSText>
       <Image source={props.cover} style={styles.image} />
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   },
   courseScore: {
     position: 'absolute',
-    bottom: -25,
+    bottom: -30,
   },
   circleWrap: {
     position: 'absolute',
@@ -133,6 +133,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     top: 83 - RADIUS * 3,
     transform: [{rotateZ: '45deg'}, {translateX: 85}],
+    zIndex: 0,
   },
   line3: {
     width: RADIUS * 2 - 10,
@@ -153,6 +154,5 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 3,
   },
 });

@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.51,
     shadowRadius: 13.16,
-
     elevation: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',

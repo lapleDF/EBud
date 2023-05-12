@@ -5,8 +5,9 @@ import {
   RouteProp,
 } from '@react-navigation/native';
 
-import CSContainer from '../../components/core/CSContainer';
-import CSText from '../../components/core/CSText';
+import VocabLesson from './VocabLesson';
+import GrammarLesson from './GrammarLesson';
+import PronounceLesson from './PronounceLesson';
 
 interface LessonProps {
   navigation: NavigationProp<any>;
@@ -16,11 +17,13 @@ interface LessonProps {
 const Lesson = (props: LessonProps) => {
   const {course}: any = props.route.params;
 
-  return (
-    <CSContainer>
-      <CSText>Lesson of topic {course?.name}</CSText>
-    </CSContainer>
-  );
+  if (course.skill === 'vocab') {
+    return <VocabLesson />;
+  } else if (course.skill === 'grammar') {
+    return <GrammarLesson />;
+  } else {
+    return <PronounceLesson />;
+  }
 };
 
 export default Lesson;
