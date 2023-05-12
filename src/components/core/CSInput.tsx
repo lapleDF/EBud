@@ -8,7 +8,7 @@ import {SPACING} from '../../constants/spacing';
 import {FONTS} from '../../constants/font';
 
 interface CSInputProps {
-  defaultValue?: any;
+  defaultValue?: string;
   onChangeText: (changedText: string) => void;
   secure?: boolean;
   placeholder?: string;
