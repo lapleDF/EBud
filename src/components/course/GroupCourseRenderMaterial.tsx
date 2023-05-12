@@ -8,10 +8,12 @@ import {
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import CircularProgress from 'react-native-circular-progress-indicator';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import CSText from '../core/CSText';
 import {SPACING} from '../../constants/spacing';
 import {COLORS} from '../../constants/color';
+import {CourseItem} from '../../types';
 
 interface MainElementProps {
   name: string;
@@ -21,10 +23,9 @@ interface MainElementProps {
 }
 
 interface CircleProgressProps {
-  value: number;
+  courseItem: CourseItem;
   isThirdCircle?: boolean;
-  idCourse: string;
-  skill: string;
+  filteredArray: CourseItem[];
 }
 
 interface LineProps {
@@ -51,20 +52,34 @@ const CircleProgress = ({
   ...props
 }: CircleProgressProps) => {
   const navigation = useNavigation<any>();
+  const indexPrevItem = props.filteredArray.indexOf(props.courseItem);
+  const isLock =
+    indexPrevItem !== 0 &&
+    props.courseItem.learnedLesson === 0 &&
+    props.filteredArray[indexPrevItem - 1].learnedLesson < 5;
 
   return (
     <TouchableOpacity
-      onPress={() =>
+      onPress={() => {
+        if (isLock) {
+          return;
+        }
         navigation.navigate('lesson', {
-          skill: props.skill,
-          idCourse: props.idCourse,
-        })
-      }
+          course: props.courseItem,
+        });
+      }}
       activeOpacity={0.8}
       // eslint-disable-next-line react-native/no-inline-styles
       style={[styles.circleWrap, isThirdCircle && {right: 0}]}>
+      {isLock && (
+        <View style={styles.lockIcon}>
+          <Icon name="lock-closed" size={50} color={COLORS.primaryLighter} />
+        </View>
+      )}
       <CircularProgress
-        value={props.value}
+        value={
+          (props.courseItem.learnedLesson / props.courseItem.totalLesson) * 100
+        }
         radius={RADIUS}
         showProgressValue={false}
         activeStrokeColor={COLORS.primaryLight}
@@ -106,6 +121,8 @@ const styles = StyleSheet.create({
   },
   circleWrap: {
     position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
     zIndex: 2,
   },
   line12: {
@@ -127,5 +144,15 @@ const styles = StyleSheet.create({
   },
   lineActive: {
     backgroundColor: COLORS.primaryLight,
+  },
+  lockIcon: {
+    position: 'absolute',
+    borderRadius: 70,
+    backgroundColor: COLORS.overlay,
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 3,
   },
 });

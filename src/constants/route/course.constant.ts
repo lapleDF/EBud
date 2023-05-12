@@ -1,3 +1,4 @@
+import HeaderScreen from '../../components/HeaderScreen';
 import Courses from '../../screens/course/Courses';
 import Lesson from '../../screens/course/Lesson';
 
@@ -10,6 +11,9 @@ export const COURSE_ROUTE = [
   {
     name: 'lesson',
     component: Lesson,
-    options: {headerShown: false},
+    options: {
+      headerShown: true,
+      header: () => HeaderScreen({backBtn: true, textLeft: 'Lesson'}),
+    },
   },
 ];

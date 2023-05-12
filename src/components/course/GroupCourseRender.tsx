@@ -28,11 +28,7 @@ const GroupCourseRender = ({
               {item.id !== filtedArray[0].id && (
                 <Line variant="line12" isActive={item.learnedLesson > 0} />
               )}
-              <CircleProgress
-                idCourse={item.id}
-                skill={item.skill}
-                value={(item.learnedLesson / item.totalLesson) * 100}
-              />
+              <CircleProgress filteredArray={filtedArray} courseItem={item} />
             </View>
           );
         }
@@ -54,9 +50,8 @@ const GroupCourseRender = ({
                   isActive={item.learnedLesson > 0}
                 />
                 <CircleProgress
-                  idCourse={item.id}
-                  skill={item.skill}
-                  value={(item.learnedLesson / item.totalLesson) * 100}
+                  filteredArray={filtedArray}
+                  courseItem={item}
                   isThirdCircle={index === 2}
                 />
               </View>

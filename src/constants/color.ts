@@ -10,4 +10,5 @@ export const COLORS = {
   secondary: '#F8B558',
   black: '#000000',
   red: '#FF0000',
+  overlay: 'rgba(0, 0, 0, 0.24)',
 };
