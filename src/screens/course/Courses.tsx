@@ -26,13 +26,18 @@ const Courses = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      header: () =>
-        HeaderScreen({
-          avatar: user.avatar,
-          textLeft: user.username,
-          textRight: user.totalStreak?.toString(),
-          iconRight: 'flame',
-        }),
+      header: () => {
+        if (user !== null) {
+          return HeaderScreen({
+            avatar: user.avatar,
+            textLeft: user.username,
+            textRight: user.totalStreak?.toString(),
+            iconRight: 'flame',
+          });
+        } else {
+          return null;
+        }
+      },
     });
   });
 

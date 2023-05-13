@@ -11,7 +11,7 @@ const Account = () => {
   const navigation = useNavigation<any>();
 
   const logout = () => {
-    AsyncStorage.removeItem(ASYNC_STORAGE.user);
+    AsyncStorage.removeItem(ASYNC_STORAGE.accessToken);
     navigation.navigate('authentication');
   };
 
