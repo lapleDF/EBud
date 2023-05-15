@@ -4,12 +4,19 @@ import {
   NavigationContainerRefWithCurrent,
   useNavigationContainerRef,
 } from '@react-navigation/native';
-
-import RootNavigator from './navigators/RootNavigator';
 import SplashScreen from 'react-native-splash-screen';
 import {Provider} from 'react-redux';
+import Parse from 'parse/react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import {APP_ID, JS_KEY, SERVER_URL} from '@env';
+import RootNavigator from './navigators/RootNavigator';
 import store, {AppDispatch} from './store/store';
 import {MANAGED_ROUTE_ACTION} from './store/actions/managedRoute.action';
+
+Parse.setAsyncStorage(AsyncStorage);
+Parse.initialize(APP_ID, JS_KEY);
+Parse.serverURL = SERVER_URL;
 
 const App = () => {
   const navigationRef: NavigationContainerRefWithCurrent<ReactNavigation.RootParamList> =
