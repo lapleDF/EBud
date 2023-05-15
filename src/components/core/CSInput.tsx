@@ -31,7 +31,7 @@ const CSInput = ({
         <TextInput
           style={styles.inputFiled}
           defaultValue={defaultValue}
-          onChangeText={changedText => props.onChangeText(changedText)}
+          onChangeText={props.onChangeText}
           secureTextEntry={isSecure}
           placeholder={placeholder}
           autoCapitalize="none"
