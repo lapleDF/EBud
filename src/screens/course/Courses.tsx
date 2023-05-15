@@ -89,7 +89,7 @@ const Courses = () => {
         renderItem={({item, section}) => (
           <GroupCourseRender
             filtedArray={myCourseList.filter(
-              fuck => fuck.skill === section.skill,
+              course => course.skill === section.skill,
             )}
             groupItem={item}
           />
