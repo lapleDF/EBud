@@ -1,46 +1,52 @@
 import {StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
 import {Link, useNavigation} from '@react-navigation/native';
+import Parse from 'parse/react-native';
 
 import CSContainer from '../../components/core/CSContainer';
 import CSText from '../../components/core/CSText';
 import CSInput from '../../components/core/CSInput';
 import {CSButton} from '../../components/core/CSButton';
 import {SPACING} from '../../constants/spacing';
-import {User} from '../../types';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../store/store';
-import {storeDataAsyncStorage, storeDataObjAsyncStorage} from '../../utils';
+import {storeDataObjAsyncStorage} from '../../utils';
 import {ASYNC_STORAGE} from '../../constants/asyncStorage';
+import CSLoading from '../../components/core/CSLoading';
+import {AppDispatch} from '../../store/store';
+import {USER_ACTION} from '../../store/actions';
 
 const Login = () => {
+  const navigation = useNavigation<any>();
+  const [isLoading, setIsLoading] = useState(false);
   const [params, setParams] = useState({
     username: '',
     password: '',
   });
-
   const [errMess, setErrMess] = useState({
     userName: '',
     password: '',
   });
 
-  const user: User = useSelector((state: RootState) => state.user);
-  const navigation = useNavigation<any>();
-
-  const login = () => {
+  const login = async () => {
     // todo: Validate input
-    if (user.username === params.username) {
-      if (user.password === params.password) {
-        storeDataAsyncStorage(ASYNC_STORAGE.accessToken, 'abcd'); // !hard code access token
-        storeDataObjAsyncStorage(ASYNC_STORAGE.user, user);
-        navigation.navigate('bottomTab');
-      } else {
+    try {
+      setIsLoading(true);
+      await Parse.User.logIn(params.username, params.password).then(
+        (loggedInUser: Parse.User) => {
+          AppDispatch(USER_ACTION.UPDATE, loggedInUser);
+          storeDataObjAsyncStorage(ASYNC_STORAGE.userInfo, loggedInUser);
+        },
+      );
+      setIsLoading(false);
+      navigation.navigate('bottomTab');
+    } catch (error: any) {
+      if (error?.message === 'Invalid username/password.') {
         setErrMess({...errMess, password: 'Email hoặc mật khẩu không đúng'});
       }
     }
   };
   return (
     <CSContainer style={styles.container}>
+      {isLoading && <CSLoading />}
       <CSText size={'xxl'} color="primaryLight" variant="PoppinsBold">
         Đăng nhập
       </CSText>

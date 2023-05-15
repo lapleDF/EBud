@@ -76,7 +76,7 @@ const Courses = () => {
   ];
 
   return (
-    <CSContainer style={styles.container}>
+    <CSContainer>
       <SectionList
         sections={SECTION}
         renderSectionHeader={({section}) => (
@@ -89,7 +89,7 @@ const Courses = () => {
         renderItem={({item, section}) => (
           <GroupCourseRender
             filtedArray={myCourseList.filter(
-              fuck => fuck.skill === section.skill,
+              course => course.skill === section.skill,
             )}
             groupItem={item}
           />
@@ -100,9 +100,6 @@ const Courses = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: SPACING.px,
-  },
   footerSection: {
     width: '100%',
     justifyContent: 'center',
@@ -110,6 +107,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   contentContainerSection: {
+    paddingHorizontal: SPACING.px,
     paddingBottom: 90,
   },
 });

@@ -66,9 +66,11 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   container: {
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 20,
+    paddingHorizontal: SPACING.px,
     gap: 10,
   },
 });

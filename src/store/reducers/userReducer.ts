@@ -1,14 +1,13 @@
-import uuid from 'react-native-uuid';
-
 import {PayloadAction, User} from '../../types';
 import {USER_ACTION} from '../actions';
 
 export const initialUser: User = {
-  id: uuid.v4().toString(),
+  objectId: '',
   username: '',
   email: '',
   password: '',
-  avatar: require('../../assets/images/avatar/winged.png'),
+  avatar:
+    'https://parsefiles.back4app.com/m3BU02yXteFvr3TV0XEGWVRClKOlaQzDYoTvPCZ1/4c29fc10ed03063f1ea4718adb47b658_winged.png',
   totalMedal: 0,
   createdAt: new Date(),
   totalStreak: 0,

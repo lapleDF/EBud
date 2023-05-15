@@ -1,8 +1,8 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
 import Onboarding from 'react-native-onboarding-swiper';
 import {Image, StyleSheet} from 'react-native';
+import Parse from 'parse/react-native';
 
 import CSText from '../components/core/CSText';
 import CSContainer from '../components/core/CSContainer';
@@ -28,19 +28,19 @@ const OnboardingScreen = () => {
   const [isFirstLaunch, setIsFirstLaunch] = useState<any>(null);
   const navigation = useNavigation<any>();
 
-  const updateUser = async () => {
-    const user = await getDataObjAsyncStorage(ASYNC_STORAGE.user);
-    AppDispatch(USER_ACTION.UPDATE, user);
+  const trackingAuthen = async () => {
+    const user: Parse.User = await getDataObjAsyncStorage(
+      ASYNC_STORAGE.userInfo,
+    );
+    if (user == null) {
+      setIsFirstLaunch(true);
+    } else {
+      AppDispatch(USER_ACTION.UPDATE, user);
+      setIsFirstLaunch(false);
+    }
   };
   useEffect(() => {
-    AsyncStorage.getItem(ASYNC_STORAGE.accessToken).then(value => {
-      if (value == null) {
-        setIsFirstLaunch(true);
-      } else {
-        setIsFirstLaunch(false);
-        updateUser();
-      }
-    });
+    trackingAuthen();
   }, []);
 
   if (isFirstLaunch === null) {

@@ -24,7 +24,7 @@ const IconRender = (props: IconRenderProps) => {
     <Icon
       name={props.focused ? props.iconNameUnfocus : props.iconName}
       size={40}
-      color={props.focused ? COLORS.primaryDark : COLORS.primaryLighter}
+      color={props.focused ? COLORS.primaryLight : COLORS.primaryLighter}
       style={styles.icon}
     />
   );

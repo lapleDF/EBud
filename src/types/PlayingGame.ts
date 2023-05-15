@@ -1,5 +1,5 @@
 export interface PlayingGame {
-  id: string;
+  objectId: string;
   idGame: string;
   idUser: string;
 }

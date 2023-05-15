@@ -1,7 +1,7 @@
 import {SentenceEg} from './SentenceEg';
 
 export interface LessonVocab {
-  id: string;
+  objectId: string;
   idCourse: string;
   title?: string;
   image?: string;

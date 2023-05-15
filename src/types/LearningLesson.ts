@@ -1,5 +1,5 @@
 export interface LearningLesson {
-  id: string;
+  objectId: string;
   idLesson: string;
   idCourse: string;
   idUser: string;

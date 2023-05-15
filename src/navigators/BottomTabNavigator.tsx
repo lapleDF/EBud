@@ -88,7 +88,7 @@ const stytes = StyleSheet.create({
   indicator: {
     width: getWithTabItem() - 40,
     height: 5,
-    backgroundColor: COLORS.primaryDark,
+    backgroundColor: COLORS.primaryLight,
     position: 'absolute',
     bottom: 83,
     left: 40,
