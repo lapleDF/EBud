@@ -23,21 +23,17 @@ interface sectionProps {
 const Courses = () => {
   const navigation = useNavigation();
   const user: User = useSelector((state: RootState) => state.user);
+  console.log('user', user.username);
 
   useEffect(() => {
     navigation.setOptions({
-      header: () => {
-        if (user !== null) {
-          return HeaderScreen({
-            avatar: user.avatar,
-            textLeft: user.username,
-            textRight: user.totalStreak?.toString(),
-            iconRight: 'flame',
-          });
-        } else {
-          return null;
-        }
-      },
+      header: () =>
+        HeaderScreen({
+          avatar: user.avatar,
+          textLeft: user.username,
+          textRight: user.totalStreak?.toString(),
+          iconRight: 'flame',
+        }),
     });
   });
 

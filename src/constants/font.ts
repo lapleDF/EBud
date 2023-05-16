@@ -9,4 +9,8 @@ export const FONTS = {
   NeutonRegular: 'Neuton-Regular',
   NeutonBold: 'Neuton-Bold',
   NeutonItalic: 'Neuton-Italic',
+  // Bungee
+  Bungee: 'Bungee-Regular',
+  // Sriracha
+  Sriracha: 'Sriracha-Regular',
 };

@@ -47,7 +47,7 @@ const Login = () => {
   return (
     <CSContainer style={styles.container}>
       {isLoading && <CSLoading />}
-      <CSText size={'xxl'} color="primaryLight" variant="PoppinsBold">
+      <CSText size={'xxl'} color="primaryLight" variant="Bungee">
         Đăng nhập
       </CSText>
       <View style={styles.groupInput}>

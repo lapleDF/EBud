@@ -48,7 +48,7 @@ const Register = () => {
     <CSContainer style={styles.container}>
       {isLoading && <CSLoading />}
       <CSButtonBack />
-      <CSText size={'xxl'} color="primaryLight" variant="PoppinsBold">
+      <CSText size={'xxl'} color="primaryLight" variant="Bungee">
         Đăng ký
       </CSText>
       <View style={styles.groupInput}>

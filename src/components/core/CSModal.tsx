@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 20,
     paddingHorizontal: SPACING.px,
+    paddingTop: 40,
     gap: 10,
   },
 });

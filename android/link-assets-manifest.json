@@ -2,6 +2,22 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/assets/fonts/Batman/Batman-outline.ttf",
+      "sha1": "12bddc07d8019389710c823cbefec0a08cf788a8"
+    },
+    {
+      "path": "src/assets/fonts/Batman/Batman.ttf",
+      "sha1": "970fa26afb211a3b67188799e891233239c4d681"
+    },
+    {
+      "path": "src/assets/fonts/Bungee/Bungee-Regular.ttf",
+      "sha1": "cf6a83b3c5b11d5ce4f851bc86701e5edf75287e"
+    },
+    {
+      "path": "src/assets/fonts/Bungee/OFL.txt",
+      "sha1": "016b0312263fdfa61f13d700037415b426ab63af"
+    },
+    {
       "path": "src/assets/fonts/Neuton/Neuton-Bold.ttf",
       "sha1": "432577ed9218f8df2ad804c3efb98ff7705f813a"
     },
@@ -104,6 +120,14 @@
     {
       "path": "src/assets/fonts/Poppins/Poppins-ThinItalic.ttf",
       "sha1": "193eb4a66d90b17d1c2c1d96e5f218aa018e59b6"
+    },
+    {
+      "path": "src/assets/fonts/Sriracha/OFL.txt",
+      "sha1": "322172eb13baf20ad59a3948a50016f25905763c"
+    },
+    {
+      "path": "src/assets/fonts/Sriracha/Sriracha-Regular.ttf",
+      "sha1": "662b965c4eb20849f79405f8972572742e34ab4e"
     }
   ]
 }

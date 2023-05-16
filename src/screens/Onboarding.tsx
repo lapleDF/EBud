@@ -72,16 +72,16 @@ const OnboardingScreen = () => {
               <CSText
                 size={'xxl'}
                 style={styles.text}
-                variant="NeutonBold"
+                variant="Bungee"
                 color="primaryLight">
                 {page.title}
               </CSText>
             ),
             subtitle: (
               <CSText
-                size={'xxl'}
+                size={'lg'}
                 style={styles.text}
-                variant="NeutonItalic"
+                variant="Sriracha"
                 color="secondary">
                 {page.subtitle}
               </CSText>
@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
-    marginTop: 20,
     marginHorizontal: 10,
+    lineHeight: 60,
   },
 });
 
