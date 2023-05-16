@@ -12,7 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {APP_ID, JS_KEY, SERVER_URL} from '@env';
 import RootNavigator from './navigators/RootNavigator';
 import store, {AppDispatch} from './store/store';
-import {MANAGED_ROUTE_ACTION} from './store/actions/managedRoute.action';
+import {MANAGED_ROUTE_ACTION} from './store/actions';
 
 Parse.setAsyncStorage(AsyncStorage);
 Parse.initialize(APP_ID, JS_KEY);

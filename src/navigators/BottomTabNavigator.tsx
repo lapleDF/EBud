@@ -1,21 +1,23 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {Animated, StyleSheet} from 'react-native';
 import {COLORS} from '../constants/color';
 import {BOTTOM_TAB_ROUTE} from '../constants/route/bottomTab.constant';
 import {SPACING} from '../constants/spacing';
-import {RootState} from '../store/store';
-import {ManagedRoute} from '../types/ManagedRoute';
+import {AppDispatch, RootState} from '../store/store';
 import {useSelector} from 'react-redux';
+import {COURSE_ACTION} from '../store/actions';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
-  const managedRoute: ManagedRoute = useSelector(
-    (state: RootState) => state.managedRoute,
-  );
+  const rootState: RootState = useSelector((state: RootState) => state);
+
+  useEffect(() => {
+    AppDispatch(COURSE_ACTION.GET_LIST, rootState.user.objectId);
+  }, [rootState.user.objectId]);
 
   return (
     <>
@@ -23,8 +25,8 @@ const BottomTabNavigator = () => {
         initialRouteName="home"
         screenOptions={{
           tabBarShowLabel: false,
-          tabBarStyle: managedRoute.bottomTabRouteName.includes(
-            managedRoute.currentRouteName,
+          tabBarStyle: rootState.managedRoute.bottomTabRouteName.includes(
+            rootState.managedRoute.currentRouteName,
           )
             ? stytes.tabBarContainer
             : stytes.hideTabBar,
@@ -48,8 +50,8 @@ const BottomTabNavigator = () => {
           ))}
         </Tab.Group>
       </Tab.Navigator>
-      {managedRoute.bottomTabRouteName.includes(
-        managedRoute.currentRouteName,
+      {rootState.managedRoute.bottomTabRouteName.includes(
+        rootState.managedRoute.currentRouteName,
       ) && (
         <Animated.View
           style={[

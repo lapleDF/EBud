@@ -5,10 +5,9 @@ import {useSelector} from 'react-redux';
 import HeaderScreen from '../../components/HeaderScreen';
 import CSContainer from '../../components/core/CSContainer';
 import {RootState} from '../../store/store';
-import {CourseItem, User} from '../../types';
+import {CourseItem, CourseList, User} from '../../types';
 import {SectionList, StyleSheet, View} from 'react-native';
 import {SPACING} from '../../constants/spacing';
-import {myCourseList} from '../../../data';
 import {splitChunkArray} from '../../utils/handleArray';
 import CSText from '../../components/core/CSText';
 import GroupCourseRender from '../../components/course/GroupCourseRender';
@@ -22,7 +21,9 @@ interface sectionProps {
 
 const Courses = () => {
   const navigation = useNavigation();
-  const user: User = useSelector((state: RootState) => state.user);
+  const state: RootState = useSelector((rootState: RootState) => rootState);
+  const user: User = state.user;
+  const course: CourseList = state.course;
 
   useEffect(() => {
     navigation.setOptions({
@@ -37,7 +38,7 @@ const Courses = () => {
   });
 
   const courseSectionArr = (skill: string) => {
-    const filteredArr = myCourseList.filter(item => item.skill === skill);
+    const filteredArr = course.list.filter(item => item.skill === skill);
     return splitChunkArray(filteredArr, 3);
   };
 
@@ -83,8 +84,8 @@ const Courses = () => {
         contentContainerStyle={styles.contentContainerSection}
         renderItem={({item, section}) => (
           <GroupCourseRender
-            filtedArray={myCourseList.filter(
-              course => course.skill === section.skill,
+            filtedArray={course.list.filter(
+              courseItem => courseItem.skill === section.skill,
             )}
             groupItem={item}
           />

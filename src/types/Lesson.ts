@@ -1,6 +1,6 @@
 import {SentenceEg} from './SentenceEg';
 
-export interface LessonVocab {
+export interface Lesson {
   objectId: string;
   idCourse: string;
   title?: string;

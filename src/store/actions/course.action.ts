@@ -1,0 +1,6 @@
+export const COURSE_ACTION = {
+  GET_LIST: 'GET_LIST',
+  UPDATE_LIST: 'UPDATE_LIST',
+  LOADING: 'LOADING',
+  IDLE: 'IDLE',
+};

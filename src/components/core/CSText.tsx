@@ -35,7 +35,8 @@ const CSText = ({
           fontFamily: FONTS[variant],
         },
         props.style,
-      ]}>
+      ]}
+      lineBreakMode="tail">
       {props.children}
     </Text>
   );

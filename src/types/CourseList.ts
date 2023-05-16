@@ -6,4 +6,5 @@ export interface CourseList {
   prevPage: number;
   nextPage: number;
   totalPage: number;
+  status: 'loading' | 'error' | 'idle';
 }

@@ -1,10 +1,4 @@
-import {
-  Image,
-  ImageSourcePropType,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import CircularProgress from 'react-native-circular-progress-indicator';
@@ -19,7 +13,7 @@ interface MainElementProps {
   name: string;
   learnedLesson: number;
   totalLesson: number;
-  cover: ImageSourcePropType;
+  cover: string;
 }
 
 interface CircleProgressProps {
@@ -42,7 +36,7 @@ const MainElement = (props: MainElementProps) => {
       <CSText size={'sm'} style={styles.courseScore}>
         {`${props.learnedLesson}/${props.totalLesson}`}
       </CSText>
-      <Image source={props.cover} style={styles.image} />
+      <Image source={{uri: props.cover}} style={styles.image} />
     </View>
   );
 };
@@ -106,14 +100,16 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   image: {
-    width: '100%',
-    height: '100%',
+    width: '90%',
+    height: '90%',
     resizeMode: 'cover',
     borderRadius: 70,
   },
   courseTitle: {
     position: 'absolute',
     top: -25,
+    width: 160,
+    textAlign: 'center',
   },
   courseScore: {
     position: 'absolute',
