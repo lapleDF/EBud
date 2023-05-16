@@ -1,5 +1,4 @@
 export const PARSE_OBJ = {
-  user: 'User',
   course: 'Course',
   lesson: 'Lesson',
   game: 'Game',

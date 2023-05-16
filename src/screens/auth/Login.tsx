@@ -32,13 +32,14 @@ const Login = () => {
       setIsLoading(true);
       await Parse.User.logIn(params.username, params.password).then(
         (loggedInUser: Parse.User) => {
-          AppDispatch(USER_ACTION.UPDATE, loggedInUser);
+          AppDispatch(USER_ACTION.LOGIN, loggedInUser);
           storeDataObjAsyncStorage(ASYNC_STORAGE.userInfo, loggedInUser);
         },
       );
       setIsLoading(false);
       navigation.navigate('bottomTab');
     } catch (error: any) {
+      setIsLoading(false);
       if (error?.message === 'Invalid username/password.') {
         setErrMess({...errMess, password: 'Email hoặc mật khẩu không đúng'});
       }

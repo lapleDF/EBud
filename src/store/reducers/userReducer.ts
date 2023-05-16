@@ -5,12 +5,12 @@ export const initialUser: User = {
   objectId: '',
   username: '',
   email: '',
-  password: '',
   avatar:
     'https://parsefiles.back4app.com/m3BU02yXteFvr3TV0XEGWVRClKOlaQzDYoTvPCZ1/4c29fc10ed03063f1ea4718adb47b658_winged.png',
   totalMedal: 0,
   createdAt: new Date(),
   totalStreak: 0,
+  desc: '',
 };
 
 export const userReducer = (
@@ -18,8 +18,6 @@ export const userReducer = (
   action: PayloadAction,
 ) => {
   switch (action.type) {
-    case USER_ACTION.REGISTER:
-      return action.payload;
     case USER_ACTION.UPDATE:
       return action.payload;
     default:

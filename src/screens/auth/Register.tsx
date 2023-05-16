@@ -12,13 +12,14 @@ import {User} from '../../types';
 import {initialUser} from '../../store/reducers/userReducer';
 import CSInput from '../../components/core/CSInput';
 import {COLORS} from '../../constants/color';
-import {AppDispatch} from '../../store/store';
-import {USER_ACTION} from '../../store/actions';
 import CSLoading from '../../components/core/CSLoading';
 
 const Register = () => {
   const [params, setParams] = useState<User>(initialUser);
-  const [confirmPwd, setConfirmPwd] = useState<string>('');
+  const [passwordFields, setPasswordFields] = useState({
+    password: '',
+    confirmPassword: '',
+  });
   const [isAgree, setIsAgree] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigation = useNavigation<any>();
@@ -28,10 +29,9 @@ const Register = () => {
       return;
     }
     // todo: Validate input form
-    AppDispatch(USER_ACTION.REGISTER, params);
     try {
       setIsLoading(true);
-      await Parse.User.signUp(params.username, params.password, {
+      await Parse.User.signUp(params.username, passwordFields.password, {
         email: params.email,
         avatar: params.avatar,
         totalStreak: params.totalStreak,
@@ -40,8 +40,9 @@ const Register = () => {
       });
       setIsLoading(false);
       navigation.navigate('login');
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      setIsLoading(false);
+      console.log(error.message);
     }
   };
   return (
@@ -63,16 +64,20 @@ const Register = () => {
           defaultValue={params.email}
         />
         <CSInput
-          onChangeText={text => setParams({...params, password: text})}
+          onChangeText={text =>
+            setPasswordFields({...passwordFields, password: text})
+          }
           placeholder="Mật khẩu"
-          defaultValue={params.password}
+          defaultValue={passwordFields.password}
           secure
         />
         <CSInput
-          onChangeText={text => setConfirmPwd(text)}
+          onChangeText={text =>
+            setPasswordFields({...passwordFields, confirmPassword: text})
+          }
           placeholder="Nhập lại mật khẩu"
           secure
-          defaultValue={confirmPwd}
+          defaultValue={passwordFields.confirmPassword}
         />
       </View>
       <View style={styles.groupBtn}>

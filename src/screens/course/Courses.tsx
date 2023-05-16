@@ -23,7 +23,6 @@ interface sectionProps {
 const Courses = () => {
   const navigation = useNavigation();
   const user: User = useSelector((state: RootState) => state.user);
-  console.log('user', user.username);
 
   useEffect(() => {
     navigation.setOptions({
