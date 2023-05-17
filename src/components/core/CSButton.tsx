@@ -10,12 +10,14 @@ import {COLORS} from '../../constants/color';
 import CSText from './CSText';
 import {useNavigation} from '@react-navigation/native';
 import {SPACING} from '../../constants/spacing';
+import {FONTS} from '../../constants/font';
 
 export interface CSButtonProps {
   onPress: () => void;
   title: string;
   variant?: 'primary' | 'secondary';
   style?: StyleProp<any>;
+  variantText?: keyof typeof FONTS;
 }
 
 export interface CSButtonBackProps {
@@ -23,14 +25,20 @@ export interface CSButtonBackProps {
   style?: StyleProp<ViewStyle>;
 }
 
-const CSButton = ({variant = 'primary', ...props}: CSButtonProps) => {
+const CSButton = ({
+  variant = 'primary',
+  variantText = 'PoppinsBold',
+  ...props
+}: CSButtonProps) => {
   const colorText = variant !== 'primary' ? 'primaryDark' : 'whiteText';
   return (
     <TouchableOpacity
       activeOpacity={0.5}
       style={[styles.btn, styles[variant]]}
       onPress={props.onPress}>
-      <CSText color={colorText}>{props.title}</CSText>
+      <CSText color={colorText} variant={variantText}>
+        {props.title}
+      </CSText>
     </TouchableOpacity>
   );
 };

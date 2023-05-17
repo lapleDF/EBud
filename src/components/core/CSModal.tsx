@@ -1,4 +1,4 @@
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleProp, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 import RBSheet from 'react-native-raw-bottom-sheet';
@@ -8,10 +8,10 @@ import CSContainer from './CSContainer';
 
 interface CSModalProps {
   refRBSheet: any;
-  height?: any;
+  height?: number | string;
   closeBtn?: boolean;
-  children?: any;
-  style?: any;
+  children?: React.ReactNode;
+  style?: StyleProp<any>;
 }
 
 const CSModal = (props: CSModalProps) => {

@@ -1,7 +1,7 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 
-import {ROOT_ROUTE} from '../constants/route';
+import {ROOT_ROUTE} from '../constants/route/rootRoute.constant';
 
 const RootNavigator = () => {
   const RootStack = createStackNavigator();

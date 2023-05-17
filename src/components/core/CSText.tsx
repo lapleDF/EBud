@@ -5,7 +5,7 @@ import {COLORS} from '../../constants/color';
 import {FONTS} from '../../constants/font';
 
 export interface CSTextProps {
-  children: any;
+  children: React.ReactNode;
   size?: keyof typeof sizeText | number;
   color?: keyof typeof COLORS;
   style?: StyleProp<TextStyle>;

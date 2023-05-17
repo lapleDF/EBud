@@ -8,7 +8,7 @@ import {SPACING} from '../../constants/spacing';
 import {FONTS} from '../../constants/font';
 
 interface CSInputProps {
-  defaultValue?: any;
+  defaultValue?: string;
   onChangeText: (changedText: string) => void;
   secure?: boolean;
   placeholder?: string;
@@ -31,7 +31,7 @@ const CSInput = ({
         <TextInput
           style={styles.inputFiled}
           defaultValue={defaultValue}
-          onChangeText={changedText => props.onChangeText(changedText)}
+          onChangeText={props.onChangeText}
           secureTextEntry={isSecure}
           placeholder={placeholder}
           autoCapitalize="none"

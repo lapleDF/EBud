@@ -4,7 +4,7 @@ import React from 'react';
 import {COLORS} from '../../constants/color';
 
 export interface CSContainerProps {
-  children: any;
+  children: React.ReactNode;
   style?: ViewStyle;
 }
 
