@@ -16,8 +16,8 @@ const BottomTabNavigator = () => {
   const rootState: RootState = useSelector((state: RootState) => state);
 
   useEffect(() => {
-    AppDispatch(COURSE_ACTION.GET_LIST, rootState.user.objectId);
-  }, [rootState.user.objectId]);
+    AppDispatch(COURSE_ACTION.GET_LIST, rootState.user.id);
+  }, [rootState.user.id]);
 
   return (
     <>

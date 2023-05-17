@@ -8,8 +8,6 @@ import CSText from '../../components/core/CSText';
 import CSInput from '../../components/core/CSInput';
 import {CSButton} from '../../components/core/CSButton';
 import {SPACING} from '../../constants/spacing';
-import {storeDataObjAsyncStorage} from '../../utils';
-import {ASYNC_STORAGE} from '../../constants/asyncStorage';
 import CSLoading from '../../components/core/CSLoading';
 import {AppDispatch} from '../../store/store';
 import {USER_ACTION} from '../../store/actions';
@@ -33,7 +31,6 @@ const Login = () => {
       await Parse.User.logIn(params.username, params.password).then(
         (loggedInUser: Parse.User) => {
           AppDispatch(USER_ACTION.LOGIN, loggedInUser);
-          storeDataObjAsyncStorage(ASYNC_STORAGE.userInfo, loggedInUser);
         },
       );
       setIsLoading(false);

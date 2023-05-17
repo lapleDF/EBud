@@ -36,7 +36,12 @@ const MainElement = (props: MainElementProps) => {
       <CSText size={'sm'} style={styles.courseScore}>
         {`${props.learnedLesson}/${props.totalLesson}`}
       </CSText>
-      <Image source={{uri: props.cover}} style={styles.image} />
+      <Image
+        source={{
+          uri: props.cover,
+        }}
+        style={styles.image}
+      />
     </View>
   );
 };
@@ -48,9 +53,11 @@ const CircleProgress = ({
   const navigation = useNavigation<any>();
   const indexPrevItem = props.filteredArray.indexOf(props.courseItem);
   const isLock =
-    indexPrevItem !== 0 &&
-    props.courseItem.learnedLesson === 0 &&
-    props.filteredArray[indexPrevItem - 1].learnedLesson < 5;
+    (indexPrevItem !== 0 &&
+      props.courseItem.learnedLesson === 0 &&
+      props.filteredArray[indexPrevItem - 1].learnedLesson <
+        props.filteredArray[indexPrevItem - 1].totalLesson / 2) ||
+    props.courseItem.totalLesson === 0;
 
   return (
     <TouchableOpacity
@@ -72,7 +79,10 @@ const CircleProgress = ({
       )}
       <CircularProgress
         value={
-          (props.courseItem.learnedLesson / props.courseItem.totalLesson) * 100
+          props.courseItem.totalLesson !== 0
+            ? (props.courseItem.learnedLesson / props.courseItem.totalLesson) *
+              100
+            : 0
         }
         radius={RADIUS}
         showProgressValue={false}
@@ -86,8 +96,6 @@ const CircleProgress = ({
 const Line = ({variant, isActive = false}: LineProps) => {
   return <View style={[styles[variant], isActive && styles.lineActive]} />;
 };
-
-export {MainElement, CircleProgress, Line};
 
 const styles = StyleSheet.create({
   mainEle: {
@@ -152,3 +160,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export {MainElement, CircleProgress, Line};

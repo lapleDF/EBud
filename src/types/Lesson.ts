@@ -1,8 +1,8 @@
 import {SentenceEg} from './SentenceEg';
 
 export interface Lesson {
-  objectId: string;
-  idCourse: string;
+  id: string;
+  courseId: string;
   title?: string;
   image?: string;
   word?: string;

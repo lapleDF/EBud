@@ -18,14 +18,14 @@ const GroupCourseRender = ({
       {groupItem.map((item, index) => {
         if (index === 0) {
           return (
-            <View style={styles.first} key={item.objectId}>
+            <View style={styles.first} key={item.id}>
               <MainElement
                 cover={item.cover}
                 learnedLesson={item.learnedLesson}
                 name={item.name}
                 totalLesson={item.totalLesson}
               />
-              {item.objectId !== filtedArray[0].objectId && (
+              {item.id !== filtedArray[0].id && (
                 <Line variant="line12" isActive={item.learnedLesson > 0} />
               )}
               <CircleProgress filteredArray={filtedArray} courseItem={item} />

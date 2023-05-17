@@ -2,7 +2,7 @@ import {PayloadAction, User} from '../../types';
 import {USER_ACTION} from '../actions';
 
 export const initialUser: User = {
-  objectId: '',
+  id: '',
   username: '',
   email: '',
   avatar:

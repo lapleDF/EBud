@@ -12,6 +12,7 @@ import {splitChunkArray} from '../../utils/handleArray';
 import CSText from '../../components/core/CSText';
 import GroupCourseRender from '../../components/course/GroupCourseRender';
 import {CSButton} from '../../components/core/CSButton';
+import CSLoading from '../../components/core/CSLoading';
 
 interface sectionProps {
   title: string;
@@ -42,16 +43,23 @@ const Courses = () => {
     return splitChunkArray(filteredArr, 3);
   };
 
-  const renderSectionFooter = (section: sectionProps) => (
-    <View style={styles.footerSection}>
-      <CSButton
-        title="Xem thêm"
-        onPress={() => {
-          console.log(section.skill);
-        }}
-      />
-    </View>
-  );
+  const renderSectionFooter = (section: sectionProps) => {
+    const LIMIT = 12;
+    if (course.list.length > LIMIT) {
+      return (
+        <View style={styles.footerSection}>
+          <CSButton
+            title="Xem thêm"
+            onPress={() => {
+              console.log(section.skill);
+            }}
+          />
+        </View>
+      );
+    } else {
+      return null;
+    }
+  };
 
   const SECTION: sectionProps[] = [
     {
@@ -73,24 +81,28 @@ const Courses = () => {
 
   return (
     <CSContainer>
-      <SectionList
-        sections={SECTION}
-        renderSectionHeader={({section}) => (
-          <CSText size={'lg'} variant="PoppinsBold">
-            {section.title}
-          </CSText>
-        )}
-        renderSectionFooter={({section}) => renderSectionFooter(section)}
-        contentContainerStyle={styles.contentContainerSection}
-        renderItem={({item, section}) => (
-          <GroupCourseRender
-            filtedArray={course.list.filter(
-              courseItem => courseItem.skill === section.skill,
-            )}
-            groupItem={item}
-          />
-        )}
-      />
+      {course.fetchingStatus === 'loading' ? (
+        <CSLoading />
+      ) : (
+        <SectionList
+          sections={SECTION}
+          renderSectionHeader={({section}) => (
+            <CSText size={'lg'} variant="PoppinsBold">
+              {section.title}
+            </CSText>
+          )}
+          renderSectionFooter={({section}) => renderSectionFooter(section)}
+          contentContainerStyle={styles.contentContainerSection}
+          renderItem={({item, section}) => (
+            <GroupCourseRender
+              filtedArray={course.list.filter(
+                courseItem => courseItem.skill === section.skill,
+              )}
+              groupItem={item}
+            />
+          )}
+        />
+      )}
     </CSContainer>
   );
 };

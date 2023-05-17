@@ -7,6 +7,7 @@ export const initialCourseList: CourseList = {
   nextPage: 1,
   prevPage: 1,
   totalPage: 1,
+  fetchingStatus: 'idle',
 };
 
 export const courseReducer = (
@@ -16,6 +17,8 @@ export const courseReducer = (
   switch (action.type) {
     case COURSE_ACTION.UPDATE_LIST:
       return {...state, list: action.payload};
+    case COURSE_ACTION.UPDATE_STATE:
+      return {...state, fetchingStatus: action.payload};
     default:
       return state;
   }

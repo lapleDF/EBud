@@ -1,5 +1,5 @@
 export interface CourseItem {
-  objectId: string;
+  id: string;
   skill: 'vocab' | 'grammar' | 'pronounce';
   name: string;
   cover: string;

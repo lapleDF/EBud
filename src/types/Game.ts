@@ -1,5 +1,5 @@
 export interface Game {
-  objectId: string;
+  id: string;
   name: string;
   rule: string;
   cover: string;
