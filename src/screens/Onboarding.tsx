@@ -11,16 +11,15 @@ import {ASYNC_STORAGE} from '../constants/asyncStorage';
 const OnboardingScreen = () => {
   const navigation = useNavigation<any>();
 
-  useEffect(() => {
-    storeDataAsyncStorage(ASYNC_STORAGE.isFirstLaunch, 'false');
-  }, []);
   return (
     <Onboarding
       onDone={() => {
         navigation.navigate('authentication');
+        storeDataAsyncStorage(ASYNC_STORAGE.isFirstLaunch, 'false');
       }}
       onSkip={() => {
         navigation.navigate('authentication');
+        storeDataAsyncStorage(ASYNC_STORAGE.isFirstLaunch, 'false');
       }}
       nextLabel={<CSText color="primaryDark">Tiếp theo</CSText>}
       skipLabel={<CSText>Bỏ qua</CSText>}

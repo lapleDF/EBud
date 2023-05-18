@@ -1,12 +1,12 @@
 import React from 'react';
-import CSContainer from '../../components/core/CSContainer';
 import CSText from '../../components/core/CSText';
+import CSLayout from '../../components/core/CSLayout';
 
 const VocabStared = () => {
   return (
-    <CSContainer>
+    <CSLayout>
       <CSText>Vocab Stared</CSText>
-    </CSContainer>
+    </CSLayout>
   );
 };
 
