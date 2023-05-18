@@ -1,4 +1,4 @@
-import {StyleProp, Text, TextStyle} from 'react-native';
+import {StyleProp, Text, TextProps, TextStyle} from 'react-native';
 import React from 'react';
 
 import {COLORS} from '../../constants/color';
@@ -10,6 +10,7 @@ export interface CSTextProps {
   color?: keyof typeof COLORS;
   style?: StyleProp<TextStyle>;
   variant?: keyof typeof FONTS;
+  textProps?: TextProps;
 }
 
 export const sizeText = {
@@ -36,6 +37,7 @@ const CSText = ({
         },
         props.style,
       ]}
+      {...props.textProps}
       lineBreakMode="tail">
       {props.children}
     </Text>

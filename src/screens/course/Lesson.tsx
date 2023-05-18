@@ -24,12 +24,13 @@ const Lesson = (props: LessonProps) => {
     navigation.setOptions({
       header: () =>
         HeaderScreen({
-          textLeft:
+          textLeft: `${
             course.skill === 'vocab'
               ? 'Từ vựng'
               : course.skill === 'grammar'
               ? 'Ngữ pháp'
-              : 'Phát âm',
+              : 'Phát âm'
+          } - ${course.name}`,
           backBtn: true,
           onPressRight() {
             navigation.navigate('vocabStared');
@@ -37,7 +38,7 @@ const Lesson = (props: LessonProps) => {
           iconRight: 'star',
         }),
     });
-  }, [course.skill, navigation]);
+  }, [course.name, course.skill, navigation]);
 
   if (course.skill === 'vocab') {
     return <VocabLesson courseItem={course} />;

@@ -32,7 +32,7 @@ const Account = () => {
         variant="secondary"
       />
       <CSModal refRBSheet={refBtnLogout}>
-        <CSText size={'lg'} color="redLighter" variant="PoppinsBold">
+        <CSText size={'lg'} color="primaryDark" variant="PoppinsBold">
           Đăng xuất khỏi thiết bị?
         </CSText>
         <CSText>Nếu đồng ý bạn sẽ đăng nhập khỏi thiết bị hiện tại</CSText>
