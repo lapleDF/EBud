@@ -36,12 +36,7 @@ const MainElement = (props: MainElementProps) => {
       <CSText size={'sm'} style={styles.courseScore}>
         {`${props.learnedLesson}/${props.totalLesson}`}
       </CSText>
-      <Image
-        source={{
-          uri: props.cover,
-        }}
-        style={styles.image}
-      />
+      <Image source={{uri: props.cover}} style={styles.image} />
     </View>
   );
 };
@@ -59,16 +54,23 @@ const CircleProgress = ({
         props.filteredArray[indexPrevItem - 1].totalLesson / 2) ||
     props.courseItem.totalLesson === 0;
 
+  const valueProgress =
+    props.courseItem.totalLesson !== 0
+      ? (props.courseItem.learnedLesson / props.courseItem.totalLesson) * 100
+      : 0;
+
+  const handlePress = () => {
+    if (isLock) {
+      return;
+    }
+    navigation.navigate('lesson', {
+      course: props.courseItem,
+    });
+  };
+
   return (
     <TouchableOpacity
-      onPress={() => {
-        if (isLock) {
-          return;
-        }
-        navigation.navigate('lesson', {
-          course: props.courseItem,
-        });
-      }}
+      onPress={handlePress}
       activeOpacity={0.8}
       // eslint-disable-next-line react-native/no-inline-styles
       style={[styles.circleWrap, isThirdCircle && {right: 0}]}>
@@ -78,12 +80,7 @@ const CircleProgress = ({
         </View>
       )}
       <CircularProgress
-        value={
-          props.courseItem.totalLesson !== 0
-            ? (props.courseItem.learnedLesson / props.courseItem.totalLesson) *
-              100
-            : 0
-        }
+        value={valueProgress}
         radius={RADIUS}
         showProgressValue={false}
         activeStrokeColor={COLORS.primaryLight}
@@ -127,7 +124,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 2,
+    zIndex: 20,
   },
   line12: {
     height: RADIUS * 2 - 15,

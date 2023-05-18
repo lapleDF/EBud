@@ -3,7 +3,6 @@ import React, {useState} from 'react';
 import {Link, useNavigation} from '@react-navigation/native';
 import Parse from 'parse/react-native';
 
-import CSContainer from '../../components/core/CSContainer';
 import CSText from '../../components/core/CSText';
 import CSInput from '../../components/core/CSInput';
 import {CSButton} from '../../components/core/CSButton';
@@ -11,6 +10,7 @@ import {SPACING} from '../../constants/spacing';
 import CSLoading from '../../components/core/CSLoading';
 import {AppDispatch} from '../../store/store';
 import {USER_ACTION} from '../../store/actions';
+import CSLayout from '../../components/core/CSLayout';
 
 const Login = () => {
   const navigation = useNavigation<any>();
@@ -43,7 +43,7 @@ const Login = () => {
     }
   };
   return (
-    <CSContainer style={styles.container}>
+    <CSLayout style={styles.container}>
       {isLoading && <CSLoading />}
       <CSText size={'xxl'} color="primaryLight" variant="Bungee">
         Đăng nhập
@@ -72,7 +72,7 @@ const Login = () => {
           </Link>
         </CSText>
       </View>
-    </CSContainer>
+    </CSLayout>
   );
 };
 

@@ -3,12 +3,12 @@ import React from 'react';
 
 import {COLORS} from '../../constants/color';
 
-export interface CSContainerProps {
+export interface CSLayoutProps {
   children: React.ReactNode;
   style?: ViewStyle;
 }
 
-const CSContainer = (props: CSContainerProps) => {
+const CSLayout = (props: CSLayoutProps) => {
   return (
     <View
       style={[props.style, {backgroundColor: COLORS.bgDark}, styles.container]}>
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CSContainer;
+export default CSLayout;

@@ -1,13 +1,13 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React, {useEffect, useLayoutEffect} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import SplashScreen from 'react-native-splash-screen';
 
 import {ROOT_ROUTE} from '../constants/route/rootRoute.constant';
 import {getDataAsyncStorage, getDataObjAsyncStorage} from '../utils';
 import {ASYNC_STORAGE} from '../constants/asyncStorage';
-import {useNavigation} from '@react-navigation/native';
 import {AppDispatch} from '../store/store';
 import {USER_ACTION} from '../store/actions';
-import SplashScreen from 'react-native-splash-screen';
 
 const RootStack = createStackNavigator();
 
@@ -30,7 +30,10 @@ const RootNavigator = () => {
         navigation.navigate('authentication');
       } else {
         AppDispatch(USER_ACTION.UPDATE, user);
-        navigation.navigate('bottomTab');
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'bottomTab'}],
+        });
       }
     };
     trackingAuthenAndFirstLaunch();

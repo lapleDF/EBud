@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {Link, useNavigation} from '@react-navigation/native';
 import Parse from 'parse/react-native';
 
-import CSContainer from '../../components/core/CSContainer';
 import CSText from '../../components/core/CSText';
 import {CSButton, CSButtonBack} from '../../components/core/CSButton';
 import {SPACING} from '../../constants/spacing';
@@ -13,6 +12,7 @@ import {initialUser} from '../../store/reducers/userReducer';
 import CSInput from '../../components/core/CSInput';
 import {COLORS} from '../../constants/color';
 import CSLoading from '../../components/core/CSLoading';
+import CSLayout from '../../components/core/CSLayout';
 
 const Register = () => {
   const [params, setParams] = useState<User>(initialUser);
@@ -46,7 +46,7 @@ const Register = () => {
     }
   };
   return (
-    <CSContainer style={styles.container}>
+    <CSLayout style={styles.container}>
       {isLoading && <CSLoading />}
       <CSButtonBack />
       <CSText size={'xxl'} color="primaryLight" variant="Bungee">
@@ -101,7 +101,7 @@ const Register = () => {
         </View>
         <CSButton onPress={register} title="Đăng ký" />
       </View>
-    </CSContainer>
+    </CSLayout>
   );
 };
 

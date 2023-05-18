@@ -2,8 +2,8 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 
 import HeaderScreen from '../../components/HeaderScreen';
-import CSContainer from '../../components/core/CSContainer';
 import CSText from '../../components/core/CSText';
+import CSLayout from '../../components/core/CSLayout';
 
 const Library = () => {
   const navigation = useNavigation();
@@ -14,9 +14,9 @@ const Library = () => {
     });
   });
   return (
-    <CSContainer>
+    <CSLayout>
       <CSText>Library</CSText>
-    </CSContainer>
+    </CSLayout>
   );
 };
 
