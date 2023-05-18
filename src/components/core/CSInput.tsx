@@ -25,6 +25,10 @@ const CSInput = ({
   ...props
 }: CSInputProps) => {
   const [isSecure, setIsSecure] = useState<boolean>(secure);
+  const handlePressIcon = () => {
+    secure === undefined ? props.onPressIcon : setIsSecure(!isSecure);
+  };
+
   return (
     <View style={[styles.container, props.styleContainer]}>
       <View style={[styles.wrapper, props.styleWrapper]}>
@@ -42,11 +46,7 @@ const CSInput = ({
             name={isSecure ? 'eye-outline' : 'eye-off-outline'}
             size={30}
             color={COLORS.primaryDark}
-            onPress={
-              secure === undefined
-                ? props.onPressIcon
-                : () => setIsSecure(!isSecure)
-            }
+            onPress={handlePressIcon}
           />
         )}
       </View>

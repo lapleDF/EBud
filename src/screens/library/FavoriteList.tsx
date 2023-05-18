@@ -1,12 +1,12 @@
 import React from 'react';
-import CSContainer from '../../components/core/CSContainer';
 import CSText from '../../components/core/CSText';
+import CSLayout from '../../components/core/CSLayout';
 
 const FavoriteList = () => {
   return (
-    <CSContainer>
+    <CSLayout>
       <CSText>FavoriteList</CSText>
-    </CSContainer>
+    </CSLayout>
   );
 };
 

@@ -1,13 +1,13 @@
 import React from 'react';
 
-import CSContainer from '../../components/core/CSContainer';
 import CSText from '../../components/core/CSText';
+import CSLayout from '../../components/core/CSLayout';
 
 const GameRollDice = () => {
   return (
-    <CSContainer>
+    <CSLayout>
       <CSText>Game Roll Dice is comming soon</CSText>
-    </CSContainer>
+    </CSLayout>
   );
 };
 

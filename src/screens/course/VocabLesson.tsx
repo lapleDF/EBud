@@ -3,11 +3,11 @@ import FlipCard from 'react-native-flip-card';
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import CSContainer from '../../components/core/CSContainer';
 import CSText from '../../components/core/CSText';
 import {SPACING} from '../../constants/spacing';
 import {CourseItem} from '../../types';
 import {COLORS} from '../../constants/color';
+import CSLayout from '../../components/core/CSLayout';
 
 interface VocabLessonProps {
   courseItem: CourseItem;
@@ -64,7 +64,7 @@ const VocabLesson = ({courseItem}: VocabLessonProps) => {
   // console.log(courseItem.id);
   console.log(isInBack);
   return (
-    <CSContainer style={styles.container}>
+    <CSLayout style={styles.container}>
       <FlipCard
         flip={isInBack}
         friction={8}
@@ -81,7 +81,7 @@ const VocabLesson = ({courseItem}: VocabLessonProps) => {
           wordMean="Xin chào"
         />
       </FlipCard>
-    </CSContainer>
+    </CSLayout>
   );
 };
 

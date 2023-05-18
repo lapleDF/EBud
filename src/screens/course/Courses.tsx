@@ -1,18 +1,18 @@
+import {SectionList, StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
 
 import HeaderScreen from '../../components/HeaderScreen';
-import CSContainer from '../../components/core/CSContainer';
 import {RootState} from '../../store/store';
 import {CourseItem, CourseList, User} from '../../types';
-import {SectionList, StyleSheet, View} from 'react-native';
 import {SPACING} from '../../constants/spacing';
-import {splitChunkArray} from '../../utils/handleArray';
 import CSText from '../../components/core/CSText';
 import GroupCourseRender from '../../components/course/GroupCourseRender';
 import {CSButton} from '../../components/core/CSButton';
 import CSLoading from '../../components/core/CSLoading';
+import {splitChunkArray} from '../../utils';
+import CSLayout from '../../components/core/CSLayout';
 
 interface sectionProps {
   title: string;
@@ -38,6 +38,10 @@ const Courses = () => {
     });
   });
 
+  const handleSeeMore = (skill: string) => {
+    console.log('See more ', skill);
+  };
+
   const courseSectionArr = (skill: string) => {
     const filteredArr = course.list.filter(item => item.skill === skill);
     return splitChunkArray(filteredArr, 3);
@@ -50,9 +54,7 @@ const Courses = () => {
         <View style={styles.footerSection}>
           <CSButton
             title="Xem thêm"
-            onPress={() => {
-              console.log(section.skill);
-            }}
+            onPress={() => handleSeeMore(section.skill)}
           />
         </View>
       );
@@ -80,7 +82,7 @@ const Courses = () => {
   ];
 
   return (
-    <CSContainer>
+    <CSLayout>
       {course.fetchingStatus === 'loading' ? (
         <CSLoading />
       ) : (
@@ -103,7 +105,7 @@ const Courses = () => {
           )}
         />
       )}
-    </CSContainer>
+    </CSLayout>
   );
 };
 

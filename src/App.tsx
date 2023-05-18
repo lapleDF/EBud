@@ -1,10 +1,9 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useRef} from 'react';
 import {
   NavigationContainer,
   NavigationContainerRefWithCurrent,
   useNavigationContainerRef,
 } from '@react-navigation/native';
-import SplashScreen from 'react-native-splash-screen';
 import {Provider} from 'react-redux';
 import Parse from 'parse/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -22,10 +21,6 @@ const App = () => {
   const navigationRef: NavigationContainerRefWithCurrent<ReactNavigation.RootParamList> =
     useNavigationContainerRef();
   const routeNameRef = useRef<any>();
-
-  useEffect(() => {
-    SplashScreen.hide();
-  }, []);
 
   return (
     <Provider store={store}>

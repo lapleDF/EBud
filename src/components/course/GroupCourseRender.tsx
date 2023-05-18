@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 200,
+    zIndex: 1,
   },
   secondAndThird: {
     position: 'relative',

@@ -2,11 +2,11 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 
 import HeaderScreen from '../../components/HeaderScreen';
-import CSContainer from '../../components/core/CSContainer';
 import CSText from '../../components/core/CSText';
 import {User} from '../../types';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
+import CSLayout from '../../components/core/CSLayout';
 
 const Game = () => {
   const navigation = useNavigation();
@@ -22,9 +22,9 @@ const Game = () => {
     });
   });
   return (
-    <CSContainer>
+    <CSLayout>
       <CSText>Game</CSText>
-    </CSContainer>
+    </CSLayout>
   );
 };
 

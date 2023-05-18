@@ -1,12 +1,12 @@
 import React from 'react';
-import CSContainer from '../../components/core/CSContainer';
 import CSText from '../../components/core/CSText';
+import CSLayout from '../../components/core/CSLayout';
 
 const GameGuessTheWord = () => {
   return (
-    <CSContainer>
+    <CSLayout>
       <CSText>GameGuessTheWord</CSText>
-    </CSContainer>
+    </CSLayout>
   );
 };
 

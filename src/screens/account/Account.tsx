@@ -2,7 +2,6 @@ import React, {useRef} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import CSContainer from '../../components/core/CSContainer';
 import CSText from '../../components/core/CSText';
 import {CSButton} from '../../components/core/CSButton';
 import {ASYNC_STORAGE} from '../../constants/asyncStorage';
@@ -11,6 +10,7 @@ import {StyleSheet, View} from 'react-native';
 import {AppDispatch} from '../../store/store';
 import {USER_ACTION} from '../../store/actions';
 import {initialUser} from '../../store/reducers/userReducer';
+import CSLayout from '../../components/core/CSLayout';
 
 const Account = () => {
   const navigation = useNavigation<any>();
@@ -24,7 +24,7 @@ const Account = () => {
   };
 
   return (
-    <CSContainer>
+    <CSLayout>
       <CSText>Account</CSText>
       <CSButton
         title="Logout"
@@ -45,7 +45,7 @@ const Account = () => {
           />
         </View>
       </CSModal>
-    </CSContainer>
+    </CSLayout>
   );
 };
 

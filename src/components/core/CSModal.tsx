@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {SPACING} from '../../constants/spacing';
 import {COLORS} from '../../constants/color';
-import CSContainer from './CSContainer';
+import CSLayout from './CSLayout';
 
 interface CSModalProps {
   refRBSheet: any;
@@ -53,7 +53,7 @@ const CSModal = (props: CSModalProps) => {
           <Icon name="x" size={26} color={COLORS.red} />
         </TouchableOpacity>
       )}
-      <CSContainer style={styles.container}>{children}</CSContainer>
+      <CSLayout style={styles.container}>{children}</CSLayout>
     </RBSheet>
   );
 };
