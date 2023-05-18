@@ -51,13 +51,13 @@ const CircleProgress = ({
   ...props
 }: CircleProgressProps) => {
   const navigation = useNavigation<any>();
-  const indexPrevItem = props.filteredArray.indexOf(props.courseItem);
+  const indexItem = props.filteredArray.indexOf(props.courseItem);
   const isLock =
-    (indexPrevItem !== 0 &&
+    (indexItem !== 0 &&
       props.courseItem.learnedLesson === 0 &&
-      props.filteredArray[indexPrevItem - 1].learnedLesson <
-        props.filteredArray[indexPrevItem - 1].totalLesson / 2) ||
-    props.courseItem.totalLesson === 0;
+      props.filteredArray[indexItem - 1].learnedLesson <
+        props.filteredArray[indexItem - 1].totalLesson / 2) ||
+    (props.courseItem.totalLesson === 0 && indexItem !== 0);
 
   return (
     <TouchableOpacity
