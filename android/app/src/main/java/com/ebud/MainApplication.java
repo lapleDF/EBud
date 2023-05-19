@@ -10,6 +10,7 @@ import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
+import com.brentvatne.react.ReactVideoPackage;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
       // packages.add(new MyReactNativePackage());
       new SplashScreenReactPackage();
       new LottiePackage();
+      new ReactVideoPackage();
       return packages;
     }
 

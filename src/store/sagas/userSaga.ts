@@ -6,10 +6,6 @@ import {PayloadAction, User} from '../../types';
 import {storeDataObjAsyncStorage} from '../../utils';
 import {ASYNC_STORAGE} from '../../constants/asyncStorage';
 
-function* register() {
-  console.log('register');
-}
-
 function* login(action: PayloadAction) {
   const loggedInUser: Parse.User = action.payload;
   const newUser: User = {
@@ -25,10 +21,8 @@ function* login(action: PayloadAction) {
   storeDataObjAsyncStorage(ASYNC_STORAGE.userInfo, newUser);
 
   yield put({type: USER_ACTION.UPDATE, payload: newUser});
-  // yield put({type: COURSE_ACTION.GET_LIST, payload: newUser.id});
 }
 
 export default function* userSaga() {
-  yield takeLatest(USER_ACTION.REGISTER, register);
   yield takeLatest(USER_ACTION.LOGIN, login);
 }

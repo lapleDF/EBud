@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import Onboarding from 'react-native-onboarding-swiper';
 import {Image, StyleSheet} from 'react-native';
 
@@ -11,16 +11,14 @@ import {ASYNC_STORAGE} from '../constants/asyncStorage';
 const OnboardingScreen = () => {
   const navigation = useNavigation<any>();
 
+  const handleComplete = () => {
+    navigation.navigate('authentication');
+    storeDataAsyncStorage(ASYNC_STORAGE.isFirstLaunch, 'false');
+  };
   return (
     <Onboarding
-      onDone={() => {
-        navigation.navigate('authentication');
-        storeDataAsyncStorage(ASYNC_STORAGE.isFirstLaunch, 'false');
-      }}
-      onSkip={() => {
-        navigation.navigate('authentication');
-        storeDataAsyncStorage(ASYNC_STORAGE.isFirstLaunch, 'false');
-      }}
+      onDone={handleComplete}
+      onSkip={handleComplete}
       nextLabel={<CSText color="primaryDark">Tiếp theo</CSText>}
       skipLabel={<CSText>Bỏ qua</CSText>}
       controlStatusBar={false}

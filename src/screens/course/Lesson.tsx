@@ -10,7 +10,8 @@ import VocabLesson from './VocabLesson';
 import GrammarLesson from './GrammarLesson';
 import PronounceLesson from './PronounceLesson';
 import HeaderScreen from '../../components/HeaderScreen';
-
+import {AppDispatch} from '../../store/store';
+import {LESSON_ACTION} from '../../store/actions';
 interface LessonProps {
   navigation: NavigationProp<any>;
   route: RouteProp<ParamListBase>;
@@ -19,6 +20,13 @@ interface LessonProps {
 const Lesson = (props: LessonProps) => {
   const {course}: any = props.route.params;
   const navigation = useNavigation<any>();
+
+  useEffect(() => {
+    AppDispatch(LESSON_ACTION.GET_LESSON_LIST, {
+      courseId: course.id,
+      skill: course.skill,
+    });
+  }, [course]);
 
   useEffect(() => {
     navigation.setOptions({

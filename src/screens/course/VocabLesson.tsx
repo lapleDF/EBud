@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import {
   FlatList,
   Image,
@@ -15,38 +15,78 @@ import VocabFlipCard from '../../components/course/vocab/VocabFlipCard';
 import {COLORS} from '../../constants/color';
 import {SPACING} from '../../constants/spacing';
 import {CourseItem} from '../../types';
+import {LessonList} from '../../store/reducers/lessonReducer';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
+import CSLoading from '../../components/core/CSLoading';
 
 interface VocabLessonProps {
   courseItem: CourseItem;
 }
 
 const VocabLesson = ({courseItem}: VocabLessonProps) => {
-  console.log(courseItem.id);
-
+  const lesson: LessonList = useSelector((state: RootState) => state.lesson);
+  const refFlatList = useRef<any>();
+  const [index, setIndex] = useState(0);
   const handleSeeMore = () => {
-    console.log('handle see more');
+    console.log('handle see more', courseItem.id);
   };
+
+  const handleBtnChangeFlipCard = (isNext: boolean) => {
+    if (
+      (isNext && index + 1 === lesson.lessons.length) ||
+      (!isNext && index === 0)
+    ) {
+      return;
+    }
+    refFlatList.current.scrollToIndex({
+      animated: true,
+      index: isNext ? index + 1 : index - 1,
+    });
+    setIndex(isNext ? index + 1 : index - 1);
+  };
+
+  const onViewableItemsChanged = useCallback(({viewableItems}: any) => {
+    if (viewableItems[0]?.index !== undefined) {
+      setIndex(viewableItems[0]?.index);
+    }
+  }, []);
 
   return (
     <CSLayout style={styles.container}>
+      {lesson.fetchingStatus === 'loading' && <CSLoading />}
       <FlatList
-        data={[...Array(10)]}
-        renderItem={() => <VocabFlipCard />}
-        keyExtractor={(item, index) => index.toString()}
+        data={lesson.lessons}
+        ref={refFlatList}
+        renderItem={({item}) => (
+          <VocabFlipCard
+            lessonId={item.id}
+            imageUrl={item.image}
+            word={item.word}
+            wordMean={item.wordMeaning}
+            wordPronouncing={item.pronouncing}
+          />
+        )}
+        keyExtractor={(item, idx) => idx.toString()}
         contentContainerStyle={styles.flipCardList}
         pagingEnabled
         horizontal
         showsHorizontalScrollIndicator={false}
+        onViewableItemsChanged={onViewableItemsChanged}
+        viewabilityConfig={{
+          waitForInteraction: true,
+          viewAreaCoveragePercentThreshold: 98,
+        }}
       />
       <View style={styles.controls}>
         <View style={styles.btns}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => handleBtnChangeFlipCard(false)}>
             <Image
               source={require('../../assets/images/prevBtn.png')}
               style={styles.btnImg}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => handleBtnChangeFlipCard(true)}>
             <Image
               source={require('../../assets/images/nextBtn.png')}
               style={styles.btnImg}
@@ -54,29 +94,32 @@ const VocabLesson = ({courseItem}: VocabLessonProps) => {
           </TouchableOpacity>
         </View>
         <View style={styles.progressBar}>
-          <View style={styles.progressBarActive} />
+          <View
+            style={[
+              styles.progressBarActive,
+              {width: `${((index + 1) / lesson.lessons.length) * 100}%`},
+            ]}
+          />
         </View>
-        <CSText>1/10</CSText>
+        <CSText>{`${index + 1}/${lesson.lessons.length}`}</CSText>
       </View>
       <View style={styles.exampleContainer}>
         <CSText size={'xlg'} variant={'PoppinsBold'}>
           Các mẫu câu ví dụ
         </CSText>
-        <ExampleSentence
-          id="1"
-          meaning="I'm from good, thanks"
-          sentence="How are you from?"
-        />
-        <ExampleSentence
-          id="1"
-          meaning="I'm from good, thanks"
-          sentence="How are you from?"
-        />
-        <ExampleSentence
-          id="1"
-          meaning="I'm from good, thanks"
-          sentence="How are you from?"
-        />
+        {lesson.lessons.length > 0 && (
+          <FlatList
+            data={lesson.lessons[index].sentencesEg}
+            renderItem={({item}) => (
+              <ExampleSentence
+                meaning={item.meaning}
+                sentence={item.sentence}
+              />
+            )}
+            contentContainerStyle={{gap: 10}}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        )}
         <View style={styles.controls}>
           <CSButton onPress={handleSeeMore} title="Xem thêm ví dụ khác" />
         </View>
@@ -119,7 +162,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   progressBarActive: {
-    width: '60%',
     height: 10,
     backgroundColor: COLORS.primaryLight,
     borderRadius: 10,

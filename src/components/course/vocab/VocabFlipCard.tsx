@@ -1,6 +1,8 @@
 import {View, StyleSheet, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React, {useState} from 'react';
+import Tts from 'react-native-tts';
+
 import CSText from '../../core/CSText';
 import {COLORS} from '../../../constants/color';
 import FlipCard from 'react-native-flip-card';
@@ -12,6 +14,7 @@ interface CardSideProps {
   wordPronouncing?: string;
   wordMean?: string;
   imageUrl?: string;
+  handleSpeak: () => void;
 }
 
 const CardSide = (props: CardSideProps) => {
@@ -25,7 +28,9 @@ const CardSide = (props: CardSideProps) => {
         ]}>
         {props.word && <CSText>{props.word}</CSText>}
         {props.wordPronouncing && <CSText>{props.wordPronouncing}</CSText>}
-        {props.wordMean && <CSText>{props.wordMean}</CSText>}
+        {props.wordMean && (
+          <CSText style={styles.wordMean}>{props.wordMean}</CSText>
+        )}
         {props.imageUrl && (
           <Image source={{uri: props.imageUrl}} style={styles.image} />
         )}
@@ -35,6 +40,7 @@ const CardSide = (props: CardSideProps) => {
         size={30}
         color={COLORS.primaryDark}
         style={styles.btnSound}
+        onPress={props.handleSpeak}
       />
       <Icon
         name="star-outline"
@@ -53,9 +59,29 @@ const CardSide = (props: CardSideProps) => {
   );
 };
 
-const VocabFlipCard = () => {
+interface VocabFlipCardProps {
+  word?: string;
+  wordPronouncing?: string;
+  wordMean?: string;
+  imageUrl?: string;
+  lessonId: string;
+}
+
+const VocabFlipCard = (props: VocabFlipCardProps) => {
   const [isInBack, setIsInBack] = useState(true);
 
+  Tts.voices().then(voices => console.log(voices));
+
+  const handleSpeak = () =>
+    Tts.speak(props.word || '', {
+      androidParams: {
+        KEY_PARAM_STREAM: 'STREAM_ACCESSIBILITY',
+        KEY_PARAM_PAN: 0,
+        KEY_PARAM_VOLUME: 1,
+      },
+      iosVoiceId: 'en-US-SMTf00',
+      rate: 0.01,
+    });
   return (
     <FlipCard
       flip={isInBack}
@@ -65,13 +91,15 @@ const VocabFlipCard = () => {
       clickable={false}>
       <CardSide
         onPressFlip={() => setIsInBack(!isInBack)}
-        word="Hello"
-        wordPronouncing="/Hế lô/"
+        imageUrl={props.imageUrl}
+        wordMean={props.wordMean}
+        handleSpeak={handleSpeak}
       />
       <CardSide
         onPressFlip={() => setIsInBack(!isInBack)}
-        imageUrl="https://parsefiles.back4app.com/m3BU02yXteFvr3TV0XEGWVRClKOlaQzDYoTvPCZ1/9e65530c9858cfe3ad85f34d7983b022_hello.png"
-        wordMean="Xin chào"
+        word={props.word}
+        wordPronouncing={props.wordPronouncing}
+        handleSpeak={handleSpeak}
       />
     </FlipCard>
   );
@@ -112,10 +140,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: '60%',
+    width: '55%',
     height: 130,
     resizeMode: 'cover',
     borderRadius: 6,
+  },
+  wordMean: {
+    width: '35%',
   },
 });
 
