@@ -35,7 +35,7 @@ const Lesson = (props: LessonProps) => {
           onPressRight() {
             navigation.navigate('vocabStared');
           },
-          iconRight: 'star',
+          iconRight: course.skill === 'vocab' ? 'star' : undefined,
         }),
     });
   }, [course.name, course.skill, navigation]);

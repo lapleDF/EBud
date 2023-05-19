@@ -17,6 +17,7 @@ export const sizeText = {
   xs: 11,
   sm: 13,
   md: 17,
+  xlg: 23,
   lg: 27,
   xxl: 37,
 };

@@ -89,7 +89,7 @@ const Courses = () => {
         <SectionList
           sections={SECTION}
           renderSectionHeader={({section}) => (
-            <CSText size={'lg'} variant="PoppinsBold">
+            <CSText size={'xlg'} variant="PoppinsBold">
               {section.title}
             </CSText>
           )}

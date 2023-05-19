@@ -1,10 +1,10 @@
 import {View, StyleSheet, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React, {useState} from 'react';
-import CSText from '../core/CSText';
-import {COLORS} from '../../constants/color';
+import CSText from '../../core/CSText';
+import {COLORS} from '../../../constants/color';
 import FlipCard from 'react-native-flip-card';
-import {SPACING} from '../../constants/spacing';
+import {SPACING} from '../../../constants/spacing';
 
 interface CardSideProps {
   onPressFlip: () => void;
@@ -59,9 +59,9 @@ const VocabFlipCard = () => {
   return (
     <FlipCard
       flip={isInBack}
-      // friction={8}
       flipHorizontal={false}
       style={styles.container}
+      useNativeDriver={true}
       clickable={false}>
       <CardSide
         onPressFlip={() => setIsInBack(!isInBack)}

@@ -36,7 +36,7 @@ const HeaderScreen = ({backBtn = false, ...props}: HeaderScreenProps) => {
           <Icon name={props.iconLeft} size={40} color={COLORS.primaryDark} />
         )}
         {props.textLeft && (
-          <CSText variant="PoppinsSemiBold" size={'lg'}>
+          <CSText variant="PoppinsSemiBold" size={'xlg'}>
             {props.textLeft}
           </CSText>
         )}
@@ -56,7 +56,7 @@ const HeaderScreen = ({backBtn = false, ...props}: HeaderScreenProps) => {
         onPress={props.onPressRight}
         activeOpacity={0.5}>
         {props.textRight && (
-          <CSText variant="PoppinsSemiBold" size={'lg'}>
+          <CSText variant="PoppinsSemiBold" size={'xlg'}>
             {props.textRight}
           </CSText>
         )}
