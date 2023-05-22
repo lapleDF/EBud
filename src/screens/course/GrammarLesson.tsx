@@ -2,9 +2,8 @@ import React from 'react';
 import Video from 'react-native-video';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
-import CSText from '../../components/core/CSText';
-import CSLayout from '../../components/core/CSLayout';
 import {COLORS} from '../../constants/color';
+import {CSLayout, CSText} from '../../components/core';
 
 const GrammarLesson = () => {
   return (

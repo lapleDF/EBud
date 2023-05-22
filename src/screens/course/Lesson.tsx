@@ -50,11 +50,11 @@ const Lesson = (props: LessonProps) => {
 
   if (course.skill === 'vocab') {
     return <VocabLesson courseItem={course} />;
-  } else if (course.skill === 'grammar') {
-    return <GrammarLesson />;
-  } else {
-    return <PronounceLesson />;
   }
+  if (course.skill === 'grammar') {
+    return <GrammarLesson />;
+  }
+  return <PronounceLesson />;
 };
 
 export default Lesson;

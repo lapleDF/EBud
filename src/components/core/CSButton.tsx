@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import {COLORS} from '../../constants/color';
-import CSText from './CSText';
+import {CSText} from './CSText';
 import {useNavigation} from '@react-navigation/native';
 import {SPACING} from '../../constants/spacing';
 import {FONTS} from '../../constants/font';

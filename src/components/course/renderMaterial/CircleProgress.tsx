@@ -1,20 +1,12 @@
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
-import React from 'react';
 import {useNavigation} from '@react-navigation/native';
+import React from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import CSText from '../core/CSText';
-import {SPACING} from '../../constants/spacing';
-import {COLORS} from '../../constants/color';
-import {CourseItem} from '../../types';
-
-interface MainElementProps {
-  name: string;
-  learnedLesson: number;
-  totalLesson: number;
-  cover: string;
-}
+import {COLORS} from '../../../constants/color';
+import {SPACING} from '../../../constants/spacing';
+import {CourseItem} from '../../../types';
 
 interface CircleProgressProps {
   courseItem: CourseItem;
@@ -22,24 +14,7 @@ interface CircleProgressProps {
   filteredArray: CourseItem[];
 }
 
-interface LineProps {
-  variant: 'line12' | 'line3';
-  isActive?: boolean;
-}
-
 const RADIUS = SPACING.screenWidth / 6;
-
-const MainElement = (props: MainElementProps) => {
-  return (
-    <View style={styles.mainEle}>
-      <CSText style={styles.courseTitle}>{props.name}</CSText>
-      <CSText size={'sm'} style={styles.courseScore}>
-        {`${props.learnedLesson}/${props.totalLesson}`}
-      </CSText>
-      <Image source={{uri: props.cover}} style={styles.image} />
-    </View>
-  );
-};
 
 const CircleProgress = ({
   isThirdCircle = false,
@@ -90,62 +65,14 @@ const CircleProgress = ({
   );
 };
 
-const Line = ({variant, isActive = false}: LineProps) => {
-  return <View style={[styles[variant], isActive && styles.lineActive]} />;
-};
+export {CircleProgress};
 
 const styles = StyleSheet.create({
-  mainEle: {
-    width: RADIUS * 2,
-    height: RADIUS * 2,
-    borderRadius: 70,
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 1,
-  },
-  image: {
-    width: '90%',
-    height: '90%',
-    resizeMode: 'cover',
-    borderRadius: 70,
-  },
-  courseTitle: {
-    position: 'absolute',
-    top: -25,
-    width: 160,
-    textAlign: 'center',
-  },
-  courseScore: {
-    position: 'absolute',
-    bottom: -30,
-  },
   circleWrap: {
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 20,
-  },
-  line12: {
-    height: RADIUS * 2 - 15,
-    width: 10,
-    backgroundColor: COLORS.borderDeactive,
-    position: 'absolute',
-    borderRadius: 20,
-    top: 83 - RADIUS * 3,
-    transform: [{rotateZ: '45deg'}, {translateX: 85}],
-    zIndex: 0,
-  },
-  line3: {
-    width: RADIUS * 2 - 10,
-    height: 10,
-    backgroundColor: COLORS.borderDeactive,
-    position: 'absolute',
-    borderRadius: 20,
-    right: RADIUS * 2 - 5,
-  },
-  lineActive: {
-    backgroundColor: COLORS.primaryLight,
   },
   lockIcon: {
     position: 'absolute',
@@ -157,5 +84,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export {MainElement, CircleProgress, Line};

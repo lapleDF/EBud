@@ -3,10 +3,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import React, {useState} from 'react';
 import Tts from 'react-native-tts';
 
-import CSText from '../../core/CSText';
 import {COLORS} from '../../../constants/color';
 import FlipCard from 'react-native-flip-card';
 import {SPACING} from '../../../constants/spacing';
+import {CSText} from '../../core';
 
 interface CardSideProps {
   onPressFlip: () => void;

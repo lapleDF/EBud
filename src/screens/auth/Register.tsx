@@ -4,15 +4,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {Link, useNavigation} from '@react-navigation/native';
 import Parse from 'parse/react-native';
 
-import CSText from '../../components/core/CSText';
 import {CSButton, CSButtonBack} from '../../components/core/CSButton';
 import {SPACING} from '../../constants/spacing';
 import {User} from '../../types';
 import {initialUser} from '../../store/reducers/userReducer';
-import CSInput from '../../components/core/CSInput';
 import {COLORS} from '../../constants/color';
-import CSLoading from '../../components/core/CSLoading';
-import CSLayout from '../../components/core/CSLayout';
+import {CSInput, CSLayout, CSLoading, CSText} from '../../components/core';
 
 const Register = () => {
   const [params, setParams] = useState<User>(initialUser);

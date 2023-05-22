@@ -28,16 +28,15 @@ const CSText = ({
   variant = 'PoppinsRegular',
   ...props
 }: CSTextProps) => {
+  const styleText = {
+    color: COLORS[color],
+    fontSize: typeof size === 'number' ? size : sizeText[size],
+    fontFamily: FONTS[variant],
+  };
+
   return (
     <Text
-      style={[
-        {
-          color: COLORS[color],
-          fontSize: typeof size === 'number' ? size : sizeText[size],
-          fontFamily: FONTS[variant],
-        },
-        props.style,
-      ]}
+      style={[styleText, props.style]}
       {...props.textProps}
       lineBreakMode="tail">
       {props.children}
@@ -45,4 +44,4 @@ const CSText = ({
   );
 };
 
-export default CSText;
+export {CSText};

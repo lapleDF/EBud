@@ -2,11 +2,10 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 
 import HeaderScreen from '../../components/HeaderScreen';
-import CSText from '../../components/core/CSText';
 import {User} from '../../types';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
-import CSLayout from '../../components/core/CSLayout';
+import {CSLayout, CSText} from '../../components/core';
 
 const Game = () => {
   const navigation = useNavigation();

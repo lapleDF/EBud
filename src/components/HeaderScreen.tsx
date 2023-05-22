@@ -1,21 +1,14 @@
-import {
-  Image,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  ImageSourcePropType,
-} from 'react-native';
+import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import CSText from './core/CSText';
 import {COLORS} from '../constants/color';
 import {SPACING} from '../constants/spacing';
-import {CSButtonBack} from './core/CSButton';
+import {CSButtonBack, CSText} from './core';
 
 interface HeaderScreenProps {
   textLeft?: string;
-  avatar?: string | ImageSourcePropType;
+  avatar?: string;
   backBtn?: boolean;
   onPressLeft?: () => void;
   iconLeft?: string;
@@ -41,14 +34,7 @@ const HeaderScreen = ({backBtn = false, ...props}: HeaderScreenProps) => {
           </CSText>
         )}
         {props.avatar && (
-          <Image
-            source={
-              typeof props.avatar === 'string'
-                ? {uri: props.avatar}
-                : props.avatar
-            }
-            style={styles.imgAvatar}
-          />
+          <Image source={{uri: props.avatar}} style={styles.imgAvatar} />
         )}
       </TouchableOpacity>
       <TouchableOpacity

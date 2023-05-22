@@ -8,8 +8,6 @@ import {
 } from 'react-native';
 
 import {CSButton} from '../../components/core/CSButton';
-import CSLayout from '../../components/core/CSLayout';
-import CSText from '../../components/core/CSText';
 import ExampleSentence from '../../components/course/vocab/ExampleSentence';
 import VocabFlipCard from '../../components/course/vocab/VocabFlipCard';
 import {COLORS} from '../../constants/color';
@@ -18,7 +16,7 @@ import {CourseItem} from '../../types';
 import {LessonList} from '../../store/reducers/lessonReducer';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
-import CSLoading from '../../components/core/CSLoading';
+import {CSLayout, CSLoading, CSText} from '../../components/core';
 
 interface VocabLessonProps {
   courseItem: CourseItem;

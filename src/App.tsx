@@ -22,25 +22,28 @@ const App = () => {
     useNavigationContainerRef();
   const routeNameRef = useRef<any>();
 
+  const onReady = () => {
+    routeNameRef.current = navigationRef.getCurrentRoute()?.name;
+  };
+
+  const onStateChange = async () => {
+    const previousRouteName = routeNameRef.current;
+    const currentRouteName = navigationRef.getCurrentRoute()?.name;
+    const trackScreenView = (routeName: string | undefined) => {
+      AppDispatch(MANAGED_ROUTE_ACTION.UPDATE_CURRENT_ROUTE, routeName);
+    };
+
+    if (previousRouteName !== currentRouteName) {
+      routeNameRef.current = currentRouteName;
+      trackScreenView(currentRouteName);
+    }
+  };
   return (
     <Provider store={store}>
       <NavigationContainer
         ref={navigationRef}
-        onReady={() => {
-          routeNameRef.current = navigationRef.getCurrentRoute()?.name;
-        }}
-        onStateChange={async () => {
-          const previousRouteName = routeNameRef.current;
-          const currentRouteName = navigationRef.getCurrentRoute()?.name;
-          const trackScreenView = (routeName: string | undefined) => {
-            AppDispatch(MANAGED_ROUTE_ACTION.UPDATE_CURRENT_ROUTE, routeName);
-          };
-
-          if (previousRouteName !== currentRouteName) {
-            routeNameRef.current = currentRouteName;
-            trackScreenView(currentRouteName);
-          }
-        }}>
+        onReady={onReady}
+        onStateChange={onStateChange}>
         <RootNavigator />
       </NavigationContainer>
     </Provider>
