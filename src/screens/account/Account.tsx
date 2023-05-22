@@ -2,15 +2,13 @@ import React, {useRef} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import CSText from '../../components/core/CSText';
 import {CSButton} from '../../components/core/CSButton';
 import {ASYNC_STORAGE} from '../../constants/asyncStorage';
-import CSModal from '../../components/core/CSModal';
 import {StyleSheet, View} from 'react-native';
 import {AppDispatch} from '../../store/store';
 import {USER_ACTION} from '../../store/actions';
 import {initialUser} from '../../store/reducers/userReducer';
-import CSLayout from '../../components/core/CSLayout';
+import {CSLayout, CSModal, CSText} from '../../components/core';
 
 const Account = () => {
   const navigation = useNavigation<any>();

@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import AnimatedLoader from 'react-native-animated-loader';
 
-import CSText from './CSText';
+import {CSText} from './CSText';
 
 interface CSLoadingProps {
   text?: string;
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CSLoading;
+export {CSLoading};

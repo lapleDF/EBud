@@ -1,6 +1,6 @@
 import React from 'react';
-import CSText from '../../components/core/CSText';
-import CSLayout from '../../components/core/CSLayout';
+
+import {CSLayout, CSText} from '../../components/core';
 
 const GrammarLesson = () => {
   return (

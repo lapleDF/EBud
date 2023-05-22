@@ -7,12 +7,10 @@ import HeaderScreen from '../../components/HeaderScreen';
 import {RootState} from '../../store/store';
 import {CourseItem, CourseList, User} from '../../types';
 import {SPACING} from '../../constants/spacing';
-import CSText from '../../components/core/CSText';
 import GroupCourseRender from '../../components/course/GroupCourseRender';
 import {CSButton} from '../../components/core/CSButton';
-import CSLoading from '../../components/core/CSLoading';
 import {splitChunkArray} from '../../utils';
-import CSLayout from '../../components/core/CSLayout';
+import {CSLayout, CSLoading, CSText} from '../../components/core';
 
 interface sectionProps {
   title: string;

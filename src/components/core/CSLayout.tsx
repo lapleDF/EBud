@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CSLayout;
+export {CSLayout};

@@ -1,12 +1,12 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import Onboarding from 'react-native-onboarding-swiper';
 import {Image, StyleSheet} from 'react-native';
 
-import CSText from '../components/core/CSText';
 import {ONBOARDING} from '../constants/onBoarding.constant';
 import {storeDataAsyncStorage} from '../utils';
 import {ASYNC_STORAGE} from '../constants/asyncStorage';
+import {CSText} from '../components/core';
 
 const OnboardingScreen = () => {
   const navigation = useNavigation<any>();

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   FlatList,
   NativeScrollEvent,
@@ -8,8 +8,8 @@ import {
 
 import {SPACING} from '../../constants/spacing';
 import {CourseItem} from '../../types';
-import CSLayout from '../../components/core/CSLayout';
 import VocabFlipCard from '../../components/course/VocabFlipCard';
+import {CSLayout} from '../../components/core';
 
 interface VocabLessonProps {
   courseItem: CourseItem;

@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {COLORS} from '../../constants/color';
-import CSText, {sizeText} from './CSText';
+import {sizeText, CSText} from './CSText';
 import {SPACING} from '../../constants/spacing';
 import {FONTS} from '../../constants/font';
 
@@ -65,7 +65,7 @@ const CSInput = ({
   );
 };
 
-export default CSInput;
+export {CSInput};
 
 const styles = StyleSheet.create({
   container: {
