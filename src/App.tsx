@@ -1,19 +1,49 @@
-import React, {useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-
-import RootNavigator from './navigators/RootNavigator';
-import SplashScreen from 'react-native-splash-screen';
+import React, {useRef} from 'react';
+import {
+  NavigationContainer,
+  NavigationContainerRefWithCurrent,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 import {Provider} from 'react-redux';
-import store from './store/store';
+import Parse from 'parse/react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import {APP_ID, JS_KEY, SERVER_URL} from '@env';
+import RootNavigator from './navigators/RootNavigator';
+import store, {AppDispatch} from './store/store';
+import {MANAGED_ROUTE_ACTION} from './store/actions';
+
+Parse.setAsyncStorage(AsyncStorage);
+Parse.initialize(APP_ID, JS_KEY);
+Parse.serverURL = SERVER_URL;
 
 const App = () => {
-  useEffect(() => {
-    SplashScreen.hide();
-  }, []);
+  const navigationRef: NavigationContainerRefWithCurrent<ReactNavigation.RootParamList> =
+    useNavigationContainerRef();
+  const routeNameRef = useRef<any>();
 
+  const onReady = () => {
+    routeNameRef.current = navigationRef.getCurrentRoute()?.name;
+  };
+
+  const onStateChange = async () => {
+    const previousRouteName = routeNameRef.current;
+    const currentRouteName = navigationRef.getCurrentRoute()?.name;
+    const trackScreenView = (routeName: string | undefined) => {
+      AppDispatch(MANAGED_ROUTE_ACTION.UPDATE_CURRENT_ROUTE, routeName);
+    };
+
+    if (previousRouteName !== currentRouteName) {
+      routeNameRef.current = currentRouteName;
+      trackScreenView(currentRouteName);
+    }
+  };
   return (
     <Provider store={store}>
-      <NavigationContainer>
+      <NavigationContainer
+        ref={navigationRef}
+        onReady={onReady}
+        onStateChange={onStateChange}>
         <RootNavigator />
       </NavigationContainer>
     </Provider>

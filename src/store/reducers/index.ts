@@ -1,7 +1,11 @@
 import {combineReducers} from 'redux';
 
 import {userReducer} from './userReducer';
+import {managedReducer} from './managedRouteReducer';
+import {courseReducer} from './courseReducer';
 
 export const rootReducer = combineReducers({
-  users: userReducer,
+  user: userReducer,
+  managedRoute: managedReducer,
+  course: courseReducer,
 });

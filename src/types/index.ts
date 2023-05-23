@@ -1,6 +1,5 @@
 export * from './CourseItem';
 export * from './CourseList';
-export * from './CourseSkill';
 export * from './LearningLesson';
 export * from './Lesson';
 export * from './PayloadAction';

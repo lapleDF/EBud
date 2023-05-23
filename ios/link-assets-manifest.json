@@ -2,6 +2,50 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/assets/fonts/Batman/Batman-outline.ttf",
+      "sha1": "12bddc07d8019389710c823cbefec0a08cf788a8"
+    },
+    {
+      "path": "src/assets/fonts/Batman/Batman.ttf",
+      "sha1": "970fa26afb211a3b67188799e891233239c4d681"
+    },
+    {
+      "path": "src/assets/fonts/Bungee/Bungee-Regular.ttf",
+      "sha1": "cf6a83b3c5b11d5ce4f851bc86701e5edf75287e"
+    },
+    {
+      "path": "src/assets/fonts/Bungee/OFL.txt",
+      "sha1": "016b0312263fdfa61f13d700037415b426ab63af"
+    },
+    {
+      "path": "src/assets/fonts/Neuton/Neuton-Bold.ttf",
+      "sha1": "432577ed9218f8df2ad804c3efb98ff7705f813a"
+    },
+    {
+      "path": "src/assets/fonts/Neuton/Neuton-ExtraBold.ttf",
+      "sha1": "960a17ca90d6d7f89d9f659b7f29f33c74a86a8f"
+    },
+    {
+      "path": "src/assets/fonts/Neuton/Neuton-ExtraLight.ttf",
+      "sha1": "dbb2f41a2b1e728f327a312a2e5545e14f103da7"
+    },
+    {
+      "path": "src/assets/fonts/Neuton/Neuton-Italic.ttf",
+      "sha1": "659a91b1915320b564044cb8dad48056c91b4daf"
+    },
+    {
+      "path": "src/assets/fonts/Neuton/Neuton-Light.ttf",
+      "sha1": "08015ab47bd2ec730e46eca69501f0be548514af"
+    },
+    {
+      "path": "src/assets/fonts/Neuton/Neuton-Regular.ttf",
+      "sha1": "8f57fe255189f9894820453f019c3b93795f45f9"
+    },
+    {
+      "path": "src/assets/fonts/Neuton/OFL.txt",
+      "sha1": "0b28f9f5b88bb42219037a92a3abc7337606a78b"
+    },
+    {
       "path": "src/assets/fonts/Poppins/OFL.txt",
       "sha1": "8d6c34b70e3d638c82d7b5aba3f847f7d6d2c831"
     },
@@ -76,6 +120,14 @@
     {
       "path": "src/assets/fonts/Poppins/Poppins-ThinItalic.ttf",
       "sha1": "193eb4a66d90b17d1c2c1d96e5f218aa018e59b6"
+    },
+    {
+      "path": "src/assets/fonts/Sriracha/OFL.txt",
+      "sha1": "322172eb13baf20ad59a3948a50016f25905763c"
+    },
+    {
+      "path": "src/assets/fonts/Sriracha/Sriracha-Regular.ttf",
+      "sha1": "662b965c4eb20849f79405f8972572742e34ab4e"
     }
   ]
 }

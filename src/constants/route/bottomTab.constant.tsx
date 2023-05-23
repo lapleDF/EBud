@@ -1,13 +1,13 @@
 import React from 'react';
+import {StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import Account from '../../screens/Account';
-import Courses from '../../screens/Courses';
-import Game from '../../screens/Game';
-import Library from '../../screens/Library';
 import {COLORS} from '../color';
-import {StyleSheet, View} from 'react-native';
-import CSText from '../../components/core/CSText';
+import HeaderScreen from '../../components/HeaderScreen';
+import CourseNavigator from '../../navigators/CourseNavigator';
+import LibraryNavigator from '../../navigators/LibraryNavigator';
+import GameNavigator from '../../navigators/GameNavigator';
+import AccountNavigator from '../../navigators/AccountNavigator';
 
 interface IconRenderProps {
   focused: boolean;
@@ -24,7 +24,7 @@ const IconRender = (props: IconRenderProps) => {
     <Icon
       name={props.focused ? props.iconNameUnfocus : props.iconName}
       size={40}
-      color={props.focused ? COLORS.primaryDark : COLORS.secondary}
+      color={props.focused ? COLORS.primaryLight : COLORS.primaryLighter}
       style={styles.icon}
     />
   );
@@ -32,9 +32,10 @@ const IconRender = (props: IconRenderProps) => {
 
 export const BOTTOM_TAB_ROUTE = [
   {
-    name: 'courses',
-    component: Courses,
+    name: 'courseNavigator',
+    component: CourseNavigator,
     options: {
+      headerShown: false,
       tabBarIcon: (props: tabBarIconProps) => (
         <IconRender
           focused={props.focused}
@@ -42,18 +43,13 @@ export const BOTTOM_TAB_ROUTE = [
           iconNameUnfocus="school"
         />
       ),
-      headerShown: true,
-      header: () => (
-        <View style={styles.header}>
-          <CSText>Courses header</CSText>
-        </View>
-      ),
     },
   },
   {
-    name: 'library',
-    component: Library,
+    name: 'libraryNavigator',
+    component: LibraryNavigator,
     options: {
+      headerShown: false,
       tabBarIcon: (props: tabBarIconProps) => (
         <IconRender
           focused={props.focused}
@@ -61,13 +57,14 @@ export const BOTTOM_TAB_ROUTE = [
           iconNameUnfocus="book"
         />
       ),
-      headerShown: true,
+      tabBarVisible: false,
     },
   },
   {
-    name: 'game',
-    component: Game,
+    name: 'gameNavigator',
+    component: GameNavigator,
     options: {
+      headerShown: false,
       tabBarIcon: (props: tabBarIconProps) => (
         <IconRender
           focused={props.focused}
@@ -75,13 +72,13 @@ export const BOTTOM_TAB_ROUTE = [
           iconNameUnfocus="game-controller"
         />
       ),
-      headerShown: true,
     },
   },
   {
-    name: 'account',
-    component: Account,
+    name: 'accountNavigator',
+    component: AccountNavigator,
     options: {
+      headerShown: true,
       tabBarIcon: (props: tabBarIconProps) => (
         <IconRender
           focused={props.focused}
@@ -89,24 +86,12 @@ export const BOTTOM_TAB_ROUTE = [
           iconNameUnfocus="person"
         />
       ),
-      headerShown: true,
+      header: () => HeaderScreen({textLeft: 'Tài khoản của tôi'}),
     },
   },
 ];
 
 const styles = StyleSheet.create({
-  header: {
-    height: 50,
-    backgroundColor: COLORS.bgDark,
-    width: '100%',
-    shadowColor: COLORS.black,
-    shadowOpacity: 0.06,
-    shadowOffset: {
-      width: 10,
-      height: 10,
-    },
-    elevation: 15,
-  },
   icon: {
     position: 'absolute',
     bottom: 5,
