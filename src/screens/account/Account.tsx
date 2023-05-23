@@ -31,9 +31,11 @@ const Account = () => {
       />
       <CSModal refRBSheet={refBtnLogout}>
         <CSText size={'lg'} color="primaryDark" variant="PoppinsBold">
-          Đăng xuất khỏi thiết bị?
+          Đăng xuất?
         </CSText>
-        <CSText>Nếu đồng ý bạn sẽ đăng nhập khỏi thiết bị hiện tại</CSText>
+        <CSText style={styles.textCenter}>
+          Nếu đồng ý bạn sẽ đăng xuất khỏi thiết bị hiện tại
+        </CSText>
         <View style={styles.groupBtnModal}>
           <CSButton title="Đồng ý" onPress={logout} />
           <CSButton
@@ -53,6 +55,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  textCenter: {
+    textAlign: 'center',
   },
 });
 export default Account;

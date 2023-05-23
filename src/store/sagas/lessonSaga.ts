@@ -1,8 +1,12 @@
 import {put, select, takeLatest} from 'redux-saga/effects';
 
 import {LESSON_ACTION} from '../actions';
-import {Lesson, PayloadAction} from '../../types';
-import {addLessonToFavoriteList, getLessonList} from '../../query';
+import {Lesson, PayloadAction, User} from '../../types';
+import {
+  addLessonToFavoriteList,
+  completeLessonQuery,
+  getLessonList,
+} from '../../query';
 import {RootState} from '../store';
 import {LessonList} from '../reducers/lessonReducer';
 
@@ -42,7 +46,33 @@ function* addFavoriteList(action: PayloadAction) {
   });
 }
 
+function* completeLesson(action: PayloadAction) {
+  yield put({type: LESSON_ACTION.UPDATE_STATUS, payload: 'loading'});
+  const lessonList: LessonList = yield select(
+    (state: RootState) => state.lesson,
+  );
+
+  const user: User = yield select((state: RootState) => state.user);
+
+  const sovledLessonList = lessonList.lessons.map((lesson: Lesson) => {
+    if (lesson.id === action.payload) {
+      lesson.isLearned = true;
+    }
+    return lesson;
+  });
+
+  yield completeLessonQuery(user.id, action.payload);
+
+  yield put({
+    type: LESSON_ACTION.UPDATE_LESSON_LIST,
+    payload: sovledLessonList,
+  });
+
+  yield put({type: LESSON_ACTION.UPDATE_STATUS, payload: 'idle'});
+}
+
 export default function* lessonSaga() {
   yield takeLatest(LESSON_ACTION.GET_LESSON_LIST, getLesson);
   yield takeLatest(LESSON_ACTION.ADD_FAVORITE_LIST, addFavoriteList);
+  yield takeLatest(LESSON_ACTION.COMPLETE_LESSON, completeLesson);
 }

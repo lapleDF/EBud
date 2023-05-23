@@ -49,7 +49,7 @@ const Lesson = (props: LessonProps) => {
   }, [course.name, course.skill, navigation]);
 
   if (course.skill === 'vocab') {
-    return <VocabLesson courseItem={course} />;
+    return <VocabLesson />;
   }
   if (course.skill === 'grammar') {
     return <GrammarLesson />;

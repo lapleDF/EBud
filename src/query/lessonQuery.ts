@@ -50,3 +50,21 @@ export const addLessonToFavoriteList = async (id: string) => {
     console.log('Error add favorite list: ', error);
   }
 };
+
+export const completeLessonQuery = async (userId: string, lessonId: string) => {
+  const lessonQuery = new Parse.Object(PARSE_OBJ.lesson);
+  const userQuery = new Parse.User();
+
+  lessonQuery.set('objectId', lessonId);
+  userQuery.set('objectId', userId);
+
+  const learningLessonObj = new Parse.Object(PARSE_OBJ.learningLesson);
+  learningLessonObj.set('idLesson', lessonQuery);
+  learningLessonObj.set('idUser', userQuery);
+
+  try {
+    await learningLessonObj.save();
+  } catch (error) {
+    console.log('learning lesson query error: ', error);
+  }
+};

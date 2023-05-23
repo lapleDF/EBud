@@ -3,6 +3,7 @@ import {
   StyleProp,
   StyleSheet,
   TouchableOpacity,
+  TouchableOpacityProps,
   ViewStyle,
 } from 'react-native';
 import React from 'react';
@@ -18,6 +19,7 @@ export interface CSButtonProps {
   variant?: 'primary' | 'secondary';
   style?: StyleProp<ViewStyle>;
   variantText?: keyof typeof FONTS;
+  buttonProps?: TouchableOpacityProps;
 }
 
 export interface CSButtonBackProps {
@@ -34,6 +36,7 @@ const CSButton = ({
   return (
     <TouchableOpacity
       activeOpacity={0.5}
+      {...props.buttonProps}
       style={[styles.btn, styles[variant], props.style]}
       onPress={props.onPress}>
       <CSText color={colorText} variant={variantText}>

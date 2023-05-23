@@ -9,25 +9,27 @@ import {
   View,
 } from 'react-native';
 import {useSelector} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 
 import ExampleSentence from '../../components/course/vocab/ExampleSentence';
 import VocabFlipCard from '../../components/course/vocab/VocabFlipCard';
-import {CSLayout, CSLoading, CSText} from '../../components/core';
+import {CSLayout, CSLoading, CSModal, CSText} from '../../components/core';
 import {LessonList} from '../../store/reducers/lessonReducer';
 import {CSButton} from '../../components/core/CSButton';
 import {SPACING} from '../../constants/spacing';
 import {COLORS} from '../../constants/color';
-import {RootState} from '../../store/store';
-import {CourseItem} from '../../types';
+import {AppDispatch, RootState} from '../../store/store';
+import {COURSE_ACTION, LESSON_ACTION} from '../../store/actions';
+import {User} from '../../types';
 
-interface VocabLessonProps {
-  courseItem: CourseItem;
-}
-
-const VocabLesson = ({courseItem}: VocabLessonProps) => {
+const VocabLesson = () => {
   const lesson: LessonList = useSelector((state: RootState) => state.lesson);
+  const user: User = useSelector((state: RootState) => state.user);
+
   const refFlatList = useRef<any>();
+  const refModal = useRef<any>();
   const [index, setIndex] = useState(0);
+  const navigation = useNavigation<any>();
   const WIDTH = SPACING.screenWidth - SPACING.px * 2;
   const progressAnimatedValue = useRef(new Animated.Value(-WIDTH)).current;
 
@@ -36,7 +38,21 @@ const VocabLesson = ({courseItem}: VocabLessonProps) => {
   };
 
   const handleComplete = () => {
-    console.log('handle see more', courseItem.id);
+    AppDispatch(LESSON_ACTION.COMPLETE_LESSON, lesson.lessons[index].id);
+  };
+
+  const handleExit = () => {
+    refModal.current.close();
+    navigation.navigate('course');
+  };
+
+  const handleReset = () => {
+    refFlatList.current.scrollToIndex({
+      animated: true,
+      index: 0,
+    });
+    setIndex(0);
+    refModal.current.close();
   };
 
   const handleBtnChangeFlipCard = (isNext: boolean) => {
@@ -67,12 +83,36 @@ const VocabLesson = ({courseItem}: VocabLessonProps) => {
         easing: Easing.linear,
         duration: 500,
       }).start();
+      if (
+        index + 1 === lesson.lessons.length &&
+        lesson.lessons[index].isLearned
+      ) {
+        AppDispatch(COURSE_ACTION.GET_LIST, user.id);
+        refModal.current.open();
+      }
     }
-  }, [WIDTH, index, lesson.lessons.length, progressAnimatedValue]);
+  }, [WIDTH, index, lesson.lessons, progressAnimatedValue, user.id]);
 
   return (
     <CSLayout style={styles.container}>
       {lesson.fetchingStatus === 'loading' && <CSLoading />}
+      <CSModal refRBSheet={refModal}>
+        <CSText
+          size={'lg'}
+          color="primaryDark"
+          variant="PoppinsBold"
+          style={styles.textCenter}>
+          Chúc mừng hoàn thành bài học
+        </CSText>
+        <CSText style={styles.textCenter}>
+          Bạn đã hoàn thành tất cả bài học. Nhấn học lại để xem lại những bài
+          học trước đó
+        </CSText>
+        <View style={styles.groupBtnModal}>
+          <CSButton title="Học lại" onPress={handleReset} />
+          <CSButton title="Thoát" onPress={handleExit} variant="secondary" />
+        </View>
+      </CSModal>
       <FlatList
         data={lesson.lessons}
         ref={refFlatList}
@@ -94,13 +134,18 @@ const VocabLesson = ({courseItem}: VocabLessonProps) => {
           <TouchableOpacity onPress={() => handleBtnChangeFlipCard(false)}>
             <Image
               source={require('../../assets/images/prevBtn.png')}
-              style={styles.btnImg}
+              style={[styles.btnImg, index === 0 && styles.disabled]}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleBtnChangeFlipCard(true)}>
+          <TouchableOpacity
+            onPress={() => handleBtnChangeFlipCard(true)}
+            disabled={!lesson.lessons[index]?.isLearned}>
             <Image
               source={require('../../assets/images/nextBtn.png')}
-              style={styles.btnImg}
+              style={[
+                styles.btnImg,
+                !lesson.lessons[index]?.isLearned && styles.disabled,
+              ]}
             />
           </TouchableOpacity>
         </View>
@@ -128,7 +173,14 @@ const VocabLesson = ({courseItem}: VocabLessonProps) => {
           />
         )}
         <View style={styles.controls}>
-          <CSButton onPress={handleComplete} title="Hoàn thành" />
+          <CSButton
+            buttonProps={{disabled: lesson.lessons[index]?.isLearned}}
+            onPress={handleComplete}
+            style={lesson.lessons[index]?.isLearned && styles.btnDisabled}
+            title={
+              lesson.lessons[index]?.isLearned ? 'Đã hoàn thành' : 'Hoàn thành'
+            }
+          />
           <CSText size={'sm'} variant="PoppinsItalic" style={styles.text}>
             {'(Hoàn thành bài học để có thể học bài tiếp theo)'}
           </CSText>
@@ -185,6 +237,22 @@ const styles = StyleSheet.create({
   },
   contentSentence: {gap: 10},
   text: {
+    textAlign: 'center',
+  },
+  btnDisabled: {
+    opacity: 0.5,
+  },
+  disabled: {
+    opacity: 0.5,
+    transform: [{scale: 0.8}],
+  },
+  groupBtnModal: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  textCenter: {
     textAlign: 'center',
   },
 });
