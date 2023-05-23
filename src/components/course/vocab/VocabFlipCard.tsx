@@ -1,12 +1,15 @@
-import {View, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React, {useState} from 'react';
-import Tts from 'react-native-tts';
+import FlipCard from 'react-native-flip-card';
 
 import {COLORS} from '../../../constants/color';
-import FlipCard from 'react-native-flip-card';
 import {SPACING} from '../../../constants/spacing';
 import {CSText} from '../../core';
+import {handleSpeak} from '../../../utils';
+import {AppDispatch} from '../../../store/store';
+import {LESSON_ACTION} from '../../../store/actions';
+import {Lesson} from '../../../types';
 
 interface CardSideProps {
   onPressFlip: () => void;
@@ -15,9 +18,15 @@ interface CardSideProps {
   wordMean?: string;
   imageUrl?: string;
   handleSpeak: () => void;
+  lessonId: string;
+  isStar: boolean;
 }
 
 const CardSide = (props: CardSideProps) => {
+  const handleStar = () => {
+    AppDispatch(LESSON_ACTION.ADD_FAVORITE_LIST, props.lessonId);
+  };
+
   return (
     <View style={styles.cardSide}>
       <View
@@ -35,53 +44,41 @@ const CardSide = (props: CardSideProps) => {
           <Image source={{uri: props.imageUrl}} style={styles.image} />
         )}
       </View>
-      <Icon
-        name="volume-medium-outline"
-        size={30}
-        color={COLORS.primaryDark}
-        style={styles.btnSound}
-        onPress={props.handleSpeak}
-      />
-      <Icon
-        name="star-outline"
-        size={30}
-        color={COLORS.primaryDark}
-        style={styles.btnStar}
-      />
-      <Icon
-        name="sync"
-        size={30}
-        color={COLORS.primaryDark}
-        style={styles.btnFlip}
-        onPress={props.onPressFlip}
-      />
+      <TouchableOpacity style={styles.btnSound}>
+        <Icon
+          name="volume-medium-outline"
+          size={30}
+          color={COLORS.primaryDark}
+          onPress={props.handleSpeak}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.btnStar}>
+        <Icon
+          name={props.isStar ? 'star' : 'star-outline'}
+          size={30}
+          color={COLORS.primaryDark}
+          onPress={handleStar}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.btnFlip}>
+        <Icon
+          name="sync"
+          size={30}
+          color={COLORS.primaryDark}
+          onPress={props.onPressFlip}
+        />
+      </TouchableOpacity>
     </View>
   );
 };
 
 interface VocabFlipCardProps {
-  word?: string;
-  wordPronouncing?: string;
-  wordMean?: string;
-  imageUrl?: string;
-  lessonId: string;
+  lesson: Lesson;
 }
 
-const VocabFlipCard = (props: VocabFlipCardProps) => {
+const VocabFlipCard = ({lesson}: VocabFlipCardProps) => {
   const [isInBack, setIsInBack] = useState(true);
 
-  Tts.voices().then(voices => console.log(voices));
-
-  const handleSpeak = () =>
-    Tts.speak(props.word || '', {
-      androidParams: {
-        KEY_PARAM_STREAM: 'STREAM_ACCESSIBILITY',
-        KEY_PARAM_PAN: 0,
-        KEY_PARAM_VOLUME: 1,
-      },
-      iosVoiceId: 'en-US-SMTf00',
-      rate: 0.01,
-    });
   return (
     <FlipCard
       flip={isInBack}
@@ -91,15 +88,19 @@ const VocabFlipCard = (props: VocabFlipCardProps) => {
       clickable={false}>
       <CardSide
         onPressFlip={() => setIsInBack(!isInBack)}
-        imageUrl={props.imageUrl}
-        wordMean={props.wordMean}
-        handleSpeak={handleSpeak}
+        imageUrl={lesson.image}
+        wordMean={lesson.wordMeaning}
+        handleSpeak={() => handleSpeak(lesson.word || '')}
+        lessonId={lesson.id}
+        isStar={lesson.stared || false}
       />
       <CardSide
         onPressFlip={() => setIsInBack(!isInBack)}
-        word={props.word}
-        wordPronouncing={props.wordPronouncing}
-        handleSpeak={handleSpeak}
+        word={lesson.word}
+        wordPronouncing={lesson.pronouncing}
+        handleSpeak={() => handleSpeak(lesson.word || '')}
+        lessonId={lesson.id}
+        isStar={lesson.stared || false}
       />
     </FlipCard>
   );

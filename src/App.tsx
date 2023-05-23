@@ -4,6 +4,7 @@ import {
   NavigationContainerRefWithCurrent,
   useNavigationContainerRef,
 } from '@react-navigation/native';
+import {LogBox} from 'react-native';
 import {Provider} from 'react-redux';
 import Parse from 'parse/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -16,6 +17,8 @@ import {MANAGED_ROUTE_ACTION} from './store/actions';
 Parse.setAsyncStorage(AsyncStorage);
 Parse.initialize(APP_ID, JS_KEY);
 Parse.serverURL = SERVER_URL;
+
+LogBox.ignoreLogs(['new NativeEventEmitter']);
 
 const App = () => {
   const navigationRef: NavigationContainerRefWithCurrent<ReactNavigation.RootParamList> =

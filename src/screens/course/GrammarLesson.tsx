@@ -1,29 +1,60 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Video from 'react-native-video';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {useSelector} from 'react-redux';
 
 import {COLORS} from '../../constants/color';
-import {CSLayout, CSText} from '../../components/core';
+import {CSLayout, CSLoading, CSText} from '../../components/core';
+import {RootState} from '../../store/store';
+import {LessonList} from '../../store/reducers/lessonReducer';
 
 const GrammarLesson = () => {
+  const lesson: LessonList = useSelector((state: RootState) => state.lesson);
+  const [index, setIndex] = useState(0);
+
+  const onPressNextLesson = () => {
+    if (index < lesson.lessons.length - 1) {
+      setIndex(index + 1);
+    }
+  };
+
   return (
     <CSLayout>
-      <View style={styles.header}>
-        <CSText>{'Bài 1/3'}</CSText>
-        <CSText variant="PoppinsBold">{'title'}</CSText>
-        <TouchableOpacity onPress={() => {}}>
-          <CSText color="primaryLighter">{'Bài tiếp theo'}</CSText>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.video}>
-        <Video
-          source={{
-            uri: 'https://drive.google.com/file/d/1BaE5nZjwLh06Wvfdljb5RcZMf-OWWAmz/view?usp=sharing',
-          }}
-          onError={error => console.log(error)}
-          style={styles.backgroundVideo}
-        />
-      </View>
+      {lesson.fetchingStatus === 'loading' ? (
+        <CSLoading />
+      ) : (
+        <>
+          <View style={styles.header}>
+            <CSText>{`Bài ${index + 1}/${lesson.lessons.length}`}</CSText>
+            <CSText variant="PoppinsBold">
+              {lesson.lessons[index]?.title}
+            </CSText>
+            <TouchableOpacity onPress={onPressNextLesson}>
+              <CSText color="primaryLighter">{'Bài tiếp theo'}</CSText>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.video}>
+            <Video
+              source={{
+                uri: lesson.lessons[index]?.video,
+              }}
+              resizeMode="cover"
+              poster={lesson.lessons[index]?.poster}
+              posterResizeMode="cover"
+              controls
+              style={styles.backgroundVideo}
+            />
+          </View>
+          <CSText size={'xlg'} variant="PoppinsBold">
+            Mô tả video
+          </CSText>
+          <CSText>{lesson.lessons[index]?.description}</CSText>
+          <CSText size={'xlg'} variant="PoppinsBold">
+            Nội dung video
+          </CSText>
+          <CSText>{lesson.lessons[index]?.summarizeLesson}</CSText>
+        </>
+      )}
     </CSLayout>
   );
 };

@@ -2,19 +2,17 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-import CSText from '../../core/CSText';
 import {COLORS} from '../../../constants/color';
 import {SentenceEg} from '../../../types';
+import {CSText} from '../../core';
+import {handleSpeak} from '../../../utils';
 
 const ExampleSentence = (props: SentenceEg) => {
-  const handlePlaySound = () => {
-    console.log('Handle play sound', props.listen);
-  };
   return (
     <View style={styles.exampleWrap}>
       <View style={styles.exampleGroup}>
         <CSText>{`\u25CF ${props.sentence}`}</CSText>
-        <TouchableOpacity onPress={handlePlaySound}>
+        <TouchableOpacity onPress={() => handleSpeak(props.sentence)}>
           <Icon name="volume-medium-outline" size={27} color={COLORS.bgGrey} />
         </TouchableOpacity>
       </View>
@@ -28,6 +26,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     gap: 10,
+    flexWrap: 'wrap',
   },
   exampleWrap: {
     width: '100%',

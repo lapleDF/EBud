@@ -13,7 +13,7 @@ function* getList(action: PayloadAction) {
     yield put({type: COURSE_ACTION.UPDATE_STATE, payload: 'idle'});
   } catch (error) {
     yield put({type: COURSE_ACTION.UPDATE_STATE, payload: 'error'});
-    console.log(error);
+    console.log('get list error: ', error);
   }
 }
 

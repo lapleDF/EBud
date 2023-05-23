@@ -1,22 +1,24 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useRef, useState, useEffect} from 'react';
 import {
+  Animated,
+  Easing,
   FlatList,
   Image,
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
+import {useSelector} from 'react-redux';
 
-import {CSButton} from '../../components/core/CSButton';
 import ExampleSentence from '../../components/course/vocab/ExampleSentence';
 import VocabFlipCard from '../../components/course/vocab/VocabFlipCard';
-import {COLORS} from '../../constants/color';
-import {SPACING} from '../../constants/spacing';
-import {CourseItem} from '../../types';
-import {LessonList} from '../../store/reducers/lessonReducer';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../store/store';
 import {CSLayout, CSLoading, CSText} from '../../components/core';
+import {LessonList} from '../../store/reducers/lessonReducer';
+import {CSButton} from '../../components/core/CSButton';
+import {SPACING} from '../../constants/spacing';
+import {COLORS} from '../../constants/color';
+import {RootState} from '../../store/store';
+import {CourseItem} from '../../types';
 
 interface VocabLessonProps {
   courseItem: CourseItem;
@@ -26,7 +28,14 @@ const VocabLesson = ({courseItem}: VocabLessonProps) => {
   const lesson: LessonList = useSelector((state: RootState) => state.lesson);
   const refFlatList = useRef<any>();
   const [index, setIndex] = useState(0);
-  const handleSeeMore = () => {
+  const WIDTH = SPACING.screenWidth - SPACING.px * 2;
+  const progressAnimatedValue = useRef(new Animated.Value(-WIDTH)).current;
+
+  const transformAnimate = {
+    transform: [{translateX: progressAnimatedValue}, {perspective: 1000}],
+  };
+
+  const handleComplete = () => {
     console.log('handle see more', courseItem.id);
   };
 
@@ -50,21 +59,24 @@ const VocabLesson = ({courseItem}: VocabLessonProps) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (lesson.lessons.length > 0) {
+      Animated.timing(progressAnimatedValue, {
+        toValue: -WIDTH + ((index + 1) * WIDTH) / lesson.lessons.length,
+        useNativeDriver: false,
+        easing: Easing.linear,
+        duration: 500,
+      }).start();
+    }
+  }, [WIDTH, index, lesson.lessons.length, progressAnimatedValue]);
+
   return (
     <CSLayout style={styles.container}>
       {lesson.fetchingStatus === 'loading' && <CSLoading />}
       <FlatList
         data={lesson.lessons}
         ref={refFlatList}
-        renderItem={({item}) => (
-          <VocabFlipCard
-            lessonId={item.id}
-            imageUrl={item.image}
-            word={item.word}
-            wordMean={item.wordMeaning}
-            wordPronouncing={item.pronouncing}
-          />
-        )}
+        renderItem={({item}) => <VocabFlipCard lesson={item} />}
         keyExtractor={(item, idx) => idx.toString()}
         contentContainerStyle={styles.flipCardList}
         pagingEnabled
@@ -76,6 +88,7 @@ const VocabLesson = ({courseItem}: VocabLessonProps) => {
           viewAreaCoveragePercentThreshold: 98,
         }}
       />
+
       <View style={styles.controls}>
         <View style={styles.btns}>
           <TouchableOpacity onPress={() => handleBtnChangeFlipCard(false)}>
@@ -92,34 +105,33 @@ const VocabLesson = ({courseItem}: VocabLessonProps) => {
           </TouchableOpacity>
         </View>
         <View style={styles.progressBar}>
-          <View
-            style={[
-              styles.progressBarActive,
-              {width: `${((index + 1) / lesson.lessons.length) * 100}%`},
-            ]}
-          />
+          <Animated.View style={[styles.progressBarActive, transformAnimate]} />
         </View>
         <CSText>{`${index + 1}/${lesson.lessons.length}`}</CSText>
       </View>
+
       <View style={styles.exampleContainer}>
         <CSText size={'xlg'} variant={'PoppinsBold'}>
           Các mẫu câu ví dụ
         </CSText>
         {lesson.lessons.length > 0 && (
           <FlatList
-            data={lesson.lessons[index].sentencesEg}
+            data={lesson.lessons[index]?.sentencesEg}
             renderItem={({item}) => (
               <ExampleSentence
                 meaning={item.meaning}
                 sentence={item.sentence}
               />
             )}
-            contentContainerStyle={{gap: 10}}
-            keyExtractor={(item, index) => index.toString()}
+            contentContainerStyle={styles.contentSentence}
+            keyExtractor={(_item, indexKey) => indexKey.toString()}
           />
         )}
         <View style={styles.controls}>
-          <CSButton onPress={handleSeeMore} title="Xem thêm ví dụ khác" />
+          <CSButton onPress={handleComplete} title="Hoàn thành" />
+          <CSText size={'sm'} variant="PoppinsItalic" style={styles.text}>
+            {'(Hoàn thành bài học để có thể học bài tiếp theo)'}
+          </CSText>
         </View>
       </View>
     </CSLayout>
@@ -158,16 +170,22 @@ const styles = StyleSheet.create({
     height: 10,
     backgroundColor: COLORS.borderDeactive,
     borderRadius: 10,
+    overflow: 'hidden',
   },
   progressBarActive: {
     height: 10,
     backgroundColor: COLORS.primaryLight,
     borderRadius: 10,
+    width: '100%',
   },
   exampleContainer: {
     width: '100%',
     gap: 10,
     height: SPACING.screenHeight - 230 * 2,
+  },
+  contentSentence: {gap: 10},
+  text: {
+    textAlign: 'center',
   },
 });
 

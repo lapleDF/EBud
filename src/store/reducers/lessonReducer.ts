@@ -16,9 +16,9 @@ export const lessonReducer = (
   action: PayloadAction,
 ) => {
   switch (action.type) {
-    case LESSON_ACTION.GET_LESSON_LIST:
-      return {...state, fetchingStatus: 'loading'};
-    case LESSON_ACTION.GET_LESSON_LIST_SUCCESS:
+    case LESSON_ACTION.UPDATE_STATUS:
+      return {...state, fetchingStatus: action.payload};
+    case LESSON_ACTION.UPDATE_LESSON_LIST:
       return {...state, lessons: action.payload, fetchingStatus: 'idle'};
     default:
       return state;
