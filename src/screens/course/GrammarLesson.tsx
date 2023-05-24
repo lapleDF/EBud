@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import Video from 'react-native-video';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useSelector} from 'react-redux';
 
-import {COLORS} from '../../constants/color';
 import {CSLayout, CSLoading, CSText} from '../../components/core';
 import {RootState} from '../../store/store';
 import {LessonList} from '../../store/reducers/lessonReducer';
+import {SPACING} from '../../constants/spacing';
+import CSVideo from '../../components/course/grammarAndPronouce/Video';
 
 const GrammarLesson = () => {
   const lesson: LessonList = useSelector((state: RootState) => state.lesson);
@@ -17,7 +17,6 @@ const GrammarLesson = () => {
       setIndex(index + 1);
     }
   };
-
   return (
     <CSLayout>
       {lesson.fetchingStatus === 'loading' ? (
@@ -33,26 +32,20 @@ const GrammarLesson = () => {
               <CSText color="primaryLighter">{'Bài tiếp theo'}</CSText>
             </TouchableOpacity>
           </View>
-          <View style={styles.video}>
-            <Video
-              source={{
-                uri: lesson.lessons[index]?.video,
-              }}
-              resizeMode="cover"
-              poster={lesson.lessons[index]?.poster}
-              posterResizeMode="cover"
-              controls
-              style={styles.backgroundVideo}
-            />
-          </View>
-          <CSText size={'xlg'} variant="PoppinsBold">
-            Mô tả video
-          </CSText>
-          <CSText>{lesson.lessons[index]?.description}</CSText>
-          <CSText size={'xlg'} variant="PoppinsBold">
-            Nội dung video
-          </CSText>
-          <CSText>{lesson.lessons[index]?.summarizeLesson}</CSText>
+          <CSVideo
+            posterUrl={lesson.lessons[index]?.poster}
+            videoUrl={lesson.lessons[index]?.video}
+          />
+          <ScrollView contentContainerStyle={styles.textContent}>
+            <CSText size={'xlg'} variant="PoppinsBold">
+              Mô tả video
+            </CSText>
+            <CSText>{lesson.lessons[index]?.description}</CSText>
+            <CSText size={'xlg'} variant="PoppinsBold">
+              Nội dung video
+            </CSText>
+            <CSText>{lesson.lessons[index]?.summarizeLesson}</CSText>
+          </ScrollView>
         </>
       )}
     </CSLayout>
@@ -65,18 +58,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
+    paddingHorizontal: SPACING.px,
   },
-  video: {
-    width: '100%',
-    height: 230,
-    backgroundColor: COLORS.bgGrey,
-  },
-  backgroundVideo: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+  textContent: {
+    paddingHorizontal: SPACING.px,
+    paddingVertical: SPACING.px * 2,
   },
   collasibleContainer: {},
   collasibleHeader: {},

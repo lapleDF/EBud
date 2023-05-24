@@ -95,7 +95,89 @@ const VocabLesson = () => {
 
   return (
     <CSLayout style={styles.container}>
-      {lesson.fetchingStatus === 'loading' && <CSLoading />}
+      {lesson.fetchingStatus === 'loading' ? (
+        <CSLoading />
+      ) : (
+        <>
+          <FlatList
+            data={lesson.lessons}
+            ref={refFlatList}
+            renderItem={({item}) => <VocabFlipCard lesson={item} />}
+            keyExtractor={(item, idx) => idx.toString()}
+            contentContainerStyle={styles.flipCardList}
+            pagingEnabled
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            onViewableItemsChanged={onViewableItemsChanged}
+            viewabilityConfig={{
+              waitForInteraction: true,
+              viewAreaCoveragePercentThreshold: 98,
+            }}
+          />
+
+          <View style={styles.controls}>
+            <View style={styles.btns}>
+              <TouchableOpacity onPress={() => handleBtnChangeFlipCard(false)}>
+                <Image
+                  source={require('../../assets/images/prevBtn.png')}
+                  style={[styles.btnImg, index === 0 && styles.disabled]}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => handleBtnChangeFlipCard(true)}
+                disabled={!lesson.lessons[index]?.isLearned}>
+                <Image
+                  source={require('../../assets/images/nextBtn.png')}
+                  style={[
+                    styles.btnImg,
+                    !lesson.lessons[index]?.isLearned && styles.disabled,
+                  ]}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.progressBar}>
+              <Animated.View
+                style={[styles.progressBarActive, transformAnimate]}
+              />
+            </View>
+            <CSText>{`${index + 1}/${lesson.lessons.length}`}</CSText>
+          </View>
+
+          <View style={styles.exampleContainer}>
+            <CSText size={'xlg'} variant={'PoppinsBold'}>
+              Các mẫu câu ví dụ
+            </CSText>
+            {lesson.lessons.length > 0 && (
+              <FlatList
+                data={lesson.lessons[index]?.sentencesEg}
+                renderItem={({item}) => (
+                  <ExampleSentence
+                    meaning={item.meaning}
+                    sentence={item.sentence}
+                  />
+                )}
+                contentContainerStyle={styles.contentSentence}
+                keyExtractor={(_item, indexKey) => indexKey.toString()}
+              />
+            )}
+            <View style={styles.controls}>
+              <CSButton
+                buttonProps={{disabled: lesson.lessons[index]?.isLearned}}
+                onPress={handleComplete}
+                style={lesson.lessons[index]?.isLearned && styles.btnDisabled}
+                title={
+                  lesson.lessons[index]?.isLearned
+                    ? 'Đã hoàn thành'
+                    : 'Hoàn thành'
+                }
+              />
+              <CSText size={'sm'} variant="PoppinsItalic" style={styles.text}>
+                {'(Hoàn thành bài học để có thể học bài tiếp theo)'}
+              </CSText>
+            </View>
+          </View>
+        </>
+      )}
       <CSModal refRBSheet={refModal}>
         <CSText
           size={'lg'}
@@ -113,79 +195,6 @@ const VocabLesson = () => {
           <CSButton title="Thoát" onPress={handleExit} variant="secondary" />
         </View>
       </CSModal>
-      <FlatList
-        data={lesson.lessons}
-        ref={refFlatList}
-        renderItem={({item}) => <VocabFlipCard lesson={item} />}
-        keyExtractor={(item, idx) => idx.toString()}
-        contentContainerStyle={styles.flipCardList}
-        pagingEnabled
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        onViewableItemsChanged={onViewableItemsChanged}
-        viewabilityConfig={{
-          waitForInteraction: true,
-          viewAreaCoveragePercentThreshold: 98,
-        }}
-      />
-
-      <View style={styles.controls}>
-        <View style={styles.btns}>
-          <TouchableOpacity onPress={() => handleBtnChangeFlipCard(false)}>
-            <Image
-              source={require('../../assets/images/prevBtn.png')}
-              style={[styles.btnImg, index === 0 && styles.disabled]}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => handleBtnChangeFlipCard(true)}
-            disabled={!lesson.lessons[index]?.isLearned}>
-            <Image
-              source={require('../../assets/images/nextBtn.png')}
-              style={[
-                styles.btnImg,
-                !lesson.lessons[index]?.isLearned && styles.disabled,
-              ]}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.progressBar}>
-          <Animated.View style={[styles.progressBarActive, transformAnimate]} />
-        </View>
-        <CSText>{`${index + 1}/${lesson.lessons.length}`}</CSText>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <CSText size={'xlg'} variant={'PoppinsBold'}>
-          Các mẫu câu ví dụ
-        </CSText>
-        {lesson.lessons.length > 0 && (
-          <FlatList
-            data={lesson.lessons[index]?.sentencesEg}
-            renderItem={({item}) => (
-              <ExampleSentence
-                meaning={item.meaning}
-                sentence={item.sentence}
-              />
-            )}
-            contentContainerStyle={styles.contentSentence}
-            keyExtractor={(_item, indexKey) => indexKey.toString()}
-          />
-        )}
-        <View style={styles.controls}>
-          <CSButton
-            buttonProps={{disabled: lesson.lessons[index]?.isLearned}}
-            onPress={handleComplete}
-            style={lesson.lessons[index]?.isLearned && styles.btnDisabled}
-            title={
-              lesson.lessons[index]?.isLearned ? 'Đã hoàn thành' : 'Hoàn thành'
-            }
-          />
-          <CSText size={'sm'} variant="PoppinsItalic" style={styles.text}>
-            {'(Hoàn thành bài học để có thể học bài tiếp theo)'}
-          </CSText>
-        </View>
-      </View>
     </CSLayout>
   );
 };
