@@ -15,7 +15,7 @@ interface VideoProps {
   posterUrl?: string;
 }
 
-const CSVideo = ({videoUrl, posterUrl}: VideoProps) => {
+const CSVideo = ({videoUrl = '', posterUrl = ''}: VideoProps) => {
   const refVideo = useRef<Video>(null);
   const navigation = useNavigation();
   const [params, setParams] = useState({
@@ -90,7 +90,7 @@ const CSVideo = ({videoUrl, posterUrl}: VideoProps) => {
         source={{
           uri: videoUrl,
         }}
-        resizeMode="cover"
+        resizeMode="contain"
         ref={refVideo}
         poster={posterUrl}
         posterResizeMode="cover"
@@ -167,11 +167,12 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     zIndex: 1,
+    backgroundColor: COLORS.black,
   },
   video: {
     width: '100%',
     height: 230,
-    backgroundColor: COLORS.bgGrey,
+    backgroundColor: COLORS.black,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },

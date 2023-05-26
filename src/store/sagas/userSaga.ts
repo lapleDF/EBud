@@ -5,6 +5,8 @@ import {USER_ACTION} from '../actions';
 import {PayloadAction, User} from '../../types';
 import {storeDataObjAsyncStorage} from '../../utils';
 import {ASYNC_STORAGE} from '../../constants/asyncStorage';
+import {ToastAndroid} from 'react-native';
+import {initialUser} from '../reducers/userReducer';
 
 function* login(action: PayloadAction) {
   const loggedInUser: Parse.User = action.payload;
@@ -23,6 +25,18 @@ function* login(action: PayloadAction) {
   yield put({type: USER_ACTION.UPDATE, payload: newUser});
 }
 
+function* logout() {
+  try {
+    yield Parse.User.logOut().then(() => {
+      ToastAndroid.show('Logged out', ToastAndroid.LONG);
+    });
+    yield put({type: USER_ACTION.UPDATE, payload: initialUser});
+  } catch (error) {
+    console.log('Error logout action: ', error);
+  }
+}
+
 export default function* userSaga() {
   yield takeLatest(USER_ACTION.LOGIN, login);
+  yield takeLatest(USER_ACTION.LOGOUT, logout);
 }

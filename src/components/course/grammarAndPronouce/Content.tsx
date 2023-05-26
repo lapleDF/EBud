@@ -1,34 +1,38 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {LessonList} from '../../../store/reducers/lessonReducer';
+import {AppDispatch, RootState} from '../../../store/store';
+import {LESSON_ACTION} from '../../../store/actions';
+import {CSButton, CSLayout, CSLoading, CSText} from '../../core';
+import Playlist from './Playlist';
+import {COLORS} from '../../../constants/color';
+import CSVideo from './CSVideo';
+import ExampleSentence from '../vocab/ExampleSentence';
+import {SPACING} from '../../../constants/spacing';
 
-import {CSButton, CSLayout, CSLoading, CSText} from '../../components/core';
-import {AppDispatch, RootState} from '../../store/store';
-import {LessonList} from '../../store/reducers/lessonReducer';
-import {SPACING} from '../../constants/spacing';
-import ExampleSentence from '../../components/course/vocab/ExampleSentence';
-import {LESSON_ACTION} from '../../store/actions';
-import {COLORS} from '../../constants/color';
-import CSVideo from '../../components/course/grammarAndPronouce/Video';
-import DrawerList from '../../components/course/grammarAndPronouce/DrawerList';
+interface ContentProps {
+  skill: 'pronounce' | 'grammar';
+}
 
-const PronounceLesson = () => {
+const Content = ({skill}: ContentProps) => {
   const lesson: LessonList = useSelector((state: RootState) => state.lesson);
   const [index, setIndex] = useState(0);
-  const refDrawer = useRef();
-  const [openDrawerRight, setOpenDrawerRight] = useState(false);
+  const [openPlaylist, setOpenPlaylist] = useState(false);
 
-  const onPressNextLesson = () => {
-    if (index < lesson.lessons.length - 1) {
-      setIndex(index + 1);
-    }
+  const onHandleMenuPlaylist = () => {
+    setOpenPlaylist(!openPlaylist);
   };
 
   const handleComplete = () => {
-    AppDispatch(LESSON_ACTION.COMPLETE_LESSON, lesson.lessons[index].id);
+    AppDispatch(LESSON_ACTION.COMPLETE_LESSON, lesson.lessons[index]);
   };
 
+  const handlePressItemList = (activeIndex: number) => {
+    setIndex(activeIndex);
+    setOpenPlaylist(!openPlaylist);
+  };
   return (
     <CSLayout>
       {lesson.fetchingStatus === 'loading' ? (
@@ -36,17 +40,18 @@ const PronounceLesson = () => {
       ) : (
         <>
           <View style={styles.header}>
-            <CSText color="primaryDark" variant="PoppinsBold">{`Bài ${
-              index + 1
-            }: ${lesson.lessons[index]?.title}`}</CSText>
-            <TouchableOpacity onPress={onPressNextLesson}>
+            <CSText variant="PoppinsBold">{`Bài ${index + 1}: ${
+              lesson.lessons[index]?.title
+            }`}</CSText>
+            <TouchableOpacity onPress={onHandleMenuPlaylist}>
               <Icon name="menu" size={40} color={COLORS.primaryDark} />
             </TouchableOpacity>
           </View>
-          <DrawerList
-            ref={refDrawer}
-            data={[...Array(6)]}
-            onPressItem={() => {}}
+          <Playlist
+            activeIndex={index}
+            data={lesson.lessons}
+            onPressItem={handlePressItemList}
+            open={openPlaylist}
           />
           <CSVideo
             posterUrl={lesson.lessons[index]?.poster}
@@ -56,11 +61,16 @@ const PronounceLesson = () => {
             <CSText size={'xlg'} variant="PoppinsBold">
               Mô tả video
             </CSText>
-            <CSText>{lesson.lessons[index]?.pronouncingUsage}</CSText>
+            <CSText>
+              {skill === 'grammar'
+                ? lesson.lessons[index]?.description
+                : lesson.lessons[index]?.pronouncingUsage}
+            </CSText>
             <CSText size={'xlg'} variant="PoppinsBold">
-              Ví dụ
+              {skill === 'grammar' ? 'Nội dung bài học' : 'Ví dụ'}
             </CSText>
             {lesson.lessons.length > 0 &&
+              skill === 'pronounce' &&
               lesson.lessons[index]?.sentencesEg?.map((item, idx) => (
                 <ExampleSentence
                   meaning={item.meaning}
@@ -68,6 +78,9 @@ const PronounceLesson = () => {
                   key={idx}
                 />
               ))}
+            {skill === 'grammar' && (
+              <CSText>{lesson.lessons[index]?.summarizeLesson}</CSText>
+            )}
             <View style={styles.btnBottom}>
               <CSButton
                 title={
@@ -121,4 +134,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PronounceLesson;
+export default Content;

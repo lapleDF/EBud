@@ -38,7 +38,7 @@ const VocabLesson = () => {
   };
 
   const handleComplete = () => {
-    AppDispatch(LESSON_ACTION.COMPLETE_LESSON, lesson.lessons[index].id);
+    AppDispatch(LESSON_ACTION.COMPLETE_LESSON, lesson.lessons[index]);
   };
 
   const handleExit = () => {

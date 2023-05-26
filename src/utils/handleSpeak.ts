@@ -1,6 +1,6 @@
 import Tts from 'react-native-tts';
 
-export const handleSpeak = (text: string) =>
+export const handleSpeak = (text: string = '') =>
   Tts.speak(text, {
     androidParams: {
       KEY_PARAM_STREAM: 'STREAM_ACCESSIBILITY',

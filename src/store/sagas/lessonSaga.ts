@@ -1,7 +1,7 @@
 import {put, select, takeLatest} from 'redux-saga/effects';
 
-import {LESSON_ACTION} from '../actions';
-import {Lesson, PayloadAction, User} from '../../types';
+import {COURSE_ACTION, LESSON_ACTION} from '../actions';
+import {CourseItem, Lesson, PayloadAction, User} from '../../types';
 import {
   addLessonToFavoriteList,
   completeLessonQuery,
@@ -24,18 +24,13 @@ function* getLesson(action: PayloadAction) {
 }
 
 function* addFavoriteList(action: PayloadAction) {
-  yield put({type: LESSON_ACTION.UPDATE_STATUS, payload: 'loading'});
-  const addToListAction: boolean = yield addLessonToFavoriteList(
-    action.payload,
-  );
-
   const lessonList: LessonList = yield select(
     (state: RootState) => state.lesson,
   );
 
   const lessonListSovled = lessonList.lessons.map(item => {
     if (item.id === action.payload) {
-      item.stared = addToListAction;
+      item.stared = !item.stared;
     }
     return item;
   });
@@ -44,31 +39,44 @@ function* addFavoriteList(action: PayloadAction) {
     type: LESSON_ACTION.UPDATE_LESSON_LIST,
     payload: lessonListSovled,
   });
+
+  yield addLessonToFavoriteList(action.payload);
 }
 
 function* completeLesson(action: PayloadAction) {
-  yield put({type: LESSON_ACTION.UPDATE_STATUS, payload: 'loading'});
   const lessonList: LessonList = yield select(
     (state: RootState) => state.lesson,
   );
 
-  const user: User = yield select((state: RootState) => state.user);
+  const state: RootState = yield select((rootState: RootState) => rootState);
+  const user: User = state.user;
+  const course: CourseItem[] = state.course.list;
+
+  const updatedCourses = course.map(item => {
+    if (item.id === action.payload.courseId) {
+      item.learnedLesson += 1;
+    }
+    return item;
+  });
+
+  yield put({
+    type: COURSE_ACTION.UPDATE_LIST,
+    payload: updatedCourses,
+  });
 
   const sovledLessonList = lessonList.lessons.map((lesson: Lesson) => {
-    if (lesson.id === action.payload) {
+    if (lesson.id === action.payload.id) {
       lesson.isLearned = true;
     }
     return lesson;
   });
 
-  yield completeLessonQuery(user.id, action.payload);
+  yield completeLessonQuery(user.id, action.payload.id);
 
   yield put({
     type: LESSON_ACTION.UPDATE_LESSON_LIST,
     payload: sovledLessonList,
   });
-
-  yield put({type: LESSON_ACTION.UPDATE_STATUS, payload: 'idle'});
 }
 
 export default function* lessonSaga() {

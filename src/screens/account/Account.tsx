@@ -7,7 +7,6 @@ import {ASYNC_STORAGE} from '../../constants/asyncStorage';
 import {StyleSheet, View} from 'react-native';
 import {AppDispatch} from '../../store/store';
 import {USER_ACTION} from '../../store/actions';
-import {initialUser} from '../../store/reducers/userReducer';
 import {CSLayout, CSModal, CSText} from '../../components/core';
 
 const Account = () => {
@@ -16,7 +15,7 @@ const Account = () => {
 
   const logout = () => {
     AsyncStorage.removeItem(ASYNC_STORAGE.userInfo);
-    AppDispatch(USER_ACTION.UPDATE, initialUser);
+    AppDispatch(USER_ACTION.LOGOUT, null);
     refBtnLogout.current.close();
     navigation.navigate('authentication');
   };

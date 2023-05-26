@@ -1,16 +1,17 @@
-import {SectionList, StyleSheet, View} from 'react-native';
+import {RefreshControl, SectionList, StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
 
 import HeaderScreen from '../../components/HeaderScreen';
-import {RootState} from '../../store/store';
+import {AppDispatch, RootState} from '../../store/store';
 import {CourseItem, CourseList, User} from '../../types';
 import {SPACING} from '../../constants/spacing';
 import GroupCourseRender from '../../components/course/GroupCourseRender';
 import {CSButton} from '../../components/core/CSButton';
 import {splitChunkArray} from '../../utils';
 import {CSLayout, CSLoading, CSText} from '../../components/core';
+import {COURSE_ACTION} from '../../store/actions';
 
 interface sectionProps {
   title: string;
@@ -79,6 +80,10 @@ const Courses = () => {
     },
   ];
 
+  const onRefresh = () => {
+    AppDispatch(COURSE_ACTION.GET_LIST, user.id);
+  };
+
   return (
     <CSLayout>
       {course.fetchingStatus === 'loading' ? (
@@ -101,6 +106,9 @@ const Courses = () => {
               groupItem={item}
             />
           )}
+          refreshControl={
+            <RefreshControl refreshing={false} onRefresh={onRefresh} />
+          }
         />
       )}
     </CSLayout>

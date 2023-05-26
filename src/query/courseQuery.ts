@@ -18,6 +18,8 @@ export const getCourseList = async (idUser: string) => {
     .contains('idUser', idUser)
     .find();
 
+  console.log('lessonArr', lessonArr);
+  console.log('favorite', favoriteList);
   const lessons: Lesson[] = convertLessonData(lessonArr, favoriteList);
 
   const learningLessons: LearningLesson[] =

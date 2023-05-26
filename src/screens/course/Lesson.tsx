@@ -7,11 +7,10 @@ import {
 } from '@react-navigation/native';
 
 import VocabLesson from './VocabLesson';
-import GrammarLesson from './GrammarLesson';
-import PronounceLesson from './PronounceLesson';
 import HeaderScreen from '../../components/HeaderScreen';
 import {AppDispatch} from '../../store/store';
 import {LESSON_ACTION} from '../../store/actions';
+import Content from '../../components/course/grammarAndPronouce/Content';
 interface LessonProps {
   navigation: NavigationProp<any>;
   route: RouteProp<ParamListBase>;
@@ -52,9 +51,9 @@ const Lesson = (props: LessonProps) => {
     return <VocabLesson />;
   }
   if (course.skill === 'grammar') {
-    return <GrammarLesson />;
+    return <Content skill="grammar" />;
   }
-  return <PronounceLesson />;
+  return <Content skill="pronounce" />;
 };
 
 export default Lesson;
