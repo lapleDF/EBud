@@ -27,27 +27,20 @@ const Playlist = ({
     transform: [{translateX: refDrawer}],
   };
 
-  const handleClose = () => {
-    Animated.spring(refDrawer, {
-      toValue: -WIDTH,
-      useNativeDriver: true,
-    }).start();
-  };
-  const handleOpen = () => {
-    Animated.timing(refDrawer, {
-      toValue: 0,
-      useNativeDriver: true,
-      duration: 300,
-    }).start();
-  };
-
   useEffect(() => {
     if (open) {
-      handleOpen();
+      Animated.timing(refDrawer, {
+        toValue: 0,
+        useNativeDriver: true,
+        duration: 300,
+      }).start();
     } else {
-      handleClose();
+      Animated.spring(refDrawer, {
+        toValue: -WIDTH,
+        useNativeDriver: true,
+      }).start();
     }
-  }, [open]);
+  }, [open, refDrawer]);
 
   return (
     <>
@@ -72,17 +65,6 @@ const Playlist = ({
 export default Playlist;
 
 const styles = StyleSheet.create({
-  wrapper: {
-    width: SPACING.screenWidth,
-    height: SPACING.screenHeight,
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    // backgroundColor: COLORS.overlay,
-    // zIndex: 1,
-  },
   container: {
     width: WIDTH,
     backgroundColor: COLORS.bgHeader,

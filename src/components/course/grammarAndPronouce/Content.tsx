@@ -1,16 +1,17 @@
-import React, {useState} from 'react';
 import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useSelector} from 'react-redux';
+import React, {useState} from 'react';
+
 import {LessonList} from '../../../store/reducers/lessonReducer';
-import {AppDispatch, RootState} from '../../../store/store';
-import {LESSON_ACTION} from '../../../store/actions';
 import {CSButton, CSLayout, CSLoading, CSText} from '../../core';
-import Playlist from './Playlist';
-import {COLORS} from '../../../constants/color';
-import CSVideo from './CSVideo';
+import {AppDispatch, RootState} from '../../../store/store';
 import ExampleSentence from '../vocab/ExampleSentence';
+import {LESSON_ACTION} from '../../../store/actions';
 import {SPACING} from '../../../constants/spacing';
+import {COLORS} from '../../../constants/color';
+import Playlist from './Playlist';
+import CSVideo from './CSVideo';
 
 interface ContentProps {
   skill: 'pronounce' | 'grammar';

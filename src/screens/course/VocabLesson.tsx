@@ -106,6 +106,7 @@ const VocabLesson = () => {
             keyExtractor={(item, idx) => idx.toString()}
             contentContainerStyle={styles.flipCardList}
             pagingEnabled
+            scrollEnabled={false}
             horizontal
             showsHorizontalScrollIndicator={false}
             onViewableItemsChanged={onViewableItemsChanged}
