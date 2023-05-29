@@ -24,6 +24,7 @@ function* getLesson(action: PayloadAction) {
 }
 
 function* addFavoriteList(action: PayloadAction) {
+  const user: User = yield select((state: RootState) => state.user);
   const lessonList: LessonList = yield select(
     (state: RootState) => state.lesson,
   );
@@ -40,7 +41,7 @@ function* addFavoriteList(action: PayloadAction) {
     payload: lessonListSovled,
   });
 
-  yield addLessonToFavoriteList(action.payload);
+  yield addLessonToFavoriteList(action.payload, user.id);
 }
 
 function* completeLesson(action: PayloadAction) {

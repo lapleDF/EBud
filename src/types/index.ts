@@ -6,6 +6,6 @@ export * from './PayloadAction';
 export * from './SentenceEg';
 export * from './User';
 export * from './Book';
-export * from './BookFavoriteList';
+export * from './BookList';
 export * from './Game';
 export * from './GameList';

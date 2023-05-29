@@ -19,7 +19,7 @@ import {CSButton} from '../../components/core/CSButton';
 import {SPACING} from '../../constants/spacing';
 import {COLORS} from '../../constants/color';
 import {AppDispatch, RootState} from '../../store/store';
-import {COURSE_ACTION, LESSON_ACTION} from '../../store/actions';
+import {LESSON_ACTION} from '../../store/actions';
 import {User} from '../../types';
 
 const VocabLesson = () => {
@@ -87,7 +87,7 @@ const VocabLesson = () => {
         index + 1 === lesson.lessons.length &&
         lesson.lessons[index].isLearned
       ) {
-        AppDispatch(COURSE_ACTION.GET_LIST, user.id);
+        // AppDispatch(COURSE_ACTION.GET_LIST, user.id);
         refModal.current.open();
       }
     }

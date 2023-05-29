@@ -1,4 +1,11 @@
-import {StyleProp, StyleSheet, TextInput, View, ViewStyle} from 'react-native';
+import {
+  StyleProp,
+  StyleSheet,
+  TextInput,
+  TextInputProps,
+  View,
+  ViewStyle,
+} from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -16,6 +23,7 @@ interface CSInputProps {
   styleWrapper?: StyleProp<ViewStyle>;
   styleContainer?: StyleProp<ViewStyle>;
   onPressIcon?: () => void;
+  textInputProps?: TextInputProps;
 }
 
 const CSInput = ({
@@ -39,6 +47,7 @@ const CSInput = ({
           secureTextEntry={isSecure}
           placeholder={placeholder}
           autoCapitalize="none"
+          {...props.textInputProps}
         />
         {secure && (
           <Icon

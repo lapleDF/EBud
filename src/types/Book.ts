@@ -4,6 +4,8 @@ export interface Book {
   author: string;
   cover: string;
   desc: string;
-  content: string;
   type: 'comic' | 'magazine';
+  fileUrl: string;
+  audioUrl?: string;
+  isSaved: boolean;
 }

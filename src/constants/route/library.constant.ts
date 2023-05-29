@@ -12,7 +12,7 @@ export const LIBRARY_ROUTE = [
   {
     name: 'preview',
     component: BookPreview,
-    options: {headerShown: false},
+    options: {headerShown: true},
   },
   {
     name: 'content',

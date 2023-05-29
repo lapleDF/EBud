@@ -10,12 +10,13 @@ import {SPACING} from '../../constants/spacing';
 import GroupCourseRender from '../../components/course/GroupCourseRender';
 import {CSButton} from '../../components/core/CSButton';
 import {splitChunkArray} from '../../utils';
-import {CSLayout, CSLoading, CSText} from '../../components/core';
+import {CSLayout, CSLoading} from '../../components/core';
 import {COURSE_ACTION} from '../../store/actions';
+import SectionHeader from '../../components/sectionList/SectionHeader';
 
-interface sectionProps {
+export interface SectionCourseProps {
   title: string;
-  skill: string;
+  skill: 'vocab' | 'grammar' | 'pronounce';
   data: CourseItem[][];
 }
 
@@ -46,7 +47,7 @@ const Courses = () => {
     return splitChunkArray(filteredArr, 3);
   };
 
-  const renderSectionFooter = (section: sectionProps) => {
+  const renderSectionFooter = (section: SectionCourseProps) => {
     const LIMIT = 12;
     if (course.list.length > LIMIT) {
       return (
@@ -57,12 +58,11 @@ const Courses = () => {
           />
         </View>
       );
-    } else {
-      return null;
     }
+    return null;
   };
 
-  const SECTION: sectionProps[] = [
+  const SECTION: SectionCourseProps[] = [
     {
       title: 'Từ vựng',
       skill: 'vocab',
@@ -92,9 +92,7 @@ const Courses = () => {
         <SectionList
           sections={SECTION}
           renderSectionHeader={({section}) => (
-            <CSText size={'xlg'} variant="PoppinsBold">
-              {section.title}
-            </CSText>
+            <SectionHeader sectionCourse={section} />
           )}
           renderSectionFooter={({section}) => renderSectionFooter(section)}
           contentContainerStyle={styles.contentContainerSection}
@@ -125,6 +123,9 @@ const styles = StyleSheet.create({
   contentContainerSection: {
     paddingHorizontal: SPACING.px,
     paddingBottom: 90,
+  },
+  headerSection: {
+    marginTop: 40,
   },
 });
 

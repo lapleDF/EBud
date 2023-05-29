@@ -13,7 +13,9 @@ export const getCourseList = async (idUser: string) => {
 
   const coursesArr = await courseQuery.limit(LIMITATION).find();
   const lessonArr = await lessonQuery.find();
-  const favoriteList = await favoriteListQuery.find();
+  const favoriteList = await favoriteListQuery
+    .contains('idUser', idUser)
+    .find();
   const learningLessonArr = await learningLessonQuery
     .contains('idUser', idUser)
     .find();
