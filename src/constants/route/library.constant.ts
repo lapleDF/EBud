@@ -22,6 +22,6 @@ export const LIBRARY_ROUTE = [
   {
     name: 'favorite',
     component: FavoriteList,
-    options: {headerShown: false},
+    options: {headerShown: true},
   },
 ];

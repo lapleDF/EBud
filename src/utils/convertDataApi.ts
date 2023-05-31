@@ -64,6 +64,8 @@ export const convertBookData = (
       desc: book.attributes.desc,
       title: book.attributes.title,
       type: book.attributes.type,
+      audioUrl: book.attributes?.audioUrl,
+      trackAudio: book.attributes?.trackAudio,
       isSaved:
         favoriteArr.filter(item => item.attributes?.bookId?.id === book.id)
           .length !== 0,

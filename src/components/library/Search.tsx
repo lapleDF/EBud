@@ -13,10 +13,15 @@ import {COLORS} from '../../constants/color';
 import {FONTS} from '../../constants/font';
 import {SPACING} from '../../constants/spacing';
 
-const Search = () => {
-  const [value, setValue] = useState('');
+interface SearchProps {
+  searchValue: string;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Search = ({searchValue, setSearchValue}: SearchProps) => {
   const offsetValue = useRef(new Animated.Value(SPACING.screenWidth)).current;
   const refInput = useRef<TextInput>(null);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const transformAnimate = {
@@ -28,7 +33,7 @@ const Search = () => {
 
   const handlePressIcon = () => {
     if (isOpen) {
-      setValue('');
+      setSearchValue('');
       refInput.current?.blur();
     } else {
       refInput.current?.focus();
@@ -42,6 +47,7 @@ const Search = () => {
       useNativeDriver: false,
     }).start();
   }, [isOpen, offsetValue]);
+
   return (
     <KeyboardAvoidingView
       style={styles.searchContainer}
@@ -49,9 +55,9 @@ const Search = () => {
       behavior="height">
       <Animated.View style={[styles.wrapInputFiled, transformAnimate]}>
         <TextInput
-          onChangeText={text => setValue(text)}
+          onChangeText={text => setSearchValue(text)}
           ref={refInput}
-          defaultValue={value}
+          defaultValue={searchValue}
           placeholder="Tìm kiếm sách"
           onSubmitEditing={handleSubmit}
           style={styles.searchField}

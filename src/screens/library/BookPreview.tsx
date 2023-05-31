@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
-import {CSButton, CSLayout, CSText} from '../../components/core';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import React, {useEffect} from 'react';
 import {
   Image,
   ScrollView,
@@ -8,15 +7,16 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useSelector} from 'react-redux';
 
-import {BookList} from '../../types';
-import {AppDispatch, RootState} from '../../store/store';
 import HeaderScreen from '../../components/HeaderScreen';
+import {CSButton, CSLayout, CSText} from '../../components/core';
 import {COLORS} from '../../constants/color';
 import {SPACING} from '../../constants/spacing';
 import {BOOK_ACTION} from '../../store/actions';
+import {AppDispatch, RootState} from '../../store/store';
+import {BookList} from '../../types';
 
 const BookPreview = () => {
   const navigation = useNavigation<any>();

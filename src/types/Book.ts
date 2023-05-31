@@ -1,3 +1,8 @@
+export interface TrackAudio {
+  pageIndex: number;
+  endTime: number;
+}
+
 export interface Book {
   id: string;
   title: string;
@@ -8,4 +13,5 @@ export interface Book {
   fileUrl: string;
   audioUrl?: string;
   isSaved: boolean;
+  trackAudio?: TrackAudio[];
 }
