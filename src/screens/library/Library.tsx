@@ -75,8 +75,6 @@ const Library = () => {
     console.log(type);
   };
 
-  console.log(searchValue);
-
   const handleNormalizeText = (text: string) => {
     return text
       .toLowerCase()

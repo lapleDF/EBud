@@ -31,6 +31,7 @@ const Search = ({searchValue, setSearchValue}: SearchProps) => {
   const handlePressIcon = () => {
     if (isOpen) {
       setSearchValue('');
+      refInput.current?.clear();
       refInput.current?.blur();
     } else {
       refInput.current?.focus();
