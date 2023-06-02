@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   },
   contentContainerSection: {
     paddingHorizontal: SPACING.px,
-    paddingBottom: 90,
+    paddingBottom: SPACING.heightBottomTab,
   },
   headerSection: {
     marginTop: 40,

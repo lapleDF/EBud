@@ -5,6 +5,7 @@ import {managedReducer} from './managedRouteReducer';
 import {courseReducer} from './courseReducer';
 import {lessonReducer} from './lessonReducer';
 import {bookReducer} from './bookReducer';
+import {gameReducer} from './gameReducer';
 
 export const rootReducer = combineReducers({
   user: userReducer,
@@ -12,4 +13,5 @@ export const rootReducer = combineReducers({
   course: courseReducer,
   lesson: lessonReducer,
   book: bookReducer,
+  game: gameReducer,
 });

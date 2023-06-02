@@ -1,10 +1,16 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {GAME_ROUTE} from '../constants/route/game.constant';
+import {AppDispatch} from '../store/store';
+import {GAME_ACTION} from '../store/actions';
 
 const GameStack = createStackNavigator();
 
 const GameNavigator = () => {
+  useEffect(() => {
+    AppDispatch(GAME_ACTION.GET_LIST);
+  }, []);
+
   return (
     <GameStack.Navigator screenOptions={{headerShown: false}}>
       {GAME_ROUTE.map(route => (

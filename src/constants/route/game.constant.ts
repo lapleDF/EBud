@@ -1,6 +1,5 @@
 import Game from '../../screens/game/Game';
-import GameGuessTheWord from '../../screens/game/GameGuessTheWord';
-import GameRollDice from '../../screens/game/GameRollDice';
+import GamePlaying from '../../screens/game/GamePlaying';
 
 export const GAME_ROUTE = [
   {
@@ -9,13 +8,8 @@ export const GAME_ROUTE = [
     options: {headerShown: true},
   },
   {
-    name: 'guessTheWord',
-    component: GameGuessTheWord,
-    options: {headerShown: false},
-  },
-  {
-    name: 'rollDice',
-    component: GameRollDice,
+    name: 'gamePlaying',
+    component: GamePlaying,
     options: {headerShown: false},
   },
 ];

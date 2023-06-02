@@ -12,6 +12,7 @@ import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.github.yamill.orientation.OrientationPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -33,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
       new LottiePackage();
       new ReactVideoPackage();
       new OrientationPackage();
+      new LinearGradientPackage();
       return packages;
     }
 
