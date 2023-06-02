@@ -7,10 +7,10 @@ import {
 } from '@react-navigation/native';
 
 import VocabLesson from './VocabLesson';
-import GrammarLesson from './GrammarLesson';
-import PronounceLesson from './PronounceLesson';
 import HeaderScreen from '../../components/HeaderScreen';
-
+import {AppDispatch} from '../../store/store';
+import {LESSON_ACTION} from '../../store/actions';
+import Content from '../../components/course/grammarAndPronouce/Content';
 interface LessonProps {
   navigation: NavigationProp<any>;
   route: RouteProp<ParamListBase>;
@@ -19,6 +19,13 @@ interface LessonProps {
 const Lesson = (props: LessonProps) => {
   const {course}: any = props.route.params;
   const navigation = useNavigation<any>();
+
+  useEffect(() => {
+    AppDispatch(LESSON_ACTION.GET_LESSON_LIST, {
+      courseId: course.id,
+      skill: course.skill,
+    });
+  }, [course]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -35,18 +42,18 @@ const Lesson = (props: LessonProps) => {
           onPressRight() {
             navigation.navigate('vocabStared');
           },
-          iconRight: 'star',
+          iconRight: course.skill === 'vocab' ? 'star' : undefined,
         }),
     });
   }, [course.name, course.skill, navigation]);
 
   if (course.skill === 'vocab') {
-    return <VocabLesson courseItem={course} />;
+    return <VocabLesson />;
   }
   if (course.skill === 'grammar') {
-    return <GrammarLesson />;
+    return <Content skill="grammar" />;
   }
-  return <PronounceLesson />;
+  return <Content skill="pronounce" />;
 };
 
 export default Lesson;

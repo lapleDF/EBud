@@ -2,14 +2,6 @@
   "migIndex": 1,
   "data": [
     {
-      "path": "src/assets/fonts/Batman/Batman-outline.ttf",
-      "sha1": "12bddc07d8019389710c823cbefec0a08cf788a8"
-    },
-    {
-      "path": "src/assets/fonts/Batman/Batman.ttf",
-      "sha1": "970fa26afb211a3b67188799e891233239c4d681"
-    },
-    {
       "path": "src/assets/fonts/Bungee/Bungee-Regular.ttf",
       "sha1": "cf6a83b3c5b11d5ce4f851bc86701e5edf75287e"
     },

@@ -1,5 +1,5 @@
 export interface SentenceEg {
-  id: string;
+  id?: string;
   sentence: string;
   meaning: string;
   listen?: string;

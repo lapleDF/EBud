@@ -7,7 +7,7 @@ const CourseStack = createStackNavigator();
 
 const CourseNavigator = () => {
   return (
-    <CourseStack.Navigator screenOptions={{headerShown: false}}>
+    <CourseStack.Navigator>
       {COURSE_ROUTE.map(route => (
         <CourseStack.Screen
           name={route.name}

@@ -32,7 +32,9 @@ const GroupCourseRender = ({
       <View style={styles.secondAndThird}>
         {item23.map((item, index) => {
           return (
-            <View key={index} style={styles.item23}>
+            <View
+              key={index}
+              style={[styles.item23, index === 0 && styles.item2]}>
               <MainElement
                 cover={item.cover}
                 learnedLesson={item.learnedLesson}
@@ -69,6 +71,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  item2: {
+    zIndex: 1,
   },
   item23: {
     height: 200,

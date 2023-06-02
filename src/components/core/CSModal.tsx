@@ -16,13 +16,31 @@ interface CSModalProps {
 
 const CSModal = (props: CSModalProps) => {
   const {refRBSheet, height = 'auto', closeBtn = true, children, style} = props;
+  const containerRBS = {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    borderRadius: 15,
+    width: SPACING.screenWidth - SPACING.px * 2,
+    position: 'absolute',
+    shadowColor: COLORS.black,
+    backgroundColor: COLORS.bgDark,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+    height: height,
+    elevation: 6,
+    ...style,
+  };
   return (
     <RBSheet
       ref={refRBSheet}
       closeOnDragDown={false}
       animationType="slide"
       customStyles={{
-        container: [styles.containerRBS, {height: height, ...style}],
+        container: containerRBS,
         wrapper: styles.wrapper,
       }}>
       {closeBtn && (
@@ -52,23 +70,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.px,
     paddingTop: 40,
     gap: 10,
-  },
-  containerRBS: {
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    borderRadius: 15,
-    width: SPACING.screenWidth - SPACING.px * 2,
-    position: 'absolute',
-    shadowColor: COLORS.black,
-    backgroundColor: COLORS.bgDark,
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
-
-    elevation: 6,
   },
   wrapper: {
     justifyContent: 'center',
