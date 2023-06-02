@@ -63,16 +63,16 @@ const BookContent = () => {
   };
 
   const handleOnProgress = ({currentTime}: OnProgressData) => {
-    for (let index = 0; index < trackAudioList.length; index++) {
-      if (params.currentPage !== params.totalPages) {
-        if (
-          trackAudioList[index].pageIndex === params.currentPage &&
-          trackAudioList[index].endTime < currentTime
-        ) {
-          refPdf.current?.setPage(params.currentPage + 1);
-        }
+    trackAudioList.forEach(trackAudio => {
+      if (
+        params.currentPage !== params.totalPages &&
+        trackAudio.pageIndex !== params.currentPage &&
+        trackAudio.endTime > currentTime &&
+        trackAudio.startTime < currentTime
+      ) {
+        refPdf.current?.setPage(trackAudio.pageIndex);
       }
-    }
+    });
     setParams({...params, currentTime: currentTime});
   };
 
@@ -141,7 +141,7 @@ const BookContent = () => {
     );
     if (bookContinueRead !== null) {
       refPdf.current?.setPage(
-        bookContinueRead.filter(item => item.bookId === bookItem.id)[0]
+        bookContinueRead?.filter(item => item.bookId === bookItem.id)[0]
           .currenPage,
       );
     }
@@ -163,7 +163,7 @@ const BookContent = () => {
         const bookContinueRead: BookContinueRead[] =
           await getDataObjAsyncStorage(ASYNC_STORAGE.bookContinueRead);
         if (
-          bookContinueRead.filter(item => item.bookId === bookItem.id).length >
+          bookContinueRead?.filter(item => item.bookId === bookItem.id).length >
           0
         ) {
           refModal.current?.open();

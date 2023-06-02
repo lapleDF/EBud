@@ -27,9 +27,6 @@ const Search = ({searchValue, setSearchValue}: SearchProps) => {
   const transformAnimate = {
     transform: [{translateX: offsetValue}],
   };
-  const handleSubmit = () => {
-    console.log('submited');
-  };
 
   const handlePressIcon = () => {
     if (isOpen) {
@@ -59,7 +56,6 @@ const Search = ({searchValue, setSearchValue}: SearchProps) => {
           ref={refInput}
           defaultValue={searchValue}
           placeholder="Tìm kiếm sách"
-          onSubmitEditing={handleSubmit}
           style={styles.searchField}
         />
       </Animated.View>

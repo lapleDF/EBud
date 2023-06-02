@@ -6309,7 +6309,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@*", "prop-types@^15.5.0", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.8.1":
+"prop-types@*", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -6551,11 +6551,6 @@
     "react-freeze" "^1.0.0"
     "warn-once" "^0.1.0"
 
-"react-native-sound-player@^0.13.2":
-  "integrity" "sha512-m457mjp496sARAED7epYzbhorfiLZ3j6HzJn7zEL9RU+ZJKcans/0gFNUEBvlh31fSDZRliQ2WwE4mJ6836bNg=="
-  "resolved" "https://registry.npmjs.org/react-native-sound-player/-/react-native-sound-player-0.13.2.tgz"
-  "version" "0.13.2"
-
 "react-native-splash-screen@^3.3.0":
   "integrity" "sha512-rGjt6HkoSXxMqH4SQUJ1gnPQlPJV8+J47+4yhgTIan4bVvAwJhEeJH7wWt9hXSdH4+VfwTS0GTaflj1Tw83IhA=="
   "resolved" "https://registry.npmjs.org/react-native-splash-screen/-/react-native-splash-screen-3.3.0.tgz"
@@ -6597,14 +6592,7 @@
     "prop-types" "^15.7.2"
     "shaka-player" "^2.5.9"
 
-"react-native-youtube@^2.0.2":
-  "integrity" "sha512-tyoGG8mqv0q2327BUYCXBmloUO8twFTOsGdwYvj0tiINAwtxNid8bS0KxnjViH3f/HmBqATDbPwhHpNXpOCsLA=="
-  "resolved" "https://registry.npmjs.org/react-native-youtube/-/react-native-youtube-2.0.2.tgz"
-  "version" "2.0.2"
-  dependencies:
-    "prop-types" "^15.5.0"
-
-"react-native@*", "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", "react-native@>=0.40", "react-native@>=0.46", "react-native@>=0.56", "react-native@>=0.57.0", "react-native@>=0.59", "react-native@>=0.59.0", "react-native@>=0.60", "react-native@0.71.7":
+"react-native@*", "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", "react-native@>=0.40", "react-native@>=0.46", "react-native@>=0.56", "react-native@>=0.57.0", "react-native@>=0.59", "react-native@>=0.59.0", "react-native@0.71.7":
   "integrity" "sha512-Id6iRLS581fJMFGbBl1jP5uSmjExtGOvw5Gvh7694zISXjsRAsFMmU+izs0pyCLqDBoHK7y4BT7WGPGw693nYw=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.71.7.tgz"
   "version" "0.71.7"

@@ -1,5 +1,6 @@
 export interface TrackAudio {
   pageIndex: number;
+  startTime: number;
   endTime: number;
 }
 
