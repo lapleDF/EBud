@@ -1,25 +1,61 @@
 import {FlatList, StyleSheet, View} from 'react-native';
 import React from 'react';
-import GuessWordItem from '../../components/game/GuessWordItem';
+import GuessWordItem from '../../components/game/GuessWordItemPicture';
 import {SPACING} from '../../constants/spacing';
-import {CSText} from '../../components/core';
-import {COLORS} from '../../constants/color';
+import GuessWordItemText from '../../components/game/GuessWordItemText';
+import {GuessTheWordRound} from '../../types/GuessTheWord';
+import {CSButtonBack, CSText} from '../../components/core';
+
+const DATA: GuessTheWordRound[] = [
+  {
+    image: 'https://source.unsplash.com/random/?Cryptocurrency&',
+    word: 'school',
+  },
+  {
+    image: 'https://source.unsplash.com/random/?Cryptocurrency&',
+    word: 'hospital',
+  },
+  {
+    image: 'https://source.unsplash.com/random/?Cryptocurrency&',
+    word: 'bank',
+  },
+  {
+    image: 'https://source.unsplash.com/random/?Cryptocurrency&',
+    word: 'supermarket',
+  },
+  {
+    image: 'https://source.unsplash.com/random/?Cryptocurrency&',
+    word: 'bakery',
+  },
+  {
+    image: 'https://source.unsplash.com/random/?Cryptocurrency&',
+    word: 'cafe shop',
+  },
+];
 
 const GameGuessTheWord = () => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={[...Array(6)]}
-        renderItem={() => <GuessWordItem />}
+        data={DATA}
+        renderItem={({item, index}) => (
+          <GuessWordItem image={`${item.image}${index}`} word={item.word} />
+        )}
         keyExtractor={(_item, index) => index.toString()}
         contentContainerStyle={styles.contentContainer}
         ListFooterComponent={
           <View style={styles.footerContainer}>
-            {[...Array(6)].map((item, index) => (
-              <CSText style={styles.resultItem} key={index}>
-                result item {index}
-              </CSText>
+            {DATA.map((item, index) => (
+              <GuessWordItemText word={item.word} key={index} />
             ))}
+          </View>
+        }
+        ListHeaderComponent={
+          <View style={styles.header}>
+            <CSButtonBack isAbsolute={false} />
+            <CSText variant="NeutonBold" color="secondary">
+              Level 1
+            </CSText>
           </View>
         }
         numColumns={2}
@@ -37,7 +73,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   contentContainer: {
-    gap: (SPACING.screenWidth - SPACING.px * 2) * 0.06,
+    gap: (SPACING.screenWidth - SPACING.px * 2) * 0.08,
     width: '100%',
     height: '100%',
     justifyContent: 'flex-start',
@@ -51,12 +87,8 @@ const styles = StyleSheet.create({
   comlumnWrapper: {
     justifyContent: 'space-between',
   },
-  resultItem: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    backgroundColor: COLORS.primaryDark,
-    width: '45%',
-    borderRadius: 10,
-    textAlign: 'center',
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });

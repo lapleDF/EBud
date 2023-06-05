@@ -62,7 +62,7 @@ const Content = ({skill}: ContentProps) => {
             <CSText size={'xlg'} variant="PoppinsBold">
               Mô tả video
             </CSText>
-            <CSText>
+            <CSText style={styles.text}>
               {skill === 'grammar'
                 ? lesson.lessons[index]?.description
                 : lesson.lessons[index]?.pronouncingUsage}
@@ -129,6 +129,9 @@ const styles = StyleSheet.create({
   },
   textCenter: {
     textAlign: 'center',
+  },
+  text: {
+    textAlign: 'justify',
   },
   btnDisabled: {
     opacity: 0.5,
