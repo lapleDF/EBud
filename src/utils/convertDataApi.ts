@@ -76,7 +76,6 @@ export const convertBookData = (
 
 export const convertGameData = (gameArr: Parse.Object[]) => {
   const games: Game[] = gameArr.map((game: Parse.Object) => {
-    console.log('game', game);
     return {
       id: game.id,
       name: game.attributes?.name,

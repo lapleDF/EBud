@@ -9,7 +9,6 @@ const GamePlaying = () => {
   const route = useRoute<any>();
   const {gameItem} = route.params;
 
-  console.log(gameItem.type);
   return (
     <CSLayout>
       {gameItem.type === 'guessWord' ? <GameGuessTheWord /> : <GameRollDice />}
