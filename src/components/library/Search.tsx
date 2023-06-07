@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Animated,
+  Platform,
 } from 'react-native';
 
 import {sizeText} from '../../components/core';
@@ -50,7 +51,7 @@ const Search = ({searchValue, setSearchValue}: SearchProps) => {
     <KeyboardAvoidingView
       style={styles.searchContainer}
       enabled
-      behavior="height">
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <Animated.View style={[styles.wrapInputFiled, transformAnimate]}>
         <TextInput
           onChangeText={text => setSearchValue(text)}

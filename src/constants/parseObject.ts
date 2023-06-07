@@ -7,4 +7,5 @@ export const PARSE_OBJ = {
   learningLesson: 'LearningLesson',
   sentenceEg: 'SentenceEg',
   favoriteList: 'FavoriteList',
+  GuessTheWord: 'GuessTheWord',
 };

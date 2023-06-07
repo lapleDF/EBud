@@ -55,7 +55,7 @@ const GameRenderItem = ({handleHelp, gameItem}: GameRenderItemProps) => {
 export const bgColorArr = [
   ['#1E0F3D', '#4B0F3E', '#633838'],
   ['#4F0948', '#3C0B54', '#383C63'],
-  // ['#F03131', '#872323', '#31031C'],
+  // ['#F40084', '#ea9019', '#EAC819'],
 ];
 
 const styles = StyleSheet.create({

@@ -1,51 +1,37 @@
+import React, {useEffect, useRef, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
-import GuessWordItem from '../../components/game/GuessWordItem';
-import {SPACING} from '../../constants/spacing';
-import {GuessTheWordRound} from '../../types/GuessTheWord';
-import {CSButton, CSButtonBack, CSText} from '../../components/core';
-import GuessWordListText from '../../components/game/GuessWordListText';
-import {shuffleArray} from '../../utils';
+import Lottie from 'lottie-react-native';
+import {useSelector} from 'react-redux';
+import RBSheet from 'react-native-raw-bottom-sheet';
 
-export const DATA: GuessTheWordRound[] = [
-  {
-    image: 'https://source.unsplash.com/random/?Cryptocurrency&',
-    word: 'school',
-  },
-  {
-    image: 'https://source.unsplash.com/random/?Cryptocurrency&',
-    word: 'hospital',
-  },
-  {
-    image: 'https://source.unsplash.com/random/?Cryptocurrency&',
-    word: 'bank',
-  },
-  {
-    image: 'https://source.unsplash.com/random/?Cryptocurrency&',
-    word: 'supermarket',
-  },
-  {
-    image: 'https://source.unsplash.com/random/?Cryptocurrency&',
-    word: 'bakery',
-  },
-  {
-    image: 'https://source.unsplash.com/random/?Cryptocurrency&',
-    word: 'cafe shop',
-  },
-];
+import GuessWordItem from '../../components/game/GuessWordItem';
+import {
+  CSButton,
+  CSButtonBack,
+  CSLoading,
+  CSModal,
+  CSText,
+} from '../../components/core';
+import GuessWordListText from '../../components/game/GuessWordListText';
+import {SPACING} from '../../constants/spacing';
+import {shuffleArray} from '../../utils';
+import {GuessTheWordList} from '../../types';
+import {AppDispatch, RootState} from '../../store/store';
+import {GUESS_THE_WORD_ACTION} from '../../store/actions';
+import {useNavigation} from '@react-navigation/native';
 
 const GameGuessTheWord = () => {
+  const guessTheWordata: GuessTheWordList = useSelector(
+    (state: RootState) => state.guesTheWord,
+  );
+
   const [activeIndex, setActiveIndex] = useState(0);
-  const [guessList, setGuessList] = useState<string[]>(
-    Array(DATA.length).fill(''),
-  );
-  const [wordList, setWordList] = useState(
-    shuffleArray(
-      DATA.map(item => {
-        return item.word;
-      }),
-    ),
-  );
+  const [guessList, setGuessList] = useState<string[]>(Array(6).fill(''));
+  const [wordList, setWordList] = useState<string[]>([]);
+  const [score, setScore] = useState(0);
+  const refModal = useRef<RBSheet>();
+  const [level, setLevel] = useState(1);
+  const navigation = useNavigation<any>();
 
   const handlePressItem = (index: number) => {
     setActiveIndex(index);
@@ -68,10 +54,20 @@ const GameGuessTheWord = () => {
   };
 
   const handleCheck = () => {
-    console.log(guessList);
+    let count = 0;
+    guessTheWordata.list.forEach((item, index) => {
+      if (item.word === guessList[index]) {
+        count += 1;
+      }
+    });
+    setScore(count);
+    refModal.current?.open();
   };
 
   const hanlePressText = (index: number) => {
+    if (activeIndex === -1) {
+      return;
+    }
     let wordListTemp = wordList;
     wordListTemp = wordList.filter(item => item !== wordList[index]);
     setGuessList(
@@ -87,19 +83,101 @@ const GameGuessTheWord = () => {
     }
     setWordList(wordListTemp);
 
-    if (activeIndex + 1 !== guessList.length) {
-      setActiveIndex(activeIndex + 1);
-    } else {
-      setActiveIndex(0);
+    if (wordListTemp.length === 0) {
+      setActiveIndex(-1);
+      return;
+    }
+    for (let indexItem = 0; indexItem < guessList.length; indexItem++) {
+      if (indexItem !== activeIndex && guessList[indexItem] === '') {
+        setActiveIndex(indexItem);
+        return;
+      }
     }
   };
+
+  const handleTryAgain = () => {
+    refModal.current?.close();
+    setGuessList(Array(6).fill(''));
+    setWordList(
+      shuffleArray(
+        guessTheWordata.list.map(item => {
+          return item.word;
+        }),
+      ),
+    );
+  };
+
+  const handleNextLevel = () => {
+    refModal.current?.close();
+    if (guessTheWordata.maxLevel !== guessTheWordata.list[0].level) {
+      setLevel(level + 1);
+    } else {
+      return;
+    }
+    setGuessList(Array(6).fill(''));
+    setWordList(
+      shuffleArray(
+        guessTheWordata.list.map(item => {
+          return item.word;
+        }),
+      ),
+    );
+  };
+  useEffect(() => {
+    AppDispatch(GUESS_THE_WORD_ACTION.GET_LIST, level);
+  }, [level]);
+
+  useEffect(() => {
+    setWordList(
+      shuffleArray(
+        guessTheWordata.list.map(item => {
+          return item.word;
+        }),
+      ),
+    );
+  }, [guessTheWordata.list]);
+
   return (
     <View style={styles.container}>
+      {guessTheWordata.fetchingStatus === 'loading' && <CSLoading />}
+      <CSModal refRBSheet={refModal} height={SPACING.screenHeight * 0.35}>
+        {score === guessTheWordata.list.length && (
+          <Lottie
+            source={require('../../assets/images/congratulation.json')}
+            autoPlay
+            loop
+            style={styles.imageCongratulation}
+            speed={1}
+          />
+        )}
+        <CSText variant="Bungee" color="primaryDark" size={'xlg'}>
+          Điểm của bạn
+        </CSText>
+        <CSText variant="Bungee" size={'lg'} color="secondary">
+          {`${score}/${guessTheWordata.list.length}`}
+        </CSText>
+        <View style={styles.btnControls}>
+          <CSButton
+            title="Thử lại"
+            onPress={handleTryAgain}
+            variant="secondary"
+          />
+          {score === guessTheWordata.list.length &&
+          guessTheWordata.maxLevel !== guessTheWordata.list[0]?.level ? (
+            <CSButton title="Tiếp theo" onPress={handleNextLevel} />
+          ) : (
+            <CSButton
+              title="Thoát"
+              onPress={() => navigation.navigate('game')}
+            />
+          )}
+        </View>
+      </CSModal>
       <FlatList
-        data={DATA}
+        data={guessTheWordata.list}
         renderItem={({item, index}) => (
           <GuessWordItem
-            image={`${item.image}${index}`}
+            image={item.image}
             word={guessList[index]}
             onPressItem={() => handlePressItem(index)}
             onRemoveItem={() => handleRemoveItem(index)}
@@ -112,16 +190,18 @@ const GameGuessTheWord = () => {
         ListFooterComponent={
           <>
             <GuessWordListText wordList={wordList} onPress={hanlePressText} />
-            {wordList.length === 0 && (
-              <CSButton title="Kiểm tra" onPress={handleCheck} />
-            )}
+            {wordList.length === 0 &&
+              guessTheWordata.fetchingStatus !== 'loading' &&
+              guessTheWordata.list.length > 0 && (
+                <CSButton title="Kiểm tra" onPress={handleCheck} />
+              )}
           </>
         }
         ListHeaderComponent={
           <View style={styles.header}>
             <CSButtonBack isAbsolute={false} />
             <CSText variant="NeutonBold" color="secondary" size={'xlg'}>
-              Level 1
+              Level {`${level}/${guessTheWordata.maxLevel}`}
             </CSText>
           </View>
         }
@@ -151,5 +231,22 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  imageCongratulation: {
+    width: 500,
+    height: 500,
+    zIndex: 0,
+    position: 'absolute',
+    resizeMode: 'center',
+  },
+  btnControls: {
+    justifyContent: 'center',
+    gap: 30,
+    alignItems: 'center',
+    flexDirection: 'row',
+    width: '100%',
+  },
+  text: {
+    textAlign: 'center',
   },
 });

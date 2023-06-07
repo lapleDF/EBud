@@ -56,7 +56,7 @@ const Library = () => {
             onPressLeft: () => navigation.navigate('favorite'),
           }),
       });
-      AppDispatch(BOOK_ACTION.GET_LIST, null);
+      AppDispatch(BOOK_ACTION.GET_LIST);
     };
     firstMount();
     // eslint-disable-next-line react-hooks/exhaustive-deps

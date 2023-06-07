@@ -12,6 +12,7 @@ interface CSModalProps {
   closeBtn?: boolean;
   children?: React.ReactNode;
   style?: StyleProp<any>;
+  styleContainer?: StyleProp<any>;
 }
 
 const CSModal = (props: CSModalProps) => {
@@ -50,7 +51,9 @@ const CSModal = (props: CSModalProps) => {
           <Icon name="x" size={26} color={COLORS.red} />
         </TouchableOpacity>
       )}
-      <CSLayout style={styles.container}>{children}</CSLayout>
+      <CSLayout style={[styles.container, props.styleContainer]}>
+        {children}
+      </CSLayout>
     </RBSheet>
   );
 };

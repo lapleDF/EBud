@@ -5,7 +5,7 @@ import {COLORS} from '../../constants/color';
 
 export interface CSLayoutProps {
   children: React.ReactNode;
-  style?: ViewStyle;
+  style?: ViewStyle | ViewStyle[];
 }
 
 const CSLayout = (props: CSLayoutProps) => {
