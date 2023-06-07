@@ -1,5 +1,5 @@
 import Parse from 'parse/react-native';
-import {LearningLesson, Lesson} from '../types';
+import {Book, LearningLesson, Lesson} from '../types';
 
 export const convertLessonData = (
   lessonArr: Array<Parse.Object>,
@@ -15,10 +15,8 @@ export const convertLessonData = (
       poster: lesson.attributes?.posterVideo,
       stared:
         favoriteList.filter(
-          (item: Parse.Object) => item.attributes.lessonId.id === lesson.id,
-        ).length !== 0
-          ? true
-          : false,
+          (item: Parse.Object) => item.attributes?.lessonId?.id === lesson.id,
+        ).length !== 0,
       word: lesson.attributes.word,
       wordMeaning: lesson.attributes.wordMeaning,
       pronouncing: lesson.attributes.pronouncing,
@@ -30,9 +28,7 @@ export const convertLessonData = (
       isLearned:
         learningLessonArr.filter(
           item => item?.attributes?.idLesson?.id === lesson.id,
-        ).length !== 0
-          ? true
-          : false,
+        ).length !== 0,
     };
   });
   return lessons;
@@ -53,4 +49,27 @@ export const convertLearningLessonData = (
     },
   );
   return learningLessons;
+};
+
+export const convertBookData = (
+  bookArr: Parse.Object[],
+  favoriteArr: Parse.Object[],
+) => {
+  const books: Book[] = bookArr.map((book: Parse.Object) => {
+    return {
+      id: book.id,
+      author: book.attributes.author,
+      fileUrl: book.attributes.fileUrl,
+      cover: book.attributes.cover,
+      desc: book.attributes.desc,
+      title: book.attributes.title,
+      type: book.attributes.type,
+      audioUrl: book.attributes?.audioUrl,
+      trackAudio: book.attributes?.trackAudio,
+      isSaved:
+        favoriteArr.filter(item => item.attributes?.bookId?.id === book.id)
+          .length !== 0,
+    };
+  });
+  return books;
 };

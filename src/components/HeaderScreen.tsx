@@ -3,8 +3,8 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {COLORS} from '../constants/color';
-import {SPACING} from '../constants/spacing';
 import {CSButtonBack, CSText} from './core';
+import {SPACING} from '../constants/spacing';
 
 interface HeaderScreenProps {
   textLeft?: string;
@@ -15,6 +15,7 @@ interface HeaderScreenProps {
   onPressRight?: () => void;
   iconRight?: string;
   textRight?: string | number;
+  headerRight?: JSX.Element;
 }
 
 const HeaderScreen = ({backBtn = false, ...props}: HeaderScreenProps) => {
@@ -29,7 +30,10 @@ const HeaderScreen = ({backBtn = false, ...props}: HeaderScreenProps) => {
           <Icon name={props.iconLeft} size={40} color={COLORS.primaryDark} />
         )}
         {props.textLeft && (
-          <CSText variant="PoppinsSemiBold" size={'xlg'}>
+          <CSText
+            textProps={{numberOfLines: 1}}
+            variant="PoppinsSemiBold"
+            size={'xlg'}>
             {props.textLeft}
           </CSText>
         )}
@@ -37,19 +41,24 @@ const HeaderScreen = ({backBtn = false, ...props}: HeaderScreenProps) => {
           <Image source={{uri: props.avatar}} style={styles.imgAvatar} />
         )}
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.right}
-        onPress={props.onPressRight}
-        activeOpacity={0.5}>
-        {props.textRight && (
-          <CSText variant="PoppinsSemiBold" size={'xlg'}>
-            {props.textRight}
-          </CSText>
-        )}
-        {props.iconRight && (
-          <Icon name={props.iconRight} size={40} color={COLORS.secondary} />
-        )}
-      </TouchableOpacity>
+      {props.headerRight || (
+        <TouchableOpacity
+          style={styles.right}
+          onPress={props.onPressRight}
+          activeOpacity={0.5}>
+          {props.textRight && (
+            <CSText
+              textProps={{numberOfLines: 1}}
+              variant="PoppinsSemiBold"
+              size={'xlg'}>
+              {props.textRight}
+            </CSText>
+          )}
+          {props.iconRight && (
+            <Icon name={props.iconRight} size={40} color={COLORS.secondary} />
+          )}
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -58,7 +67,6 @@ const styles = StyleSheet.create({
   header: {
     height: 60,
     backgroundColor: COLORS.bgHeader,
-    paddingHorizontal: SPACING.px,
     width: '100%',
     shadowColor: COLORS.black,
     shadowOffset: {
@@ -70,6 +78,7 @@ const styles = StyleSheet.create({
     elevation: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    paddingHorizontal: SPACING.px,
   },
   left: {
     justifyContent: 'center',
