@@ -1,4 +1,4 @@
-import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -30,6 +30,13 @@ const GameRenderItem = ({handleHelp, gameItem}: GameRenderItemProps) => {
     <LinearGradient
       colors={bgColorArr[randomcolor(0, bgColorArr.length - 1)]}
       style={styles.gameItem}>
+      {gameItem.type === 'rollDice' && (
+        <View style={styles.overlay}>
+          <CSText variant="PoppinsItalic" size={'xlg'} color="secondary">
+            Sắp phát hành!
+          </CSText>
+        </View>
+      )}
       <Image
         source={{
           uri: gameItem.cover,
@@ -39,6 +46,7 @@ const GameRenderItem = ({handleHelp, gameItem}: GameRenderItemProps) => {
       <CSText
         variant="PoppinsBold"
         textProps={{numberOfLines: 2}}
+        size={'xlg'}
         style={styles.title}>
         {gameItem.name}
       </CSText>
@@ -61,7 +69,7 @@ export const bgColorArr = [
 const styles = StyleSheet.create({
   gameItem: {
     width: '100%',
-    height: 300,
+    height: 320,
     padding: 15,
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -91,6 +99,18 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 15,
     right: 15,
+  },
+  overlay: {
+    backgroundColor: COLORS.overlay,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    zIndex: 2,
   },
 });
 

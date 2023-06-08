@@ -7,4 +7,5 @@ export interface User {
   totalMedal?: number;
   createdAt?: Date;
   desc?: string;
+  learntLesson: number;
 }

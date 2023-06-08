@@ -14,7 +14,7 @@ import {
 } from '../../components/core';
 import GuessWordListText from '../../components/game/GuessWordListText';
 import {SPACING} from '../../constants/spacing';
-import {shuffleArray} from '../../utils';
+import {handleSpeak, shuffleArray} from '../../utils';
 import {GuessTheWordList} from '../../types';
 import {AppDispatch, RootState} from '../../store/store';
 import {GUESS_THE_WORD_ACTION} from '../../store/actions';
@@ -65,6 +65,7 @@ const GameGuessTheWord = () => {
   };
 
   const hanlePressText = (index: number) => {
+    handleSpeak(wordList[index]);
     if (activeIndex === -1) {
       return;
     }
@@ -140,7 +141,10 @@ const GameGuessTheWord = () => {
   return (
     <View style={styles.container}>
       {guessTheWordata.fetchingStatus === 'loading' && <CSLoading />}
-      <CSModal refRBSheet={refModal} height={SPACING.screenHeight * 0.35}>
+      <CSModal
+        refRBSheet={refModal}
+        height={SPACING.screenHeight * 0.35}
+        closeBtn={false}>
         {score === guessTheWordata.list.length && (
           <Lottie
             source={require('../../assets/images/congratulation.json')}

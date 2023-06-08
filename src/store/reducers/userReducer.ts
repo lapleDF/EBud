@@ -11,6 +11,7 @@ export const initialUser: User = {
   createdAt: new Date(),
   totalStreak: 0,
   desc: '',
+  learntLesson: 0,
 };
 
 export const userReducer = (

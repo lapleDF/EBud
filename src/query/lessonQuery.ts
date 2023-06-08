@@ -4,7 +4,7 @@ import {PARSE_OBJ} from '../constants/parseObject';
 import {convertLessonData} from '../utils';
 import {Lesson, PayloadAction} from '../types';
 
-export const getLessonList = async (action: PayloadAction) => {
+export const getLessonList = async (action: PayloadAction, userId: string) => {
   const lessonQuery = new Parse.Query(PARSE_OBJ.lesson);
   const favoriteListQuery = new Parse.Query(PARSE_OBJ.favoriteList);
   const learningLessonQuery = new Parse.Query(PARSE_OBJ.learningLesson);
@@ -12,8 +12,12 @@ export const getLessonList = async (action: PayloadAction) => {
   const lessonArr = await lessonQuery
     .contains('idCourse', action.payload.courseId)
     .find();
-  const favoriteList = await favoriteListQuery.find();
-  const learningLessonList = await learningLessonQuery.find();
+  const favoriteList = await favoriteListQuery
+    .contains('userId', userId)
+    .find();
+  const learningLessonList = await learningLessonQuery
+    .contains('idUser', userId)
+    .find();
 
   const lessons: Lesson[] = convertLessonData(
     lessonArr,
