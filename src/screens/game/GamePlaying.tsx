@@ -11,7 +11,11 @@ const GamePlaying = () => {
 
   return (
     <CSLayout>
-      {gameItem.type === 'guessWord' ? <GameGuessTheWord /> : <GameRollDice />}
+      {gameItem.type === 'guessWord' ? (
+        <GameGuessTheWord gameId={gameItem.id} />
+      ) : (
+        <GameRollDice />
+      )}
     </CSLayout>
   );
 };

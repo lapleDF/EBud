@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useRef} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -20,9 +20,6 @@ const Account = () => {
     navigation.navigate('authentication');
   };
 
-  useEffect(() => {
-    AppDispatch(USER_ACTION.UPDATE_LEARNT_LESSON);
-  }, []);
   return (
     <CSLayout>
       <CSText>Account</CSText>

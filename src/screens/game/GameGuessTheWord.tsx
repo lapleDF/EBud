@@ -17,20 +17,35 @@ import {SPACING} from '../../constants/spacing';
 import {handleSpeak, shuffleArray} from '../../utils';
 import {GuessTheWordList} from '../../types';
 import {AppDispatch, RootState} from '../../store/store';
-import {GUESS_THE_WORD_ACTION} from '../../store/actions';
+import {
+  GAME_ACTION,
+  GUESS_THE_WORD_ACTION,
+  USER_ACTION,
+} from '../../store/actions';
 import {useNavigation} from '@react-navigation/native';
+import {PlayingGame} from '../../types/PlayingGame';
 
-const GameGuessTheWord = () => {
-  const guessTheWordata: GuessTheWordList = useSelector(
-    (state: RootState) => state.guesTheWord,
-  );
+interface GameGuessTheWordProps {
+  gameId: string;
+}
+
+const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
+  const state: RootState = useSelector((rootState: RootState) => rootState);
+  const guessTheWordata: GuessTheWordList = state.guesTheWord;
+  const userGameInfo: PlayingGame[] = state.user.game;
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [guessList, setGuessList] = useState<string[]>(Array(6).fill(''));
   const [wordList, setWordList] = useState<string[]>([]);
   const [score, setScore] = useState(0);
   const refModal = useRef<RBSheet>();
-  const [level, setLevel] = useState(1);
+  const [level, setLevel] = useState(
+    (userGameInfo.find(
+      item =>
+        item.gameId === gameId &&
+        item.currentLevel !== guessTheWordata.maxLevel,
+    )?.currentLevel || 0) + 1,
+  );
   const navigation = useNavigation<any>();
 
   const handlePressItem = (index: number) => {
@@ -60,6 +75,16 @@ const GameGuessTheWord = () => {
         count += 1;
       }
     });
+    if (
+      count === guessTheWordata.list.length &&
+      guessTheWordata.list.length !== 0
+    ) {
+      AppDispatch(GAME_ACTION.UPDATE_GAME_INFO_USER, {
+        gameId: gameId,
+        level: level,
+      });
+      AppDispatch(USER_ACTION.INCREASE_MEDAL);
+    }
     setScore(count);
     refModal.current?.open();
   };

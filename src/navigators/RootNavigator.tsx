@@ -29,7 +29,7 @@ const RootNavigator = () => {
       if (user === null) {
         navigation.navigate('authentication');
       } else {
-        AppDispatch(USER_ACTION.UPDATE, user);
+        AppDispatch(USER_ACTION.GET_INFO, user.id);
         navigation.reset({
           index: 0,
           routes: [{name: 'bottomTab'}],

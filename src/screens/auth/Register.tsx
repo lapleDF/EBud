@@ -34,6 +34,7 @@ const Register = () => {
         totalStreak: params.totalStreak,
         totalMedal: params.totalMedal,
         desc: params.desc,
+        game: [],
       });
       setIsLoading(false);
       navigation.navigate('login');
