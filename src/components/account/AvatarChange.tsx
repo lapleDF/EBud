@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import Parse from 'parse/react-native';
 
 import {PARSE_OBJ} from '../../constants/parseObject';
-import {CSButton, CSText} from '../core';
+import {CSButton, CSLoading, CSText} from '../core';
 import {COLORS} from '../../constants/color';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {SPACING} from '../../constants/spacing';
@@ -28,6 +28,9 @@ const AvatarChange = ({refRBSheet}: AvatarChangeProps) => {
   };
 
   const handleSubmit = () => {
+    if (activeAvatar === undefined) {
+      return;
+    }
     AppDispatch(USER_ACTION.CHANGE_AVATAR, activeAvatar?.url);
     refRBSheet.current?.close();
   };
@@ -54,7 +57,7 @@ const AvatarChange = ({refRBSheet}: AvatarChangeProps) => {
   return (
     <>
       <View style={styles.container}>
-        {avatars.length > 0 &&
+        {avatars.length > 0 ? (
           avatars.map((avatar: Avatar, index: number) => (
             <TouchableOpacity
               key={index}
@@ -71,7 +74,10 @@ const AvatarChange = ({refRBSheet}: AvatarChangeProps) => {
                 <CSText style={styles.nameAvatar}>{avatar.name}</CSText>
               </>
             </TouchableOpacity>
-          ))}
+          ))
+        ) : (
+          <CSLoading />
+        )}
       </View>
       <View style={styles.btnGroup}>
         <CSButton title="Chọn làm avatar" onPress={handleSubmit} />
