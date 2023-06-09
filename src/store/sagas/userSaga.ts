@@ -81,12 +81,9 @@ function* increaseMedal() {
   const user: User = yield select((state: RootState) => state.user);
   userQuery.set('objectId', user.id);
 
-  const resultUser = user;
-
   try {
-    userQuery.set('totalMedal', resultUser.totalMedal);
+    userQuery.set('totalMedal', user.totalMedal);
     yield userQuery.save();
-    yield put({type: USER_ACTION.UPDATE, payload: resultUser});
   } catch (err) {
     console.log('error update total medal: ', err);
   }
@@ -97,14 +94,24 @@ function* increaseStreak() {
   const user: User = yield select((state: RootState) => state.user);
   userQuery.set('objectId', user.id);
 
-  const resultUser = user;
-
   try {
-    userQuery.set('totalMedal', resultUser.totalMedal);
+    userQuery.set('totalMedal', user.totalMedal);
     yield userQuery.save();
-    yield put({type: USER_ACTION.UPDATE, payload: resultUser});
   } catch (err) {
     console.log('error update total medal: ', err);
+  }
+}
+
+function* changeAvatar() {
+  const userQuery = new Parse.User();
+  const user: User = yield select((state: RootState) => state.user);
+  userQuery.set('objectId', user.id);
+
+  try {
+    userQuery.set('avatar', user.avatar);
+    yield userQuery.save();
+  } catch (err) {
+    console.log('error update avatar: ', err);
   }
 }
 
@@ -115,4 +122,5 @@ export default function* userSaga() {
   yield takeLatest(USER_ACTION.UPDATE_LEARNT_LESSON, updateLearntLesson);
   yield takeLatest(USER_ACTION.INCREASE_MEDAL, increaseMedal);
   yield takeLatest(USER_ACTION.INCREASE_STREAK, increaseStreak);
+  yield takeLatest(USER_ACTION.CHANGE_AVATAR, changeAvatar);
 }

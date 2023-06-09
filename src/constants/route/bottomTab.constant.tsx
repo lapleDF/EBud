@@ -3,7 +3,6 @@ import {StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {COLORS} from '../color';
-import HeaderScreen from '../../components/HeaderScreen';
 import CourseNavigator from '../../navigators/CourseNavigator';
 import LibraryNavigator from '../../navigators/LibraryNavigator';
 import GameNavigator from '../../navigators/GameNavigator';
@@ -78,7 +77,7 @@ export const BOTTOM_TAB_ROUTE = [
     name: 'accountNavigator',
     component: AccountNavigator,
     options: {
-      headerShown: true,
+      headerShown: false,
       tabBarIcon: (props: tabBarIconProps) => (
         <IconRender
           focused={props.focused}
@@ -86,7 +85,6 @@ export const BOTTOM_TAB_ROUTE = [
           iconNameUnfocus="person"
         />
       ),
-      header: () => HeaderScreen({textLeft: 'Tài khoản của tôi'}),
     },
   },
 ];

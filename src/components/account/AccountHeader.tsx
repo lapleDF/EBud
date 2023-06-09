@@ -1,9 +1,11 @@
-import {Image, StyleSheet, View} from 'react-native';
-import React from 'react';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import React, {useRef} from 'react';
 import {SPACING} from '../../constants/spacing';
 import {COLORS} from '../../constants/color';
-import {CSText} from '../core';
+import {CSModal, CSText} from '../core';
 import HeaderLeftItem from './HeaderLeftItem';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import AvatarChange from './AvatarChange';
 
 interface AccountHeaderProps {
   avatar: string;
@@ -22,10 +24,18 @@ const AccountHeader = ({
   learntLesson,
   rank,
 }: AccountHeaderProps) => {
+  const refModal = useRef<RBSheet>();
   return (
     <View style={styles.header}>
+      <CSModal refRBSheet={refModal} closeBtn={false}>
+        <AvatarChange refRBSheet={refModal} />
+      </CSModal>
       <View style={styles.headerLeft}>
-        <Image source={{uri: avatar}} style={styles.avatar} />
+        <TouchableOpacity
+          onPress={() => refModal.current?.open()}
+          style={styles.avatarTouchable}>
+          <Image source={{uri: avatar}} style={styles.avatar} />
+        </TouchableOpacity>
         <CSText variant="PoppinsBold" size={'xlg'}>
           {userName}
         </CSText>
@@ -65,9 +75,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  avatar: {
+  avatarTouchable: {
     width: '70%',
     height: '70%',
+  },
+  avatar: {
+    width: '100%',
+    height: '100%',
     resizeMode: 'contain',
   },
   headerRight: {

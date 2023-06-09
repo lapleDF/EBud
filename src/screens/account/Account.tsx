@@ -3,7 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {CSButton} from '../../components/core/CSButton';
 import {ASYNC_STORAGE} from '../../constants/asyncStorage';
@@ -30,24 +30,63 @@ const Account = () => {
 
   return (
     <CSLayout style={styles.container}>
-      <AccountHeader
-        avatar={user.avatar}
-        learntLesson={user.learntLesson}
-        rank={100}
-        totalMedal={user.totalMedal}
-        totalStreak={user.totalStreak}
-        userName={user.username}
-      />
-      {/* //todo: Render list setting item */}
-      <SettingItem label="What you know about" icon="settings-outline" />
-      <TouchableOpacity
-        onPress={() => refBtnLogout.current.open()}
-        style={styles.logout}>
-        <CSText color="primaryLighter" variant="PoppinsBold">
-          Đăng xuất
+      <ScrollView
+        contentContainerStyle={styles.contentContainer}
+        showsVerticalScrollIndicator={false}>
+        <AccountHeader
+          avatar={user.avatar}
+          learntLesson={user.learntLesson}
+          rank={100}
+          totalMedal={user.totalMedal}
+          totalStreak={user.totalStreak}
+          userName={user.username}
+        />
+
+        <CSText variant="PoppinsBold" style={styles.titleList}>
+          Chung
         </CSText>
-        <Icon name="log-out-outline" size={40} color={COLORS.primaryLighter} />
-      </TouchableOpacity>
+        <SettingItem
+          label="Thông tin tài khoản"
+          icon="person-outline"
+          routeName="userInfo"
+        />
+        <SettingItem
+          label="Cài đặt hiển thị"
+          icon="settings-outline"
+          routeName="appearance"
+        />
+        <SettingItem
+          label="Cài đặt thông báo"
+          icon="notifications-outline"
+          routeName="notification"
+        />
+        <CSText variant="PoppinsBold" style={styles.titleList}>
+          Hỗ trợ
+        </CSText>
+        <SettingItem
+          label="Báo cáo sự cố"
+          icon="warning-outline"
+          routeName="reportIssue"
+        />
+        <SettingItem
+          label="Các câu hỏi thường gặp"
+          icon="help-circle-outline"
+          routeName="FAQ"
+        />
+
+        <TouchableOpacity
+          onPress={() => refBtnLogout.current.open()}
+          style={styles.logout}>
+          <CSText color="primaryLighter" variant="PoppinsBold">
+            Đăng xuất
+          </CSText>
+          <Icon
+            name="log-out-outline"
+            size={40}
+            color={COLORS.primaryLighter}
+          />
+        </TouchableOpacity>
+      </ScrollView>
       <CSModal refRBSheet={refBtnLogout}>
         <CSText size={'lg'} color="primaryDark" variant="PoppinsBold">
           Đăng xuất?
@@ -82,7 +121,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   logout: {
-    width: '100%',
+    width: SPACING.screenWidth - SPACING.px * 4,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -91,6 +130,15 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: COLORS.primaryLighter,
     paddingVertical: 10,
+    marginLeft: SPACING.px,
+    marginVertical: 20,
+  },
+  titleList: {
+    marginTop: 20,
+  },
+  contentContainer: {
+    width: '100%',
+    paddingBottom: SPACING.heightBottomTab,
   },
 });
 export default Account;

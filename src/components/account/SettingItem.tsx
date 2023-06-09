@@ -5,15 +5,27 @@ import {TouchableNativeFeedback} from 'react-native-gesture-handler';
 
 import {CSText} from '../core';
 import {COLORS} from '../../constants/color';
+import {useNavigation} from '@react-navigation/native';
 
 interface SettingItemProps {
   label: string;
   icon: string;
+  onPress?: () => void;
+  routeName?: string;
 }
 
-const SettingItem = ({label, icon}: SettingItemProps) => {
+const SettingItem = ({label, icon, onPress, routeName}: SettingItemProps) => {
+  const navigation = useNavigation<any>();
+
+  const handlePressItem = () => {
+    if (routeName) {
+      navigation.navigate(routeName);
+    } else {
+      onPress && onPress();
+    }
+  };
   return (
-    <TouchableNativeFeedback onPress={() => {}} style={styles.item}>
+    <TouchableNativeFeedback onPress={handlePressItem} style={styles.item}>
       <View style={styles.itemLeft}>
         <Icon name={icon} color={COLORS.primaryLighter} size={35} />
         <CSText>{label}</CSText>
@@ -35,7 +47,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 10,
+    paddingVertical: 15,
   },
   itemLeft: {
     flexDirection: 'row',

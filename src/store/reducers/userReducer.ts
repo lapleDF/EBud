@@ -32,6 +32,11 @@ export const userReducer = (
         ...state,
         totalStreak: state.totalStreak + 1,
       };
+    case USER_ACTION.CHANGE_AVATAR:
+      return {
+        ...state,
+        avatar: action.payload,
+      };
     default:
       return state;
   }
