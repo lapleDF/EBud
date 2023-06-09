@@ -69,11 +69,12 @@ function* logout() {
 function* updateLearntLesson() {
   const user: User = yield select((rootState: RootState) => rootState.user);
   const query = new Parse.Query(PARSE_OBJ.learningLesson);
-  const learrntLesson: Parse.Object[] = yield query
+  const learntLessonArr: Parse.Object[] = yield query
     .contains('idUser', user.id)
     .find();
-  user.learntLesson = learrntLesson.length;
-  yield put({type: USER_ACTION.UPDATE, payload: user});
+
+  const resultUser: User = {...user, learntLesson: learntLessonArr.length};
+  yield put({type: USER_ACTION.UPDATE, payload: resultUser});
 }
 
 function* increaseMedal() {
@@ -82,11 +83,14 @@ function* increaseMedal() {
   userQuery.set('objectId', user.id);
 
   try {
-    userQuery.set('totalMedal', user.totalMedal);
+    userQuery.set('totalMedal', user.totalMedal + 1);
     yield userQuery.save();
   } catch (err) {
     console.log('error update total medal: ', err);
   }
+
+  const resultUser: User = {...user, totalMedal: user.totalMedal + 1};
+  yield put({type: USER_ACTION.UPDATE, payload: resultUser});
 }
 
 function* increaseStreak() {
@@ -95,11 +99,14 @@ function* increaseStreak() {
   userQuery.set('objectId', user.id);
 
   try {
-    userQuery.set('totalMedal', user.totalMedal);
+    userQuery.set('totalStreak', user.totalStreak + 1);
     yield userQuery.save();
   } catch (err) {
-    console.log('error update total medal: ', err);
+    console.log('error update total streak: ', err);
   }
+
+  const resultUser: User = {...user, totalStreak: user.totalStreak + 1};
+  yield put({type: USER_ACTION.UPDATE, payload: resultUser});
 }
 
 function* changeAvatar() {

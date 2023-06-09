@@ -22,16 +22,6 @@ export const userReducer = (
   switch (action.type) {
     case USER_ACTION.UPDATE:
       return action.payload;
-    case USER_ACTION.INCREASE_MEDAL:
-      return {
-        ...state,
-        totalMedal: state.totalMedal + 1,
-      };
-    case USER_ACTION.INCREASE_STREAK:
-      return {
-        ...state,
-        totalStreak: state.totalStreak + 1,
-      };
     case USER_ACTION.CHANGE_AVATAR:
       return {
         ...state,
