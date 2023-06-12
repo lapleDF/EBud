@@ -1,8 +1,15 @@
 import AuthNavigator from '../../navigators/AuthNavigator';
 import BottomTabNavigator from '../../navigators/BottomTabNavigator';
 import OnboardingScreen from '../../screens/Onboarding';
+import {RootStackParamList} from '../../types/navigation/types';
 
-export const ROOT_ROUTE = [
+interface RootRouteProps {
+  name: keyof RootStackParamList;
+  component: () => JSX.Element;
+  options?: {};
+}
+
+export const ROOT_ROUTE: RootRouteProps[] = [
   {
     name: 'onboarding',
     component: OnboardingScreen,

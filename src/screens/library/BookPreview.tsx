@@ -17,10 +17,12 @@ import {SPACING} from '../../constants/spacing';
 import {BOOK_ACTION} from '../../store/actions';
 import {AppDispatch, RootState} from '../../store/store';
 import {BookList} from '../../types';
+import {LibraryScreenProps} from '../../types/navigation/types';
 
 const BookPreview = () => {
-  const navigation = useNavigation<any>();
-  const route = useRoute<any>();
+  const navigation =
+    useNavigation<LibraryScreenProps<'Conttent'>['navigation']>();
+  const route = useRoute<LibraryScreenProps<'Preview'>['route']>();
   const {bookId} = route.params;
   const books: BookList = useSelector((state: RootState) => state.book);
   const selectedBook = books.list.filter(item => item.id === bookId)[0];
@@ -29,7 +31,7 @@ const BookPreview = () => {
     AppDispatch(BOOK_ACTION.ADD_FAVORITE, selectedBook.id);
   };
   const handleNavigate = () => {
-    navigation.navigate('content', {
+    navigation.navigate('Conttent', {
       bookItem: selectedBook,
     });
   };

@@ -1,18 +1,19 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useRef, useState} from 'react';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import {FlatList, StyleSheet} from 'react-native';
+import {useSelector} from 'react-redux';
 
 import HeaderScreen from '../../components/HeaderScreen';
 import {GameList, User} from '../../types';
-import {useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 import {CSLayout, CSLoading, CSModal, CSText} from '../../components/core';
-import GameRenderItem from '../../components/game/GameRenderItem';
-import {FlatList, StyleSheet} from 'react-native';
 import {SPACING} from '../../constants/spacing';
-import RBSheet from 'react-native-raw-bottom-sheet';
+import GameItem from '../../components/game/GameItem';
+import {GameScreenProps} from '../../types/navigation/types';
 
 const Game = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<GameScreenProps<'Game'>['navigation']>();
   const rootState: RootState = useSelector((state: RootState) => state);
   const user: User = rootState.user;
   const gameList: GameList = rootState.game;
@@ -41,7 +42,7 @@ const Game = () => {
         <FlatList
           data={gameList.list}
           renderItem={({item}) => (
-            <GameRenderItem gameItem={item} handleHelp={handleHelp} />
+            <GameItem gameItem={item} handleHelp={handleHelp} />
           )}
           keyExtractor={(_item, index) => index.toString()}
           contentContainerStyle={styles.contentContainer}

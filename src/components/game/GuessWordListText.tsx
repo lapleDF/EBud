@@ -1,5 +1,6 @@
 import {ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
+
 import {CSText} from '../core';
 import {COLORS} from '../../constants/color';
 

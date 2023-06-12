@@ -1,14 +1,21 @@
 import Game from '../../screens/game/Game';
 import GamePlaying from '../../screens/game/GamePlaying';
+import {GameStackParamList} from '../../types/navigation/types';
 
-export const GAME_ROUTE = [
+interface GameRouteProps {
+  name: keyof GameStackParamList;
+  component: () => JSX.Element;
+  options?: {};
+}
+
+export const GAME_ROUTE: GameRouteProps[] = [
   {
-    name: 'game',
+    name: 'Game',
     component: Game,
     options: {headerShown: true},
   },
   {
-    name: 'gamePlaying',
+    name: 'GamePlaying',
     component: GamePlaying,
     options: {headerShown: false},
   },

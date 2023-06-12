@@ -8,9 +8,11 @@ import {SPACING} from '../../constants/spacing';
 import {AppDispatch} from '../../store/store';
 import {USER_ACTION} from '../../store/actions';
 import {CSInput, CSLayout, CSLoading, CSText} from '../../components/core';
+import {RootStackScreenProps} from '../../types/navigation/types';
 
 const Login = () => {
-  const navigation = useNavigation<any>();
+  const navigation =
+    useNavigation<RootStackScreenProps<'BottomTab'>['navigation']>();
   const [isLoading, setIsLoading] = useState(false);
   const [params, setParams] = useState({
     username: '',
@@ -31,7 +33,7 @@ const Login = () => {
         },
       );
       setIsLoading(false);
-      navigation.navigate('bottomTab');
+      navigation.navigate('BottomTab');
     } catch (error: any) {
       setIsLoading(false);
       if (error?.message === 'Invalid username/password.') {

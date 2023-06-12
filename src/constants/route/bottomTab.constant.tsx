@@ -8,6 +8,7 @@ import CourseNavigator from '../../navigators/CourseNavigator';
 import LibraryNavigator from '../../navigators/LibraryNavigator';
 import GameNavigator from '../../navigators/GameNavigator';
 import AccountNavigator from '../../navigators/AccountNavigator';
+import {BottomTabParamList} from '../../types/navigation/types';
 
 interface IconRenderProps {
   focused: boolean;
@@ -17,6 +18,12 @@ interface IconRenderProps {
 
 interface tabBarIconProps {
   focused: boolean;
+}
+
+interface BottomTabRouteProps {
+  name: keyof BottomTabParamList;
+  component: () => JSX.Element;
+  options?: {};
 }
 
 const IconRender = (props: IconRenderProps) => {
@@ -30,9 +37,9 @@ const IconRender = (props: IconRenderProps) => {
   );
 };
 
-export const BOTTOM_TAB_ROUTE = [
+export const BOTTOM_TAB_ROUTE: BottomTabRouteProps[] = [
   {
-    name: 'courseNavigator',
+    name: 'CourseNavigator',
     component: CourseNavigator,
     options: {
       headerShown: false,
@@ -46,7 +53,7 @@ export const BOTTOM_TAB_ROUTE = [
     },
   },
   {
-    name: 'libraryNavigator',
+    name: 'LibraryNavigator',
     component: LibraryNavigator,
     options: {
       headerShown: false,
@@ -61,7 +68,7 @@ export const BOTTOM_TAB_ROUTE = [
     },
   },
   {
-    name: 'gameNavigator',
+    name: 'GameNavigator',
     component: GameNavigator,
     options: {
       headerShown: false,
@@ -75,7 +82,7 @@ export const BOTTOM_TAB_ROUTE = [
     },
   },
   {
-    name: 'accountNavigator',
+    name: 'AccountNavigator',
     component: AccountNavigator,
     options: {
       headerShown: true,

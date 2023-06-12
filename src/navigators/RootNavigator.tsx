@@ -8,11 +8,16 @@ import {getDataAsyncStorage, getDataObjAsyncStorage} from '../utils';
 import {ASYNC_STORAGE} from '../constants/asyncStorage';
 import {AppDispatch} from '../store/store';
 import {USER_ACTION} from '../store/actions';
+import {
+  RootStackParamList,
+  RootStackScreenProps,
+} from '../types/navigation/types';
 
-const RootStack = createStackNavigator();
+const RootStack = createStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
-  const navigation = useNavigation<any>();
+  const navigation =
+    useNavigation<RootStackScreenProps<'Authentication'>['navigation']>();
 
   useLayoutEffect(() => {
     const trackingAuthenAndFirstLaunch = async () => {
@@ -23,16 +28,16 @@ const RootNavigator = () => {
       );
 
       if (firstLaunch === null) {
-        navigation.navigate('onboarding');
+        navigation.navigate('Onboarding');
         return;
       }
       if (user === null) {
-        navigation.navigate('authentication');
+        navigation.navigate('Authentication');
       } else {
         AppDispatch(USER_ACTION.GET_INFO, user.id);
         navigation.reset({
           index: 0,
-          routes: [{name: 'bottomTab'}],
+          routes: [{name: 'BottomTab'}],
         });
       }
     };

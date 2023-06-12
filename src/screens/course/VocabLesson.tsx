@@ -21,6 +21,7 @@ import {COLORS} from '../../constants/color';
 import {AppDispatch, RootState} from '../../store/store';
 import {LESSON_ACTION} from '../../store/actions';
 import {User} from '../../types';
+import {CourseScreenProps} from '../../types/navigation/types';
 
 const VocabLesson = () => {
   const lesson: LessonList = useSelector((state: RootState) => state.lesson);
@@ -29,7 +30,8 @@ const VocabLesson = () => {
   const refFlatList = useRef<any>();
   const refModal = useRef<any>();
   const [index, setIndex] = useState(0);
-  const navigation = useNavigation<any>();
+  const navigation =
+    useNavigation<CourseScreenProps<'VocabStared'>['navigation']>();
   const WIDTH = SPACING.screenWidth - SPACING.px * 2;
   const progressAnimatedValue = useRef(new Animated.Value(-WIDTH)).current;
 
@@ -43,7 +45,7 @@ const VocabLesson = () => {
 
   const handleExit = () => {
     refModal.current.close();
-    navigation.navigate('course');
+    navigation.navigate('Course');
   };
 
   const handleReset = () => {

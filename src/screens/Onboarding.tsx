@@ -7,12 +7,14 @@ import {ONBOARDING} from '../constants/onBoarding.constant';
 import {storeDataAsyncStorage} from '../utils';
 import {ASYNC_STORAGE} from '../constants/asyncStorage';
 import {CSText} from '../components/core';
+import {RootStackScreenProps} from '../types/navigation/types';
 
 const OnboardingScreen = () => {
-  const navigation = useNavigation<any>();
+  const navigation =
+    useNavigation<RootStackScreenProps<'Onboarding'>['navigation']>();
 
   const handleComplete = () => {
-    navigation.navigate('authentication');
+    navigation.navigate('Authentication');
     storeDataAsyncStorage(ASYNC_STORAGE.isFirstLaunch, 'false');
   };
   return (

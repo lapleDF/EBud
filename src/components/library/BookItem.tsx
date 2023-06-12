@@ -15,17 +15,19 @@ import {COLORS} from '../../constants/color';
 import {SPACING} from '../../constants/spacing';
 import {AppDispatch} from '../../store/store';
 import {BOOK_ACTION} from '../../store/actions';
+import {LibraryScreenProps} from '../../types/navigation/types';
 
-interface BookItemRenderProps {
+interface BookItemProps {
   item: Book;
   isFavorite?: boolean;
 }
 
-const BookItemRender = ({item, isFavorite = false}: BookItemRenderProps) => {
-  const navigation = useNavigation<any>();
+const BookItem = ({item, isFavorite = false}: BookItemProps) => {
+  const navigation =
+    useNavigation<LibraryScreenProps<'Preview'>['navigation']>();
 
   const onPress = () => {
-    navigation.navigate('preview', {
+    navigation.navigate('Preview', {
       bookId: item.id,
     });
   };
@@ -93,4 +95,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BookItemRender;
+export default BookItem;

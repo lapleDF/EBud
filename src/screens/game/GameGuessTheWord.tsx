@@ -3,6 +3,7 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import Lottie from 'lottie-react-native';
 import {useSelector} from 'react-redux';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import {useNavigation} from '@react-navigation/native';
 
 import GuessWordItem from '../../components/game/GuessWordItem';
 import {
@@ -22,8 +23,8 @@ import {
   GUESS_THE_WORD_ACTION,
   USER_ACTION,
 } from '../../store/actions';
-import {useNavigation} from '@react-navigation/native';
 import {PlayingGame} from '../../types/PlayingGame';
+import {GameScreenProps} from '../../types/navigation/types';
 
 interface GameGuessTheWordProps {
   gameId: string;
@@ -39,6 +40,7 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
   const [wordList, setWordList] = useState<string[]>([]);
   const [score, setScore] = useState(0);
   const refModal = useRef<RBSheet>();
+
   const [level, setLevel] = useState(
     (userGameInfo.find(
       item =>
@@ -46,7 +48,9 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
         item.currentLevel !== guessTheWordata.maxLevel,
     )?.currentLevel || 0) + 1,
   );
-  const navigation = useNavigation<any>();
+
+  const navigation =
+    useNavigation<GameScreenProps<'GamePlaying'>['navigation']>();
 
   const handlePressItem = (index: number) => {
     setActiveIndex(index);
@@ -169,7 +173,7 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
       <CSModal
         refRBSheet={refModal}
         height={SPACING.screenHeight * 0.35}
-        closeBtn={false}>
+        isShowCloseBtn={false}>
         {score === guessTheWordata.list.length && (
           <Lottie
             source={require('../../assets/images/congratulation.json')}
@@ -197,7 +201,7 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
           ) : (
             <CSButton
               title="Thoát"
-              onPress={() => navigation.navigate('game')}
+              onPress={() => navigation.navigate('Game')}
             />
           )}
         </View>

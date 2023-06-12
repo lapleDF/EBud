@@ -10,6 +10,7 @@ import {User} from '../../types';
 import {initialUser} from '../../store/reducers/userReducer';
 import {COLORS} from '../../constants/color';
 import {CSInput, CSLayout, CSLoading, CSText} from '../../components/core';
+import {AuthStackScreenProps} from '../../types/navigation/types';
 
 const Register = () => {
   const [params, setParams] = useState<User>(initialUser);
@@ -19,7 +20,8 @@ const Register = () => {
   });
   const [isAgree, setIsAgree] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const navigation = useNavigation<any>();
+  const navigation =
+    useNavigation<AuthStackScreenProps<'Login'>['navigation']>();
 
   const register = async () => {
     if (!isAgree) {
@@ -37,7 +39,7 @@ const Register = () => {
         game: [],
       });
       setIsLoading(false);
-      navigation.navigate('login');
+      navigation.navigate('Login');
     } catch (error: any) {
       setIsLoading(false);
       console.log(error.message);

@@ -8,27 +8,29 @@ import {CSButton, CSText} from '../core';
 import {COLORS} from '../../constants/color';
 import {SPACING} from '../../constants/spacing';
 import {Game} from '../../types';
+import {GameScreenProps} from '../../types/navigation/types';
 
-interface GameRenderItemProps {
+interface GameItemProps {
   handleHelp: (gameRule: string) => void;
   gameItem: Game;
 }
 
-const GameRenderItem = ({handleHelp, gameItem}: GameRenderItemProps) => {
-  const navigation = useNavigation<any>();
+const GameItem = ({handleHelp, gameItem}: GameItemProps) => {
+  const navigation =
+    useNavigation<GameScreenProps<'GamePlaying'>['navigation']>();
   const randomcolor = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-  const handlePlay = () => {
-    navigation.navigate('gamePlaying', {
+  const handlePlayClick = () => {
+    navigation.navigate('GamePlaying', {
       gameItem,
     });
   };
 
   return (
     <LinearGradient
-      colors={bgColorArr[randomcolor(0, bgColorArr.length - 1)]}
+      colors={bgColors[randomcolor(0, bgColors.length - 1)]}
       style={styles.gameItem}>
       {gameItem.type === 'rollDice' && (
         <View style={styles.overlay}>
@@ -50,7 +52,7 @@ const GameRenderItem = ({handleHelp, gameItem}: GameRenderItemProps) => {
         style={styles.title}>
         {gameItem.name}
       </CSText>
-      <CSButton title="Chơi" onPress={handlePlay} />
+      <CSButton title="Chơi" onPress={handlePlayClick} />
       <TouchableOpacity
         onPress={() => handleHelp(gameItem.rule)}
         style={styles.help}>
@@ -60,10 +62,9 @@ const GameRenderItem = ({handleHelp, gameItem}: GameRenderItemProps) => {
   );
 };
 
-export const bgColorArr = [
+export const bgColors = [
   ['#1E0F3D', '#4B0F3E', '#633838'],
   ['#4F0948', '#3C0B54', '#383C63'],
-  // ['#F40084', '#ea9019', '#EAC819'],
 ];
 
 const styles = StyleSheet.create({
@@ -114,4 +115,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GameRenderItem;
+export default GameItem;

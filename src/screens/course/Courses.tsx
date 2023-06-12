@@ -7,12 +7,13 @@ import HeaderScreen from '../../components/HeaderScreen';
 import {AppDispatch, RootState} from '../../store/store';
 import {CourseItem, CourseList, User} from '../../types';
 import {SPACING} from '../../constants/spacing';
-import GroupCourseRender from '../../components/course/GroupCourseRender';
 import {CSButton} from '../../components/core/CSButton';
 import {splitChunkArray} from '../../utils';
 import {CSLayout, CSLoading} from '../../components/core';
 import {COURSE_ACTION} from '../../store/actions';
 import SectionHeader from '../../components/sectionList/SectionHeader';
+import {BottomTabScreenProps} from '../../types/navigation/types';
+import GroupCourse from '../../components/course/GroupCourse';
 
 export interface SectionCourseProps {
   title: string;
@@ -21,7 +22,8 @@ export interface SectionCourseProps {
 }
 
 const Courses = () => {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<BottomTabScreenProps<'CourseNavigator'>['navigation']>();
   const state: RootState = useSelector((rootState: RootState) => rootState);
   const user: User = state.user;
   const course: CourseList = state.course;
@@ -98,7 +100,7 @@ const Courses = () => {
           renderSectionFooter={({section}) => renderSectionFooter(section)}
           contentContainerStyle={styles.contentContainerSection}
           renderItem={({item, section}) => (
-            <GroupCourseRender
+            <GroupCourse
               filtedArray={course.list.filter(
                 courseItem => courseItem.skill === section.skill,
               )}

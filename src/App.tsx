@@ -23,7 +23,7 @@ LogBox.ignoreLogs(['new NativeEventEmitter']);
 const App = () => {
   const navigationRef: NavigationContainerRefWithCurrent<ReactNavigation.RootParamList> =
     useNavigationContainerRef();
-  const routeNameRef = useRef<any>();
+  const routeNameRef = useRef<string>();
 
   const onReady = () => {
     routeNameRef.current = navigationRef.getCurrentRoute()?.name;

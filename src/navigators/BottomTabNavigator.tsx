@@ -1,19 +1,46 @@
 import React, {useEffect, useRef} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {Animated, StyleSheet} from 'react-native';
+import {Animated, BackHandler, StyleSheet} from 'react-native';
 import {COLORS} from '../constants/color';
 import {BOTTOM_TAB_ROUTE} from '../constants/route/bottomTab.constant';
 import {SPACING} from '../constants/spacing';
 import {AppDispatch, RootState} from '../store/store';
 import {useSelector} from 'react-redux';
 import {COURSE_ACTION} from '../store/actions';
+import {
+  BottomTabParamList,
+  BottomTabScreenProps,
+} from '../types/navigation/types';
+import {useNavigation} from '@react-navigation/native';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const BottomTabNavigator = () => {
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
   const rootState: RootState = useSelector((state: RootState) => state);
+  const navigation =
+    useNavigation<BottomTabScreenProps<'CourseNavigator'>['navigation']>();
+
+  const handleFocus = () =>
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      navigation.navigate('CourseNavigator');
+      handleAnimatedStart(0);
+      return true;
+    });
+
+  const handleBlur = () =>
+    BackHandler.removeEventListener('hardwareBackPress', () => {
+      handleAnimatedStart(0);
+      return true;
+    });
+
+  const handleAnimatedStart = (index: number) => {
+    Animated.spring(tabOffsetValue, {
+      toValue: getWithTabItem() * index,
+      useNativeDriver: true,
+    }).start();
+  };
 
   useEffect(() => {
     AppDispatch(COURSE_ACTION.GET_LIST, rootState.user.id);
@@ -22,7 +49,7 @@ const BottomTabNavigator = () => {
   return (
     <>
       <Tab.Navigator
-        initialRouteName="home"
+        initialRouteName="CourseNavigator"
         screenOptions={{
           tabBarShowLabel: false,
           tabBarStyle: rootState.managedRoute.bottomTabRouteName.includes(
@@ -39,12 +66,9 @@ const BottomTabNavigator = () => {
               component={route.component}
               options={route.options}
               listeners={() => ({
-                tabPress: () => {
-                  Animated.spring(tabOffsetValue, {
-                    toValue: getWithTabItem() * index,
-                    useNativeDriver: true,
-                  }).start();
-                },
+                tabPress: () => handleAnimatedStart(index),
+                focus: handleFocus,
+                blur: handleBlur,
               })}
             />
           ))}

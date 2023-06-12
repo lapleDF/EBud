@@ -24,15 +24,17 @@ import {
 } from '../../utils';
 import {ASYNC_STORAGE} from '../../constants/asyncStorage';
 import {TrackAudio} from '../../types';
+import {LibraryScreenProps} from '../../types/navigation/types';
 
 export interface BookContinueRead {
   bookId: string;
   currenPage: number;
 }
 const BookContent = () => {
-  const route = useRoute<any>();
+  const route = useRoute<LibraryScreenProps<'Conttent'>['route']>();
   const {bookItem} = route.params;
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<LibraryScreenProps<'Conttent'>['navigation']>();
 
   const trackAudioList: TrackAudio[] = bookItem.trackAudio;
   const refPdf = useRef<Pdf>(null);

@@ -1,10 +1,10 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
+import {FlatList, Image, StyleSheet, View} from 'react-native';
 
 import {CSLayout, CSText} from '../../components/core';
 import {RootState} from '../../store/store';
 import {LessonList} from '../../store/reducers/lessonReducer';
-import {FlatList, Image, StyleSheet, View} from 'react-native';
 import StaredItem from '../../components/course/vocab/StaredItem';
 
 const Empty = () => {

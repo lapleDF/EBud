@@ -11,7 +11,8 @@ import Search from '../../components/library/Search';
 import {Book, BookList} from '../../types';
 import {SPACING} from '../../constants/spacing';
 import SectionHeader from '../../components/sectionList/SectionHeader';
-import BookItemRender from '../../components/library/BookItemRender';
+import {LibraryScreenProps} from '../../types/navigation/types';
+import BookItem from '../../components/library/BookItem';
 
 export interface SectionBookProps {
   title: string;
@@ -35,7 +36,8 @@ const Empty = ({search}: EmptyProps) => {
 };
 
 const Library = () => {
-  const navigation = useNavigation<any>();
+  const navigation =
+    useNavigation<LibraryScreenProps<'Library'>['navigation']>();
   const state: RootState = useSelector((rootState: RootState) => rootState);
   const books: BookList = state.book;
   const [searchValue, setSearchValue] = useState<string>('');
@@ -53,14 +55,13 @@ const Library = () => {
               />
             ),
             iconLeft: 'heart',
-            onPressLeft: () => navigation.navigate('favorite'),
+            onPressLeft: () => navigation.navigate('Favorite'),
           }),
       });
       AppDispatch(BOOK_ACTION.GET_LIST);
     };
     firstMount();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigation]);
+  }, [navigation, searchValue]);
 
   useLayoutEffect(() => {
     if (searchValue.length > 0) {
@@ -134,7 +135,7 @@ const Library = () => {
           renderItem={({section}) => (
             <FlatList
               data={section.data[0]}
-              renderItem={({item}) => <BookItemRender item={item} />}
+              renderItem={({item}) => <BookItem item={item} />}
               columnWrapperStyle={styles.contentSectionItem}
               ListEmptyComponent={<Empty search={searchValue} />}
               numColumns={2}

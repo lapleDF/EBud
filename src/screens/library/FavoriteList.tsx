@@ -5,10 +5,11 @@ import {useSelector} from 'react-redux';
 
 import HeaderScreen from '../../components/HeaderScreen';
 import {CSLayout, CSText} from '../../components/core';
-import BookItemRender from '../../components/library/BookItemRender';
 import {SPACING} from '../../constants/spacing';
 import {RootState} from '../../store/store';
 import {BookList} from '../../types';
+import {LibraryScreenProps} from '../../types/navigation/types';
+import BookItem from '../../components/library/BookItem';
 
 const EmptyComponent = () => {
   return (
@@ -19,7 +20,8 @@ const EmptyComponent = () => {
 };
 
 const FavoriteList = () => {
-  const navigation = useNavigation<any>();
+  const navigation =
+    useNavigation<LibraryScreenProps<'Favorite'>['navigation']>();
   const bookList: BookList = useSelector((state: RootState) => state.book);
   const bookData = bookList.list.filter(item => item.isSaved);
 
@@ -34,7 +36,7 @@ const FavoriteList = () => {
     <CSLayout>
       <FlatList
         data={bookData}
-        renderItem={({item}) => <BookItemRender item={item} isFavorite />}
+        renderItem={({item}) => <BookItem item={item} isFavorite />}
         keyExtractor={item => item.id}
         numColumns={2}
         contentContainerStyle={styles.contentContainer}

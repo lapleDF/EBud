@@ -6,10 +6,11 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 import {CSText} from '../core';
 import {SPACING} from '../../constants/spacing';
 import {COLORS} from '../../constants/color';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 interface GuessWordItemProps {
   image: string;

@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {COLORS} from '../../../constants/color';
 import {SPACING} from '../../../constants/spacing';
 import {CourseItem} from '../../../types';
+import {CourseScreenProps} from '../../../types/navigation/types';
 
 interface CircleProgressProps {
   courseItem: CourseItem;
@@ -20,7 +21,7 @@ const CircleProgress = ({
   isThirdCircle = false,
   ...props
 }: CircleProgressProps) => {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<CourseScreenProps<'Lesson'>['navigation']>();
   const indexItem = props.filteredArray.indexOf(props.courseItem);
   const isLock =
     (indexItem !== 0 &&
@@ -38,7 +39,7 @@ const CircleProgress = ({
     if (isLock) {
       return;
     }
-    navigation.navigate('lesson', {
+    navigation.navigate('Lesson', {
       course: props.courseItem,
     });
   };
