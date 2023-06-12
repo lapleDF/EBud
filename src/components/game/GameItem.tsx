@@ -8,7 +8,7 @@ import {CSButton, CSText} from '../core';
 import {COLORS} from '../../constants/color';
 import {SPACING} from '../../constants/spacing';
 import {Game} from '../../types';
-import {GameScreenProps} from '../../types/navigation/types';
+import {RootStackScreenProps} from '../../types/navigation/types';
 
 interface GameItemProps {
   handleHelp: (gameRule: string) => void;
@@ -17,14 +17,15 @@ interface GameItemProps {
 
 const GameItem = ({handleHelp, gameItem}: GameItemProps) => {
   const navigation =
-    useNavigation<GameScreenProps<'GamePlaying'>['navigation']>();
+    useNavigation<RootStackScreenProps<'GameNavigator'>['navigation']>();
   const randomcolor = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
   const handlePlayClick = () => {
-    navigation.navigate('GamePlaying', {
-      gameItem,
+    navigation.navigate('GameNavigator', {
+      screen: 'GamePlaying',
+      params: {gameItem},
     });
   };
 

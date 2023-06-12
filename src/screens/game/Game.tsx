@@ -6,11 +6,12 @@ import {useSelector} from 'react-redux';
 
 import HeaderScreen from '../../components/HeaderScreen';
 import {GameList, User} from '../../types';
-import {RootState} from '../../store/store';
+import {AppDispatch, RootState} from '../../store/store';
 import {CSLayout, CSLoading, CSModal, CSText} from '../../components/core';
 import {SPACING} from '../../constants/spacing';
 import GameItem from '../../components/game/GameItem';
 import {GameScreenProps} from '../../types/navigation/types';
+import {GAME_ACTION} from '../../store/actions';
 
 const Game = () => {
   const navigation = useNavigation<GameScreenProps<'Game'>['navigation']>();
@@ -34,6 +35,11 @@ const Game = () => {
         }),
     });
   });
+
+  useEffect(() => {
+    AppDispatch(GAME_ACTION.GET_LIST);
+  }, []);
+
   return (
     <CSLayout>
       {gameList.fetchingStatus === 'loading' ? (

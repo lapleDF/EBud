@@ -15,7 +15,7 @@ import {COLORS} from '../../constants/color';
 import {SPACING} from '../../constants/spacing';
 import {AppDispatch} from '../../store/store';
 import {BOOK_ACTION} from '../../store/actions';
-import {LibraryScreenProps} from '../../types/navigation/types';
+import {RootStackScreenProps} from '../../types/navigation/types';
 
 interface BookItemProps {
   item: Book;
@@ -24,11 +24,12 @@ interface BookItemProps {
 
 const BookItem = ({item, isFavorite = false}: BookItemProps) => {
   const navigation =
-    useNavigation<LibraryScreenProps<'Preview'>['navigation']>();
+    useNavigation<RootStackScreenProps<'LibraryNavigator'>['navigation']>();
 
   const onPress = () => {
-    navigation.navigate('Preview', {
-      bookId: item.id,
+    navigation.navigate('LibraryNavigator', {
+      screen: 'Preview',
+      params: {bookId: item.id},
     });
   };
 

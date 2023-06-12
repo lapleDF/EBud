@@ -14,7 +14,7 @@ const OnboardingScreen = () => {
     useNavigation<RootStackScreenProps<'Onboarding'>['navigation']>();
 
   const handleComplete = () => {
-    navigation.navigate('Authentication');
+    navigation.navigate('Authentication', {screen: 'Login'});
     storeDataAsyncStorage(ASYNC_STORAGE.isFirstLaunch, 'false');
   };
   return (

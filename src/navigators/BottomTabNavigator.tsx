@@ -20,11 +20,11 @@ const BottomTabNavigator = () => {
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
   const rootState: RootState = useSelector((state: RootState) => state);
   const navigation =
-    useNavigation<BottomTabScreenProps<'CourseNavigator'>['navigation']>();
+    useNavigation<BottomTabScreenProps<'Course'>['navigation']>();
 
   const handleFocus = () =>
     BackHandler.addEventListener('hardwareBackPress', () => {
-      navigation.navigate('CourseNavigator');
+      navigation.navigate('Course');
       handleAnimatedStart(0);
       return true;
     });
@@ -49,14 +49,10 @@ const BottomTabNavigator = () => {
   return (
     <>
       <Tab.Navigator
-        initialRouteName="CourseNavigator"
+        initialRouteName="Course"
         screenOptions={{
           tabBarShowLabel: false,
-          tabBarStyle: rootState.managedRoute.bottomTabRouteName.includes(
-            rootState.managedRoute.currentRouteName,
-          )
-            ? stytes.tabBarContainer
-            : stytes.hideTabBar,
+          tabBarStyle: stytes.tabBarContainer,
         }}>
         <Tab.Group>
           {BOTTOM_TAB_ROUTE.map((route, index) => (
@@ -74,18 +70,14 @@ const BottomTabNavigator = () => {
           ))}
         </Tab.Group>
       </Tab.Navigator>
-      {rootState.managedRoute.bottomTabRouteName.includes(
-        rootState.managedRoute.currentRouteName,
-      ) && (
-        <Animated.View
-          style={[
-            stytes.indicator,
-            {
-              transform: [{translateX: tabOffsetValue}],
-            },
-          ]}
-        />
-      )}
+      <Animated.View
+        style={[
+          stytes.indicator,
+          {
+            transform: [{translateX: tabOffsetValue}],
+          },
+        ]}
+      />
     </>
   );
 };

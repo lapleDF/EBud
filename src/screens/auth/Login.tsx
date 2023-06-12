@@ -33,7 +33,7 @@ const Login = () => {
         },
       );
       setIsLoading(false);
-      navigation.navigate('BottomTab');
+      navigation.navigate('BottomTab', {screen: 'Course'});
     } catch (error: any) {
       setIsLoading(false);
       if (error?.message === 'Invalid username/password.') {
@@ -66,7 +66,7 @@ const Login = () => {
         <CSButton title="Đăng nhập" onPress={login} />
         <CSText>
           Chưa có tài khoản?{' '}
-          <Link to={{screen: 'register'}}>
+          <Link to={{screen: 'Authentication', params: {screen: 'Register'}}}>
             <CSText color="primaryDark">Đăng ký</CSText>
           </Link>
         </CSText>

@@ -9,6 +9,10 @@ export type RootStackParamList = {
   Onboarding: undefined;
   Authentication: NavigatorScreenParams<AuthStackParamList> | undefined;
   BottomTab: NavigatorScreenParams<BottomTabParamList> | undefined;
+  CourseNavigator: NavigatorScreenParams<CourseStackParamList> | undefined;
+  LibraryNavigator: NavigatorScreenParams<LibraryStackParamList> | undefined;
+  GameNavigator: NavigatorScreenParams<GameStackParamList> | undefined;
+  AccountNavigator: NavigatorScreenParams<AccountStackParamList> | undefined;
 };
 
 export type AuthStackParamList = {
@@ -17,10 +21,10 @@ export type AuthStackParamList = {
 };
 
 export type BottomTabParamList = {
-  CourseNavigator: NavigatorScreenParams<CourseStackParamList> | undefined;
-  LibraryNavigator: NavigatorScreenParams<LibraryStackParamList> | undefined;
-  GameNavigator: NavigatorScreenParams<GameStackParamList> | undefined;
-  AccountNavigator: NavigatorScreenParams<AccountStackParamList> | undefined;
+  Course: NavigatorScreenParams<CourseStackParamList> | undefined;
+  Library: NavigatorScreenParams<LibraryStackParamList> | undefined;
+  Game: NavigatorScreenParams<GameStackParamList> | undefined;
+  Account: NavigatorScreenParams<AccountStackParamList> | undefined;
 };
 
 export type CourseStackParamList = {
@@ -67,3 +71,9 @@ export type AccountScreenProps<T extends keyof AccountStackParamList> =
 
 export type LibraryScreenProps<T extends keyof LibraryStackParamList> =
   StackScreenProps<LibraryStackParamList, T>;
+
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
+}

@@ -23,7 +23,7 @@ export interface SectionCourseProps {
 
 const Courses = () => {
   const navigation =
-    useNavigation<BottomTabScreenProps<'CourseNavigator'>['navigation']>();
+    useNavigation<BottomTabScreenProps<'Course'>['navigation']>();
   const state: RootState = useSelector((rootState: RootState) => rootState);
   const user: User = state.user;
   const course: CourseList = state.course;

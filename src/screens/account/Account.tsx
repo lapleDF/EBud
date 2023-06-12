@@ -20,7 +20,7 @@ const Account = () => {
     AsyncStorage.removeItem(ASYNC_STORAGE.userInfo);
     AppDispatch(USER_ACTION.LOGOUT, null);
     refBtnLogout.current?.close();
-    navigation.navigate('Authentication');
+    navigation.navigate('Authentication', {screen: 'Login'});
   };
 
   return (

@@ -92,7 +92,7 @@ const Register = () => {
           />
           <CSText size={'sm'}>
             Tôi đồng ý với các{' '}
-            <Link to={{screen: 'register'}}>
+            <Link to={{screen: 'Authentication', params: {screen: 'Register'}}}>
               <CSText size={'sm'} color="primaryDark">
                 điều khoản và chính sách
               </CSText>

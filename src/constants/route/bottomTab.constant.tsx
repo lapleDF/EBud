@@ -4,11 +4,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import {COLORS} from '../color';
 import HeaderScreen from '../../components/HeaderScreen';
-import CourseNavigator from '../../navigators/CourseNavigator';
-import LibraryNavigator from '../../navigators/LibraryNavigator';
-import GameNavigator from '../../navigators/GameNavigator';
-import AccountNavigator from '../../navigators/AccountNavigator';
 import {BottomTabParamList} from '../../types/navigation/types';
+import Courses from '../../screens/course/Courses';
+import Library from '../../screens/library/Library';
+import Game from '../../screens/game/Game';
+import Account from '../../screens/account/Account';
 
 interface IconRenderProps {
   focused: boolean;
@@ -39,10 +39,10 @@ const IconRender = (props: IconRenderProps) => {
 
 export const BOTTOM_TAB_ROUTE: BottomTabRouteProps[] = [
   {
-    name: 'CourseNavigator',
-    component: CourseNavigator,
+    name: 'Course',
+    component: Courses,
     options: {
-      headerShown: false,
+      headerShown: true,
       tabBarIcon: (props: tabBarIconProps) => (
         <IconRender
           focused={props.focused}
@@ -53,10 +53,10 @@ export const BOTTOM_TAB_ROUTE: BottomTabRouteProps[] = [
     },
   },
   {
-    name: 'LibraryNavigator',
-    component: LibraryNavigator,
+    name: 'Library',
+    component: Library,
     options: {
-      headerShown: false,
+      headerShown: true,
       tabBarIcon: (props: tabBarIconProps) => (
         <IconRender
           focused={props.focused}
@@ -68,10 +68,10 @@ export const BOTTOM_TAB_ROUTE: BottomTabRouteProps[] = [
     },
   },
   {
-    name: 'GameNavigator',
-    component: GameNavigator,
+    name: 'Game',
+    component: Game,
     options: {
-      headerShown: false,
+      headerShown: true,
       tabBarIcon: (props: tabBarIconProps) => (
         <IconRender
           focused={props.focused}
@@ -82,8 +82,8 @@ export const BOTTOM_TAB_ROUTE: BottomTabRouteProps[] = [
     },
   },
   {
-    name: 'AccountNavigator',
-    component: AccountNavigator,
+    name: 'Account',
+    component: Account,
     options: {
       headerShown: true,
       tabBarIcon: (props: tabBarIconProps) => (

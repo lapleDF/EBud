@@ -11,7 +11,7 @@ import Search from '../../components/library/Search';
 import {Book, BookList} from '../../types';
 import {SPACING} from '../../constants/spacing';
 import SectionHeader from '../../components/sectionList/SectionHeader';
-import {LibraryScreenProps} from '../../types/navigation/types';
+import {RootStackScreenProps} from '../../types/navigation/types';
 import BookItem from '../../components/library/BookItem';
 
 export interface SectionBookProps {
@@ -37,7 +37,7 @@ const Empty = ({search}: EmptyProps) => {
 
 const Library = () => {
   const navigation =
-    useNavigation<LibraryScreenProps<'Library'>['navigation']>();
+    useNavigation<RootStackScreenProps<'BottomTab'>['navigation']>();
   const state: RootState = useSelector((rootState: RootState) => rootState);
   const books: BookList = state.book;
   const [searchValue, setSearchValue] = useState<string>('');
@@ -55,13 +55,15 @@ const Library = () => {
               />
             ),
             iconLeft: 'heart',
-            onPressLeft: () => navigation.navigate('Favorite'),
+            onPressLeft: () =>
+              navigation.navigate('LibraryNavigator', {screen: 'Favorite'}),
           }),
       });
       AppDispatch(BOOK_ACTION.GET_LIST);
     };
     firstMount();
-  }, [navigation, searchValue]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigation]);
 
   useLayoutEffect(() => {
     if (searchValue.length > 0) {

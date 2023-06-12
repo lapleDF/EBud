@@ -32,7 +32,7 @@ const RootNavigator = () => {
         return;
       }
       if (user === null) {
-        navigation.navigate('Authentication');
+        navigation.navigate('Authentication', {screen: 'Login'});
       } else {
         AppDispatch(USER_ACTION.GET_INFO, user.id);
         navigation.reset({
