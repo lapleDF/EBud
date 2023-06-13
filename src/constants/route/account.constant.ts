@@ -5,17 +5,24 @@ import FAQ from '../../screens/account/FAQ';
 import NotificationSettings from '../../screens/account/NotificationSettings';
 import ReportIssue from '../../screens/account/ReportIssue';
 import UserInfo from '../../screens/account/UserInfo';
+import type {AccountStackParamList} from '../../types/navigation/types';
 
-export const ACCOUNT_ROUTE = [
+interface AccountRouteProps {
+  name: keyof AccountStackParamList;
+  component: () => JSX.Element;
+  options?: {};
+}
+
+export const ACCOUNT_ROUTE: AccountRouteProps[] = [
   {
-    name: 'account',
+    name: 'Account',
     component: Account,
     options: {
       headerShown: false,
     },
   },
   {
-    name: 'appearance',
+    name: 'Appearance',
     component: AppearanceSetting,
     options: {
       headerShown: true,
@@ -23,7 +30,7 @@ export const ACCOUNT_ROUTE = [
     },
   },
   {
-    name: 'userInfo',
+    name: 'UserInfo',
     component: UserInfo,
     options: {
       headerShown: true,
@@ -32,7 +39,7 @@ export const ACCOUNT_ROUTE = [
     },
   },
   {
-    name: 'reportIssue',
+    name: 'ReportIssue',
     component: ReportIssue,
     options: {
       headerShown: true,
@@ -48,7 +55,7 @@ export const ACCOUNT_ROUTE = [
     },
   },
   {
-    name: 'notification',
+    name: 'Notification',
     component: NotificationSettings,
     options: {
       headerShown: true,

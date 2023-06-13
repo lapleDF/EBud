@@ -1,7 +1,7 @@
 import Parse from 'parse/react-native';
 
 import {PARSE_OBJ} from '../constants/parseObject';
-import {Game} from '../types';
+import type {Game} from '../types';
 import {convertGameData} from '../utils';
 
 export const queryGetListGame = async () => {

@@ -1,18 +1,21 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import Onboarding from 'react-native-onboarding-swiper';
-import {Image, StyleSheet} from 'react-native';
+import {Image} from 'react-native';
 
 import {ONBOARDING} from '../constants/onBoarding.constant';
 import {storeDataAsyncStorage} from '../utils';
 import {ASYNC_STORAGE} from '../constants/asyncStorage';
 import {CSText} from '../components/core';
+import type {RootStackScreenProps} from '../types/navigation/types';
+import {OnboardingScreenStyles as styles} from './Onboarding.styles';
 
 const OnboardingScreen = () => {
-  const navigation = useNavigation<any>();
+  const navigation =
+    useNavigation<RootStackScreenProps<'Onboarding'>['navigation']>();
 
   const handleComplete = () => {
-    navigation.navigate('authentication');
+    navigation.navigate('Authentication', {screen: 'Login'});
     storeDataAsyncStorage(ASYNC_STORAGE.isFirstLaunch, 'false');
   };
   return (
@@ -56,27 +59,5 @@ const OnboardingScreen = () => {
     />
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    width: '100%',
-    resizeMode: 'contain',
-    height: 350,
-  },
-  logo: {
-    width: '100%',
-    resizeMode: 'contain',
-    height: 250,
-  },
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    textAlign: 'center',
-    marginHorizontal: 10,
-    lineHeight: 60,
-  },
-});
 
 export default OnboardingScreen;

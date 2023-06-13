@@ -3,7 +3,7 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {CSText} from '../../core';
-import {Lesson} from '../../../types';
+import type {Lesson} from '../../../types';
 import {COLORS} from '../../../constants/color';
 import {handleSpeak} from '../../../utils';
 import {SPACING} from '../../../constants/spacing';

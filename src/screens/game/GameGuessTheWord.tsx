@@ -1,8 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import Lottie from 'lottie-react-native';
 import {useSelector} from 'react-redux';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import {useNavigation} from '@react-navigation/native';
 
 import GuessWordItem from '../../components/game/GuessWordItem';
 import {
@@ -15,15 +16,16 @@ import {
 import GuessWordListText from '../../components/game/GuessWordListText';
 import {SPACING} from '../../constants/spacing';
 import {handleSpeak, shuffleArray} from '../../utils';
-import {GuessTheWordList} from '../../types';
+import type {GuessTheWordList} from '../../types';
 import {AppDispatch, RootState} from '../../store/store';
 import {
   GAME_ACTION,
   GUESS_THE_WORD_ACTION,
   USER_ACTION,
 } from '../../store/actions';
-import {useNavigation} from '@react-navigation/native';
-import {PlayingGame} from '../../types/PlayingGame';
+import type {PlayingGame} from '../../types/PlayingGame';
+import type {GameScreenProps} from '../../types/navigation/types';
+import {GameGuessTheWordStyles as styles} from './GameGuessTheWord.styles';
 
 interface GameGuessTheWordProps {
   gameId: string;
@@ -39,6 +41,7 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
   const [wordList, setWordList] = useState<string[]>([]);
   const [score, setScore] = useState(0);
   const refModal = useRef<RBSheet>();
+
   const [level, setLevel] = useState(
     (userGameInfo.find(
       item =>
@@ -46,7 +49,9 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
         item.currentLevel !== guessTheWordata.maxLevel,
     )?.currentLevel || 0) + 1,
   );
-  const navigation = useNavigation<any>();
+
+  const navigation =
+    useNavigation<GameScreenProps<'GamePlaying'>['navigation']>();
 
   const handlePressItem = (index: number) => {
     setActiveIndex(index);
@@ -169,7 +174,7 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
       <CSModal
         refRBSheet={refModal}
         height={SPACING.screenHeight * 0.35}
-        closeBtn={false}>
+        isShowCloseBtn={false}>
         {score === guessTheWordata.list.length && (
           <Lottie
             source={require('../../assets/images/congratulation.json')}
@@ -197,7 +202,7 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
           ) : (
             <CSButton
               title="Thoát"
-              onPress={() => navigation.navigate('game')}
+              onPress={() => navigation.navigate('Game')}
             />
           )}
         </View>
@@ -242,40 +247,3 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
 };
 
 export default GameGuessTheWord;
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: SPACING.px,
-    paddingVertical: 15,
-  },
-  contentContainer: {
-    gap: (SPACING.screenWidth - SPACING.px * 2) * 0.08,
-    width: '100%',
-    height: '100%',
-    justifyContent: 'flex-start',
-  },
-  comlumnWrapper: {
-    justifyContent: 'space-between',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  imageCongratulation: {
-    width: 500,
-    height: 500,
-    zIndex: 0,
-    position: 'absolute',
-    resizeMode: 'center',
-  },
-  btnControls: {
-    justifyContent: 'center',
-    gap: 30,
-    alignItems: 'center',
-    flexDirection: 'row',
-    width: '100%',
-  },
-  text: {
-    textAlign: 'center',
-  },
-});

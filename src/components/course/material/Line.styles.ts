@@ -1,22 +1,9 @@
-import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import {StyleSheet} from 'react-native';
 
-import {SPACING} from '../../../constants/spacing';
 import {COLORS} from '../../../constants/color';
+import {RADIUS} from './Line';
 
-interface LineProps {
-  variant: 'line12' | 'line3';
-  isActive?: boolean;
-}
-
-const RADIUS = SPACING.screenWidth / 6;
-
-const Line = ({variant, isActive = false}: LineProps) => {
-  return <View style={[styles[variant], isActive && styles.lineActive]} />;
-};
-export {Line};
-
-const styles = StyleSheet.create({
+export const LineStyles = StyleSheet.create({
   line12: {
     height: RADIUS * 2 - 15,
     width: 10,

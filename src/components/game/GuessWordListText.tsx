@@ -1,7 +1,8 @@
-import {ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
+import {ScrollView, TouchableOpacity} from 'react-native';
 import React from 'react';
+
 import {CSText} from '../core';
-import {COLORS} from '../../constants/color';
+import {GuessWordListTextStyles as styles} from './GuessWordListText.styles';
 
 interface GuessWordItemTextProps {
   wordList: string[];
@@ -27,21 +28,3 @@ const GuessWordListText = ({wordList, onPress}: GuessWordItemTextProps) => {
 };
 
 export default GuessWordListText;
-
-const styles = StyleSheet.create({
-  item: {
-    backgroundColor: COLORS.primaryDark,
-    borderRadius: 6,
-    width: '48%',
-  },
-  text: {
-    textAlign: 'center',
-  },
-  footerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-    width: '100%',
-    rowGap: 20,
-  },
-});

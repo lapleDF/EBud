@@ -1,24 +1,20 @@
 import React, {useEffect} from 'react';
-import {
-  NavigationProp,
-  ParamListBase,
-  RouteProp,
-  useNavigation,
-} from '@react-navigation/native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 
 import VocabLesson from './VocabLesson';
 import HeaderScreen from '../../components/HeaderScreen';
 import {AppDispatch} from '../../store/store';
 import {LESSON_ACTION} from '../../store/actions';
 import Content from '../../components/course/grammarAndPronouce/Content';
-interface LessonProps {
-  navigation: NavigationProp<any>;
-  route: RouteProp<ParamListBase>;
-}
+import type {
+  CourseScreenProps,
+  CourseStackParamList,
+} from '../../types/navigation/types';
 
-const Lesson = (props: LessonProps) => {
-  const {course}: any = props.route.params;
-  const navigation = useNavigation<any>();
+const Lesson = () => {
+  const route = useRoute<RouteProp<CourseStackParamList, 'Lesson'>>();
+  const {course} = route.params;
+  const navigation = useNavigation<CourseScreenProps<'Lesson'>['navigation']>();
 
   useEffect(() => {
     AppDispatch(LESSON_ACTION.GET_LESSON_LIST, {
@@ -40,7 +36,7 @@ const Lesson = (props: LessonProps) => {
           } - ${course.name}`,
           backBtn: true,
           onPressRight() {
-            navigation.navigate('vocabStared');
+            navigation.navigate('VocabStared');
           },
           iconRight: course.skill === 'vocab' ? 'star' : undefined,
         }),
