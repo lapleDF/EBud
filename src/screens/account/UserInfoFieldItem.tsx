@@ -18,7 +18,7 @@ interface UserInfoFieldItemProps {
 const UserInfoFieldItem = (props: UserInfoFieldItemProps) => {
   return (
     <View style={styles.infoItem}>
-      <CSText>{props.label}</CSText>
+      <CSText variant="PoppinsBold">{props.label}</CSText>
       <TouchableOpacity
         onPress={() => props.onPressEditBtn(props.index)}
         style={styles.editBtn}>
@@ -29,6 +29,7 @@ const UserInfoFieldItem = (props: UserInfoFieldItemProps) => {
         onChangeText={props.onChangeText}
         textInputProps={{editable: props.editable}}
         styleContainer={styles.input}
+        styleInputFiled={styles.inpuField}
       />
     </View>
   );

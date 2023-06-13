@@ -6,20 +6,25 @@ import {TouchableNativeFeedback} from 'react-native-gesture-handler';
 import {CSText} from '../core';
 import {COLORS} from '../../constants/color';
 import {useNavigation} from '@react-navigation/native';
+import type {
+  AccountStackParamList,
+  RootStackScreenProps,
+} from '../../types/navigation/types';
 
 interface SettingItemProps {
   label: string;
   icon: string;
   onPress?: () => void;
-  routeName?: string;
+  routeName?: keyof AccountStackParamList;
 }
 
 const SettingItem = ({label, icon, onPress, routeName}: SettingItemProps) => {
-  const navigation = useNavigation<any>();
+  const navigation =
+    useNavigation<RootStackScreenProps<'AccountNavigator'>['navigation']>();
 
   const handlePressItem = () => {
     if (routeName) {
-      navigation.navigate(routeName);
+      navigation.navigate('AccountNavigator', {screen: routeName});
     } else {
       onPress && onPress();
     }

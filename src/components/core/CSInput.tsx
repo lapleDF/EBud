@@ -2,6 +2,7 @@ import {
   StyleProp,
   TextInput,
   TextInputProps,
+  TextStyle,
   View,
   ViewStyle,
 } from 'react-native';
@@ -22,6 +23,7 @@ interface CSInputProps {
   styleContainer?: StyleProp<ViewStyle>;
   onPressIcon?: () => void;
   textInputProps?: TextInputProps;
+  styleInputFiled?: StyleProp<TextStyle>;
 }
 
 const CSInput = ({
@@ -39,7 +41,7 @@ const CSInput = ({
     <View style={[styles.container, props.styleContainer]}>
       <View style={[styles.wrapper, props.styleWrapper]}>
         <TextInput
-          style={styles.inputFiled}
+          style={props.styleInputFiled || styles.inputFiled}
           defaultValue={defaultValue}
           onChangeText={props.onChangeText}
           secureTextEntry={isSecure}
