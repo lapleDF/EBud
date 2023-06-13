@@ -1,10 +1,10 @@
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import React, {useState} from 'react';
 import {Link, useNavigation} from '@react-navigation/native';
 import Parse from 'parse/react-native';
 
 import {CSButton} from '../../components/core/CSButton';
-import {SPACING} from '../../constants/spacing';
+import {LoginStyles as styles} from './Login.styles';
 import {AppDispatch} from '../../store/store';
 import {USER_ACTION} from '../../store/actions';
 import {CSInput, CSLayout, CSLoading, CSText} from '../../components/core';
@@ -75,21 +75,4 @@ const Login = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'space-between',
-    paddingVertical: 100,
-    alignItems: 'center',
-    paddingHorizontal: SPACING.px,
-  },
-  groupInput: {
-    width: '100%',
-    gap: 20,
-  },
-  groupBtn: {
-    width: '100%',
-    gap: 10,
-    alignItems: 'center',
-  },
-});
 export default Login;

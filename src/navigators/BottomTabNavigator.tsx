@@ -1,20 +1,22 @@
-import React, {useEffect, useRef} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useRef} from 'react';
+import {Animated, BackHandler} from 'react-native';
+import {useSelector} from 'react-redux';
 
-import {Animated, BackHandler, StyleSheet} from 'react-native';
-import {COLORS} from '../constants/color';
 import {BOTTOM_TAB_ROUTE} from '../constants/route/bottomTab.constant';
 import {SPACING} from '../constants/spacing';
-import {AppDispatch, RootState} from '../store/store';
-import {useSelector} from 'react-redux';
 import {COURSE_ACTION} from '../store/actions';
+import {AppDispatch, RootState} from '../store/store';
 import {
   BottomTabParamList,
   BottomTabScreenProps,
 } from '../types/navigation/types';
-import {useNavigation} from '@react-navigation/native';
+import {BottomTabNavigatorStytes as styles} from './BottomTabNavigator.styles';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
+
+export const WIDTH_TAB_ITEM = (SPACING.screenWidth - 40) / 4;
 
 const BottomTabNavigator = () => {
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
@@ -37,7 +39,7 @@ const BottomTabNavigator = () => {
 
   const handleAnimatedStart = (index: number) => {
     Animated.spring(tabOffsetValue, {
-      toValue: getWithTabItem() * index,
+      toValue: WIDTH_TAB_ITEM * index,
       useNativeDriver: true,
     }).start();
   };
@@ -52,7 +54,7 @@ const BottomTabNavigator = () => {
         initialRouteName="Course"
         screenOptions={{
           tabBarShowLabel: false,
-          tabBarStyle: stytes.tabBarContainer,
+          tabBarStyle: styles.tabBarContainer,
         }}>
         <Tab.Group>
           {BOTTOM_TAB_ROUTE.map((route, index) => (
@@ -72,7 +74,7 @@ const BottomTabNavigator = () => {
       </Tab.Navigator>
       <Animated.View
         style={[
-          stytes.indicator,
+          styles.indicator,
           {
             transform: [{translateX: tabOffsetValue}],
           },
@@ -82,35 +84,4 @@ const BottomTabNavigator = () => {
   );
 };
 
-const getWithTabItem = () => {
-  return (SPACING.screenWidth - 40) / 4;
-};
-
-const stytes = StyleSheet.create({
-  tabBarContainer: {
-    position: 'absolute',
-    bottom: 30,
-    marginHorizontal: 20,
-    backgroundColor: COLORS.bgGrey,
-    borderRadius: 10,
-    height: 70,
-    shadowColor: COLORS.black,
-    shadowOpacity: 0.06,
-    shadowOffset: {
-      width: 10,
-      height: 10,
-    },
-    borderTopWidth: 0,
-  },
-  hideTabBar: {display: 'none'},
-  indicator: {
-    width: getWithTabItem() - 40,
-    height: 5,
-    backgroundColor: COLORS.primaryLight,
-    position: 'absolute',
-    bottom: 83,
-    left: 40,
-    borderRadius: 5,
-  },
-});
 export default BottomTabNavigator;

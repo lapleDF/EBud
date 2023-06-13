@@ -1,14 +1,14 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useRef, useState} from 'react';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
 
 import HeaderScreen from '../../components/HeaderScreen';
 import {GameList, User} from '../../types';
 import {AppDispatch, RootState} from '../../store/store';
 import {CSLayout, CSLoading, CSModal, CSText} from '../../components/core';
-import {SPACING} from '../../constants/spacing';
+import {GameStyles as styles} from './Game.styles';
 import GameItem from '../../components/game/GameItem';
 import {GameScreenProps} from '../../types/navigation/types';
 import {GAME_ACTION} from '../../store/actions';
@@ -63,17 +63,5 @@ const Game = () => {
     </CSLayout>
   );
 };
-
-const styles = StyleSheet.create({
-  contentContainer: {
-    paddingHorizontal: SPACING.px,
-    paddingBottom: SPACING.heightBottomTab,
-    marginTop: 20,
-    gap: 20,
-  },
-  gameRule: {
-    textAlign: 'justify',
-  },
-});
 
 export default Game;

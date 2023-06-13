@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Link, useNavigation} from '@react-navigation/native';
 import Parse from 'parse/react-native';
 
 import {CSButton, CSButtonBack} from '../../components/core/CSButton';
-import {SPACING} from '../../constants/spacing';
+import {RegisterStyles as styles} from './Register.styles';
 import {User} from '../../types';
 import {initialUser} from '../../store/reducers/userReducer';
 import {COLORS} from '../../constants/color';
@@ -105,29 +105,4 @@ const Register = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 100,
-    paddingHorizontal: SPACING.px,
-  },
-  groupBtn: {
-    width: '100%',
-    alignItems: 'center',
-    gap: 15,
-  },
-  groupInput: {
-    width: '100%',
-    alignItems: 'center',
-    gap: 25,
-  },
-  agreeBtnGroup: {
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    columnGap: 10,
-  },
-});
 export default Register;

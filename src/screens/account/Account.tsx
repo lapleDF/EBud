@@ -1,8 +1,9 @@
 import React, {useRef} from 'react';
+import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import {StyleSheet, View} from 'react-native';
+import {AccountStyles as styles} from './Account.styles';
 
 import {CSButton} from '../../components/core/CSButton';
 import {ASYNC_STORAGE} from '../../constants/asyncStorage';
@@ -51,15 +52,4 @@ const Account = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  groupBtnModal: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  textCenter: {
-    textAlign: 'center',
-  },
-});
 export default Account;

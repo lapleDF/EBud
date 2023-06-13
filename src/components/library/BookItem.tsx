@@ -1,10 +1,4 @@
-import {
-  Image,
-  Pressable,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, Pressable, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -12,10 +6,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {CSText} from '../core';
 import {Book} from '../../types';
 import {COLORS} from '../../constants/color';
-import {SPACING} from '../../constants/spacing';
 import {AppDispatch} from '../../store/store';
 import {BOOK_ACTION} from '../../store/actions';
 import {RootStackScreenProps} from '../../types/navigation/types';
+import {BookItemStyles as styles} from './BookItem.styles';
 
 interface BookItemProps {
   item: Book;
@@ -62,38 +56,5 @@ const BookItem = ({item, isFavorite = false}: BookItemProps) => {
     </Pressable>
   );
 };
-
-const styles = StyleSheet.create({
-  imgWrap: {
-    width: '47%',
-    height: 230,
-    marginBottom: (SPACING.screenWidth - SPACING.px * 2) * 0.06,
-  },
-  img: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'contain',
-    borderRadius: 5,
-  },
-  title: {
-    position: 'absolute',
-    width: '100%',
-    height: 60,
-    bottom: 0,
-    left: 0,
-    backgroundColor: COLORS.overlay,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-  },
-  titleText: {
-    textAlign: 'center',
-  },
-  saveBtn: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-  },
-});
 
 export default BookItem;

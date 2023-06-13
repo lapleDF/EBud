@@ -1,8 +1,8 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, View} from 'react-native';
 
-import {SPACING} from '../../../constants/spacing';
 import {CSText} from '../../core';
+import {MainElementStyles as styles} from './MainElement.styles';
 
 interface MainElementProps {
   name: string;
@@ -10,8 +10,6 @@ interface MainElementProps {
   totalLesson: number;
   cover: string;
 }
-
-const RADIUS = SPACING.screenWidth / 6;
 
 const MainElement = (props: MainElementProps) => {
   return (
@@ -26,31 +24,3 @@ const MainElement = (props: MainElementProps) => {
 };
 
 export {MainElement};
-
-const styles = StyleSheet.create({
-  mainEle: {
-    width: RADIUS * 2,
-    height: RADIUS * 2,
-    borderRadius: 70,
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 1,
-  },
-  image: {
-    width: '90%',
-    height: '90%',
-    resizeMode: 'cover',
-    borderRadius: 70,
-  },
-  courseTitle: {
-    position: 'absolute',
-    top: -25,
-    width: 160,
-    textAlign: 'center',
-  },
-  courseScore: {
-    position: 'absolute',
-    bottom: -30,
-  },
-});

@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import Lottie from 'lottie-react-native';
 import {useSelector} from 'react-redux';
 import RBSheet from 'react-native-raw-bottom-sheet';
@@ -25,6 +25,7 @@ import {
 } from '../../store/actions';
 import {PlayingGame} from '../../types/PlayingGame';
 import {GameScreenProps} from '../../types/navigation/types';
+import {GameGuessTheWordStyles as styles} from './GameGuessTheWord.styles';
 
 interface GameGuessTheWordProps {
   gameId: string;
@@ -246,40 +247,3 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
 };
 
 export default GameGuessTheWord;
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: SPACING.px,
-    paddingVertical: 15,
-  },
-  contentContainer: {
-    gap: (SPACING.screenWidth - SPACING.px * 2) * 0.08,
-    width: '100%',
-    height: '100%',
-    justifyContent: 'flex-start',
-  },
-  comlumnWrapper: {
-    justifyContent: 'space-between',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  imageCongratulation: {
-    width: 500,
-    height: 500,
-    zIndex: 0,
-    position: 'absolute',
-    resizeMode: 'center',
-  },
-  btnControls: {
-    justifyContent: 'center',
-    gap: 30,
-    alignItems: 'center',
-    flexDirection: 'row',
-    width: '100%',
-  },
-  text: {
-    textAlign: 'center',
-  },
-});

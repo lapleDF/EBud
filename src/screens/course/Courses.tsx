@@ -1,4 +1,4 @@
-import {RefreshControl, SectionList, StyleSheet, View} from 'react-native';
+import {RefreshControl, SectionList, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux';
 import HeaderScreen from '../../components/HeaderScreen';
 import {AppDispatch, RootState} from '../../store/store';
 import {CourseItem, CourseList, User} from '../../types';
-import {SPACING} from '../../constants/spacing';
+import {CourseStyles as styles} from './Course.styles';
 import {CSButton} from '../../components/core/CSButton';
 import {splitChunkArray} from '../../utils';
 import {CSLayout, CSLoading} from '../../components/core';
@@ -115,21 +115,5 @@ const Courses = () => {
     </CSLayout>
   );
 };
-
-const styles = StyleSheet.create({
-  footerSection: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  contentContainerSection: {
-    paddingHorizontal: SPACING.px,
-    paddingBottom: SPACING.heightBottomTab,
-  },
-  headerSection: {
-    marginTop: 40,
-  },
-});
 
 export default Courses;

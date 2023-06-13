@@ -1,12 +1,13 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {COLORS} from '../../../constants/color';
 import {SPACING} from '../../../constants/spacing';
 import {CourseItem} from '../../../types';
+import {CircleProgressStyles as styles} from './CircleProgress.styles';
 import {RootStackScreenProps} from '../../../types/navigation/types';
 
 interface CircleProgressProps {
@@ -63,27 +64,10 @@ const CircleProgress = ({
         showProgressValue={false}
         activeStrokeColor={COLORS.primaryLight}
         inActiveStrokeColor={COLORS.borderDeactive}
+        delay={1000}
       />
     </TouchableOpacity>
   );
 };
 
 export {CircleProgress};
-
-const styles = StyleSheet.create({
-  circleWrap: {
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 20,
-  },
-  lockIcon: {
-    position: 'absolute',
-    borderRadius: 70,
-    backgroundColor: COLORS.overlay,
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
