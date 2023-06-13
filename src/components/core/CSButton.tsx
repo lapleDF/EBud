@@ -1,16 +1,14 @@
 import {
   Image,
   StyleProp,
-  StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
   ViewStyle,
 } from 'react-native';
 import React from 'react';
-import {COLORS} from '../../constants/color';
 import {CSText} from './CSText';
 import {useNavigation} from '@react-navigation/native';
-import {SPACING} from '../../constants/spacing';
+import {CSButtonStyles as styles} from './CSButton.styles';
 import {FONTS} from '../../constants/font';
 
 export interface CSButtonProps {
@@ -61,31 +59,5 @@ const CSButtonBack = ({isAbsolute = true, ...props}: CSButtonBackProps) => {
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  btn: {
-    paddingHorizontal: 30,
-    paddingVertical: 10,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  primary: {
-    backgroundColor: COLORS.primaryDark,
-  },
-  secondary: {
-    borderColor: COLORS.primaryDark,
-    borderWidth: 2,
-  },
-  imgBackBtn: {
-    width: 50,
-    height: 40,
-    resizeMode: 'contain',
-  },
-  btnBack: {
-    position: 'absolute',
-    top: SPACING.px,
-    left: SPACING.px,
-  },
-});
 
 export {CSButton, CSButtonBack};

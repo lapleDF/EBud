@@ -1,6 +1,6 @@
 import Parse from 'parse/react-native';
 import {PARSE_OBJ} from '../constants/parseObject';
-import {GuessTheWordItem} from '../types';
+import type {GuessTheWordItem} from '../types';
 import {convertGuessTheWordGameData} from '../utils';
 
 export const queryGetGuessTheWordGame = async (level: number) => {

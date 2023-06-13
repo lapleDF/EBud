@@ -3,8 +3,8 @@ import React, {useEffect, useRef} from 'react';
 
 import {CSText} from '../../core';
 import {SPACING} from '../../../constants/spacing';
+import type {Lesson} from '../../../types';
 import {PlaylistStyles as styles} from './Playlist.styles';
-import {Lesson} from '../../../types';
 
 export interface PlaylistProps {
   data: Lesson[];

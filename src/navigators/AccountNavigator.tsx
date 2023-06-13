@@ -1,7 +1,7 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {ACCOUNT_ROUTE} from '../constants/route/account.constant';
-import {AccountStackParamList} from '../types/navigation/types';
+import type {AccountStackParamList} from '../types/navigation/types';
 
 const AccountStack = createStackNavigator<AccountStackParamList>();
 

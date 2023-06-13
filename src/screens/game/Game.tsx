@@ -5,12 +5,12 @@ import {FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
 
 import HeaderScreen from '../../components/HeaderScreen';
-import {GameList, User} from '../../types';
+import type {GameList, User} from '../../types';
 import {AppDispatch, RootState} from '../../store/store';
 import {CSLayout, CSLoading, CSModal, CSText} from '../../components/core';
 import {GameStyles as styles} from './Game.styles';
 import GameItem from '../../components/game/GameItem';
-import {GameScreenProps} from '../../types/navigation/types';
+import type {GameScreenProps} from '../../types/navigation/types';
 import {GAME_ACTION} from '../../store/actions';
 
 const Game = () => {

@@ -4,11 +4,11 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {CSText} from '../core';
-import {Book} from '../../types';
+import type {Book} from '../../types';
 import {COLORS} from '../../constants/color';
 import {AppDispatch} from '../../store/store';
 import {BOOK_ACTION} from '../../store/actions';
-import {RootStackScreenProps} from '../../types/navigation/types';
+import type {RootStackScreenProps} from '../../types/navigation/types';
 import {BookItemStyles as styles} from './BookItem.styles';
 
 interface BookItemProps {

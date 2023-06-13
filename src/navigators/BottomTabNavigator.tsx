@@ -8,7 +8,7 @@ import {BOTTOM_TAB_ROUTE} from '../constants/route/bottomTab.constant';
 import {SPACING} from '../constants/spacing';
 import {COURSE_ACTION} from '../store/actions';
 import {AppDispatch, RootState} from '../store/store';
-import {
+import type {
   BottomTabParamList,
   BottomTabScreenProps,
 } from '../types/navigation/types';

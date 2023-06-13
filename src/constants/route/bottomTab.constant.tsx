@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import {COLORS} from '../color';
 import HeaderScreen from '../../components/HeaderScreen';
-import {BottomTabParamList} from '../../types/navigation/types';
+import type {BottomTabParamList} from '../../types/navigation/types';
 import Courses from '../../screens/course/Courses';
 import Library from '../../screens/library/Library';
 import Game from '../../screens/game/Game';

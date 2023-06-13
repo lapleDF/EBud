@@ -6,7 +6,7 @@ import HeaderScreen from '../../components/HeaderScreen';
 import {AppDispatch} from '../../store/store';
 import {LESSON_ACTION} from '../../store/actions';
 import Content from '../../components/course/grammarAndPronouce/Content';
-import {
+import type {
   CourseScreenProps,
   CourseStackParamList,
 } from '../../types/navigation/types';

@@ -1,7 +1,7 @@
 import {View} from 'react-native';
 import React from 'react';
 
-import {CourseItem} from '../../types';
+import type {CourseItem} from '../../types';
 import {CircleProgress, Line, MainElement} from './material';
 import {GroupCourseStyles as styles} from './GroupCourse.styles';
 

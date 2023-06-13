@@ -5,12 +5,12 @@ import {Link, useNavigation} from '@react-navigation/native';
 import Parse from 'parse/react-native';
 
 import {CSButton, CSButtonBack} from '../../components/core/CSButton';
+import type {User} from '../../types';
 import {RegisterStyles as styles} from './Register.styles';
-import {User} from '../../types';
 import {initialUser} from '../../store/reducers/userReducer';
 import {COLORS} from '../../constants/color';
 import {CSInput, CSLayout, CSLoading, CSText} from '../../components/core';
-import {AuthStackScreenProps} from '../../types/navigation/types';
+import type {AuthStackScreenProps} from '../../types/navigation/types';
 
 const Register = () => {
   const [params, setParams] = useState<User>(initialUser);

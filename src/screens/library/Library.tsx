@@ -8,10 +8,10 @@ import {CSButton, CSLayout, CSLoading, CSText} from '../../components/core';
 import {AppDispatch, RootState} from '../../store/store';
 import {BOOK_ACTION} from '../../store/actions';
 import Search from '../../components/library/Search';
-import {Book, BookList} from '../../types';
+import type {Book, BookList} from '../../types';
 import {LibraryStyles as styles} from './Library.styles';
 import SectionHeader from '../../components/sectionList/SectionHeader';
-import {RootStackScreenProps} from '../../types/navigation/types';
+import type {RootStackScreenProps} from '../../types/navigation/types';
 import BookItem from '../../components/library/BookItem';
 
 export interface SectionBookProps {

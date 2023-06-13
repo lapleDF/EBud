@@ -7,8 +7,8 @@ import React from 'react';
 import {CSButton, CSText} from '../core';
 import {COLORS} from '../../constants/color';
 import {GameItemStyles as styles} from './GameItem.styles';
-import {Game} from '../../types';
-import {RootStackScreenProps} from '../../types/navigation/types';
+import type {Game} from '../../types';
+import type {RootStackScreenProps} from '../../types/navigation/types';
 
 interface GameItemProps {
   handleHelp: (gameRule: string) => void;

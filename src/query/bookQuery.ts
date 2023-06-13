@@ -2,7 +2,7 @@ import Parse from 'parse/react-native';
 
 import {PARSE_OBJ} from '../constants/parseObject';
 import {convertBookData} from '../utils';
-import {Book} from '../types';
+import type {Book} from '../types';
 
 export const queryGetListBook = async (userId: string) => {
   const bookQuery = new Parse.Query(PARSE_OBJ.book);

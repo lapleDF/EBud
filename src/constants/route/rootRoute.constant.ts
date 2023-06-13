@@ -5,7 +5,7 @@ import CourseNavigator from '../../navigators/CourseNavigator';
 import GameNavigator from '../../navigators/GameNavigator';
 import LibraryNavigator from '../../navigators/LibraryNavigator';
 import OnboardingScreen from '../../screens/Onboarding';
-import {RootStackParamList} from '../../types/navigation/types';
+import type {RootStackParamList} from '../../types/navigation/types';
 
 interface RootRouteProps {
   name: keyof RootStackParamList;

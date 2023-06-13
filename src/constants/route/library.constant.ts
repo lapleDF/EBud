@@ -2,7 +2,7 @@ import BookContent from '../../screens/library/BookContent';
 import BookPreview from '../../screens/library/BookPreview';
 import FavoriteList from '../../screens/library/FavoriteList';
 import Library from '../../screens/library/Library';
-import {LibraryStackParamList} from '../../types/navigation/types';
+import type {LibraryStackParamList} from '../../types/navigation/types';
 
 interface LibraryRouteProps {
   name: keyof LibraryStackParamList;

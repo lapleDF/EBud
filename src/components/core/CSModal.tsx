@@ -1,10 +1,12 @@
-import {StyleProp, StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleProp, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 import RBSheet from 'react-native-raw-bottom-sheet';
+
 import {SPACING} from '../../constants/spacing';
 import {COLORS} from '../../constants/color';
 import {CSLayout} from './CSLayout';
+import {CSModalStyles as styles} from './CSModal.styles';
 
 interface CSModalProps {
   refRBSheet: any;
@@ -62,27 +64,5 @@ const CSModal = (props: CSModalProps) => {
     </RBSheet>
   );
 };
-
-const styles = StyleSheet.create({
-  closeBtn: {
-    position: 'absolute',
-    top: 15,
-    right: 15,
-    zIndex: 10,
-  },
-  container: {
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 20,
-    paddingHorizontal: SPACING.px,
-    paddingTop: 40,
-    gap: 10,
-  },
-  wrapper: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export {CSModal};

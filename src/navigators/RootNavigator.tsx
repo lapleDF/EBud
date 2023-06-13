@@ -8,7 +8,7 @@ import {getDataAsyncStorage, getDataObjAsyncStorage} from '../utils';
 import {ASYNC_STORAGE} from '../constants/asyncStorage';
 import {AppDispatch} from '../store/store';
 import {USER_ACTION} from '../store/actions';
-import {
+import type {
   RootStackParamList,
   RootStackScreenProps,
 } from '../types/navigation/types';

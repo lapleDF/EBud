@@ -3,7 +3,7 @@ import React from 'react';
 
 import Login from '../screens/auth/Login';
 import Register from '../screens/auth/Register';
-import {AuthStackParamList} from '../types/navigation/types';
+import type {AuthStackParamList} from '../types/navigation/types';
 
 const AuthStack = createStackNavigator<AuthStackParamList>();
 

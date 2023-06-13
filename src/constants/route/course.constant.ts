@@ -2,7 +2,7 @@ import HeaderScreen from '../../components/HeaderScreen';
 import Courses from '../../screens/course/Courses';
 import Lesson from '../../screens/course/Lesson';
 import VocabStared from '../../screens/course/VocabStared';
-import {CourseStackParamList} from '../../types/navigation/types';
+import type {CourseStackParamList} from '../../types/navigation/types';
 
 interface CourseRouteProps {
   name: keyof CourseStackParamList;

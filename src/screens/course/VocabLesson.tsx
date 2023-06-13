@@ -19,8 +19,8 @@ import {SPACING} from '../../constants/spacing';
 import {VocabLessonStyles as styles} from './VocabLesson.styles';
 import {AppDispatch, RootState} from '../../store/store';
 import {LESSON_ACTION} from '../../store/actions';
-import {User} from '../../types';
-import {RootStackScreenProps} from '../../types/navigation/types';
+import type {User} from '../../types';
+import type {RootStackScreenProps} from '../../types/navigation/types';
 
 const VocabLesson = () => {
   const lesson: LessonList = useSelector((state: RootState) => state.lesson);

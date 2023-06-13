@@ -8,7 +8,7 @@ import {LoginStyles as styles} from './Login.styles';
 import {AppDispatch} from '../../store/store';
 import {USER_ACTION} from '../../store/actions';
 import {CSInput, CSLayout, CSLoading, CSText} from '../../components/core';
-import {RootStackScreenProps} from '../../types/navigation/types';
+import type {RootStackScreenProps} from '../../types/navigation/types';
 
 const Login = () => {
   const navigation =

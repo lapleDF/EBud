@@ -1,6 +1,6 @@
 import Game from '../../screens/game/Game';
 import GamePlaying from '../../screens/game/GamePlaying';
-import {GameStackParamList} from '../../types/navigation/types';
+import type {GameStackParamList} from '../../types/navigation/types';
 
 interface GameRouteProps {
   name: keyof GameStackParamList;

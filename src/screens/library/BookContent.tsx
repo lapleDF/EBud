@@ -22,8 +22,8 @@ import {
   storeDataObjAsyncStorage,
 } from '../../utils';
 import {ASYNC_STORAGE} from '../../constants/asyncStorage';
-import {TrackAudio} from '../../types';
-import {LibraryScreenProps} from '../../types/navigation/types';
+import type {TrackAudio} from '../../types';
+import type {LibraryScreenProps} from '../../types/navigation/types';
 import {BookContentStyles as styles} from './BookContent.styles';
 
 export interface BookContinueRead {

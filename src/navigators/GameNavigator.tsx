@@ -1,7 +1,7 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {GAME_ROUTE} from '../constants/route/game.constant';
-import {GameStackParamList} from '../types/navigation/types';
+import type {GameStackParamList} from '../types/navigation/types';
 
 const GameStack = createStackNavigator<GameStackParamList>();
 

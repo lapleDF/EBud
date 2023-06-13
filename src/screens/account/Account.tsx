@@ -3,14 +3,14 @@ import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import {AccountStyles as styles} from './Account.styles';
 
+import {AccountStyles as styles} from './Account.styles';
 import {CSButton} from '../../components/core/CSButton';
 import {ASYNC_STORAGE} from '../../constants/asyncStorage';
 import {AppDispatch} from '../../store/store';
 import {USER_ACTION} from '../../store/actions';
 import {CSLayout, CSModal, CSText} from '../../components/core';
-import {RootStackScreenProps} from '../../types/navigation/types';
+import type {RootStackScreenProps} from '../../types/navigation/types';
 
 const Account = () => {
   const navigation =

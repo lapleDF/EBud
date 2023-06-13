@@ -2,7 +2,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 
 import {COURSE_ROUTE} from '../constants/route/course.constant';
-import {CourseStackParamList} from '../types/navigation/types';
+import type {CourseStackParamList} from '../types/navigation/types';
 
 const CourseStack = createStackNavigator<CourseStackParamList>();
 

@@ -1,7 +1,7 @@
 import Account from '../../screens/account/Account';
 import AppearanceSetting from '../../screens/account/AppearanceSetting';
 import UserInfo from '../../screens/account/UserInfo';
-import {AccountStackParamList} from '../../types/navigation/types';
+import type {AccountStackParamList} from '../../types/navigation/types';
 
 interface AccountRouteProps {
   name: keyof AccountStackParamList;

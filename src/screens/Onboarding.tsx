@@ -7,7 +7,7 @@ import {ONBOARDING} from '../constants/onBoarding.constant';
 import {storeDataAsyncStorage} from '../utils';
 import {ASYNC_STORAGE} from '../constants/asyncStorage';
 import {CSText} from '../components/core';
-import {RootStackScreenProps} from '../types/navigation/types';
+import type {RootStackScreenProps} from '../types/navigation/types';
 import {OnboardingScreenStyles as styles} from './Onboarding.styles';
 
 const OnboardingScreen = () => {

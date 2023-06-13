@@ -10,8 +10,8 @@ import {COLORS} from '../../constants/color';
 import {BookPreviewStyles as styles} from './BookPreview.styles';
 import {BOOK_ACTION} from '../../store/actions';
 import {AppDispatch, RootState} from '../../store/store';
-import {BookList} from '../../types';
-import {LibraryScreenProps} from '../../types/navigation/types';
+import type {BookList} from '../../types';
+import type {LibraryScreenProps} from '../../types/navigation/types';
 
 const BookPreview = () => {
   const navigation =

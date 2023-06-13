@@ -7,8 +7,8 @@ import HeaderScreen from '../../components/HeaderScreen';
 import {CSLayout, CSText} from '../../components/core';
 import {FavoriteListStyles as styles} from './FavoriteList.styles';
 import {RootState} from '../../store/store';
-import {BookList} from '../../types';
-import {LibraryScreenProps} from '../../types/navigation/types';
+import type {BookList} from '../../types';
+import type {LibraryScreenProps} from '../../types/navigation/types';
 import BookItem from '../../components/library/BookItem';
 
 const EmptyComponent = () => {
