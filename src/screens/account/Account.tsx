@@ -1,21 +1,29 @@
 import React, {useRef} from 'react';
-import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {useSelector} from 'react-redux';
+import {ScrollView, TouchableOpacity, View} from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
 import {AccountStyles as styles} from './Account.styles';
 import {CSButton} from '../../components/core/CSButton';
 import {ASYNC_STORAGE} from '../../constants/asyncStorage';
-import {AppDispatch} from '../../store/store';
+import {AppDispatch, RootState} from '../../store/store';
 import {USER_ACTION} from '../../store/actions';
 import {CSLayout, CSModal, CSText} from '../../components/core';
 import type {RootStackScreenProps} from '../../types/navigation/types';
+import AccountHeader from '../../components/account/AccountHeader';
+import SettingItem from '../../components/account/SettingItem';
+import {COLORS} from '../../constants/color';
+import type {User} from '../../types';
 
 const Account = () => {
   const navigation =
     useNavigation<RootStackScreenProps<'Authentication'>['navigation']>();
   const refBtnLogout = useRef<RBSheet>();
+
+  const user: User = useSelector((state: RootState) => state.user);
 
   const logout = () => {
     AsyncStorage.removeItem(ASYNC_STORAGE.userInfo);
@@ -25,13 +33,64 @@ const Account = () => {
   };
 
   return (
-    <CSLayout>
-      <CSText>Account</CSText>
-      <CSButton
-        title="Logout"
-        onPress={() => refBtnLogout.current?.open()}
-        variant="secondary"
-      />
+    <CSLayout style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.contentContainer}
+        showsVerticalScrollIndicator={false}>
+        <AccountHeader
+          avatar={user.avatar}
+          learntLesson={user.learntLesson}
+          rank={100}
+          totalMedal={user.totalMedal}
+          totalStreak={user.totalStreak}
+          userName={user.username}
+        />
+
+        <CSText variant="PoppinsBold" style={styles.titleList}>
+          Chung
+        </CSText>
+        <SettingItem
+          label="Thông tin tài khoản"
+          icon="person-outline"
+          routeName="userInfo"
+        />
+        <SettingItem
+          label="Cài đặt hiển thị"
+          icon="settings-outline"
+          routeName="appearance"
+        />
+        <SettingItem
+          label="Cài đặt thông báo"
+          icon="notifications-outline"
+          routeName="notification"
+        />
+        <CSText variant="PoppinsBold" style={styles.titleList}>
+          Hỗ trợ
+        </CSText>
+        <SettingItem
+          label="Báo cáo sự cố"
+          icon="warning-outline"
+          routeName="reportIssue"
+        />
+        <SettingItem
+          label="Các câu hỏi thường gặp"
+          icon="help-circle-outline"
+          routeName="FAQ"
+        />
+
+        <TouchableOpacity
+          onPress={() => refBtnLogout.current?.open()}
+          style={styles.logout}>
+          <CSText color="primaryLighter" variant="PoppinsBold">
+            Đăng xuất
+          </CSText>
+          <Icon
+            name="log-out-outline"
+            size={40}
+            color={COLORS.primaryLighter}
+          />
+        </TouchableOpacity>
+      </ScrollView>
       <CSModal refRBSheet={refBtnLogout}>
         <CSText size={'lg'} color="primaryDark" variant="PoppinsBold">
           Đăng xuất?

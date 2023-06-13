@@ -3,7 +3,6 @@ import {StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {COLORS} from '../color';
-import HeaderScreen from '../../components/HeaderScreen';
 import type {BottomTabParamList} from '../../types/navigation/types';
 import Courses from '../../screens/course/Courses';
 import Library from '../../screens/library/Library';
@@ -85,7 +84,7 @@ export const BOTTOM_TAB_ROUTE: BottomTabRouteProps[] = [
     name: 'Account',
     component: Account,
     options: {
-      headerShown: true,
+      headerShown: false,
       tabBarIcon: (props: tabBarIconProps) => (
         <IconRender
           focused={props.focused}
@@ -93,7 +92,6 @@ export const BOTTOM_TAB_ROUTE: BottomTabRouteProps[] = [
           iconNameUnfocus="person"
         />
       ),
-      header: () => HeaderScreen({textLeft: 'Tài khoản của tôi'}),
     },
   },
 ];

@@ -49,6 +49,9 @@ export type AccountStackParamList = {
   Account: undefined;
   Appearance: undefined;
   UserInfo: undefined;
+  ReportIssue: undefined;
+  FAQ: undefined;
+  Notification: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =

@@ -8,4 +8,5 @@ export const PARSE_OBJ = {
   sentenceEg: 'SentenceEg',
   favoriteList: 'FavoriteList',
   GuessTheWord: 'GuessTheWord',
+  avatar: 'Avatars',
 };
