@@ -4,6 +4,7 @@ import {USER_ACTION} from '../actions';
 export const initialUser: User = {
   id: '',
   username: '',
+  displayName: '',
   email: '',
   avatar:
     'https://parsefiles.back4app.com/m3BU02yXteFvr3TV0XEGWVRClKOlaQzDYoTvPCZ1/4c29fc10ed03063f1ea4718adb47b658_winged.png',
