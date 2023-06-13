@@ -8,7 +8,7 @@ import {COLORS} from '../../constants/color';
 interface HeaderLeftItemProps {
   label: string;
   totalStreak: number;
-  iconName?: string | undefined;
+  iconName?: string;
 }
 
 const HeaderLeftItem = ({
