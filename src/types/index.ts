@@ -9,3 +9,5 @@ export * from './Book';
 export * from './BookList';
 export * from './Game';
 export * from './GameList';
+export * from './GuessTheWord';
+export * from './GuessTheWordList';

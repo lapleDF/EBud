@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {ScrollView, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
 import React, {useState} from 'react';
@@ -8,8 +8,8 @@ import {CSButton, CSLayout, CSLoading, CSText} from '../../core';
 import {AppDispatch, RootState} from '../../../store/store';
 import ExampleSentence from '../vocab/ExampleSentence';
 import {LESSON_ACTION} from '../../../store/actions';
-import {SPACING} from '../../../constants/spacing';
 import {COLORS} from '../../../constants/color';
+import {ContentStyles as styles} from './Content.styles';
 import Playlist from './Playlist';
 import CSVideo from './CSVideo';
 
@@ -62,7 +62,7 @@ const Content = ({skill}: ContentProps) => {
             <CSText size={'xlg'} variant="PoppinsBold">
               Mô tả video
             </CSText>
-            <CSText>
+            <CSText style={styles.text}>
               {skill === 'grammar'
                 ? lesson.lessons[index]?.description
                 : lesson.lessons[index]?.pronouncingUsage}
@@ -108,31 +108,5 @@ const Content = ({skill}: ContentProps) => {
     </CSLayout>
   );
 };
-
-const styles = StyleSheet.create({
-  header: {
-    width: '100%',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingHorizontal: SPACING.px,
-  },
-  textContent: {
-    paddingHorizontal: SPACING.px,
-    paddingVertical: SPACING.px * 2,
-  },
-  btnBottom: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 10,
-    marginTop: 10,
-  },
-  textCenter: {
-    textAlign: 'center',
-  },
-  btnDisabled: {
-    opacity: 0.5,
-  },
-});
 
 export default Content;

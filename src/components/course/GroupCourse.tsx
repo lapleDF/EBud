@@ -1,18 +1,16 @@
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
 
 import {CourseItem} from '../../types';
-import {CircleProgress, Line, MainElement} from './renderMaterial';
+import {CircleProgress, Line, MainElement} from './material';
+import {GroupCourseStyles as styles} from './GroupCourse.styles';
 
-interface GroupCourseRenderProps {
+interface GroupCourseProps {
   groupItem: CourseItem[];
   filtedArray: CourseItem[];
 }
 
-const GroupCourseRender = ({
-  groupItem,
-  filtedArray,
-}: GroupCourseRenderProps) => {
+const GroupCourse = ({groupItem, filtedArray}: GroupCourseProps) => {
   const [item1, ...item23] = groupItem;
   return (
     <>
@@ -58,27 +56,4 @@ const GroupCourseRender = ({
   );
 };
 
-const styles = StyleSheet.create({
-  first: {
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 200,
-    zIndex: 1,
-  },
-  secondAndThird: {
-    position: 'relative',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  item2: {
-    zIndex: 1,
-  },
-  item23: {
-    height: 200,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
-export default GroupCourseRender;
+export default GroupCourse;

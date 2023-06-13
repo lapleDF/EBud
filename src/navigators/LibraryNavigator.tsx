@@ -1,8 +1,9 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {LIBRARY_ROUTE} from '../constants/route/library.constant';
+import {LibraryStackParamList} from '../types/navigation/types';
 
-const LibraryStack = createStackNavigator();
+const LibraryStack = createStackNavigator<LibraryStackParamList>();
 
 const LibraryNavigator = () => {
   return (

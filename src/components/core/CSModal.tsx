@@ -9,13 +9,21 @@ import {CSLayout} from './CSLayout';
 interface CSModalProps {
   refRBSheet: any;
   height?: number | string;
-  closeBtn?: boolean;
+  isShowCloseBtn?: boolean;
   children?: React.ReactNode;
   style?: StyleProp<any>;
+  styleContainer?: StyleProp<any>;
 }
 
 const CSModal = (props: CSModalProps) => {
-  const {refRBSheet, height = 'auto', closeBtn = true, children, style} = props;
+  const {
+    refRBSheet,
+    height = 'auto',
+    isShowCloseBtn = true,
+    children,
+    style,
+    styleContainer,
+  } = props;
   const containerRBS = {
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -43,14 +51,14 @@ const CSModal = (props: CSModalProps) => {
         container: containerRBS,
         wrapper: styles.wrapper,
       }}>
-      {closeBtn && (
+      {isShowCloseBtn && (
         <TouchableOpacity
           onPress={() => refRBSheet.current.close()}
           style={styles.closeBtn}>
           <Icon name="x" size={26} color={COLORS.red} />
         </TouchableOpacity>
       )}
-      <CSLayout style={styles.container}>{children}</CSLayout>
+      <CSLayout style={[styles.container, styleContainer]}>{children}</CSLayout>
     </RBSheet>
   );
 };

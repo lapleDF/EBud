@@ -14,5 +14,5 @@ export interface Book {
   fileUrl: string;
   audioUrl?: string;
   isSaved: boolean;
-  trackAudio?: TrackAudio[];
+  trackAudio: TrackAudio[];
 }

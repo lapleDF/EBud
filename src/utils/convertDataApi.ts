@@ -1,5 +1,5 @@
 import Parse from 'parse/react-native';
-import {Book, LearningLesson, Lesson} from '../types';
+import {Book, Game, GuessTheWordItem, LearningLesson, Lesson} from '../types';
 
 export const convertLessonData = (
   lessonArr: Array<Parse.Object>,
@@ -72,4 +72,33 @@ export const convertBookData = (
     };
   });
   return books;
+};
+
+export const convertGameData = (gameArr: Parse.Object[]) => {
+  const games: Game[] = gameArr.map((game: Parse.Object) => {
+    return {
+      id: game.id,
+      name: game.attributes?.name,
+      cover: game.attributes?.cover?._url,
+      rule: game.attributes?.rule,
+      type: game.attributes?.type,
+    };
+  });
+  return games;
+};
+
+export const convertGuessTheWordGameData = (
+  guessTheWordGameArr: Parse.Object[],
+) => {
+  const result: GuessTheWordItem[] = guessTheWordGameArr.map(
+    (game: Parse.Object) => {
+      return {
+        id: game.id,
+        image: game.attributes?.image,
+        word: game.attributes?.word,
+        level: game.attributes?.level,
+      };
+    },
+  );
+  return result;
 };

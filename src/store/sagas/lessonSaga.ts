@@ -1,6 +1,6 @@
 import {put, select, takeLatest} from 'redux-saga/effects';
 
-import {COURSE_ACTION, LESSON_ACTION} from '../actions';
+import {COURSE_ACTION, LESSON_ACTION, USER_ACTION} from '../actions';
 import {CourseItem, Lesson, PayloadAction, User} from '../../types';
 import {
   addLessonToFavoriteList,
@@ -12,8 +12,9 @@ import {LessonList} from '../reducers/lessonReducer';
 
 function* getLesson(action: PayloadAction) {
   yield put({type: LESSON_ACTION.UPDATE_STATUS, payload: 'loading'});
+  const user: User = yield select((rootState: RootState) => rootState.user);
   try {
-    const lessonList: Lesson[] = yield getLessonList(action);
+    const lessonList: Lesson[] = yield getLessonList(action, user.id);
     yield put({
       type: LESSON_ACTION.UPDATE_LESSON_LIST,
       payload: lessonList,
@@ -78,6 +79,8 @@ function* completeLesson(action: PayloadAction) {
     type: LESSON_ACTION.UPDATE_LESSON_LIST,
     payload: sovledLessonList,
   });
+
+  yield put({type: USER_ACTION.UPDATE_LEARNT_LESSON});
 }
 
 export default function* lessonSaga() {
