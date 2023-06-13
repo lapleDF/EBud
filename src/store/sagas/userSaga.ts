@@ -2,7 +2,7 @@ import {put, select, takeLatest} from 'redux-saga/effects';
 import Parse from 'parse/react-native';
 
 import {USER_ACTION} from '../actions';
-import {PayloadAction, User} from '../../types';
+import type {PayloadAction, User} from '../../types';
 import {storeDataObjAsyncStorage} from '../../utils';
 import {ASYNC_STORAGE} from '../../constants/asyncStorage';
 import {ToastAndroid} from 'react-native';

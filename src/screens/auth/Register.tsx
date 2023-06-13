@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Link, useNavigation} from '@react-navigation/native';
 import Parse from 'parse/react-native';
 
 import {CSButton, CSButtonBack} from '../../components/core/CSButton';
-import {SPACING} from '../../constants/spacing';
-import {User} from '../../types';
+import type {User} from '../../types';
+import {RegisterStyles as styles} from './Register.styles';
 import {initialUser} from '../../store/reducers/userReducer';
 import {COLORS} from '../../constants/color';
 import {CSInput, CSLayout, CSLoading, CSText} from '../../components/core';
+import type {AuthStackScreenProps} from '../../types/navigation/types';
 
 const Register = () => {
   const [params, setParams] = useState<User>(initialUser);
@@ -19,7 +20,8 @@ const Register = () => {
   });
   const [isAgree, setIsAgree] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const navigation = useNavigation<any>();
+  const navigation =
+    useNavigation<AuthStackScreenProps<'Login'>['navigation']>();
 
   const register = async () => {
     if (!isAgree) {
@@ -37,7 +39,7 @@ const Register = () => {
         game: [],
       });
       setIsLoading(false);
-      navigation.navigate('login');
+      navigation.navigate('Login');
     } catch (error: any) {
       setIsLoading(false);
       console.log(error.message);
@@ -90,7 +92,7 @@ const Register = () => {
           />
           <CSText size={'sm'}>
             Tôi đồng ý với các{' '}
-            <Link to={{screen: 'register'}}>
+            <Link to={{screen: 'Authentication', params: {screen: 'Register'}}}>
               <CSText size={'sm'} color="primaryDark">
                 điều khoản và chính sách
               </CSText>
@@ -103,29 +105,4 @@ const Register = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 100,
-    paddingHorizontal: SPACING.px,
-  },
-  groupBtn: {
-    width: '100%',
-    alignItems: 'center',
-    gap: 15,
-  },
-  groupInput: {
-    width: '100%',
-    alignItems: 'center',
-    gap: 25,
-  },
-  agreeBtnGroup: {
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    columnGap: 10,
-  },
-});
 export default Register;

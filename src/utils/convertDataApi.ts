@@ -1,5 +1,11 @@
 import Parse from 'parse/react-native';
-import {Book, Game, GuessTheWordItem, LearningLesson, Lesson} from '../types';
+import type {
+  Book,
+  Game,
+  GuessTheWordItem,
+  LearningLesson,
+  Lesson,
+} from '../types';
 
 export const convertLessonData = (
   lessonArr: Array<Parse.Object>,

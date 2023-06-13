@@ -2,15 +2,22 @@ import HeaderScreen from '../../components/HeaderScreen';
 import Courses from '../../screens/course/Courses';
 import Lesson from '../../screens/course/Lesson';
 import VocabStared from '../../screens/course/VocabStared';
+import type {CourseStackParamList} from '../../types/navigation/types';
 
-export const COURSE_ROUTE = [
+interface CourseRouteProps {
+  name: keyof CourseStackParamList;
+  component: () => JSX.Element;
+  options?: {};
+}
+
+export const COURSE_ROUTE: CourseRouteProps[] = [
   {
-    name: 'course',
+    name: 'Course',
     component: Courses,
     options: {headerShown: true},
   },
   {
-    name: 'lesson',
+    name: 'Lesson',
     component: Lesson,
     options: {
       headerShown: true,
@@ -18,7 +25,7 @@ export const COURSE_ROUTE = [
     },
   },
   {
-    name: 'vocabStared',
+    name: 'VocabStared',
     component: VocabStared,
     options: {
       headerShown: true,

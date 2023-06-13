@@ -1,4 +1,4 @@
-import {BookList, PayloadAction} from '../../types';
+import type {BookList, PayloadAction} from '../../types';
 import {BOOK_ACTION} from '../actions';
 
 const initialBookList: BookList = {

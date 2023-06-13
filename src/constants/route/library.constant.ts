@@ -2,25 +2,32 @@ import BookContent from '../../screens/library/BookContent';
 import BookPreview from '../../screens/library/BookPreview';
 import FavoriteList from '../../screens/library/FavoriteList';
 import Library from '../../screens/library/Library';
+import type {LibraryStackParamList} from '../../types/navigation/types';
 
-export const LIBRARY_ROUTE = [
+interface LibraryRouteProps {
+  name: keyof LibraryStackParamList;
+  component: () => JSX.Element;
+  options?: {};
+}
+
+export const LIBRARY_ROUTE: LibraryRouteProps[] = [
   {
-    name: 'library',
+    name: 'Library',
     component: Library,
     options: {headerShown: true},
   },
   {
-    name: 'preview',
+    name: 'Preview',
     component: BookPreview,
     options: {headerShown: true},
   },
   {
-    name: 'content',
+    name: 'Conttent',
     component: BookContent,
     options: {headerShown: false},
   },
   {
-    name: 'favorite',
+    name: 'Favorite',
     component: FavoriteList,
     options: {headerShown: true},
   },

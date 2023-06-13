@@ -1,7 +1,7 @@
 import Parse from 'parse/react-native';
 
 import {PARSE_OBJ} from '../constants/parseObject';
-import {LearningLesson, Lesson} from '../types';
+import type {LearningLesson, Lesson} from '../types';
 import {convertLearningLessonData, convertLessonData} from '../utils';
 
 export const getCourseList = async (idUser: string) => {
