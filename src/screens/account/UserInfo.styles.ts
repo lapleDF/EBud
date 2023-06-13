@@ -14,5 +14,11 @@ export const UserInfoStyles = StyleSheet.create({
   input: {},
   infoItem: {
     width: '100%',
+    justifyContent: 'center'
+  },
+  editBtn: {
+    position: 'absolute',
+    top: 15,
+    right: 15,
   },
 });
