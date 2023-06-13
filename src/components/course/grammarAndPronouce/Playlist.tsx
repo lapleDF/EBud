@@ -4,7 +4,7 @@ import React, {useEffect, useRef} from 'react';
 import {CSText} from '../../core';
 import {COLORS} from '../../../constants/color';
 import {SPACING} from '../../../constants/spacing';
-import {Lesson} from '../../../types';
+import type {Lesson} from '../../../types';
 
 export interface PlaylistProps {
   data: Lesson[];

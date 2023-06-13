@@ -1,7 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
 
-import {CourseItem} from '../../types';
+import type {CourseItem} from '../../types';
 import {CircleProgress, Line, MainElement} from './renderMaterial';
 
 interface GroupCourseRenderProps {

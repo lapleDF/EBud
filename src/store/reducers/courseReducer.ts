@@ -1,4 +1,4 @@
-import {CourseList, PayloadAction} from '../../types';
+import type {CourseList, PayloadAction} from '../../types';
 import {COURSE_ACTION} from '../actions';
 
 export const initialCourseList: CourseList = {

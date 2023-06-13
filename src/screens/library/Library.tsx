@@ -8,7 +8,7 @@ import {CSButton, CSLayout, CSLoading, CSText} from '../../components/core';
 import {AppDispatch, RootState} from '../../store/store';
 import {BOOK_ACTION} from '../../store/actions';
 import Search from '../../components/library/Search';
-import {Book, BookList} from '../../types';
+import type {Book, BookList} from '../../types';
 import {SPACING} from '../../constants/spacing';
 import SectionHeader from '../../components/sectionList/SectionHeader';
 import BookItemRender from '../../components/library/BookItemRender';

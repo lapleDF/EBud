@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useRef, useState} from 'react';
 
 import HeaderScreen from '../../components/HeaderScreen';
-import {GameList, User} from '../../types';
+import type {GameList, User} from '../../types';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 import {CSLayout, CSLoading, CSModal, CSText} from '../../components/core';

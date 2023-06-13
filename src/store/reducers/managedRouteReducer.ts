@@ -1,5 +1,5 @@
-import {PayloadAction} from '../../types';
-import {ManagedRoute} from '../../types/ManagedRoute';
+import type {PayloadAction} from '../../types';
+import type {ManagedRoute} from '../../types/ManagedRoute';
 import {MANAGED_ROUTE_ACTION} from '../actions/managedRoute.action';
 
 const initialManagedRoute: ManagedRoute = {

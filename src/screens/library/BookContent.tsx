@@ -23,7 +23,7 @@ import {
   storeDataObjAsyncStorage,
 } from '../../utils';
 import {ASYNC_STORAGE} from '../../constants/asyncStorage';
-import {TrackAudio} from '../../types';
+import type {TrackAudio} from '../../types';
 
 export interface BookContinueRead {
   bookId: string;

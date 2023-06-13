@@ -9,7 +9,7 @@ import {CSText} from '../../core';
 import {handleSpeak} from '../../../utils';
 import {AppDispatch} from '../../../store/store';
 import {LESSON_ACTION} from '../../../store/actions';
-import {Lesson} from '../../../types';
+import type {Lesson} from '../../../types';
 
 interface CardSideProps {
   onPressFlip: () => void;

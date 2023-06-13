@@ -6,7 +6,7 @@ import Parse from 'parse/react-native';
 
 import {CSButton, CSButtonBack} from '../../components/core/CSButton';
 import {SPACING} from '../../constants/spacing';
-import {User} from '../../types';
+import type {User} from '../../types';
 import {initialUser} from '../../store/reducers/userReducer';
 import {COLORS} from '../../constants/color';
 import {CSInput, CSLayout, CSLoading, CSText} from '../../components/core';

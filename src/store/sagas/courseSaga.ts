@@ -2,8 +2,8 @@ import {put, takeLatest} from 'redux-saga/effects';
 
 import {COURSE_ACTION} from '../actions';
 import {getCourseList} from '../../query/courseQuery';
-import {PayloadAction} from '../../types';
-import {CourseItem} from './../../types/CourseItem';
+import type {PayloadAction} from '../../types';
+import type {CourseItem} from './../../types/CourseItem';
 
 function* getList(action: PayloadAction) {
   try {

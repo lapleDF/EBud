@@ -3,6 +3,7 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import Lottie from 'lottie-react-native';
 import {useSelector} from 'react-redux';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import {useNavigation} from '@react-navigation/native';
 
 import GuessWordItem from '../../components/game/GuessWordItem';
 import {
@@ -15,15 +16,14 @@ import {
 import GuessWordListText from '../../components/game/GuessWordListText';
 import {SPACING} from '../../constants/spacing';
 import {handleSpeak, shuffleArray} from '../../utils';
-import {GuessTheWordList} from '../../types';
+import type {GuessTheWordList} from '../../types';
 import {AppDispatch, RootState} from '../../store/store';
 import {
   GAME_ACTION,
   GUESS_THE_WORD_ACTION,
   USER_ACTION,
 } from '../../store/actions';
-import {useNavigation} from '@react-navigation/native';
-import {PlayingGame} from '../../types/PlayingGame';
+import type {PlayingGame} from '../../types/PlayingGame';
 
 interface GameGuessTheWordProps {
   gameId: string;

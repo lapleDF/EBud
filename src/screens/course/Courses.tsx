@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 
 import HeaderScreen from '../../components/HeaderScreen';
 import {AppDispatch, RootState} from '../../store/store';
-import {CourseItem, CourseList, User} from '../../types';
+import type {CourseItem, CourseList, User} from '../../types';
 import {SPACING} from '../../constants/spacing';
 import GroupCourseRender from '../../components/course/GroupCourseRender';
 import {CSButton} from '../../components/core/CSButton';

@@ -8,7 +8,7 @@ import {CSLayout, CSText} from '../../components/core';
 import BookItemRender from '../../components/library/BookItemRender';
 import {SPACING} from '../../constants/spacing';
 import {RootState} from '../../store/store';
-import {BookList} from '../../types';
+import type {BookList} from '../../types';
 
 const EmptyComponent = () => {
   return (

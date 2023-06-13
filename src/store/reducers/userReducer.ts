@@ -1,4 +1,4 @@
-import {PayloadAction, User} from '../../types';
+import type {PayloadAction, User} from '../../types';
 import {USER_ACTION} from '../actions';
 
 export const initialUser: User = {

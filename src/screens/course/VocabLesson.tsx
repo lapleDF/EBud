@@ -20,7 +20,7 @@ import {SPACING} from '../../constants/spacing';
 import {COLORS} from '../../constants/color';
 import {AppDispatch, RootState} from '../../store/store';
 import {LESSON_ACTION} from '../../store/actions';
-import {User} from '../../types';
+import type {User} from '../../types';
 
 const VocabLesson = () => {
   const lesson: LessonList = useSelector((state: RootState) => state.lesson);

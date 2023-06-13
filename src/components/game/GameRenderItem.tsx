@@ -7,7 +7,7 @@ import React from 'react';
 import {CSButton, CSText} from '../core';
 import {COLORS} from '../../constants/color';
 import {SPACING} from '../../constants/spacing';
-import {Game} from '../../types';
+import type {Game} from '../../types';
 
 interface GameRenderItemProps {
   handleHelp: (gameRule: string) => void;

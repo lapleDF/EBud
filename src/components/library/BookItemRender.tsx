@@ -10,7 +10,7 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {CSText} from '../core';
-import {Book} from '../../types';
+import type {Book} from '../../types';
 import {COLORS} from '../../constants/color';
 import {SPACING} from '../../constants/spacing';
 import {AppDispatch} from '../../store/store';

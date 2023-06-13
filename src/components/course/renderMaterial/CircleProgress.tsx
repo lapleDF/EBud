@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import {COLORS} from '../../../constants/color';
 import {SPACING} from '../../../constants/spacing';
-import {CourseItem} from '../../../types';
+import type {CourseItem} from '../../../types';
 
 interface CircleProgressProps {
   courseItem: CourseItem;

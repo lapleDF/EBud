@@ -1,4 +1,4 @@
-import {Lesson, PayloadAction} from '../../types';
+import type {Lesson, PayloadAction} from '../../types';
 import {LESSON_ACTION} from '../actions';
 
 export interface LessonList {

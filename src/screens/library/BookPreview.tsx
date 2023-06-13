@@ -16,7 +16,7 @@ import {COLORS} from '../../constants/color';
 import {SPACING} from '../../constants/spacing';
 import {BOOK_ACTION} from '../../store/actions';
 import {AppDispatch, RootState} from '../../store/store';
-import {BookList} from '../../types';
+import type {BookList} from '../../types';
 
 const BookPreview = () => {
   const navigation = useNavigation<any>();
