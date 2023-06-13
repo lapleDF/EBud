@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import React from 'react';
 
 const GameRollDice = () => {
@@ -10,5 +10,3 @@ const GameRollDice = () => {
 };
 
 export default GameRollDice;
-
-const styles = StyleSheet.create({});

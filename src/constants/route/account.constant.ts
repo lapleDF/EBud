@@ -1,20 +1,27 @@
 import Account from '../../screens/account/Account';
 import AppearanceSetting from '../../screens/account/AppearanceSetting';
 import UserInfo from '../../screens/account/UserInfo';
+import type {AccountStackParamList} from '../../types/navigation/types';
 
-export const ACCOUNT_ROUTE = [
+interface AccountRouteProps {
+  name: keyof AccountStackParamList;
+  component: () => JSX.Element;
+  options?: {};
+}
+
+export const ACCOUNT_ROUTE: AccountRouteProps[] = [
   {
-    name: 'account',
+    name: 'Account',
     component: Account,
     options: {headerShown: false},
   },
   {
-    name: 'appearance',
+    name: 'Appearance',
     component: AppearanceSetting,
     options: {headerShown: false},
   },
   {
-    name: 'userInfo',
+    name: 'UserInfo',
     component: UserInfo,
     options: {headerShown: false},
   },

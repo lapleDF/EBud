@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {FlatList, SectionList, StyleSheet, View} from 'react-native';
+import {FlatList, SectionList, View} from 'react-native';
 import {useSelector} from 'react-redux';
 
 import HeaderScreen from '../../components/HeaderScreen';
@@ -9,9 +9,10 @@ import {AppDispatch, RootState} from '../../store/store';
 import {BOOK_ACTION} from '../../store/actions';
 import Search from '../../components/library/Search';
 import type {Book, BookList} from '../../types';
-import {SPACING} from '../../constants/spacing';
+import {LibraryStyles as styles} from './Library.styles';
 import SectionHeader from '../../components/sectionList/SectionHeader';
-import BookItemRender from '../../components/library/BookItemRender';
+import type {RootStackScreenProps} from '../../types/navigation/types';
+import BookItem from '../../components/library/BookItem';
 
 export interface SectionBookProps {
   title: string;
@@ -35,7 +36,8 @@ const Empty = ({search}: EmptyProps) => {
 };
 
 const Library = () => {
-  const navigation = useNavigation<any>();
+  const navigation =
+    useNavigation<RootStackScreenProps<'BottomTab'>['navigation']>();
   const state: RootState = useSelector((rootState: RootState) => rootState);
   const books: BookList = state.book;
   const [searchValue, setSearchValue] = useState<string>('');
@@ -53,7 +55,8 @@ const Library = () => {
               />
             ),
             iconLeft: 'heart',
-            onPressLeft: () => navigation.navigate('favorite'),
+            onPressLeft: () =>
+              navigation.navigate('LibraryNavigator', {screen: 'Favorite'}),
           }),
       });
       AppDispatch(BOOK_ACTION.GET_LIST);
@@ -134,7 +137,7 @@ const Library = () => {
           renderItem={({section}) => (
             <FlatList
               data={section.data[0]}
-              renderItem={({item}) => <BookItemRender item={item} />}
+              renderItem={({item}) => <BookItem item={item} />}
               columnWrapperStyle={styles.contentSectionItem}
               ListEmptyComponent={<Empty search={searchValue} />}
               numColumns={2}
@@ -147,26 +150,4 @@ const Library = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  footerSection: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  contentContainerSection: {
-    paddingHorizontal: SPACING.px,
-    paddingBottom: SPACING.heightBottomTab,
-  },
-  headerSection: {
-    marginTop: 40,
-  },
-  contentSectionItem: {
-    justifyContent: 'space-between',
-  },
-  empty: {
-    width: '100%',
-    height: 200,
-  },
-});
 export default Library;

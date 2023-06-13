@@ -1,23 +1,27 @@
 import React, {useRef} from 'react';
+import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import RBSheet from 'react-native-raw-bottom-sheet';
 
+import {AccountStyles as styles} from './Account.styles';
 import {CSButton} from '../../components/core/CSButton';
 import {ASYNC_STORAGE} from '../../constants/asyncStorage';
-import {StyleSheet, View} from 'react-native';
 import {AppDispatch} from '../../store/store';
 import {USER_ACTION} from '../../store/actions';
 import {CSLayout, CSModal, CSText} from '../../components/core';
+import type {RootStackScreenProps} from '../../types/navigation/types';
 
 const Account = () => {
-  const navigation = useNavigation<any>();
-  const refBtnLogout = useRef<any>();
+  const navigation =
+    useNavigation<RootStackScreenProps<'Authentication'>['navigation']>();
+  const refBtnLogout = useRef<RBSheet>();
 
   const logout = () => {
     AsyncStorage.removeItem(ASYNC_STORAGE.userInfo);
     AppDispatch(USER_ACTION.LOGOUT, null);
-    refBtnLogout.current.close();
-    navigation.navigate('authentication');
+    refBtnLogout.current?.close();
+    navigation.navigate('Authentication', {screen: 'Login'});
   };
 
   return (
@@ -25,7 +29,7 @@ const Account = () => {
       <CSText>Account</CSText>
       <CSButton
         title="Logout"
-        onPress={() => refBtnLogout.current.open()}
+        onPress={() => refBtnLogout.current?.open()}
         variant="secondary"
       />
       <CSModal refRBSheet={refBtnLogout}>
@@ -39,7 +43,7 @@ const Account = () => {
           <CSButton title="Đồng ý" onPress={logout} />
           <CSButton
             title="Hủy"
-            onPress={() => refBtnLogout.current.close()}
+            onPress={() => refBtnLogout.current?.close()}
             variant="secondary"
           />
         </View>
@@ -48,15 +52,4 @@ const Account = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  groupBtnModal: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  textCenter: {
-    textAlign: 'center',
-  },
-});
 export default Account;

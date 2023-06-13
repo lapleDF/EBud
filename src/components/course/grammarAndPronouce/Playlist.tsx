@@ -1,10 +1,10 @@
-import {StyleSheet, TouchableOpacity, Animated} from 'react-native';
+import {TouchableOpacity, Animated} from 'react-native';
 import React, {useEffect, useRef} from 'react';
 
 import {CSText} from '../../core';
-import {COLORS} from '../../../constants/color';
 import {SPACING} from '../../../constants/spacing';
 import type {Lesson} from '../../../types';
+import {PlaylistStyles as styles} from './Playlist.styles';
 
 export interface PlaylistProps {
   data: Lesson[];
@@ -13,7 +13,7 @@ export interface PlaylistProps {
   open: boolean;
 }
 
-const WIDTH = SPACING.screenWidth - 80;
+export const PLAY_LIST_WIDTH = SPACING.screenWidth - 80;
 
 const Playlist = ({
   data,
@@ -21,7 +21,7 @@ const Playlist = ({
   activeIndex,
   open = false,
 }: PlaylistProps) => {
-  const refDrawer = useRef(new Animated.Value(-WIDTH)).current;
+  const refDrawer = useRef(new Animated.Value(-PLAY_LIST_WIDTH)).current;
 
   const transformAnimate = {
     transform: [{translateX: refDrawer}],
@@ -36,7 +36,7 @@ const Playlist = ({
       }).start();
     } else {
       Animated.spring(refDrawer, {
-        toValue: -WIDTH,
+        toValue: -PLAY_LIST_WIDTH,
         useNativeDriver: true,
       }).start();
     }
@@ -63,19 +63,3 @@ const Playlist = ({
 };
 
 export default Playlist;
-
-const styles = StyleSheet.create({
-  container: {
-    width: WIDTH,
-    backgroundColor: COLORS.bgHeader,
-    position: 'absolute',
-    zIndex: 3,
-    height: SPACING.screenHeight - 60,
-    left: 0,
-    paddingHorizontal: SPACING.px,
-  },
-  drawerItem: {
-    width: '100%',
-    paddingBottom: 15,
-  },
-});
