@@ -15,7 +15,7 @@ function* login(action: PayloadAction) {
   const newUser: User = {
     id: loggedInUser.id,
     username: loggedInUser.attributes.username,
-    displayName: loggedInUser.attributes.displayName,
+    fullName: loggedInUser.attributes.fullName,
     email: loggedInUser.attributes.email,
     avatar: loggedInUser.attributes.avatar,
     totalStreak: loggedInUser.attributes.totalStreak,
@@ -41,7 +41,7 @@ function* getInfo(action: PayloadAction) {
   const newUser: User = {
     id: user[0].id,
     username: user[0].attributes.username,
-    displayName: user[0].attributes.displayName,
+    fullName: user[0].attributes.fullName,
     email: user[0].attributes.email,
     avatar: user[0].attributes.avatar,
     totalStreak: user[0].attributes.totalStreak,

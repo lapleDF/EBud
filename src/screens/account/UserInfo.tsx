@@ -13,7 +13,7 @@ const UserInfo = () => {
 
   const [userParams, setUserParams] = useState<UserInfoProps>({
     username: user.username,
-    displayName: user.displayName,
+    fullName: user.fullName,
     email: user.email,
   });
 
@@ -58,7 +58,7 @@ const UserInfo = () => {
 
 interface UserInfoProps {
   username: string;
-  displayName: string;
+  fullName: string;
   email: string;
 }
 interface UserInfoItemProps {
@@ -73,7 +73,7 @@ const USER_INFO_ITEM: UserInfoItemProps[] = [
   },
   {
     label: 'Tên hiển thị',
-    property: 'displayName',
+    property: 'fullName',
   },
   {
     label: 'Email',
