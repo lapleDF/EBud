@@ -1,9 +1,10 @@
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 
 import {CSText} from '../core';
 import {COLORS} from '../../constants/color';
+import {HeaderLeftStyles as styles} from './HeaderLeftItem.styles';
 
 interface HeaderLeftItemProps {
   label: string;
@@ -28,21 +29,5 @@ const HeaderLeftItem = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  headerItem: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
-    width: '100%',
-    paddingLeft: 10,
-  },
-  headerItemEnd: {
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    flexDirection: 'row',
-    width: '20%',
-  },
-});
 
 export default HeaderLeftItem;

@@ -12,4 +12,5 @@ export interface User {
   desc: string;
   learntLesson: number;
   game: PlayingGame[];
+  fetchingStatus?: 'loading' | 'idle' | 'error';
 }

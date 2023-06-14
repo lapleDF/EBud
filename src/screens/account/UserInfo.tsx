@@ -1,21 +1,37 @@
-import React, {useState} from 'react';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import React, {useRef, useState} from 'react';
 import {useSelector} from 'react-redux';
 
-import {CSLayout} from '../../components/core';
+import {
+  CSButton,
+  CSLayout,
+  CSLoading,
+  CSModal,
+  CSText,
+} from '../../components/core';
 import {UserInfoStyles as styles} from './UserInfo.styles';
 import type {User} from '../../types';
-import {RootState} from '../../store/store';
+import {AppDispatch, RootState} from '../../store/store';
 import UserInfoFieldItem from './UserInfoFieldItem';
-import {KeyboardAvoidingView, Platform} from 'react-native';
+import {USER_ACTION} from '../../store/actions';
 
 const UserInfo = () => {
   const user: User = useSelector((rootState: RootState) => rootState.user);
+  const refModal = useRef<RBSheet>(null);
 
   const [userParams, setUserParams] = useState<UserInfoProps>({
     username: user.username,
     fullName: user.fullName,
     email: user.email,
   });
+
+  const [isChanged, setIsChanged] = useState(false);
 
   const [editables, setEditables] = useState<boolean[]>([
     ...Array(USER_INFO_ITEM.length).fill(false),
@@ -31,9 +47,22 @@ const UserInfo = () => {
     let userTemp = userParams;
     userTemp[proterty] = text;
     setUserParams(userTemp);
+
+    if (!isChanged) {
+      setIsChanged(true);
+    }
   };
 
-  console.log(editables);
+  const handleConfirmChange = () => {
+    AppDispatch(USER_ACTION.CHANGE_USER_INFO, userParams);
+    setIsChanged(false);
+    setEditables([...Array(USER_INFO_ITEM.length).fill(false)]);
+  };
+
+  const handleResetPassowrd = () => {
+    AppDispatch(USER_ACTION.RESET_PASSWORD, user.email);
+    refModal.current?.close();
+  };
 
   return (
     <CSLayout style={styles.container}>
@@ -51,12 +80,46 @@ const UserInfo = () => {
             key={index}
           />
         ))}
+        {isChanged && (
+          <TouchableOpacity
+            onPress={handleConfirmChange}
+            style={styles.btnConfirm}>
+            <CSText variant="PoppinsBold">Xác nhận</CSText>
+          </TouchableOpacity>
+        )}
+        <TouchableOpacity
+          onPress={() => refModal.current?.open()}
+          style={styles.btnResetPassowrd}>
+          <CSText variant="PoppinsBold">Đổi mật khẩu</CSText>
+        </TouchableOpacity>
+        <CSModal refRBSheet={refModal} isShowCloseBtn={false}>
+          {user.fetchingStatus === 'loading' && <CSLoading />}
+          <CSText
+            size={'xlg'}
+            variant="PoppinsBold"
+            color="primaryDark"
+            style={styles.titleResetPassword}>
+            Đổi mật khẩu
+          </CSText>
+          <CSText style={styles.descResetPassword}>
+            Chúng tôi sẽ gửi mẫu thông tin để bạn điền mật khẩu mới khi bạn xác
+            nhận muốn thay đổi mật khẩu.
+          </CSText>
+          <View style={styles.btnResetPawwords}>
+            <CSButton title="Xác nhận" onPress={handleResetPassowrd} />
+            <CSButton
+              title="Hủy"
+              variant="secondary"
+              onPress={() => refModal.current?.close()}
+            />
+          </View>
+        </CSModal>
       </KeyboardAvoidingView>
     </CSLayout>
   );
 };
 
-interface UserInfoProps {
+export interface UserInfoProps {
   username: string;
   fullName: string;
   email: string;
@@ -69,11 +132,11 @@ interface UserInfoItemProps {
 const USER_INFO_ITEM: UserInfoItemProps[] = [
   {
     label: 'Họ và tên',
-    property: 'username',
+    property: 'fullName',
   },
   {
     label: 'Tên hiển thị',
-    property: 'fullName',
+    property: 'username',
   },
   {
     label: 'Email',

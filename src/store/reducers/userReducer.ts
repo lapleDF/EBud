@@ -14,6 +14,7 @@ export const initialUser: User = {
   desc: '',
   learntLesson: 0,
   game: [],
+  fetchingStatus: 'idle',
 };
 
 export const userReducer = (
@@ -27,6 +28,11 @@ export const userReducer = (
       return {
         ...state,
         avatar: action.payload,
+      };
+    case USER_ACTION.CHANGE_FETCHING_STATUS:
+      return {
+        ...state,
+        fetchingStatus: action.payload,
       };
     default:
       return state;
