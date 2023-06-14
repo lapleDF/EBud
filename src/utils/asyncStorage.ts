@@ -14,10 +14,10 @@ export const getDataAsyncStorage = async (key: string) => {
     if (value !== null) {
       return value;
     } else {
-      return '';
+      return null;
     }
   } catch (e) {
-    console.log('error: ' + e);
+    console.log('error: ', e);
   }
 };
 

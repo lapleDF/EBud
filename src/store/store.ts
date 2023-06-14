@@ -15,7 +15,7 @@ const store = createStore(
 sagaMiddleWare.run(rootSaga);
 
 export type RootState = ReturnType<typeof store.getState>;
-export const AppDispatch = (type: string, payload: any) => {
+export const AppDispatch = (type: string, payload: any = undefined) => {
   store.dispatch({type, payload});
 };
 export default store;

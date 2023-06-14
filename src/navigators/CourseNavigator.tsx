@@ -2,12 +2,13 @@ import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 
 import {COURSE_ROUTE} from '../constants/route/course.constant';
+import type {CourseStackParamList} from '../types/navigation/types';
+
+const CourseStack = createStackNavigator<CourseStackParamList>();
 
 const CourseNavigator = () => {
-  const CourseStack = createStackNavigator();
-
   return (
-    <CourseStack.Navigator screenOptions={{headerShown: false}}>
+    <CourseStack.Navigator>
       {COURSE_ROUTE.map(route => (
         <CourseStack.Screen
           name={route.name}

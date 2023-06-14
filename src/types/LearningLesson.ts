@@ -1,7 +1,7 @@
 export interface LearningLesson {
   id: string;
-  idLesson: string;
-  idCourse: string;
-  idUser: string;
+  lessonId: string;
+  courseId: string;
+  userId: string;
   result: string | number;
 }

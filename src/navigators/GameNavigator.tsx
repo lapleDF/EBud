@@ -1,10 +1,11 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {GAME_ROUTE} from '../constants/route/game.constant';
+import type {GameStackParamList} from '../types/navigation/types';
+
+const GameStack = createStackNavigator<GameStackParamList>();
 
 const GameNavigator = () => {
-  const GameStack = createStackNavigator();
-
   return (
     <GameStack.Navigator screenOptions={{headerShown: false}}>
       {GAME_ROUTE.map(route => (

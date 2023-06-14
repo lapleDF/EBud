@@ -40,6 +40,10 @@
 		AB9A83A78B8849AAB6FB659D /* Neuton-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0711B2B2275D452899F48C80 /* Neuton-Light.ttf */; };
 		81CCEE580FFC494B9E8AB4E0 /* Neuton-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B718257463334E4EA1E3B555 /* Neuton-Regular.ttf */; };
 		CAD5A26F1AA148DF9E9F9F90 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 77553EA23355451F85272863 /* OFL.txt */; };
+		3C800C2C34B640C2881163C0 /* Bungee-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3929F6ABE9294CE1AB950013 /* Bungee-Regular.ttf */; };
+		5D49630FF7DF4333AB6E28B4 /* Sriracha-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 49A15EBDD20D43398C840DC2 /* Sriracha-Regular.ttf */; };
+		AA2247E0353447C48FB29F73 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 07B821D21CAC4A5997C894D8 /* OFL.txt */; };
+		47160150FCB04A65B4E32AAB /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7FF7983823354405BB416945 /* OFL.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +100,10 @@
 		0711B2B2275D452899F48C80 /* Neuton-Light.ttf */ = {isa = PBXFileReference; name = "Neuton-Light.ttf"; path = "../src/assets/fonts/Neuton/Neuton-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		B718257463334E4EA1E3B555 /* Neuton-Regular.ttf */ = {isa = PBXFileReference; name = "Neuton-Regular.ttf"; path = "../src/assets/fonts/Neuton/Neuton-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		77553EA23355451F85272863 /* OFL.txt */ = {isa = PBXFileReference; name = "OFL.txt"; path = "../src/assets/fonts/Neuton/OFL.txt"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3929F6ABE9294CE1AB950013 /* Bungee-Regular.ttf */ = {isa = PBXFileReference; name = "Bungee-Regular.ttf"; path = "../src/assets/fonts/Bungee/Bungee-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		49A15EBDD20D43398C840DC2 /* Sriracha-Regular.ttf */ = {isa = PBXFileReference; name = "Sriracha-Regular.ttf"; path = "../src/assets/fonts/Sriracha/Sriracha-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		07B821D21CAC4A5997C894D8 /* OFL.txt */ = {isa = PBXFileReference; name = "OFL.txt"; path = "../src/assets/fonts/Bungee/OFL.txt"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7FF7983823354405BB416945 /* OFL.txt */ = {isa = PBXFileReference; name = "OFL.txt"; path = "../src/assets/fonts/Sriracha/OFL.txt"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +238,10 @@
 				0711B2B2275D452899F48C80 /* Neuton-Light.ttf */,
 				B718257463334E4EA1E3B555 /* Neuton-Regular.ttf */,
 				77553EA23355451F85272863 /* OFL.txt */,
+				3929F6ABE9294CE1AB950013 /* Bungee-Regular.ttf */,
+				49A15EBDD20D43398C840DC2 /* Sriracha-Regular.ttf */,
+				07B821D21CAC4A5997C894D8 /* OFL.txt */,
+				7FF7983823354405BB416945 /* OFL.txt */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -357,6 +369,10 @@
 				AB9A83A78B8849AAB6FB659D /* Neuton-Light.ttf in Resources */,
 				81CCEE580FFC494B9E8AB4E0 /* Neuton-Regular.ttf in Resources */,
 				CAD5A26F1AA148DF9E9F9F90 /* OFL.txt in Resources */,
+				3C800C2C34B640C2881163C0 /* Bungee-Regular.ttf in Resources */,
+				5D49630FF7DF4333AB6E28B4 /* Sriracha-Regular.ttf in Resources */,
+				AA2247E0353447C48FB29F73 /* OFL.txt in Resources */,
+				47160150FCB04A65B4E32AAB /* OFL.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,47 +1,50 @@
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import React, {useState} from 'react';
 import {Link, useNavigation} from '@react-navigation/native';
+import Parse from 'parse/react-native';
 
-import CSContainer from '../../components/core/CSContainer';
-import CSText from '../../components/core/CSText';
-import CSInput from '../../components/core/CSInput';
 import {CSButton} from '../../components/core/CSButton';
-import {SPACING} from '../../constants/spacing';
-import {User} from '../../types';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../store/store';
-import {storeDataAsyncStorage, storeDataObjAsyncStorage} from '../../utils';
-import {ASYNC_STORAGE} from '../../constants/asyncStorage';
+import {LoginStyles as styles} from './Login.styles';
+import {AppDispatch} from '../../store/store';
+import {USER_ACTION} from '../../store/actions';
+import {CSInput, CSLayout, CSLoading, CSText} from '../../components/core';
+import type {RootStackScreenProps} from '../../types/navigation/types';
 
 const Login = () => {
+  const navigation =
+    useNavigation<RootStackScreenProps<'BottomTab'>['navigation']>();
+  const [isLoading, setIsLoading] = useState(false);
   const [params, setParams] = useState({
     username: '',
     password: '',
   });
-
   const [errMess, setErrMess] = useState({
     userName: '',
     password: '',
   });
 
-  const user: User = useSelector((state: RootState) => state.user);
-  const navigation = useNavigation<any>();
-
-  const login = () => {
+  const login = async () => {
     // todo: Validate input
-    if (user.username === params.username) {
-      if (user.password === params.password) {
-        storeDataAsyncStorage(ASYNC_STORAGE.accessToken, 'abcd'); // !hard code access token
-        storeDataObjAsyncStorage(ASYNC_STORAGE.user, user);
-        navigation.navigate('bottomTab');
-      } else {
+    try {
+      setIsLoading(true);
+      await Parse.User.logIn(params.username, params.password).then(
+        (loggedInUser: Parse.User) => {
+          AppDispatch(USER_ACTION.LOGIN, loggedInUser);
+        },
+      );
+      setIsLoading(false);
+      navigation.navigate('BottomTab', {screen: 'Course'});
+    } catch (error: any) {
+      setIsLoading(false);
+      if (error?.message === 'Invalid username/password.') {
         setErrMess({...errMess, password: 'Email hoặc mật khẩu không đúng'});
       }
     }
   };
   return (
-    <CSContainer style={styles.container}>
-      <CSText size={'xxl'} color="primaryLight" variant="PoppinsBold">
+    <CSLayout style={styles.container}>
+      {isLoading && <CSLoading />}
+      <CSText size={'xxl'} color="primaryLight" variant="Bungee">
         Đăng nhập
       </CSText>
       <View style={styles.groupInput}>
@@ -63,30 +66,13 @@ const Login = () => {
         <CSButton title="Đăng nhập" onPress={login} />
         <CSText>
           Chưa có tài khoản?{' '}
-          <Link to={{screen: 'register'}}>
+          <Link to={{screen: 'Authentication', params: {screen: 'Register'}}}>
             <CSText color="primaryDark">Đăng ký</CSText>
           </Link>
         </CSText>
       </View>
-    </CSContainer>
+    </CSLayout>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'space-between',
-    paddingVertical: 100,
-    alignItems: 'center',
-    paddingHorizontal: SPACING.px,
-  },
-  groupInput: {
-    width: '100%',
-    gap: 20,
-  },
-  groupBtn: {
-    width: '100%',
-    gap: 10,
-    alignItems: 'center',
-  },
-});
 export default Login;

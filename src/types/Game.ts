@@ -3,4 +3,5 @@ export interface Game {
   name: string;
   rule: string;
   cover: string;
+  type: 'guessWord' | 'rollDice';
 }

@@ -1,9 +1,11 @@
 import {SentenceEg} from './SentenceEg';
 
-export interface LessonVocab {
+export interface Lesson {
   id: string;
-  idCourse: string;
+  courseId: string;
   title?: string;
+  poster?: string;
+  stared?: boolean;
   image?: string;
   word?: string;
   wordMeaning?: string;
@@ -13,4 +15,5 @@ export interface LessonVocab {
   description?: string;
   summarizeLesson?: string;
   pronouncingUsage?: string;
+  isLearned: boolean;
 }
