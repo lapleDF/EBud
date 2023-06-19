@@ -68,7 +68,7 @@ const CSVideo = ({videoUrl = '', posterUrl = ''}: VideoProps) => {
     if (fullScreen) {
       Orientation.lockToPortrait();
     } else {
-      Orientation.lockToLandscape();
+      Orientation.lockToLandscapeLeft();
     }
     setParams({...params, fullScreen: !params.fullScreen});
   };

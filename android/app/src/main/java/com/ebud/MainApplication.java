@@ -13,6 +13,7 @@ import com.airbnb.android.react.lottie.LottiePackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
+import com.zmxv.RNSound.RNSoundPackage;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -35,6 +36,7 @@ public class MainApplication extends Application implements ReactApplication {
       new ReactVideoPackage();
       new OrientationPackage();
       new LinearGradientPackage();
+      new RNSoundPackage();
       return packages;
     }
 

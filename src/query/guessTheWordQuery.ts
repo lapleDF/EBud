@@ -4,7 +4,7 @@ import type {GuessTheWordItem} from '../types';
 import {convertGuessTheWordGameData} from '../utils';
 
 export const queryGetGuessTheWordGame = async (level: number) => {
-  const guessTheWordQuery = new Parse.Query(PARSE_OBJ.GuessTheWord);
+  const guessTheWordQuery = new Parse.Query(PARSE_OBJ.guessTheWord);
 
   const guessTheWordListAll = await guessTheWordQuery
     .descending('level')
