@@ -3,7 +3,7 @@ import Parse from 'parse/react-native';
 
 import {GAME_ACTION, USER_ACTION} from '../actions';
 import type {Game, PayloadAction, User} from '../../types';
-import {queryGetListGame} from '../../query/gameQuery';
+import {queryGetListGame} from '../../queries/gameQuery';
 import {RootState} from '../store';
 import type {PlayingGame} from '../../types/PlayingGame';
 

@@ -6,6 +6,7 @@ import {lessonReducer} from './lessonReducer';
 import {bookReducer} from './bookReducer';
 import {gameReducer} from './gameReducer';
 import {guessTheWordReducer} from './guessTheWordReducer';
+import {rollDiceReducer} from './rollDiceReducer';
 
 export const rootReducer = combineReducers({
   user: userReducer,
@@ -14,4 +15,5 @@ export const rootReducer = combineReducers({
   book: bookReducer,
   game: gameReducer,
   guesTheWord: guessTheWordReducer,
+  rollDice: rollDiceReducer,
 });

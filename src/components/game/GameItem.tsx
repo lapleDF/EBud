@@ -1,4 +1,4 @@
-import {Image, TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -33,13 +33,6 @@ const GameItem = ({handleHelp, gameItem}: GameItemProps) => {
     <LinearGradient
       colors={bgColors[randomcolor(0, bgColors.length - 1)]}
       style={styles.gameItem}>
-      {gameItem.type === 'rollDice' && (
-        <View style={styles.overlay}>
-          <CSText variant="PoppinsItalic" size={'xlg'} color="secondary">
-            Sắp phát hành!
-          </CSText>
-        </View>
-      )}
       <Image
         source={{
           uri: gameItem.cover,

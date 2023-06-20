@@ -25,6 +25,7 @@ export const BookItemStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
+    paddingHorizontal: SPACING.px,
   },
   titleText: {
     textAlign: 'center',

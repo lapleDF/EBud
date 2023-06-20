@@ -4,6 +4,7 @@ import Lottie from 'lottie-react-native';
 import {useSelector} from 'react-redux';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {useNavigation} from '@react-navigation/native';
+import Sound from 'react-native-sound';
 
 import GuessWordItem from '../../components/game/GuessWordItem';
 import {
@@ -53,6 +54,9 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
   const navigation =
     useNavigation<GameScreenProps<'GamePlaying'>['navigation']>();
 
+  const failSound = new Sound('fail.mp3', Sound.MAIN_BUNDLE);
+  const successSound = new Sound('success.mp3', Sound.MAIN_BUNDLE);
+
   const handlePressItem = (index: number) => {
     setActiveIndex(index);
   };
@@ -89,9 +93,14 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
         level: level,
       });
       AppDispatch(USER_ACTION.INCREASE_MEDAL);
+      successSound.play();
+      setScore(count);
+      refModal.current?.open();
+    } else {
+      failSound.play();
+      setScore(count);
+      refModal.current?.open();
     }
-    setScore(count);
-    refModal.current?.open();
   };
 
   const hanlePressText = (index: number) => {

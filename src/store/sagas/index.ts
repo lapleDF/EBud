@@ -6,6 +6,7 @@ import lessonSaga from './lessonSaga';
 import bookSaga from './bookSaga';
 import gameSaga from './gameSaga';
 import {guessTheWordSaga} from './guessTheWordSaga';
+import rollDiceSaga from './rollDiceSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -15,5 +16,6 @@ export default function* rootSaga() {
     bookSaga(),
     gameSaga(),
     guessTheWordSaga(),
+    rollDiceSaga(),
   ]);
 }
