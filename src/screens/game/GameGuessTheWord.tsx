@@ -44,11 +44,7 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
   const refModal = useRef<RBSheet>();
 
   const [level, setLevel] = useState(
-    (userGameInfo.find(
-      item =>
-        item.gameId === gameId &&
-        item.currentLevel !== guessTheWordata.maxLevel,
-    )?.currentLevel || 0) + 1,
+    userGameInfo.find(item => item.gameId === gameId)?.currentLevel || 1,
   );
 
   const navigation =
