@@ -35,8 +35,6 @@ const GameRollDice = () => {
   const [activeDice, setActiveDice] = useState(DICES[0]);
   const [answer, setAnswer] = useState('');
 
-  console.log(rollDiceQuestion);
-
   const animate = {
     transform: [{translateX: valueOffsetX}, {translateY: valueOffsetY}],
   };
@@ -123,6 +121,7 @@ const GameRollDice = () => {
     <View style={styles.container}>
       <StatusBar hidden />
       <CSModal refRBSheet={refModalQuestion}>
+        <StatusBar hidden />
         <CSText variant="PoppinsBold" size={'xlg'} color="primaryDark">
           {playItems[activeIndex].type === 'question'
             ? 'Trả lời câu hỏi sau'

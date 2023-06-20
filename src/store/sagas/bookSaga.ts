@@ -1,6 +1,6 @@
 import {put, select, takeLatest} from 'redux-saga/effects';
 import {BOOK_ACTION} from '../actions';
-import {queryAddBookFavoriteList, queryGetListBook} from '../../query';
+import {queryAddBookFavoriteList, queryGetListBook} from '../../queries';
 import type {Book, BookList, PayloadAction, User} from '../../types';
 import {RootState} from '../store';
 
