@@ -86,7 +86,7 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
     ) {
       AppDispatch(GAME_ACTION.UPDATE_GAME_INFO_USER, {
         gameId: gameId,
-        level: level,
+        level: level === guessTheWordata.maxLevel ? 1 : level + 1,
       });
       AppDispatch(USER_ACTION.INCREASE_MEDAL);
       successSound.play();

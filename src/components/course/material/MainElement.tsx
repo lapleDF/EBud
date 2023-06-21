@@ -1,8 +1,9 @@
 import React from 'react';
-import {Image, View} from 'react-native';
+import {View} from 'react-native';
 
 import {CSText} from '../../core';
 import {MainElementStyles as styles} from './MainElement.styles';
+import ProgressiveImage from '../../core/ProgressiveImage';
 
 interface MainElementProps {
   name: string;
@@ -18,7 +19,7 @@ const MainElement = (props: MainElementProps) => {
       <CSText size={'sm'} style={styles.courseScore}>
         {`${props.learnedLesson}/${props.totalLesson}`}
       </CSText>
-      <Image source={{uri: props.cover}} style={styles.image} />
+      <ProgressiveImage source={{uri: props.cover}} style={styles.image} />
     </View>
   );
 };

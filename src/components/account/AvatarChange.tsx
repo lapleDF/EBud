@@ -1,4 +1,4 @@
-import {Image, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Parse from 'parse/react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
@@ -8,6 +8,7 @@ import {CSButton, CSLoading, CSText} from '../core';
 import {AppDispatch} from '../../store/store';
 import {USER_ACTION} from '../../store/actions';
 import {AvatarChangeStyles as styles} from './AvatarChange.styles';
+import ProgressiveImage from '../core/ProgressiveImage';
 
 interface Avatar {
   name: string;
@@ -63,7 +64,7 @@ const AvatarChange = ({refRBSheet}: AvatarChangeProps) => {
               style={styles.item}
               onPress={() => handlePressImage(avatar)}>
               <>
-                <Image
+                <ProgressiveImage
                   source={{uri: avatar.url}}
                   style={[
                     styles.image,

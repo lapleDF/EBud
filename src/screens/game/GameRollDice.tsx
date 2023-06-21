@@ -1,6 +1,5 @@
 import {
   Animated,
-  Image,
   LayoutChangeEvent,
   StatusBar,
   TouchableOpacity,
@@ -19,6 +18,7 @@ import {GameRollDiceStyles as styles} from './GameRollDice.styles';
 import {DICES, PLAY_ITEMS} from '../../constants/dice';
 import {RollDiceQuestionList} from '../../store/reducers/rollDiceReducer';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import ProgressiveImage from '../../components/core/ProgressiveImage';
 
 const GameRollDice = () => {
   const rootState: RootState = useSelector((state: RootState) => state);
@@ -147,7 +147,7 @@ const GameRollDice = () => {
       <View style={styles.content} onLayout={onLayout}>
         <View style={styles.diceWrapper}>
           <TouchableOpacity onPress={handleRollDice}>
-            <Image source={activeDice.img} style={styles.dicer} />
+            <ProgressiveImage source={activeDice.img} style={styles.dicer} />
           </TouchableOpacity>
         </View>
 
