@@ -4,7 +4,7 @@ import {FlatList, SectionList, View} from 'react-native';
 import {useSelector} from 'react-redux';
 
 import HeaderScreen from '../../components/HeaderScreen';
-import {CSButton, CSLayout, CSLoading, CSText} from '../../components/core';
+import {CSButton, CSLayout, CSText} from '../../components/core';
 import {AppDispatch, RootState} from '../../store/store';
 import {BOOK_ACTION} from '../../store/actions';
 import Search from '../../components/library/Search';
@@ -13,6 +13,7 @@ import {LibraryStyles as styles} from './Library.styles';
 import SectionHeader from '../../components/sectionList/SectionHeader';
 import type {RootStackScreenProps} from '../../types/navigation/types';
 import BookItem from '../../components/library/BookItem';
+import LibraryPlaceHolder from '../../components/library/LibraryPlaceHolder';
 
 export interface SectionBookProps {
   title: string;
@@ -124,7 +125,7 @@ const Library = () => {
   return (
     <CSLayout>
       {books.fetchingStatus === 'loading' ? (
-        <CSLoading />
+        <LibraryPlaceHolder />
       ) : (
         <SectionList
           sections={SECTION}

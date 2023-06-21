@@ -4,6 +4,10 @@ import {COLORS} from '../../constants/color';
 import {SPACING} from '../../constants/spacing';
 
 export const GameItemStyles = StyleSheet.create({
+  containerPlaceholder: {
+    gap: 20,
+    marginVertical: 20,
+  },
   gameItem: {
     width: '100%',
     height: 320,

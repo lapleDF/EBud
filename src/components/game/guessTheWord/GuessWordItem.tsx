@@ -2,10 +2,10 @@ import {Pressable, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {CSText} from '../core';
-import {COLORS} from '../../constants/color';
+import {CSText} from '../../core';
+import {COLORS} from '../../../constants/color';
 import {GuessWordItemStyles as styles} from './GuessWordItem.styles';
-import ProgressiveImage from '../core/ProgressiveImage';
+import ProgressiveImage from '../../core/ProgressiveImage';
 
 interface GuessWordItemProps {
   image: string;

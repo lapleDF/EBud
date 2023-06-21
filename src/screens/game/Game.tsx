@@ -7,11 +7,12 @@ import {useSelector} from 'react-redux';
 import HeaderScreen from '../../components/HeaderScreen';
 import type {GameList, User} from '../../types';
 import {AppDispatch, RootState} from '../../store/store';
-import {CSLayout, CSLoading, CSModal, CSText} from '../../components/core';
+import {CSLayout, CSModal, CSText} from '../../components/core';
 import {GameStyles as styles} from './Game.styles';
 import GameItem from '../../components/game/GameItem';
 import type {GameScreenProps} from '../../types/navigation/types';
 import {GAME_ACTION} from '../../store/actions';
+import GameItemPlaceholder from '../../components/game/GameItemPlaceholder';
 
 const Game = () => {
   const navigation = useNavigation<GameScreenProps<'Game'>['navigation']>();
@@ -43,7 +44,7 @@ const Game = () => {
   return (
     <CSLayout>
       {gameList.fetchingStatus === 'loading' ? (
-        <CSLoading />
+        <GameItemPlaceholder />
       ) : (
         <FlatList
           data={gameList.list}
