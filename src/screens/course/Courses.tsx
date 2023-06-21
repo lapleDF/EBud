@@ -14,6 +14,7 @@ import {COURSE_ACTION} from '../../store/actions';
 import SectionHeader from '../../components/sectionList/SectionHeader';
 import type {BottomTabScreenProps} from '../../types/navigation/types';
 import GroupCourse from '../../components/course/GroupCourse';
+import CoursePlaceholder from '../../components/course/CoursePlaceholder';
 
 export interface SectionCourseProps {
   title: string;
@@ -89,7 +90,7 @@ const Courses = () => {
   return (
     <CSLayout>
       {course.fetchingStatus === 'loading' ? (
-        <CSLoading />
+        <CoursePlaceholder />
       ) : (
         <SectionList
           sections={SECTION}

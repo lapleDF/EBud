@@ -5,6 +5,7 @@ import type {
   GuessTheWordItem,
   LearningLesson,
   Lesson,
+  RollDiceQuestion,
 } from '../types';
 
 export const convertLessonData = (
@@ -106,5 +107,19 @@ export const convertGuessTheWordGameData = (
       };
     },
   );
+  return result;
+};
+
+export const convertRollDiceQuestionData = (
+  rollDiceQuestionArr: Parse.Object[],
+) => {
+  const result: RollDiceQuestion[] = rollDiceQuestionArr.map(question => {
+    return {
+      question: question.attributes?.question,
+      answer: question.attributes?.answer,
+      difficultLevel: question.attributes?.difficultLevel,
+      suggest: question.attributes?.suggest,
+    };
+  });
   return result;
 };

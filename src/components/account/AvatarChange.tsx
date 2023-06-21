@@ -1,19 +1,41 @@
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Parse from 'parse/react-native';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import SkeletonContent from 'react-native-skeleton-content-nonexpo';
 
 import {PARSE_OBJ} from '../../constants/parseObject';
-import {CSButton, CSLoading, CSText} from '../core';
-import {COLORS} from '../../constants/color';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import {SPACING} from '../../constants/spacing';
+import {CSButton, CSText} from '../core';
 import {AppDispatch} from '../../store/store';
 import {USER_ACTION} from '../../store/actions';
+import {AvatarChangeStyles as styles} from './AvatarChange.styles';
+import ProgressiveImage from '../core/ProgressiveImage';
+import {SPACING} from '../../constants/spacing';
+import {COLORS} from '../../constants/color';
 
 interface Avatar {
   name: string;
   url: string;
 }
+
+const PlaceholerAvatarList = () => {
+  return (
+    <SkeletonContent
+      containerStyle={styles.container}
+      boneColor={COLORS.bgHeader}
+      highlightColor={COLORS.bgGrey}
+      animationDirection="diagonalDownLeft"
+      layout={[
+        ...Array(6).fill({
+          width: (SPACING.screenWidth - SPACING.px * 4) * 0.25,
+          height: (SPACING.screenWidth - SPACING.px * 4) * 0.25,
+          borderRadius: 50,
+        }),
+      ]}
+      isLoading={true}
+    />
+  );
+};
 
 interface AvatarChangeProps {
   refRBSheet: React.MutableRefObject<RBSheet | undefined>;
@@ -64,7 +86,7 @@ const AvatarChange = ({refRBSheet}: AvatarChangeProps) => {
               style={styles.item}
               onPress={() => handlePressImage(avatar)}>
               <>
-                <Image
+                <ProgressiveImage
                   source={{uri: avatar.url}}
                   style={[
                     styles.image,
@@ -76,7 +98,7 @@ const AvatarChange = ({refRBSheet}: AvatarChangeProps) => {
             </TouchableOpacity>
           ))
         ) : (
-          <CSLoading />
+          <PlaceholerAvatarList />
         )}
       </View>
       <View style={styles.btnGroup}>
@@ -92,37 +114,3 @@ const AvatarChange = ({refRBSheet}: AvatarChangeProps) => {
 };
 
 export default AvatarChange;
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-    gap: 20,
-    rowGap: 40,
-    marginBottom: 50,
-  },
-  item: {
-    alignItems: 'center',
-  },
-  image: {
-    width: (SPACING.screenWidth - SPACING.px * 4) * 0.25,
-    height: (SPACING.screenWidth - SPACING.px * 4) * 0.25,
-    resizeMode: 'contain',
-    borderRadius: 50,
-  },
-  nameAvatar: {
-    position: 'absolute',
-    bottom: -30,
-  },
-  imageActive: {
-    borderColor: COLORS.primaryLight,
-    borderWidth: 6,
-  },
-  btnGroup: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-});

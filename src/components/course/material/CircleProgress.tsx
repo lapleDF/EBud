@@ -65,6 +65,7 @@ const CircleProgress = ({
         activeStrokeColor={COLORS.primaryLight}
         inActiveStrokeColor={COLORS.borderDeactive}
         delay={1000}
+        duration={1000}
       />
     </TouchableOpacity>
   );

@@ -1,25 +1,31 @@
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {TouchableNativeFeedback} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
 
 import {CSText} from '../core';
 import {COLORS} from '../../constants/color';
-import {useNavigation} from '@react-navigation/native';
+import type {
+  AccountStackParamList,
+  RootStackScreenProps,
+} from '../../types/navigation/types';
+import {SettingItemStyles as styles} from './SettingItem.styles';
 
 interface SettingItemProps {
   label: string;
   icon: string;
   onPress?: () => void;
-  routeName?: string;
+  routeName?: keyof AccountStackParamList;
 }
 
 const SettingItem = ({label, icon, onPress, routeName}: SettingItemProps) => {
-  const navigation = useNavigation<any>();
+  const navigation =
+    useNavigation<RootStackScreenProps<'AccountNavigator'>['navigation']>();
 
   const handlePressItem = () => {
     if (routeName) {
-      navigation.navigate(routeName);
+      navigation.navigate('AccountNavigator', {screen: routeName});
     } else {
       onPress && onPress();
     }
@@ -40,19 +46,3 @@ const SettingItem = ({label, icon, onPress, routeName}: SettingItemProps) => {
 };
 
 export default SettingItem;
-
-const styles = StyleSheet.create({
-  item: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 15,
-  },
-  itemLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 12,
-  },
-});

@@ -1,7 +1,7 @@
 import {put, takeLatest} from 'redux-saga/effects';
 
 import {COURSE_ACTION} from '../actions';
-import {getCourseList} from '../../query/courseQuery';
+import {getCourseList} from '../../queries/courseQuery';
 import type {PayloadAction} from '../../types';
 import type {CourseItem} from './../../types/CourseItem';
 

@@ -1,4 +1,4 @@
-import {Image, Pressable, TouchableOpacity, View} from 'react-native';
+import {Pressable, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -10,6 +10,7 @@ import {AppDispatch} from '../../store/store';
 import {BOOK_ACTION} from '../../store/actions';
 import type {RootStackScreenProps} from '../../types/navigation/types';
 import {BookItemStyles as styles} from './BookItem.styles';
+import ProgressiveImage from '../core/ProgressiveImage';
 
 interface BookItemProps {
   item: Book;
@@ -33,7 +34,7 @@ const BookItem = ({item, isFavorite = false}: BookItemProps) => {
 
   return (
     <Pressable style={styles.imgWrap} onPress={onPress}>
-      <Image source={{uri: item.cover}} style={styles.img} />
+      <ProgressiveImage source={{uri: item.cover}} style={styles.img} />
       {isFavorite && (
         <TouchableOpacity
           onPress={() => handleAddToFavorite(item.id)}

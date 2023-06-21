@@ -1,4 +1,4 @@
-import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React, {useState} from 'react';
 import FlipCard from 'react-native-flip-card';
@@ -10,6 +10,7 @@ import {handleSpeak} from '../../../utils';
 import {AppDispatch} from '../../../store/store';
 import {LESSON_ACTION} from '../../../store/actions';
 import type {Lesson} from '../../../types';
+import ProgressiveImage from '../../core/ProgressiveImage';
 
 interface CardSideProps {
   onPressFlip: () => void;
@@ -41,7 +42,10 @@ const CardSide = (props: CardSideProps) => {
           <CSText style={styles.wordMean}>{props.wordMean}</CSText>
         )}
         {props.imageUrl && (
-          <Image source={{uri: props.imageUrl}} style={styles.image} />
+          <ProgressiveImage
+            source={{uri: props.imageUrl}}
+            style={styles.image}
+          />
         )}
       </View>
       <TouchableOpacity style={styles.btnSound}>
@@ -145,6 +149,8 @@ const styles = StyleSheet.create({
     height: 130,
     resizeMode: 'cover',
     borderRadius: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   wordMean: {
     width: '35%',

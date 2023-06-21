@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import {SPACING} from '../../constants/spacing';
-import {COLORS} from '../../constants/color';
+import {SPACING} from '../../../constants/spacing';
+import {COLORS} from '../../../constants/color';
 
 export const GuessWordItemStyles = StyleSheet.create({
   container: {

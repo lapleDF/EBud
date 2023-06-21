@@ -11,3 +11,4 @@ export * from './Game';
 export * from './GameList';
 export * from './GuessTheWord';
 export * from './GuessTheWordList';
+export * from './RollDiceQuestion';

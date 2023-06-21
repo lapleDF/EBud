@@ -6,7 +6,7 @@ import {
   addLessonToFavoriteList,
   completeLessonQuery,
   getLessonList,
-} from '../../query';
+} from '../../queries';
 import {RootState} from '../store';
 import {LessonList} from '../reducers/lessonReducer';
 

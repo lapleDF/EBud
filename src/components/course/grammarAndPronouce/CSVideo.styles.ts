@@ -25,6 +25,7 @@ export const CSVideoStyles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    position: 'absolute',
     bottom: 0,
     left: 0,
     zIndex: 2,

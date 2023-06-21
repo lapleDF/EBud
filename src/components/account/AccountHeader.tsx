@@ -1,11 +1,12 @@
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
+import RBSheet from 'react-native-raw-bottom-sheet';
 import React, {useRef} from 'react';
-import {SPACING} from '../../constants/spacing';
-import {COLORS} from '../../constants/color';
+
 import {CSModal, CSText} from '../core';
 import HeaderLeftItem from './HeaderLeftItem';
-import RBSheet from 'react-native-raw-bottom-sheet';
 import AvatarChange from './AvatarChange';
+import {AccountHeaderStyles as styles} from './AccountHeader.styles';
+import ProgressiveImage from '../core/ProgressiveImage';
 
 interface AccountHeaderProps {
   avatar: string;
@@ -27,14 +28,14 @@ const AccountHeader = ({
   const refModal = useRef<RBSheet>();
   return (
     <View style={styles.header}>
-      <CSModal refRBSheet={refModal} closeBtn={false}>
+      <CSModal refRBSheet={refModal} isShowCloseBtn={false}>
         <AvatarChange refRBSheet={refModal} />
       </CSModal>
       <View style={styles.headerLeft}>
         <TouchableOpacity
           onPress={() => refModal.current?.open()}
           style={styles.avatarTouchable}>
-          <Image source={{uri: avatar}} style={styles.avatar} />
+          <ProgressiveImage source={{uri: avatar}} style={styles.avatar} />
         </TouchableOpacity>
         <CSText variant="PoppinsBold" size={'xlg'}>
           {userName}
@@ -60,56 +61,3 @@ const AccountHeader = ({
 };
 
 export default AccountHeader;
-
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
-    paddingVertical: 15,
-  },
-  headerLeft: {
-    width: '40%',
-    height: SPACING.screenWidth * 0.35,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  avatarTouchable: {
-    width: '70%',
-    height: '70%',
-  },
-  avatar: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'contain',
-  },
-  headerRight: {
-    width: '60%',
-    height: SPACING.screenWidth * 0.35,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  lineBetween: {
-    width: 6,
-    height: '100%',
-    backgroundColor: COLORS.primaryDark,
-    borderRadius: 6,
-    position: 'absolute',
-    top: 0,
-    left: -6,
-  },
-  headerItem: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
-    width: '100%',
-    paddingLeft: 10,
-  },
-  headerItemEnd: {
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    flexDirection: 'row',
-    width: '20%',
-  },
-});

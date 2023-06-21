@@ -4,6 +4,12 @@ import {SPACING} from '../../constants/spacing';
 import {COLORS} from '../../constants/color';
 
 export const BookItemStyles = StyleSheet.create({
+  containerPlaceholder: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    marginVertical: 20,
+  },
   imgWrap: {
     width: '47%',
     height: 230,
@@ -25,6 +31,7 @@ export const BookItemStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
+    paddingHorizontal: SPACING.px,
   },
   titleText: {
     textAlign: 'center',

@@ -9,12 +9,14 @@ import {ToastAndroid} from 'react-native';
 import {initialUser} from '../reducers/userReducer';
 import {RootState} from '../store';
 import {PARSE_OBJ} from '../../constants/parseObject';
+import {UserInfoProps} from '../../screens/account/UserInfo';
 
 function* login(action: PayloadAction) {
   const loggedInUser: Parse.User = action.payload;
   const newUser: User = {
     id: loggedInUser.id,
     username: loggedInUser.attributes.username,
+    fullName: loggedInUser.attributes.fullName,
     email: loggedInUser.attributes.email,
     avatar: loggedInUser.attributes.avatar,
     totalStreak: loggedInUser.attributes.totalStreak,
@@ -40,6 +42,7 @@ function* getInfo(action: PayloadAction) {
   const newUser: User = {
     id: user[0].id,
     username: user[0].attributes.username,
+    fullName: user[0].attributes.fullName,
     email: user[0].attributes.email,
     avatar: user[0].attributes.avatar,
     totalStreak: user[0].attributes.totalStreak,
@@ -122,6 +125,42 @@ function* changeAvatar() {
   }
 }
 
+function* changeUserInfo(action: PayloadAction) {
+  const userQuery = new Parse.User();
+  const user: User = yield select((state: RootState) => state.user);
+  userQuery.set('objectId', user.id);
+
+  const userInfoProperty: UserInfoProps = action.payload;
+
+  try {
+    userQuery.set('userName', userInfoProperty.username);
+    userQuery.set('fullName', userInfoProperty.fullName);
+    userQuery.set('email', userInfoProperty.email);
+    yield userQuery.save();
+
+    const newUser = {...user};
+    newUser.fullName = userInfoProperty.fullName;
+    newUser.username = userInfoProperty.username;
+    newUser.email = userInfoProperty.email;
+
+    yield put({type: USER_ACTION.UPDATE, payload: newUser});
+  } catch (err) {
+    console.log('error update user info: ', err);
+  }
+}
+
+function* resetPassword({payload}: PayloadAction) {
+  yield put({type: USER_ACTION.CHANGE_FETCHING_STATUS, payload: 'loading'});
+  try {
+    yield Parse.User.requestPasswordReset(payload);
+    yield put({type: USER_ACTION.CHANGE_FETCHING_STATUS, payload: 'idle'});
+    ToastAndroid.show('Email đã được gửi đi', ToastAndroid.SHORT);
+  } catch (error) {
+    yield put({type: USER_ACTION.CHANGE_FETCHING_STATUS, payload: 'error'});
+    console.log('error resetPassowrd', error);
+  }
+}
+
 export default function* userSaga() {
   yield takeLatest(USER_ACTION.LOGIN, login);
   yield takeLatest(USER_ACTION.LOGOUT, logout);
@@ -130,4 +169,6 @@ export default function* userSaga() {
   yield takeLatest(USER_ACTION.INCREASE_MEDAL, increaseMedal);
   yield takeLatest(USER_ACTION.INCREASE_STREAK, increaseStreak);
   yield takeLatest(USER_ACTION.CHANGE_AVATAR, changeAvatar);
+  yield takeLatest(USER_ACTION.CHANGE_USER_INFO, changeUserInfo);
+  yield takeLatest(USER_ACTION.RESET_PASSWORD, resetPassword);
 }
