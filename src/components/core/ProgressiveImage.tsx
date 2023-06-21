@@ -4,7 +4,6 @@ import {
   ImageSourcePropType,
   ImageStyle,
   StyleProp,
-  View,
   ViewStyle,
 } from 'react-native';
 import React, {useState} from 'react';
