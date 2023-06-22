@@ -1,3 +1,5 @@
+import {ImageSourcePropType} from 'react-native';
+
 export const DICES = [
   {
     img: require('../assets/images/dice/dice_1.1.png'),
@@ -102,7 +104,7 @@ export interface PlayItem {
   valueX: number;
   valueY: number;
   type: 'start' | 'question' | 'secret';
-  imageUrl: string;
+  imageUrl: ImageSourcePropType;
 }
 
 export const PLAY_ITEMS: PlayItem[] = [
@@ -111,83 +113,116 @@ export const PLAY_ITEMS: PlayItem[] = [
     valueX: 0,
     valueY: 0,
     type: 'start',
-    imageUrl: '',
+    imageUrl: require('../assets/images/dicePlayblock/start.png'),
   },
   {
     index: 1,
     valueX: 0,
     valueY: 0,
     type: 'question',
-    imageUrl: '',
+    imageUrl: require('../assets/images/dicePlayblock/Iceberg.png'),
   },
   {
     index: 2,
     valueX: 0,
     valueY: 0,
     type: 'question',
-    imageUrl: '',
+    imageUrl: require('../assets/images/dicePlayblock/coral.png'),
   },
   {
     index: 3,
     valueX: 0,
     valueY: 0,
     type: 'secret',
-    imageUrl: '',
+    imageUrl: require('../assets/images/dicePlayblock/closeBox.png'),
   },
   {
     index: 4,
     valueX: 0,
     valueY: 0,
     type: 'question',
-    imageUrl: '',
+    imageUrl: require('../assets/images/dicePlayblock/beach1.png'),
   },
   {
     index: 5,
     valueX: 0,
     valueY: 0,
     type: 'question',
-    imageUrl: '',
+    imageUrl: require('../assets/images/dicePlayblock/beach2.png'),
   },
   {
     index: 6,
     valueX: 0,
     valueY: 0,
     type: 'question',
-    imageUrl: '',
+    imageUrl: require('../assets/images/dicePlayblock/mountain.png'),
   },
   {
     index: 7,
     valueX: 0,
     valueY: 0,
     type: 'secret',
-    imageUrl: '',
+    imageUrl: require('../assets/images/dicePlayblock/closeBox.png'),
   },
   {
     index: 8,
     valueX: 0,
     valueY: 0,
     type: 'question',
-    imageUrl: '',
+    imageUrl: require('../assets/images/dicePlayblock/seaWaves.png'),
   },
   {
     index: 9,
     valueX: 0,
     valueY: 0,
     type: 'question',
-    imageUrl: '',
+    imageUrl: require('../assets/images/dicePlayblock/iceOcean.png'),
   },
   {
     index: 10,
     valueX: 0,
     valueY: 0,
     type: 'question',
-    imageUrl: '',
+    imageUrl: require('../assets/images/dicePlayblock/park.png'),
   },
   {
     index: 11,
     valueX: 0,
     valueY: 0,
     type: 'secret',
-    imageUrl: '',
+    imageUrl: require('../assets/images/dicePlayblock/closeBox.png'),
+  },
+];
+
+export interface MysteryBoxProps {
+  type: 'forward' | 'back' | 'return';
+  step?: number;
+  title: string;
+}
+
+export const mysteryBoxes: MysteryBoxProps[] = [
+  {
+    type: 'forward',
+    step: 2,
+    title: 'Tiến 2 bước',
+  },
+  {
+    type: 'back',
+    step: -1,
+    title: 'Lùi 1 bước',
+  },
+  {
+    type: 'return',
+    title: 'Đến điểm bắt đầu',
+  },
+  {
+    type: 'back',
+    step: -3,
+    title: 'Lùi 3 bước',
+  },
+  {
+    type: 'forward',
+    step: 4,
+    title: 'Tiến 4 bước',
   },
 ];

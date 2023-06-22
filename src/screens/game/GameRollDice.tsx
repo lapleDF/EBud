@@ -1,5 +1,6 @@
 import {
   Animated,
+  Image,
   LayoutChangeEvent,
   StatusBar,
   TouchableOpacity,
@@ -9,16 +10,24 @@ import React, {useEffect, useRef, useState} from 'react';
 import Orientation from 'react-native-orientation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
+import Lottie from 'lottie-react-native';
+import Sound from 'react-native-sound';
 
-import {CSButtonBack, CSInput, CSModal, CSText} from '../../components/core';
+import {CSButtonBack, CSModal, CSText} from '../../components/core';
 import {COLORS} from '../../constants/color';
-import {User} from '../../types';
+import {RollDiceQuestion, User} from '../../types';
 import {RootState} from '../../store/store';
 import {GameRollDiceStyles as styles} from './GameRollDice.styles';
-import {DICES, PLAY_ITEMS} from '../../constants/dice';
+import {
+  DICES,
+  MysteryBoxProps,
+  PLAY_ITEMS,
+  mysteryBoxes,
+} from '../../constants/dice';
 import {RollDiceQuestionList} from '../../store/reducers/rollDiceReducer';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import ProgressiveImage from '../../components/core/ProgressiveImage';
+import PopupRolling from '../../components/game/rollDice/PopupRolling';
 
 const GameRollDice = () => {
   const rootState: RootState = useSelector((state: RootState) => state);
@@ -29,11 +38,19 @@ const GameRollDice = () => {
   const valueOffsetY: Animated.Value = useRef(new Animated.Value(0)).current;
   const refModalQuestion = useRef<RBSheet>();
 
+  const jumpSound = new Sound('jump.mp3', Sound.MAIN_BUNDLE);
+  const rollSound = new Sound('rolling.mp3', Sound.MAIN_BUNDLE);
+
   const [contentLayout, setContentLayout] = useState({width: 1, height: 1});
   const [playItems, setPlayItems] = useState(PLAY_ITEMS);
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeDice, setActiveDice] = useState(DICES[0]);
-  const [answer, setAnswer] = useState('');
+  const [question, setQuestion] = useState<RollDiceQuestion>(
+    rollDiceQuestion.list[0],
+  );
+  const [mysteryBox, setMysteryBox] = useState<MysteryBoxProps>(
+    mysteryBoxes[0],
+  );
 
   const animate = {
     transform: [{translateX: valueOffsetX}, {translateY: valueOffsetY}],
@@ -76,6 +93,7 @@ const GameRollDice = () => {
   };
 
   const handleRollDice = () => {
+    rollSound.play();
     let diceTemp = activeDice;
     const intervalID = setInterval(() => {
       const dice = DICES[Math.floor(Math.random() * DICES.length)];
@@ -93,10 +111,25 @@ const GameRollDice = () => {
         setActiveIndex(newActiveIndex - playItems.length);
         // todo: actions when finish a round
       }
-    }, 3500);
+      jumpSound.play();
+      if (playItems[activeIndex].type === 'question') {
+        setQuestion(
+          rollDiceQuestion.list[
+            Math.floor(Math.random() * (rollDiceQuestion.list.length + 1))
+          ],
+        );
+        return;
+      }
+      if (playItems[activeIndex].type === 'secret') {
+        setMysteryBox(
+          mysteryBoxes[Math.floor(Math.random() * (mysteryBoxes.length + 1))],
+        );
+        return;
+      }
+    }, 4000);
     setTimeout(() => {
       refModalQuestion.current?.open();
-    }, 4000);
+    }, 5000);
   };
 
   useEffect(() => {
@@ -120,22 +153,18 @@ const GameRollDice = () => {
   return (
     <View style={styles.container}>
       <StatusBar hidden />
-      <CSModal refRBSheet={refModalQuestion}>
-        <StatusBar hidden />
-        <CSText variant="PoppinsBold" size={'xlg'} color="primaryDark">
-          {playItems[activeIndex].type === 'question'
-            ? 'Trả lời câu hỏi sau'
-            : playItems[activeIndex].type === 'secret'
-            ? 'Bí mật'
-            : 'Hoàn thành 1 lượt'}
-        </CSText>
-        <CSText>{playItems[activeIndex].type}</CSText>
-        <CSInput
-          onChangeText={text => setAnswer(text)}
-          defaultValue={answer}
-          placeholder="Nhập đáp án của bạn"
+
+      <CSModal refRBSheet={refModalQuestion} isShowCloseBtn={false}>
+        <PopupRolling
+          type={playItems[activeIndex].type}
+          question={question}
+          refModal={refModalQuestion}
+          mysteryBox={mysteryBox}
+          setActiveIndex={setActiveIndex}
+          activeIndex={activeIndex}
         />
       </CSModal>
+
       <View style={styles.header}>
         <CSButtonBack isAbsolute={false} />
         <View style={styles.streak}>
@@ -152,19 +181,27 @@ const GameRollDice = () => {
         </View>
 
         <Animated.View style={[styles.character, animate, layoutItem]}>
-          <CSText>character</CSText>
+          <Lottie
+            source={require('../../assets/images/tiger.json')}
+            autoPlay
+            loop
+            style={{
+              transform: [{scaleX: 1}],
+            }}
+            speed={1.3}
+          />
         </Animated.View>
 
         {playItems.slice(0, 4).map((item, index) => (
           <View style={[styles.contentItem, layoutItem]} key={index}>
-            <CSText>{item.type}</CSText>
+            <Image source={item.imageUrl} style={styles.imageBlock} />
           </View>
         ))}
 
         <View style={styles.rightColumn}>
           {playItems.slice(4, 7).map((item, index) => (
             <View style={[styles.contentItem, layoutItem]} key={index}>
-              <CSText> {item.type}</CSText>
+              <Image source={item.imageUrl} style={styles.imageBlock} />
             </View>
           ))}
         </View>
@@ -172,7 +209,7 @@ const GameRollDice = () => {
         <View style={styles.bottomRow}>
           {playItems.slice(7, 11).map((item, index) => (
             <View style={[styles.contentItem, layoutItem]} key={index}>
-              <CSText> {item.type}</CSText>
+              <Image source={item.imageUrl} style={styles.imageBlock} />
             </View>
           ))}
         </View>
@@ -180,7 +217,7 @@ const GameRollDice = () => {
         <View style={styles.leftColumn}>
           {playItems.slice(11, 12).map((item, index) => (
             <View style={[styles.contentItem, layoutItem]} key={index}>
-              <CSText>{item.type}</CSText>
+              <Image source={item.imageUrl} style={styles.imageBlock} />
             </View>
           ))}
         </View>

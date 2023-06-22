@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 
 import {SPACING} from '../../constants/spacing';
+import {COLORS} from '../../constants/color';
 
 export const GameRollDiceStyles = StyleSheet.create({
   container: {
@@ -43,13 +44,12 @@ export const GameRollDiceStyles = StyleSheet.create({
     width: '79%',
   },
   contentItem: {
-    backgroundColor: 'red',
+    backgroundColor: COLORS.bgHeader,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
   character: {
-    backgroundColor: 'green',
     position: 'absolute',
     left: 0,
     top: 0,
@@ -66,6 +66,11 @@ export const GameRollDiceStyles = StyleSheet.create({
   dicer: {
     width: 100,
     height: 100,
+    resizeMode: 'contain',
+  },
+  imageBlock: {
+    width: '100%',
+    height: '100%',
     resizeMode: 'contain',
   },
 });
