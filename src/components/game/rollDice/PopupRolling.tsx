@@ -1,15 +1,18 @@
-import Lottie from 'lottie-react-native';
-import React, {useEffect, useRef, useState} from 'react';
 import {Animated, ScrollView, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import React, {useEffect, useRef, useState} from 'react';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import Lottie from 'lottie-react-native';
+import Sound from 'react-native-sound';
 
 import {COLORS} from '../../../constants/color';
-import {MysteryBoxProps, PlayItem} from '../../../constants/dice';
-import {PopupRollingStyles as styles} from './PopupRolling.styles';
+import {MysteryBoxProps, PLAY_ITEMS, PlayItem} from '../../../constants/dice';
 import {RollDiceQuestion} from '../../../types';
 import {CSButton, CSInput, CSModal, CSText} from '../../core';
 import ProgressiveImage from '../../core/ProgressiveImage';
+import {PopupRollingStyles as styles} from './PopupRolling.styles';
+import {AppDispatch} from '../../../store/store';
+import {USER_ACTION} from '../../../store/actions';
 
 interface PopupRollingProps {
   type: PlayItem['type'];
@@ -30,6 +33,10 @@ const PopupRolling = ({
 }: PopupRollingProps) => {
   const textAnimateValue = useRef(new Animated.Value(0)).current;
   const refHelp = useRef<RBSheet>();
+
+  const failSound = new Sound('fail.mp3', Sound.MAIN_BUNDLE);
+  const successSound = new Sound('success.mp3', Sound.MAIN_BUNDLE);
+
   const animated = {
     transform: [{scale: textAnimateValue}],
   };
@@ -39,17 +46,26 @@ const PopupRolling = ({
 
   const handleAnswer = () => {
     if (answer.match(question.answer)) {
+      successSound.play();
       setTimeout(() => {
         refModal.current?.close();
-      }, 600);
+      }, 500);
     } else {
       setAnswerErr('Wrong answer!');
+      failSound.play();
     }
   };
 
   const handleMystery = () => {
     if (mysteryBox.type !== 'return') {
-      setActiveIndex(activeIndex + (mysteryBox.step || 0));
+      const newActiveIndex = activeIndex + mysteryBox.step;
+      if (newActiveIndex < PLAY_ITEMS.length) {
+        setActiveIndex(newActiveIndex);
+      } else {
+        setActiveIndex(newActiveIndex - PLAY_ITEMS.length);
+        AppDispatch(USER_ACTION.INCREASE_MEDAL);
+        // todo: actions when finish a round
+      }
     } else {
       setActiveIndex(0);
     }

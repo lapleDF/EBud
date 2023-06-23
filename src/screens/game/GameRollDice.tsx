@@ -16,18 +16,19 @@ import Sound from 'react-native-sound';
 import {CSButtonBack, CSModal, CSText} from '../../components/core';
 import {COLORS} from '../../constants/color';
 import {RollDiceQuestion, User} from '../../types';
-import {RootState} from '../../store/store';
+import {AppDispatch, RootState} from '../../store/store';
 import {GameRollDiceStyles as styles} from './GameRollDice.styles';
 import {
   DICES,
+  MYSTERY_BOXES,
   MysteryBoxProps,
   PLAY_ITEMS,
-  mysteryBoxes,
 } from '../../constants/dice';
 import {RollDiceQuestionList} from '../../store/reducers/rollDiceReducer';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import ProgressiveImage from '../../components/core/ProgressiveImage';
 import PopupRolling from '../../components/game/rollDice/PopupRolling';
+import {USER_ACTION} from '../../store/actions';
 
 const GameRollDice = () => {
   const rootState: RootState = useSelector((state: RootState) => state);
@@ -49,7 +50,7 @@ const GameRollDice = () => {
     rollDiceQuestion.list[0],
   );
   const [mysteryBox, setMysteryBox] = useState<MysteryBoxProps>(
-    mysteryBoxes[0],
+    MYSTERY_BOXES[0],
   );
 
   const animate = {
@@ -109,20 +110,21 @@ const GameRollDice = () => {
         setActiveIndex(newActiveIndex);
       } else {
         setActiveIndex(newActiveIndex - playItems.length);
+        AppDispatch(USER_ACTION.INCREASE_MEDAL);
         // todo: actions when finish a round
       }
       jumpSound.play();
       if (playItems[activeIndex].type === 'question') {
         setQuestion(
           rollDiceQuestion.list[
-            Math.floor(Math.random() * (rollDiceQuestion.list.length + 1))
+            Math.floor(Math.random() * rollDiceQuestion.list.length)
           ],
         );
         return;
       }
       if (playItems[activeIndex].type === 'secret') {
         setMysteryBox(
-          mysteryBoxes[Math.floor(Math.random() * (mysteryBoxes.length + 1))],
+          MYSTERY_BOXES[Math.floor(Math.random() * MYSTERY_BOXES.length)],
         );
         return;
       }

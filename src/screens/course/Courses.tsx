@@ -9,7 +9,7 @@ import type {CourseItem, CourseList, User} from '../../types';
 import {CourseStyles as styles} from './Course.styles';
 import {CSButton} from '../../components/core/CSButton';
 import {splitChunkArray} from '../../utils';
-import {CSLayout, CSLoading} from '../../components/core';
+import {CSLayout} from '../../components/core';
 import {COURSE_ACTION} from '../../store/actions';
 import SectionHeader from '../../components/sectionList/SectionHeader';
 import type {BottomTabScreenProps} from '../../types/navigation/types';

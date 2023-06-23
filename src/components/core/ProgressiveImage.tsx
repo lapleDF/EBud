@@ -4,6 +4,7 @@ import {
   ImageSourcePropType,
   ImageStyle,
   StyleProp,
+  View,
   ViewStyle,
 } from 'react-native';
 import React, {useState} from 'react';
@@ -25,11 +26,9 @@ const ProgressiveImage = ({source, style}: ProgressiveImageProps) => {
   return (
     <>
       {!isEndLoad && (
-        <ActivityIndicator
-          style={[container, style]}
-          size={'large'}
-          color={COLORS.primaryDark}
-        />
+        <View style={[container, style]}>
+          <ActivityIndicator size={'large'} color={COLORS.primaryDark} />
+        </View>
       )}
       <Image
         source={source}

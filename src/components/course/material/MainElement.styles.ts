@@ -15,7 +15,7 @@ export const MainElementStyles = StyleSheet.create({
   image: {
     width: '90%',
     height: '90%',
-    resizeMode: 'cover',
+    resizeMode: 'contain',
     borderRadius: 70,
   },
   courseTitle: {

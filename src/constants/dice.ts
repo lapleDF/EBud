@@ -196,11 +196,11 @@ export const PLAY_ITEMS: PlayItem[] = [
 
 export interface MysteryBoxProps {
   type: 'forward' | 'back' | 'return';
-  step?: number;
+  step: number;
   title: string;
 }
 
-export const mysteryBoxes: MysteryBoxProps[] = [
+export const MYSTERY_BOXES: MysteryBoxProps[] = [
   {
     type: 'forward',
     step: 2,
@@ -214,6 +214,7 @@ export const mysteryBoxes: MysteryBoxProps[] = [
   {
     type: 'return',
     title: 'Đến điểm bắt đầu',
+    step: 0,
   },
   {
     type: 'back',
