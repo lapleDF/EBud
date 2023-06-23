@@ -18,6 +18,11 @@ interface ProgressiveImageProps {
 const container: StyleProp<ViewStyle> = {
   justifyContent: 'center',
   alignItems: 'center',
+  backgroundColor: COLORS.bgHeader,
+};
+
+const unvisible: StyleProp<ImageStyle> = {
+  display: 'none',
 };
 
 const ProgressiveImage = ({source, style}: ProgressiveImageProps) => {
@@ -32,7 +37,7 @@ const ProgressiveImage = ({source, style}: ProgressiveImageProps) => {
       )}
       <Image
         source={source}
-        style={style}
+        style={isEndLoad ? style : unvisible}
         onLoadEnd={() => setIsEndLoad(true)}
       />
     </>

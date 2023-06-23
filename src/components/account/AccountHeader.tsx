@@ -1,4 +1,4 @@
-import {TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import React, {useRef} from 'react';
 
@@ -6,7 +6,6 @@ import {CSModal, CSText} from '../core';
 import HeaderLeftItem from './HeaderLeftItem';
 import AvatarChange from './AvatarChange';
 import {AccountHeaderStyles as styles} from './AccountHeader.styles';
-import ProgressiveImage from '../core/ProgressiveImage';
 
 interface AccountHeaderProps {
   avatar: string;
@@ -35,7 +34,7 @@ const AccountHeader = ({
         <TouchableOpacity
           onPress={() => refModal.current?.open()}
           style={styles.avatarTouchable}>
-          <ProgressiveImage source={{uri: avatar}} style={styles.avatar} />
+          <Image source={{uri: avatar}} style={styles.avatar} />
         </TouchableOpacity>
         <CSText variant="PoppinsBold" size={'xlg'}>
           {userName}

@@ -15,6 +15,15 @@ import type {RootStackScreenProps} from '../../types/navigation/types';
 import BookItem from '../../components/library/BookItem';
 import LibraryPlaceHolder from '../../components/library/LibraryPlaceHolder';
 
+export const handleNormalizeText = (text: string) => {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd')
+    .replace(/Đ/g, 'D');
+};
+
 export interface SectionBookProps {
   title: string;
   data: [Book[]];
@@ -77,15 +86,6 @@ const Library = () => {
 
   const handleSeeMore = (type: string) => {
     console.log(type);
-  };
-
-  const handleNormalizeText = (text: string) => {
-    return text
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/đ/g, 'd')
-      .replace(/Đ/g, 'D');
   };
 
   const renderSectionFooter = (section: SectionBookProps) => {

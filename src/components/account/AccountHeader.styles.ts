@@ -24,7 +24,6 @@ export const AccountHeaderStyles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'contain',
-    borderRadius: 60,
   },
   headerRight: {
     width: '60%',

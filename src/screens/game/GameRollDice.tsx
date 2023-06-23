@@ -1,34 +1,33 @@
+import Lottie from 'lottie-react-native';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Animated,
-  Image,
   LayoutChangeEvent,
   StatusBar,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
 import Orientation from 'react-native-orientation';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import Sound from 'react-native-sound';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
-import Lottie from 'lottie-react-native';
-import Sound from 'react-native-sound';
 
 import {CSButtonBack, CSModal, CSText} from '../../components/core';
+import ProgressiveImage from '../../components/core/ProgressiveImage';
+import PopupRolling from '../../components/game/rollDice/PopupRolling';
 import {COLORS} from '../../constants/color';
-import {RollDiceQuestion, User} from '../../types';
-import {AppDispatch, RootState} from '../../store/store';
-import {GameRollDiceStyles as styles} from './GameRollDice.styles';
 import {
   DICES,
   MYSTERY_BOXES,
   MysteryBoxProps,
   PLAY_ITEMS,
 } from '../../constants/dice';
-import {RollDiceQuestionList} from '../../store/reducers/rollDiceReducer';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import ProgressiveImage from '../../components/core/ProgressiveImage';
-import PopupRolling from '../../components/game/rollDice/PopupRolling';
 import {USER_ACTION} from '../../store/actions';
+import {RollDiceQuestionList} from '../../store/reducers/rollDiceReducer';
+import {AppDispatch, RootState} from '../../store/store';
+import type {RollDiceQuestion, User} from '../../types';
+import {GameRollDiceStyles as styles} from './GameRollDice.styles';
 
 const GameRollDice = () => {
   const rootState: RootState = useSelector((state: RootState) => state);
@@ -111,7 +110,6 @@ const GameRollDice = () => {
       } else {
         setActiveIndex(newActiveIndex - playItems.length);
         AppDispatch(USER_ACTION.INCREASE_MEDAL);
-        // todo: actions when finish a round
       }
       jumpSound.play();
       if (playItems[activeIndex].type === 'question') {
@@ -196,14 +194,20 @@ const GameRollDice = () => {
 
         {playItems.slice(0, 4).map((item, index) => (
           <View style={[styles.contentItem, layoutItem]} key={index}>
-            <Image source={item.imageUrl} style={styles.imageBlock} />
+            <ProgressiveImage
+              source={item.imageUrl}
+              style={styles.imageBlock}
+            />
           </View>
         ))}
 
         <View style={styles.rightColumn}>
           {playItems.slice(4, 7).map((item, index) => (
             <View style={[styles.contentItem, layoutItem]} key={index}>
-              <Image source={item.imageUrl} style={styles.imageBlock} />
+              <ProgressiveImage
+                source={item.imageUrl}
+                style={styles.imageBlock}
+              />
             </View>
           ))}
         </View>
@@ -211,7 +215,10 @@ const GameRollDice = () => {
         <View style={styles.bottomRow}>
           {playItems.slice(7, 11).map((item, index) => (
             <View style={[styles.contentItem, layoutItem]} key={index}>
-              <Image source={item.imageUrl} style={styles.imageBlock} />
+              <ProgressiveImage
+                source={item.imageUrl}
+                style={styles.imageBlock}
+              />
             </View>
           ))}
         </View>
@@ -219,7 +226,10 @@ const GameRollDice = () => {
         <View style={styles.leftColumn}>
           {playItems.slice(11, 12).map((item, index) => (
             <View style={[styles.contentItem, layoutItem]} key={index}>
-              <Image source={item.imageUrl} style={styles.imageBlock} />
+              <ProgressiveImage
+                source={item.imageUrl}
+                style={styles.imageBlock}
+              />
             </View>
           ))}
         </View>

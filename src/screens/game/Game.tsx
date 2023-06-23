@@ -11,7 +11,7 @@ import {CSLayout, CSModal, CSText} from '../../components/core';
 import {GameStyles as styles} from './Game.styles';
 import GameItem from '../../components/game/GameItem';
 import type {GameScreenProps} from '../../types/navigation/types';
-import {GAME_ACTION} from '../../store/actions';
+import {GAME_ACTION, ROLL_DICE_ACTION} from '../../store/actions';
 import GameItemPlaceholder from '../../components/game/GameItemPlaceholder';
 
 const Game = () => {
@@ -38,7 +38,11 @@ const Game = () => {
   });
 
   useEffect(() => {
-    AppDispatch(GAME_ACTION.GET_LIST);
+    const getListGame = () => {
+      AppDispatch(GAME_ACTION.GET_LIST);
+      AppDispatch(ROLL_DICE_ACTION.GET_LIST);
+    };
+    getListGame();
   }, []);
 
   return (
