@@ -49,7 +49,7 @@ const GameRollDice = () => {
     rollDiceQuestion.list[0],
   );
   const [mysteryBox, setMysteryBox] = useState<MysteryBoxProps>(
-    MYSTERY_BOXES[0],
+    [...MYSTERY_BOXES][Math.floor(Math.random() * MYSTERY_BOXES.length)],
   );
 
   const animate = {
@@ -97,8 +97,8 @@ const GameRollDice = () => {
     let diceTemp = activeDice;
     const intervalID = setInterval(() => {
       const dice = DICES[Math.floor(Math.random() * DICES.length)];
-      setActiveDice(dice);
       diceTemp = dice;
+      setActiveDice(dice);
     }, 500);
     setTimeout(() => {
       clearInterval(intervalID);
@@ -112,20 +112,15 @@ const GameRollDice = () => {
         AppDispatch(USER_ACTION.INCREASE_MEDAL);
       }
       jumpSound.play();
-      if (playItems[activeIndex].type === 'question') {
-        setQuestion(
-          rollDiceQuestion.list[
-            Math.floor(Math.random() * rollDiceQuestion.list.length)
-          ],
-        );
-        return;
-      }
-      if (playItems[activeIndex].type === 'secret') {
-        setMysteryBox(
-          MYSTERY_BOXES[Math.floor(Math.random() * MYSTERY_BOXES.length)],
-        );
-        return;
-      }
+      setQuestion(
+        rollDiceQuestion.list[
+          Math.floor(Math.random() * rollDiceQuestion.list.length)
+        ],
+      );
+
+      setMysteryBox(
+        MYSTERY_BOXES[Math.floor(Math.random() * MYSTERY_BOXES.length)],
+      );
     }, 4000);
     setTimeout(() => {
       refModalQuestion.current?.open();

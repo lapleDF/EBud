@@ -26,8 +26,9 @@ export const PopupRollingStyles = StyleSheet.create({
   titleMysteryBox: {
     position: 'absolute',
     fontFamily: FONTS.Bungee,
-    fontSize: sizeText.lg,
+    fontSize: sizeText.xlg,
     color: COLORS.primaryDark,
+    textAlign: 'center',
   },
   mysteryBoxContainer: {
     flex: 1,

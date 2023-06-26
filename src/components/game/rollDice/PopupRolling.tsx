@@ -1,4 +1,10 @@
-import {Animated, ScrollView, TouchableOpacity, View} from 'react-native';
+import {
+  Animated,
+  BackHandler,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import React, {useEffect, useRef, useState} from 'react';
 import RBSheet from 'react-native-raw-bottom-sheet';
@@ -85,6 +91,10 @@ const PopupRolling = ({
     }
   }, [textAnimateValue, type]);
 
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', () => true);
+  }, []);
+
   switch (type) {
     case 'question':
       return (
@@ -109,12 +119,15 @@ const PopupRolling = ({
           <CSText variant="Bungee" size={'xlg'} color="primaryDark">
             Trả lời câu hỏi sau
           </CSText>
-          <CSText style={styles.question}>{question?.question}</CSText>
+          <CSText variant="PoppinsBold" style={styles.question}>
+            {question?.question}
+          </CSText>
           <CSInput
             onChangeText={text => setAnswer(text)}
             defaultValue={answer}
             placeholder="Nhập đáp án của bạn"
             errMess={answerErr}
+            textInputProps={{onSubmitEditing: handleAnswer}}
           />
           <View style={styles.btns}>
             <CSButton onPress={handleAnswer} title="Trả lời" />

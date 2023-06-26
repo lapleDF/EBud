@@ -48,6 +48,7 @@ const CSModal = (props: CSModalProps) => {
     <RBSheet
       ref={refRBSheet}
       closeOnDragDown={false}
+      closeOnPressBack={false}
       animationType="slide"
       customStyles={{
         container: containerRBS,
