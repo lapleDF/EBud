@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import Video, {OnLoadData, OnProgressData} from 'react-native-video';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -6,9 +6,10 @@ import Slider from '@react-native-community/slider';
 import Orientation from 'react-native-orientation';
 import {useNavigation} from '@react-navigation/native';
 
-import {COLORS} from '../../../constants/color';
-import {CSText} from '../../core';
 import {getDisplayedTimeVideo} from '../../../utils';
+import {COLORS} from '../../../constants/color';
+import {CSVideoStyles as styles} from './CSVideo.styles';
+import {CSText} from '../../core';
 
 interface VideoProps {
   videoUrl?: string;
@@ -67,7 +68,7 @@ const CSVideo = ({videoUrl = '', posterUrl = ''}: VideoProps) => {
     if (fullScreen) {
       Orientation.lockToPortrait();
     } else {
-      Orientation.lockToLandscape();
+      Orientation.lockToLandscapeLeft();
     }
     setParams({...params, fullScreen: !params.fullScreen});
   };
@@ -158,61 +159,5 @@ const CSVideo = ({videoUrl = '', posterUrl = ''}: VideoProps) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  fullScreenVideo: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 1,
-    backgroundColor: COLORS.black,
-  },
-  video: {
-    width: '100%',
-    height: 230,
-    backgroundColor: COLORS.black,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  controls: {
-    backgroundColor: COLORS.overlay,
-    alignItems: 'center',
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    bottom: 0,
-    left: 0,
-    zIndex: 2,
-  },
-  sliderGroup: {
-    width: '90%',
-    height: 50,
-  },
-  slider: {
-    width: '100%',
-    height: 50,
-  },
-  controlBtn: {
-    position: 'absolute',
-    bottom: '50%',
-    transform: [{translateY: 20}],
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 50,
-    width: '100%',
-    zIndex: 2,
-  },
-  timer: {
-    position: 'absolute',
-    top: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    paddingHorizontal: 15,
-  },
-});
 
 export default CSVideo;

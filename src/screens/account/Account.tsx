@@ -3,29 +3,33 @@ import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
-import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {ScrollView, TouchableOpacity, View} from 'react-native';
+import RBSheet from 'react-native-raw-bottom-sheet';
 
+import {AccountStyles as styles} from './Account.styles';
 import {CSButton} from '../../components/core/CSButton';
 import {ASYNC_STORAGE} from '../../constants/asyncStorage';
 import {AppDispatch, RootState} from '../../store/store';
 import {USER_ACTION} from '../../store/actions';
 import {CSLayout, CSModal, CSText} from '../../components/core';
-import {User} from '../../types';
-import {SPACING} from '../../constants/spacing';
+import type {RootStackScreenProps} from '../../types/navigation/types';
 import AccountHeader from '../../components/account/AccountHeader';
-import {COLORS} from '../../constants/color';
 import SettingItem from '../../components/account/SettingItem';
+import {COLORS} from '../../constants/color';
+import type {User} from '../../types';
 
 const Account = () => {
-  const navigation = useNavigation<any>();
-  const refBtnLogout = useRef<any>();
+  const navigation =
+    useNavigation<RootStackScreenProps<'Authentication'>['navigation']>();
+  const refBtnLogout = useRef<RBSheet>();
+
   const user: User = useSelector((state: RootState) => state.user);
 
   const logout = () => {
     AsyncStorage.removeItem(ASYNC_STORAGE.userInfo);
     AppDispatch(USER_ACTION.LOGOUT, null);
-    refBtnLogout.current.close();
-    navigation.navigate('authentication');
+    refBtnLogout.current?.close();
+    navigation.navigate('Authentication', {screen: 'Login'});
   };
 
   return (
@@ -48,17 +52,17 @@ const Account = () => {
         <SettingItem
           label="Thông tin tài khoản"
           icon="person-outline"
-          routeName="userInfo"
+          routeName="UserInfo"
         />
         <SettingItem
           label="Cài đặt hiển thị"
           icon="settings-outline"
-          routeName="appearance"
+          routeName="Appearance"
         />
         <SettingItem
           label="Cài đặt thông báo"
           icon="notifications-outline"
-          routeName="notification"
+          routeName="Notification"
         />
         <CSText variant="PoppinsBold" style={styles.titleList}>
           Hỗ trợ
@@ -66,7 +70,7 @@ const Account = () => {
         <SettingItem
           label="Báo cáo sự cố"
           icon="warning-outline"
-          routeName="reportIssue"
+          routeName="ReportIssue"
         />
         <SettingItem
           label="Các câu hỏi thường gặp"
@@ -75,7 +79,7 @@ const Account = () => {
         />
 
         <TouchableOpacity
-          onPress={() => refBtnLogout.current.open()}
+          onPress={() => refBtnLogout.current?.open()}
           style={styles.logout}>
           <CSText color="primaryLighter" variant="PoppinsBold">
             Đăng xuất
@@ -87,7 +91,7 @@ const Account = () => {
           />
         </TouchableOpacity>
       </ScrollView>
-      <CSModal refRBSheet={refBtnLogout}>
+      <CSModal refRBSheet={refBtnLogout} isShowCloseBtn={false}>
         <CSText size={'lg'} color="primaryDark" variant="PoppinsBold">
           Đăng xuất?
         </CSText>
@@ -98,7 +102,7 @@ const Account = () => {
           <CSButton title="Đồng ý" onPress={logout} />
           <CSButton
             title="Hủy"
-            onPress={() => refBtnLogout.current.close()}
+            onPress={() => refBtnLogout.current?.close()}
             variant="secondary"
           />
         </View>
@@ -107,38 +111,4 @@ const Account = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: SPACING.px,
-  },
-  groupBtnModal: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  textCenter: {
-    textAlign: 'center',
-  },
-  logout: {
-    width: SPACING.screenWidth - SPACING.px * 4,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 10,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: COLORS.primaryLighter,
-    paddingVertical: 10,
-    marginLeft: SPACING.px,
-    marginVertical: 20,
-  },
-  titleList: {
-    marginTop: 20,
-  },
-  contentContainer: {
-    width: '100%',
-    paddingBottom: SPACING.heightBottomTab,
-  },
-});
 export default Account;

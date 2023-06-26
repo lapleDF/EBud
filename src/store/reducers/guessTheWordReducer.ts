@@ -1,4 +1,4 @@
-import {GuessTheWordList, PayloadAction} from '../../types';
+import type {GuessTheWordList, PayloadAction} from '../../types';
 import {GUESS_THE_WORD_ACTION} from '../actions';
 
 export const initialGuessTheWord: GuessTheWordList = {

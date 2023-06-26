@@ -1,12 +1,12 @@
 import {put, select, takeLatest} from 'redux-saga/effects';
 
 import {COURSE_ACTION, LESSON_ACTION, USER_ACTION} from '../actions';
-import {CourseItem, Lesson, PayloadAction, User} from '../../types';
+import type {CourseItem, Lesson, PayloadAction, User} from '../../types';
 import {
   addLessonToFavoriteList,
   completeLessonQuery,
   getLessonList,
-} from '../../query';
+} from '../../queries';
 import {RootState} from '../store';
 import {LessonList} from '../reducers/lessonReducer';
 

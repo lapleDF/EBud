@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {Animated, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Animated, TouchableOpacity, View} from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {Easing} from 'react-native-reanimated';
 import Pdf from 'react-native-pdf';
@@ -15,7 +15,6 @@ import {
   CSModal,
   CSText,
 } from '../../components/core';
-import {SPACING} from '../../constants/spacing';
 import {COLORS} from '../../constants/color';
 import {
   getDataObjAsyncStorage,
@@ -23,16 +22,19 @@ import {
   storeDataObjAsyncStorage,
 } from '../../utils';
 import {ASYNC_STORAGE} from '../../constants/asyncStorage';
-import {TrackAudio} from '../../types';
+import type {TrackAudio} from '../../types';
+import type {LibraryScreenProps} from '../../types/navigation/types';
+import {BookContentStyles as styles} from './BookContent.styles';
 
 export interface BookContinueRead {
   bookId: string;
   currenPage: number;
 }
 const BookContent = () => {
-  const route = useRoute<any>();
+  const route = useRoute<LibraryScreenProps<'Conttent'>['route']>();
   const {bookItem} = route.params;
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<LibraryScreenProps<'Conttent'>['navigation']>();
 
   const trackAudioList: TrackAudio[] = bookItem.trackAudio;
   const refPdf = useRef<Pdf>(null);
@@ -283,69 +285,4 @@ const BookContent = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  pdf: {
-    flex: 1,
-    width: SPACING.screenWidth,
-    height: SPACING.screenHeight,
-    backgroundColor: COLORS.bgDark,
-  },
-  audioFile: {},
-  controlsGroup: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: 100,
-    backgroundColor: COLORS.overlay,
-    padding: SPACING.px,
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 10,
-  },
-  controls: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
-  },
-  btns: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  titleModal: {
-    textAlign: 'center',
-  },
-  bookTitle: {
-    textAlign: 'center',
-    width: '65%',
-  },
-  audio: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  sliderGroup: {
-    width: '90%',
-    height: 50,
-  },
-  slider: {
-    width: '100%',
-    height: 50,
-  },
-  timer: {
-    position: 'absolute',
-    top: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    paddingHorizontal: 15,
-  },
-});
 export default BookContent;

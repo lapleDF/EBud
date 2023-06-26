@@ -3,6 +3,7 @@ import {PlayingGame} from './PlayingGame';
 export interface User {
   id: string;
   username: string;
+  fullName: string;
   email: string;
   avatar: string;
   totalStreak: number;
@@ -11,4 +12,5 @@ export interface User {
   desc: string;
   learntLesson: number;
   game: PlayingGame[];
+  fetchingStatus?: 'loading' | 'idle' | 'error';
 }

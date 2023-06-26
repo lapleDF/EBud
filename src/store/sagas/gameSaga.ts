@@ -2,10 +2,10 @@ import {put, select, takeLatest} from 'redux-saga/effects';
 import Parse from 'parse/react-native';
 
 import {GAME_ACTION, USER_ACTION} from '../actions';
-import {Game, PayloadAction, User} from '../../types';
-import {queryGetListGame} from '../../query/gameQuery';
+import type {Game, PayloadAction, User} from '../../types';
+import {queryGetListGame} from '../../queries/gameQuery';
 import {RootState} from '../store';
-import {PlayingGame} from '../../types/PlayingGame';
+import type {PlayingGame} from '../../types/PlayingGame';
 
 function* getList() {
   yield put({type: GAME_ACTION.UPDATE_FETCHING_STATUS, payload: 'loading'});

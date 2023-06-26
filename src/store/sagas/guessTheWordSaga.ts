@@ -1,8 +1,8 @@
 import {put, takeLatest} from 'redux-saga/effects';
 
 import {GUESS_THE_WORD_ACTION} from '../actions';
-import {GuessTheWordItem, PayloadAction} from '../../types';
-import {queryGetGuessTheWordGame} from '../../query/guessTheWordQuery';
+import type {GuessTheWordItem, PayloadAction} from '../../types';
+import {queryGetGuessTheWordGame} from '../../queries/guessTheWordQuery';
 
 function* getList({payload}: PayloadAction) {
   yield put({type: GUESS_THE_WORD_ACTION.UPDATE_STATUS, payload: 'loading'});

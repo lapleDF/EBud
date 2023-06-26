@@ -2,16 +2,14 @@ import React, {useEffect, useRef, useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
   KeyboardAvoidingView,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
   Animated,
   Platform,
 } from 'react-native';
 
-import {sizeText} from '../../components/core';
 import {COLORS} from '../../constants/color';
-import {FONTS} from '../../constants/font';
+import {SearchStyles as styles} from './Search.styles';
 import {SPACING} from '../../constants/spacing';
 
 interface SearchProps {
@@ -74,37 +72,5 @@ const Search = ({searchValue, setSearchValue}: SearchProps) => {
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  searchContainer: {
-    width: '86%',
-    height: 60,
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    flex: 1,
-  },
-  wrapInputFiled: {
-    width: '100%',
-    height: '100%',
-  },
-  searchField: {
-    width: '100%',
-    height: '100%',
-    paddingLeft: 15,
-    fontFamily: FONTS.PoppinsRegular,
-    backgroundColor: COLORS.bgHeader,
-    fontSize: sizeText.md,
-  },
-  searchIcon: {
-    position: 'absolute',
-    right: 0,
-    backgroundColor: COLORS.bgHeader,
-    paddingHorizontal: SPACING.px,
-    height: 60,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default Search;

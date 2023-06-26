@@ -99,7 +99,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0.4"
+        versionName "1.0.6"
     }
 
     splits {
@@ -171,6 +171,8 @@ dependencies {
     implementation project(':react-native-video')
 
     implementation project(':react-native-orientation')
+
+    implementation project(':react-native-sound')
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {

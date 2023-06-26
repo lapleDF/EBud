@@ -1,4 +1,4 @@
-import {GameList, PayloadAction} from '../../types';
+import type {GameList, PayloadAction} from '../../types';
 import {GAME_ACTION} from '../actions';
 
 export const initialGame: GameList = {

@@ -1,9 +1,10 @@
-import {PayloadAction, User} from '../../types';
+import type {PayloadAction, User} from '../../types';
 import {USER_ACTION} from '../actions';
 
 export const initialUser: User = {
   id: '',
   username: '',
+  fullName: '',
   email: '',
   avatar:
     'https://parsefiles.back4app.com/m3BU02yXteFvr3TV0XEGWVRClKOlaQzDYoTvPCZ1/4c29fc10ed03063f1ea4718adb47b658_winged.png',
@@ -13,6 +14,7 @@ export const initialUser: User = {
   desc: '',
   learntLesson: 0,
   game: [],
+  fetchingStatus: 'idle',
 };
 
 export const userReducer = (
@@ -22,20 +24,15 @@ export const userReducer = (
   switch (action.type) {
     case USER_ACTION.UPDATE:
       return action.payload;
-    case USER_ACTION.INCREASE_MEDAL:
-      return {
-        ...state,
-        totalMedal: state.totalMedal + 1,
-      };
-    case USER_ACTION.INCREASE_STREAK:
-      return {
-        ...state,
-        totalStreak: state.totalStreak + 1,
-      };
     case USER_ACTION.CHANGE_AVATAR:
       return {
         ...state,
         avatar: action.payload,
+      };
+    case USER_ACTION.CHANGE_FETCHING_STATUS:
+      return {
+        ...state,
+        fetchingStatus: action.payload,
       };
     default:
       return state;

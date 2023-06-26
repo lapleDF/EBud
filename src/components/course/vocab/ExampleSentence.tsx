@@ -3,7 +3,7 @@ import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 
 import {COLORS} from '../../../constants/color';
-import {SentenceEg} from '../../../types';
+import type {SentenceEg} from '../../../types';
 import {CSText} from '../../core';
 import {handleSpeak} from '../../../utils';
 
