@@ -4,3 +4,4 @@ export * from './lesson.action';
 export * from './book.action';
 export * from './game.action';
 export * from './guessTheWord';
+export * from './rollDice.action';

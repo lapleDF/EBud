@@ -180,7 +180,7 @@ const VocabLesson = () => {
           </View>
         </>
       )}
-      <CSModal refRBSheet={refModal}>
+      <CSModal refRBSheet={refModal} isShowCloseBtn={false}>
         <CSText
           size={'lg'}
           color="primaryDark"

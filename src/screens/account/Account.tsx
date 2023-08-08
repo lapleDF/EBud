@@ -91,7 +91,7 @@ const Account = () => {
           />
         </TouchableOpacity>
       </ScrollView>
-      <CSModal refRBSheet={refBtnLogout}>
+      <CSModal refRBSheet={refBtnLogout} isShowCloseBtn={false}>
         <CSText size={'lg'} color="primaryDark" variant="PoppinsBold">
           Đăng xuất?
         </CSText>
