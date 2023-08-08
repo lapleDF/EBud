@@ -4,6 +4,7 @@ import {USER_ACTION} from '../actions';
 export const initialUser: User = {
   id: '',
   username: '',
+  fullName: '',
   email: '',
   avatar:
     'https://parsefiles.back4app.com/m3BU02yXteFvr3TV0XEGWVRClKOlaQzDYoTvPCZ1/4c29fc10ed03063f1ea4718adb47b658_winged.png',
@@ -13,6 +14,7 @@ export const initialUser: User = {
   desc: '',
   learntLesson: 0,
   game: [],
+  fetchingStatus: 'idle',
 };
 
 export const userReducer = (
@@ -26,6 +28,11 @@ export const userReducer = (
       return {
         ...state,
         avatar: action.payload,
+      };
+    case USER_ACTION.CHANGE_FETCHING_STATUS:
+      return {
+        ...state,
+        fetchingStatus: action.payload,
       };
     default:
       return state;

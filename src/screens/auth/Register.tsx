@@ -35,6 +35,7 @@ const Register = () => {
         avatar: params.avatar,
         totalStreak: params.totalStreak,
         totalMedal: params.totalMedal,
+        fullName: params.fullName,
         desc: params.desc,
         game: [],
       });
@@ -53,6 +54,11 @@ const Register = () => {
         Đăng ký
       </CSText>
       <View style={styles.groupInput}>
+        <CSInput
+          onChangeText={text => setParams({...params, fullName: text})}
+          placeholder="Họ và tên"
+          defaultValue={params.fullName}
+        />
         <CSInput
           onChangeText={text => setParams({...params, username: text})}
           placeholder="Tên đăng nhập"

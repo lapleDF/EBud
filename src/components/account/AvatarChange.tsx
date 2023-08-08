@@ -1,14 +1,13 @@
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Parse from 'parse/react-native';
+import RBSheet from 'react-native-raw-bottom-sheet';
 
 import {PARSE_OBJ} from '../../constants/parseObject';
 import {CSButton, CSLoading, CSText} from '../core';
-import {COLORS} from '../../constants/color';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import {SPACING} from '../../constants/spacing';
 import {AppDispatch} from '../../store/store';
 import {USER_ACTION} from '../../store/actions';
+import {AvatarChangeStyles as styles} from './AvatarChange.styles';
 
 interface Avatar {
   name: string;
@@ -92,37 +91,3 @@ const AvatarChange = ({refRBSheet}: AvatarChangeProps) => {
 };
 
 export default AvatarChange;
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-    gap: 20,
-    rowGap: 40,
-    marginBottom: 50,
-  },
-  item: {
-    alignItems: 'center',
-  },
-  image: {
-    width: (SPACING.screenWidth - SPACING.px * 4) * 0.25,
-    height: (SPACING.screenWidth - SPACING.px * 4) * 0.25,
-    resizeMode: 'contain',
-    borderRadius: 50,
-  },
-  nameAvatar: {
-    position: 'absolute',
-    bottom: -30,
-  },
-  imageActive: {
-    borderColor: COLORS.primaryLight,
-    borderWidth: 6,
-  },
-  btnGroup: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-});

@@ -52,17 +52,17 @@ const Account = () => {
         <SettingItem
           label="Thông tin tài khoản"
           icon="person-outline"
-          routeName="userInfo"
+          routeName="UserInfo"
         />
         <SettingItem
           label="Cài đặt hiển thị"
           icon="settings-outline"
-          routeName="appearance"
+          routeName="Appearance"
         />
         <SettingItem
           label="Cài đặt thông báo"
           icon="notifications-outline"
-          routeName="notification"
+          routeName="Notification"
         />
         <CSText variant="PoppinsBold" style={styles.titleList}>
           Hỗ trợ
@@ -70,7 +70,7 @@ const Account = () => {
         <SettingItem
           label="Báo cáo sự cố"
           icon="warning-outline"
-          routeName="reportIssue"
+          routeName="ReportIssue"
         />
         <SettingItem
           label="Các câu hỏi thường gặp"
