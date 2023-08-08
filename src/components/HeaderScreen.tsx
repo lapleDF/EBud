@@ -1,27 +1,21 @@
-import {
-  Image,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  ImageSourcePropType,
-} from 'react-native';
+import {Image, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import CSText from './core/CSText';
 import {COLORS} from '../constants/color';
-import {SPACING} from '../constants/spacing';
-import {CSButtonBack} from './core/CSButton';
+import {CSButtonBack, CSText} from './core';
+import {HeaderScreenStyles as styles} from './HeaderScreen.styles';
 
 interface HeaderScreenProps {
   textLeft?: string;
-  avatar?: string | ImageSourcePropType;
+  avatar?: string;
   backBtn?: boolean;
   onPressLeft?: () => void;
   iconLeft?: string;
   onPressRight?: () => void;
   iconRight?: string;
   textRight?: string | number;
+  headerRight?: JSX.Element;
 }
 
 const HeaderScreen = ({backBtn = false, ...props}: HeaderScreenProps) => {
@@ -36,72 +30,37 @@ const HeaderScreen = ({backBtn = false, ...props}: HeaderScreenProps) => {
           <Icon name={props.iconLeft} size={40} color={COLORS.primaryDark} />
         )}
         {props.textLeft && (
-          <CSText variant="PoppinsSemiBold" size={'lg'}>
+          <CSText
+            textProps={{numberOfLines: 1}}
+            variant="PoppinsSemiBold"
+            size={'xlg'}>
             {props.textLeft}
           </CSText>
         )}
         {props.avatar && (
-          <Image
-            source={
-              typeof props.avatar === 'string'
-                ? {uri: props.avatar}
-                : props.avatar
-            }
-            style={styles.imgAvatar}
-          />
+          <Image source={{uri: props.avatar}} style={styles.imgAvatar} />
         )}
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.right}
-        onPress={props.onPressRight}
-        activeOpacity={0.5}>
-        {props.textRight && (
-          <CSText variant="PoppinsSemiBold" size={'lg'}>
-            {props.textRight}
-          </CSText>
-        )}
-        {props.iconRight && (
-          <Icon name={props.iconRight} size={40} color={COLORS.secondary} />
-        )}
-      </TouchableOpacity>
+      {props.headerRight || (
+        <TouchableOpacity
+          style={styles.right}
+          onPress={props.onPressRight}
+          activeOpacity={0.5}>
+          {props.textRight && (
+            <CSText
+              textProps={{numberOfLines: 1}}
+              variant="PoppinsSemiBold"
+              size={'xlg'}>
+              {props.textRight}
+            </CSText>
+          )}
+          {props.iconRight && (
+            <Icon name={props.iconRight} size={40} color={COLORS.secondary} />
+          )}
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  header: {
-    height: 60,
-    backgroundColor: COLORS.bgHeader,
-    paddingHorizontal: SPACING.px,
-    width: '100%',
-    shadowColor: COLORS.black,
-    shadowOffset: {
-      width: 10,
-      height: 10,
-    },
-    elevation: 15,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  left: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-  },
-  right: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-  },
-  imgAvatar: {
-    width: 45,
-    height: 45,
-    resizeMode: 'cover',
-    borderRadius: 30,
-    overflow: 'hidden',
-  },
-});
 
 export default HeaderScreen;

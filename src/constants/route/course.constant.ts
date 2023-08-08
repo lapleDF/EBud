@@ -1,27 +1,35 @@
+import HeaderScreen from '../../components/HeaderScreen';
 import Courses from '../../screens/course/Courses';
-import GrammarLesson from '../../screens/course/GrammarLesson';
-import PronounciationLesson from '../../screens/course/PronounciationLesson';
-import VocabLesson from '../../screens/course/VocabLesson';
+import Lesson from '../../screens/course/Lesson';
+import VocabStared from '../../screens/course/VocabStared';
+import type {CourseStackParamList} from '../../types/navigation/types';
 
-export const COURSE_ROUTE = [
+interface CourseRouteProps {
+  name: keyof CourseStackParamList;
+  component: () => JSX.Element;
+  options?: {};
+}
+
+export const COURSE_ROUTE: CourseRouteProps[] = [
   {
-    name: 'course',
+    name: 'Course',
     component: Courses,
     options: {headerShown: true},
   },
   {
-    name: 'grammar',
-    component: GrammarLesson,
-    options: {headerShown: false},
+    name: 'Lesson',
+    component: Lesson,
+    options: {
+      headerShown: true,
+      header: () => HeaderScreen({backBtn: true, textLeft: 'Lesson'}),
+    },
   },
   {
-    name: 'vocab',
-    component: VocabLesson,
-    options: {headerShown: false},
-  },
-  {
-    name: 'pronoun',
-    component: PronounciationLesson,
-    options: {headerShown: false},
+    name: 'VocabStared',
+    component: VocabStared,
+    options: {
+      headerShown: true,
+      header: () => HeaderScreen({backBtn: true, textLeft: 'Từ vựng đã lưu'}),
+    },
   },
 ];

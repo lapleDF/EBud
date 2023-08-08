@@ -4,4 +4,5 @@ export const SPACING = {
   screenWidth: Dimensions.get('screen').width,
   screenHeight: Dimensions.get('window').height,
   px: 10,
+  heightBottomTab: 100,
 };

@@ -1,21 +1,22 @@
 import Game from '../../screens/game/Game';
-import GameGuessTheWord from '../../screens/game/GameGuessTheWord';
-import GameRollDice from '../../screens/game/GameRollDice';
+import GamePlaying from '../../screens/game/GamePlaying';
+import type {GameStackParamList} from '../../types/navigation/types';
 
-export const GAME_ROUTE = [
+interface GameRouteProps {
+  name: keyof GameStackParamList;
+  component: () => JSX.Element;
+  options?: {};
+}
+
+export const GAME_ROUTE: GameRouteProps[] = [
   {
-    name: 'game',
+    name: 'Game',
     component: Game,
     options: {headerShown: true},
   },
   {
-    name: 'guessTheWord',
-    component: GameGuessTheWord,
-    options: {headerShown: false},
-  },
-  {
-    name: 'rollDice',
-    component: GameRollDice,
+    name: 'GamePlaying',
+    component: GamePlaying,
     options: {headerShown: false},
   },
 ];

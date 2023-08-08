@@ -6,4 +6,5 @@ export interface GameList {
   prevPage: number;
   nextPage: number;
   totalPage: number;
+  fetchingStatus: 'loading' | 'idle' | 'error';
 }

@@ -1,12 +1,12 @@
 import React from 'react';
-import CSContainer from '../../components/core/CSContainer';
-import CSText from '../../components/core/CSText';
+
+import {CSLayout, CSText} from '../../components/core';
 
 const AppearanceSetting = () => {
   return (
-    <CSContainer>
+    <CSLayout>
       <CSText>Appearance Setting</CSText>
-    </CSContainer>
+    </CSLayout>
   );
 };
 

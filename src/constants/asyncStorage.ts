@@ -1,4 +1,5 @@
 export const ASYNC_STORAGE = {
-  accessToken: 'EBudAccessToken',
-  user: 'EBudUser',
+  userInfo: 'userInfo',
+  isFirstLaunch: 'isFirstLaunch',
+  bookContinueRead: 'bookContinueRead',
 };

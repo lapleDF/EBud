@@ -3,19 +3,21 @@ import React from 'react';
 
 import Login from '../screens/auth/Login';
 import Register from '../screens/auth/Register';
+import type {AuthStackParamList} from '../types/navigation/types';
+
+const AuthStack = createStackNavigator<AuthStackParamList>();
 
 const AuthNavigator = () => {
-  const AuthStack = createStackNavigator();
-
   return (
-    <AuthStack.Navigator screenOptions={{headerShown: false}}>
+    <AuthStack.Navigator
+      screenOptions={{headerShown: false, animationTypeForReplace: 'push'}}>
       <AuthStack.Screen
-        name="login"
+        name="Login"
         component={Login}
         options={{presentation: 'transparentModal'}}
       />
       <AuthStack.Screen
-        name="register"
+        name="Register"
         component={Register}
         options={{presentation: 'transparentModal'}}
       />
