@@ -1,4 +1,4 @@
-import {Image, TouchableOpacity} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -9,6 +9,7 @@ import {COLORS} from '../../constants/color';
 import {GameItemStyles as styles} from './GameItem.styles';
 import type {Game} from '../../types';
 import type {RootStackScreenProps} from '../../types/navigation/types';
+import ProgressiveImage from '../core/ProgressiveImage';
 
 interface GameItemProps {
   handleHelp: (gameRule: string) => void;
@@ -33,12 +34,14 @@ const GameItem = ({handleHelp, gameItem}: GameItemProps) => {
     <LinearGradient
       colors={bgColors[randomcolor(0, bgColors.length - 1)]}
       style={styles.gameItem}>
-      <Image
-        source={{
-          uri: gameItem.cover,
-        }}
-        style={styles.image}
-      />
+      <View style={styles.imageWrapper}>
+        <ProgressiveImage
+          source={{
+            uri: gameItem.cover,
+          }}
+          style={styles.image}
+        />
+      </View>
       <CSText
         variant="PoppinsBold"
         textProps={{numberOfLines: 2}}

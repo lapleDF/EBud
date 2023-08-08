@@ -1,6 +1,6 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect} from 'react';
-import {Image, ScrollView, TouchableOpacity, View} from 'react-native';
+import {ScrollView, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
 
@@ -12,6 +12,7 @@ import {BOOK_ACTION} from '../../store/actions';
 import {AppDispatch, RootState} from '../../store/store';
 import type {BookList} from '../../types';
 import type {LibraryScreenProps} from '../../types/navigation/types';
+import ProgressiveImage from '../../components/core/ProgressiveImage';
 
 const BookPreview = () => {
   const navigation =
@@ -49,7 +50,10 @@ const BookPreview = () => {
       <ScrollView
         contentContainerStyle={styles.container}
         showsVerticalScrollIndicator={false}>
-        <Image source={{uri: selectedBook.cover}} style={styles.cover} />
+        <ProgressiveImage
+          source={{uri: selectedBook.cover}}
+          style={styles.cover}
+        />
         <CSText style={styles.desc}>
           <CSText variant="PoppinsBold">Mô tả: </CSText>
           {selectedBook.desc}

@@ -6,15 +6,9 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import {useNavigation} from '@react-navigation/native';
 import Sound from 'react-native-sound';
 
-import GuessWordItem from '../../components/game/GuessWordItem';
-import {
-  CSButton,
-  CSButtonBack,
-  CSLoading,
-  CSModal,
-  CSText,
-} from '../../components/core';
-import GuessWordListText from '../../components/game/GuessWordListText';
+import GuessWordItem from '../../components/game/guessTheWord/GuessWordItem';
+import {CSButton, CSButtonBack, CSModal, CSText} from '../../components/core';
+import GuessWordListText from '../../components/game/guessTheWord/GuessWordListText';
 import {SPACING} from '../../constants/spacing';
 import {handleSpeak, shuffleArray} from '../../utils';
 import type {GuessTheWordList} from '../../types';
@@ -27,6 +21,7 @@ import {
 import type {PlayingGame} from '../../types/PlayingGame';
 import type {GameScreenProps} from '../../types/navigation/types';
 import {GameGuessTheWordStyles as styles} from './GameGuessTheWord.styles';
+import GuessTheWordPlaceholder from '../../components/game/guessTheWord/GuessTheWordPlaceholder';
 
 interface GameGuessTheWordProps {
   gameId: string;
@@ -44,11 +39,7 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
   const refModal = useRef<RBSheet>();
 
   const [level, setLevel] = useState(
-    (userGameInfo.find(
-      item =>
-        item.gameId === gameId &&
-        item.currentLevel !== guessTheWordata.maxLevel,
-    )?.currentLevel || 0) + 1,
+    userGameInfo.find(item => item.gameId === gameId)?.currentLevel || 1,
   );
 
   const navigation =
@@ -90,7 +81,7 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
     ) {
       AppDispatch(GAME_ACTION.UPDATE_GAME_INFO_USER, {
         gameId: gameId,
-        level: level,
+        level: level === guessTheWordata.maxLevel ? 1 : level + 1,
       });
       AppDispatch(USER_ACTION.INCREASE_MEDAL);
       successSound.play();
@@ -179,7 +170,6 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
 
   return (
     <View style={styles.container}>
-      {guessTheWordata.fetchingStatus === 'loading' && <CSLoading />}
       <CSModal
         refRBSheet={refModal}
         height={SPACING.screenHeight * 0.35}
@@ -216,41 +206,43 @@ const GameGuessTheWord = ({gameId}: GameGuessTheWordProps) => {
           )}
         </View>
       </CSModal>
-      <FlatList
-        data={guessTheWordata.list}
-        renderItem={({item, index}) => (
-          <GuessWordItem
-            image={item.image}
-            word={guessList[index]}
-            onPressItem={() => handlePressItem(index)}
-            onRemoveItem={() => handleRemoveItem(index)}
-            isActive={activeIndex === index}
-            index={index}
-          />
-        )}
-        keyExtractor={(_item, index) => index.toString()}
-        contentContainerStyle={styles.contentContainer}
-        ListFooterComponent={
-          <>
-            <GuessWordListText wordList={wordList} onPress={hanlePressText} />
-            {wordList.length === 0 &&
-              guessTheWordata.fetchingStatus !== 'loading' &&
-              guessTheWordata.list.length > 0 && (
+      {guessTheWordata.fetchingStatus === 'loading' ? (
+        <GuessTheWordPlaceholder />
+      ) : (
+        <FlatList
+          data={guessTheWordata.list}
+          renderItem={({item, index}) => (
+            <GuessWordItem
+              image={item.image}
+              word={guessList[index]}
+              onPressItem={() => handlePressItem(index)}
+              onRemoveItem={() => handleRemoveItem(index)}
+              isActive={activeIndex === index}
+              index={index}
+            />
+          )}
+          keyExtractor={(_item, index) => index.toString()}
+          contentContainerStyle={styles.contentContainer}
+          ListFooterComponent={
+            <>
+              <GuessWordListText wordList={wordList} onPress={hanlePressText} />
+              {wordList.length === 0 && guessTheWordata.list.length > 0 && (
                 <CSButton title="Kiểm tra" onPress={handleCheck} />
               )}
-          </>
-        }
-        ListHeaderComponent={
-          <View style={styles.header}>
-            <CSButtonBack isAbsolute={false} />
-            <CSText variant="NeutonBold" color="secondary" size={'xlg'}>
-              Level {`${level}/${guessTheWordata.maxLevel}`}
-            </CSText>
-          </View>
-        }
-        numColumns={2}
-        columnWrapperStyle={styles.comlumnWrapper}
-      />
+            </>
+          }
+          ListHeaderComponent={
+            <View style={styles.header}>
+              <CSButtonBack isAbsolute={false} />
+              <CSText variant="NeutonBold" color="secondary" size={'xlg'}>
+                Level {`${level}/${guessTheWordata.maxLevel}`}
+              </CSText>
+            </View>
+          }
+          numColumns={2}
+          columnWrapperStyle={styles.comlumnWrapper}
+        />
+      )}
     </View>
   );
 };

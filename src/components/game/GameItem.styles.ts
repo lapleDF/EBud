@@ -4,6 +4,10 @@ import {COLORS} from '../../constants/color';
 import {SPACING} from '../../constants/spacing';
 
 export const GameItemStyles = StyleSheet.create({
+  containerPlaceholder: {
+    gap: 20,
+    marginVertical: 20,
+  },
   gameItem: {
     width: '100%',
     height: 320,
@@ -21,13 +25,18 @@ export const GameItemStyles = StyleSheet.create({
     shadowRadius: 10.32,
     elevation: 16,
   },
-  image: {
+  imageWrapper: {
     width: (SPACING.screenWidth - SPACING.px * 2) * 0.4,
     height: (SPACING.screenWidth - SPACING.px * 2) * 0.4,
-    resizeMode: 'cover',
     borderRadius: 200,
     borderWidth: 3,
     borderColor: COLORS.primaryDark,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+    borderRadius: 200,
   },
   title: {
     textAlign: 'center',
