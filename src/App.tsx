@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import Parse from 'parse/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {APP_ID, JS_KEY, SERVER_URL} from '@env';
+import {APP_ID, JS_KEY, SERVER_URL} from './constants/app';
 import RootNavigator from './navigators/RootNavigator';
 import store from './store/store';
 
